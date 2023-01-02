@@ -58,7 +58,7 @@
           },
           body: JSON.stringify({ 
             name,  
-            password,  
+            password,
           }), 
         });
 
