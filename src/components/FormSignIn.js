@@ -60,7 +60,7 @@
             name,  
             password,
           }), 
-        });
+        }); 
 
         const data = await response.json();
         setResponse(data); 
