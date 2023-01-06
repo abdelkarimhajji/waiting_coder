@@ -59,7 +59,7 @@
           body: JSON.stringify({ 
             name,  
             password,
-          }), 
+          }),
         });
  
         const data = await response.json();
