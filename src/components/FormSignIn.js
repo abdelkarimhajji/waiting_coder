@@ -62,7 +62,7 @@
           }),
         });
  
-        const data = await response.json();
+        const data = await response.json(); 
         setResponse(data); 
       } catch (error) {
         console.log(error);
