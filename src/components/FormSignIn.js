@@ -63,7 +63,7 @@
         });
  
         const data = await response.json(); 
-        setResponse(data); 
+        setResponse(data);  
       } catch (error) {
         console.log(error);
       }
