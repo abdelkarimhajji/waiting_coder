@@ -13,6 +13,7 @@
     "@testing-library/user-event": "^13.5.0",
     "babel-plugin-macros": "^3.1.0",
     "chart.js": "^4.3.3",
+    "dotenv": "^16.3.1",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
     "mathsass": "^0.11.0",

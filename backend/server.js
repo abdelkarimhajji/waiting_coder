@@ -1,4 +1,5 @@
 // Server code
+require('dotenv').config();
 const express = require("express");
 const mysql = require('mysql');
 const cors = require('cors');
@@ -30,9 +31,10 @@ app.post('/signup', (req, res) => {
       return res.json({ status: 1, userId });
     }
     else
-      return res.json({ status: -1 });
-  });
+    return res.json({ status: -1 });
 });
+});
+console.log("helli",process.env.ACCESS_TOKEN_SECRET);
 
 
 // Create an API endpoint for fetching data for a specific user's name specifics
