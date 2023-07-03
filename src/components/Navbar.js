@@ -1,4 +1,4 @@
-import style from "./sass/navbar.module.scss"
+import style from "../sass/navbar.module.scss"
 
 function Home() {
     return (

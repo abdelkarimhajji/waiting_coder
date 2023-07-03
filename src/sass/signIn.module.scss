@@ -1,0 +1,23 @@
+@import "./global.module.scss";
+
+.container
+{
+    height: 100vh;
+    background-image: linear-gradient(rgba(0,0,0,0.8),rgb(0, 186, 188)),url(../imgs/backroundSignIn.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.icon
+{
+    font-size: 50px;
+}
+.test
+{
+    font-size: 30px;
+    font-family: "FiraCode";
+    font-weight: 600;
+}

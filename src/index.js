@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Home from './Home';
 import SignIn from './SignIn';
-import "./components/sass/index.scss"
+import "./sass/index.module.scss"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

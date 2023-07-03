@@ -1,0 +1,77 @@
+@import "./global.module.scss";
+@import 'mathsass';
+
+.container
+{
+    width: 500px;
+    height: 500px;
+    background-color: red;
+    background: transparent;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
+    border-radius: 5px;
+    font-family: $myfont;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition:  0.5s;
+    animation-name: floating;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    @keyframes floating {
+        0% { transform: translate(0,  0px); }
+        50%  { transform: translate(0, 20px); }
+        100%   { transform: translate(0, -0px); }   
+    }
+    h1
+    {
+        font-size: 40px;
+        margin-top: 90px;
+        margin-bottom: 50px;
+        background-image: linear-gradient(to right, $pColorR, white);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .inputs
+    {
+        display: flex;
+        flex-direction: column;
+        // background-color: red;
+        width: 70%;
+        // height: 300px;
+    }
+    input
+    {
+        font-family: $myfont;
+        height: 45px;
+        margin-bottom: 20px;
+        border: 1px solid transparent;
+        &:focus
+        {
+            outline: none;
+        }
+        &::placeholder
+        {
+            font-size: 15px;
+            color: $placehlder;
+            text-align: center;
+        }
+    }
+    
+    .submit
+    {
+        margin-top: 20px;
+        height: 50px;
+        background-color: $pColorR;
+        color: white;
+        font-size: 17px;
+        font-weight: bold;
+        transition: 0.5s all;
+        cursor: pointer;
+        &:hover
+        {
+            background-color: $hoverR;
+            border: 1px solid white;
+        }
+    }
+}

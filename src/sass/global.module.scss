@@ -1,0 +1,42 @@
+$myfont: "FiraCode";
+
+@font-face
+{
+    font-family: $myfont;
+    src: url(../style/fonts/FiraCode-Bold.ttf) format("truetype");
+    font-weight: bold;
+}
+@font-face
+{
+    font-family: $myfont;
+    src: url(../style/fonts/FiraCode-Light.ttf) format("truetype");
+    font-weight: lighter;
+}
+@font-face
+{
+    font-family: $myfont;
+    src: url(../style/fonts/FiraCode-Medium.ttf) format("truetype");
+    /* font Medium */
+    font-weight: 500;
+}
+@font-face
+{
+    font-family: $myfont;
+    src: url(../style/fonts/FiraCode-Regular.ttf) format("truetype");
+    font-weight: normal;
+}
+@font-face
+{
+    font-family: $myfont;
+    src: url(../style/fonts/FiraCode-SemiBold.ttf) format("truetype");
+    /* font Semi Bold */
+    font-weight: 600;
+}
+
+$pColor1:#1f212b;
+$pColor2:#121418;
+$pColor3:#2a2d38;
+$pColorR:#02babd;
+$hoverR:#038688;
+$pColorR2:#7b7b7b;
+$placehlder:rgb(94, 94, 94);
