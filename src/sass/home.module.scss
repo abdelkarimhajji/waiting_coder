@@ -1,0 +1,17 @@
+@import "./global.module.scss";
+@import 'mathsass';
+
+.container
+{
+    height: auto;
+    display: flex;
+    .navbar
+    {
+        width: 70px;
+        display: inline;
+    }
+    .nextNav
+    {
+        width: 100%;
+    }
+}

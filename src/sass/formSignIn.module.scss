@@ -29,6 +29,7 @@
         margin-top: 90px;
         margin-bottom: 50px;
         background-image: linear-gradient(to right, $pColorR, white);
+        text-align: center;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
@@ -46,6 +47,8 @@
         height: 45px;
         margin-bottom: 20px;
         border: 1px solid transparent;
+        text-align: center;
+        font-size: 16px;
         &:focus
         {
             outline: none;
@@ -73,5 +76,10 @@
             background-color: $hoverR;
             border: 1px solid white;
         }
+    }
+    .error
+    {
+        color: $error;
+        font-weight: bold;
     }
 }

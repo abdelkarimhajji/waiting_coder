@@ -1,0 +1,121 @@
+@import "./global.module.scss";
+@import 'mathsass';
+
+
+@mixin menu-styles {
+    color: white;
+    font-size: 30px;
+    margin-top: 20px;
+    margin-left: 110px;
+    cursor: pointer;
+    margin-left: 251px;
+    display: inline;
+/* Add other styles as needed */
+}
+@mixin navbar-styles {
+    width: 300px;
+    height: 100vh;
+    background-color: $pColor1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: 1s all;
+    // display: none;
+/* Add other styles as needed */
+}
+@mixin containItemNav-styles
+{
+    width: 100%;
+    height: 70px;
+    display: flex;
+    transition: background-color 0.5s ease;
+    cursor: pointer;
+    &:hover
+    {
+        background: $pColorR;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to left, $pColor1, $pColorR);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to left, $pColor1, $pColorR); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
+}
+@mixin oneItem-styles
+{
+    width: 77%;
+    display: flex;
+    align-items: center;
+    font-family: $myfont;
+    padding-left: 20px;
+    color: white;
+    font-size: 17px;
+}
+@mixin twoItem-styles
+{
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25%;
+    .AiOutlineMenuFold
+    {
+        font-size: 30px;
+    }
+}
+.navbar {
+    @include navbar-styles;
+    left: -230px;
+        
+    .menu {
+      @include menu-styles;
+    }
+    .containItemNav
+    {
+        @include containItemNav-styles;
+    }
+    .oneItem
+    {
+        @include oneItem-styles;
+    }
+    .twoItem
+    {
+        @include twoItem-styles;
+    }
+    .twoUl
+    {
+        margin-top: 100px;
+    }
+  }
+
+.navbarOut
+{
+    @include navbar-styles;
+    left: 0px;
+  
+    .menu {
+      @include menu-styles;
+    }
+    .containItemNav
+    {
+        width: 100%;
+        height: 70px;
+        display: flex;
+        transition: background-color 0.5s ease;
+        cursor: pointer;
+        &:hover
+        {
+            background: $pColor3;  /* fallback for old browsers */
+        }
+    }
+    .oneItem
+    {
+        @include oneItem-styles;
+
+    }
+    .twoItem
+    {
+        @include twoItem-styles;
+    }
+    .twoUl
+    {
+        margin-top: 100px;
+    }
+}
+

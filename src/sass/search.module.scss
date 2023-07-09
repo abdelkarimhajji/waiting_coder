@@ -1,0 +1,75 @@
+@import "./global.module.scss";
+@import 'mathsass';
+
+.container
+{
+    // background-color: red;
+    height: 65px;
+    width: 100%;
+    display: flex;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+    
+    .search
+    {
+        border: none;
+        width: 70%;
+        font-size: 16px;
+        font-family: $myfont;
+        color: $placehlder;
+        @media (max-width: 768px)
+        {
+            width: 50%;
+        }
+        @media (max-width: 400px)
+        {
+            width: 40%;
+        }
+        &:focus
+        {
+            outline: none;
+        }
+        &::-webkit-search-cancel-button
+        {
+            display: none;
+        }
+    }
+    .iconSearsh
+    {
+        width: 70px;
+        font-size: 35px;
+        @include flexCenter-styles;
+        color: $placehlder;
+    }
+    .user
+    {
+        @include flexCenter-styles;
+        width: 30%;
+        // height: 100px;
+        .name
+        {
+            width: 60%;
+            font-family: $myfont;
+            text-align: center;
+            @include flexCenter-styles;
+            @media (max-width: 768px)
+            {
+                width: 100%;
+            }
+        }
+        .photo
+        {
+            width: 30%;
+            @include flexCenter-styles;
+            justify-content: flex-start;
+            img{
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+            }
+            @media (max-width: 768px)
+            {
+                display: none;
+            }
+        }
+    }
+}

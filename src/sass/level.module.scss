@@ -1,0 +1,52 @@
+@import "./global.module.scss";
+@import 'mathsass';
+
+.container
+{
+    width: 100%;
+    height: 300px;
+    background-image: url(../imgs/binary_level.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    @include flexCenter-styles;
+    .contLevel
+    {
+        width: 90%;
+        height: 250px;
+        background-color: #1b1c23c9;
+        @include flexCenter-styles;
+        flex-direction: column;
+        select
+        {
+            width: 300px;
+            height: 45px;
+            padding-left: 15px;
+            color: white;
+            background-color: #1b1c23c9;
+            border: none;
+            font-family: $myfont;
+            display: block;
+            margin-bottom: 10px;
+            &:focus
+            {
+                outline: none;
+            }
+            option
+            {
+                font-family: $myfont;
+            }
+        }
+        .level
+        {
+            width: 84%;
+            height: 40px;
+            @include flexCenter-styles;
+            border-radius: 10px;
+            p{
+                font-family: $myfont;
+                font-weight:normal;
+                font-size: 17px;
+            }
+        }
+    }
+}

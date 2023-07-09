@@ -3,13 +3,16 @@
 .container
 {
     height: 100vh;
+    width: 100vw;
     background-image: linear-gradient(rgba(0,0,0,0.8),rgb(0, 186, 188)),url(../imgs/backroundSignIn.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    background-attachment: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-position: fixed;
 }
 .icon
 {

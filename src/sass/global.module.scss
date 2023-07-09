@@ -32,11 +32,17 @@ $myfont: "FiraCode";
     /* font Semi Bold */
     font-weight: 600;
 }
-
+@mixin flexCenter-styles {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 $pColor1:#1f212b;
 $pColor2:#121418;
 $pColor3:#2a2d38;
 $pColorR:#02babd;
 $hoverR:#038688;
 $pColorR2:#7b7b7b;
+// $pColorR2:#7b7b7b;
 $placehlder:rgb(94, 94, 94);
+$error: #dc3545;
