@@ -13,10 +13,10 @@ function Searsh() {
       <input type="search" name="search" placeholder="Search ... " className={style.search}/>
       <div className={style.user}>
             <div className={style.name}>
-                <p>Abdelkarim hajji</p>
+                <p className="nameUser">Abdelkarim hajji</p>
             </div>
             <div className={style.photo}>
-                <img src={karim} alt="" />
+                <img src={karim} alt="" className="imgUser"/>
             </div>
       </div>
     </div>

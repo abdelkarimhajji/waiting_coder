@@ -1,0 +1,30 @@
+import React, { useState , useContext} from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+
+import Home from './pages/Home';
+import SignIn from './pages/SignIn';
+import './sass/index.scss';
+import { UserContext } from './utils/UserContext';
+import Language from './pages/Language';
+import NotFound from './pages/NotFound';
+
+function App() {
+  const [value, setValue] = useState(0);
+  const [isLogin, setIsLogin] = useState(0);
+  console.log("islogin  " + isLogin)
+  return (
+    <BrowserRouter>
+      <UserContext.Provider value={{value, setValue, isLogin, setIsLogin}}>
+        <Routes>
+          <Route exact path="/" element={<SignIn />} />
+          <Route path="/Home" element={parseInt(localStorage.getItem("login")) ? <Home /> : <Navigate to="/" /> } />
+          <Route path="/Language" element={parseInt(localStorage.getItem("login")) ? <Language /> : <Navigate to="/" /> } />
+          <Route path="/NotFound" element={parseInt(localStorage.getItem("login")) ? <NotFound /> : <Navigate to="/" />} />
+          <Route path="*" element={parseInt(localStorage.getItem("login")) ? <Navigate to="/NotFound"/> : <Navigate to="/"/>} />
+        </Routes>
+      </UserContext.Provider>
+    </BrowserRouter>
+  );
+}
+export default App;

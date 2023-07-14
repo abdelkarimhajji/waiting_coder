@@ -1,0 +1,160 @@
+@import "./global.module.scss";
+@import 'mathsass';
+
+
+.container
+{
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-left: 40px;
+    padding-right: 40px;
+    background-color: #f7f7f7;
+    min-height: 100vh;
+    // margin-left: 10px;
+    .language
+    {
+        width: 90%;
+        height: 60px;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+        margin-bottom: 80px;
+        background-color: $pColor1;
+        color: $pColorR;
+        display: flex;
+        align-items: center;
+        padding-left: 40px;
+        padding-right: 40px;
+        position: relative;
+        margin-top: 100px;
+        // @media (max-width: 3px)
+        // {
+        //     left: 5px;
+        // }
+        p
+        {
+            display: inline;
+            font-family: $myfont;
+            margin-left: 20px;
+            font-size: 18px;
+            // width: 70%;
+        }
+        .FaCode
+        {
+            font-size: 23px;
+        }
+        .aifillcaerdown
+        {
+            position: absolute;
+            left: 95%;
+            font-size: 23px;
+            @media (max-width: 768px)
+            {
+                left: 90%;
+            }
+            @media (max-width: 400px)
+            {
+                left: 85%;
+            }
+            // display: block;
+        }
+    }
+    .cantAllLanguage
+    {
+        width: 85%;
+        height: auto;
+        background-color: white;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+        margin-bottom: 60px;
+        padding-top: 5px;
+        padding-left: 0px;
+        // padding-bottom: 25px;
+        // padding-right: 70px;
+        .titleLanguage
+        {
+            display: flex;
+            padding-left: 20px;
+            p
+            {
+                font-family: $myfont;
+                color: rgb(70, 70, 70);
+                font-size: 18px;
+            }
+            .IconTitleLanguage
+            {
+                display: block;
+                font-size: 33px;
+                margin-top: 12px;
+                color: $pColorR;
+            }
+        }
+        .contentTitleLanguage
+        {
+            font-family: $myfont;
+            margin-left: 70px;
+            padding-right: 70px;
+            line-height: 28px;
+            text-align: justify;
+        }
+    }
+    .validationLanguage
+    {
+        height: auto;
+        padding-top: 10px;
+        // padding-right: 60px;
+        font-family: $myfont;
+        // background-color: #00fbff1b;
+        // padding-bottom: 20px;
+        // background-color: red;
+    }
+    .containLink
+    {
+        display: flex;
+        padding-left: 70px;
+    }
+    .iconLink
+    {
+        color: $pColorR;
+        margin-top: 24px;
+        font-size: 23px;
+        font-weight: bold;
+    }
+    .nameLink
+    {
+        margin-left: 20px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .link
+    {
+        display: flex;
+        padding-left: 110px;
+        padding-bottom: 5px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        align-items: center;
+        transition: 0.5s all;
+        background-color: #00fbff1b;
+        &:hover
+        {
+            background-color: #04c1c44b;
+        }
+        .clickLink
+        {
+            width: 88%;
+            cursor: pointer;
+        }
+        .validateLink
+        {
+            height: 34px;
+            width: 100px;
+            background-color: #dc3545;
+            border: 1px solid rgba(0, 0, 0, 0.141);
+            color: white;
+            cursor: pointer;
+            font-family: $myfont;
+            // margin-top: 12px;
+        }
+    }
+}

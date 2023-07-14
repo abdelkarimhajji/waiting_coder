@@ -7,8 +7,8 @@
     height: 65px;
     width: 100%;
     display: flex;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
-    
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    // border: 1px solid black;
     .search
     {
         border: none;
@@ -50,10 +50,25 @@
             width: 60%;
             font-family: $myfont;
             text-align: center;
+            // word-break: break-all;
             @include flexCenter-styles;
             @media (max-width: 768px)
             {
                 width: 100%;
+            }
+            @media (max-width: 320px)
+            {
+                font-size: 15px;
+            }
+            @media (max-width: 270px)
+            {
+                font-size: 12px;
+            }
+            @media (max-width: 236px)
+            {
+                word-break: break-all;
+                font-size: 9px;
+                // display: none;
             }
         }
         .photo

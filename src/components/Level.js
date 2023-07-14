@@ -6,7 +6,7 @@ import karim from '../imgs/karim.jpg'
 function Level() {
 
     const [level, setLevel] = useState(50);
-    const gradient = `linear-gradient(to right, #02babd ${level}%, #7b7b7b 50%)`;
+    const gradient = `linear-gradient(to right, #02babd ${level}%, #1b1c2312 50%)`;
     const [selectedValue, setSelectedValue] = useState('');
     const handleSelectChange = (event) => {
       setSelectedValue(event.target.value);
@@ -21,20 +21,21 @@ function Level() {
   return (
     <div className={style.container}>
        <div className={style.contLevel}>
-            <select value={selectedValue} onChange={handleSelectChange}>
+        <img src={karim} alt="" className={style.photoPhon}/>
+            <select value={selectedValue} onChange={handleSelectChange} className="select">
                 <option value="">Select an option</option>
                 <option value="option1">Option 1</option>
                 <option value="option2">Option 2</option>
                 <option value="option3">Option 3</option>
             </select>
-            <select value={selectedValue2} onChange={handleSelectChange2}>
+            <select value={selectedValue2} onChange={handleSelectChange2} className="select">
                 <option value="">Select an option</option>
                 <option value="option1">Option 1</option>
                 <option value="option2">Option 2</option>
                 <option value="option3">Option 3</option>
             </select>
-            <div className={style.level} style={{ background: gradient }}>
-                <p>level : 2</p>
+            <div className={style.level} >
+                <p>level - 2%</p>
             </div>
        </div>
     </div>

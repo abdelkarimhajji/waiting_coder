@@ -1,25 +1,31 @@
-  import React, { useState , useEffect} from "react";
+  import React, { useState , useEffect, useContext} from "react";
   import style from "../sass/formSignIn.module.scss";
-  import { useNavigate } from 'react-router-dom';
-
+  import { useNavigate , Navigate } from 'react-router-dom';
+  import { UserContext } from '../utils/UserContext';
   function FormSignIn() {
     // State variables
     const [name, setname] = useState('');
     const [password, setPassword] = useState('');
     const [response, setResponse] = useState('');
-    const [number, setnumber] = useState(1);
+    const {value, setValue, isLogin, setIsLogin} = useContext(UserContext);
     //navigate
     const navigate = useNavigate();
     //function to navigate
-    const handleButtonClick = (number) => {
-      navigate("/Home", { state: { number } });
+
+
+    const handleButtonClick = () => {
+      localStorage.setItem('login', 1);
+      setIsLogin(1);
+      navigate("/Home");
     };
     // Form submission handler
+    const storedData = localStorage.getItem('login');
+   
     const handleSubmit = async (e) => {
       e.preventDefault();
     
-      console.log('Name:', name);
-      console.log('Password:', password);
+      // console.log('Name:', name);
+      // console.log('Password:', password);
     
       try {
         const response = await fetch('http://localhost:8081/signup', {
@@ -42,7 +48,7 @@
     
     useEffect(() => {
       if (response === '1') {
-          handleButtonClick(number);
+          handleButtonClick();
       }
     }, [response]);
     
@@ -52,7 +58,9 @@
         setPassword('');
       }
     }, [response]);
-    
+    console.log("this is value of   " + value)
+    if (value == 1)
+      return <Navigate to="/Home" replace />;
     return (
       <div className={style.container}>
         <h1>Waiting Coder</h1>

@@ -18,6 +18,20 @@
     animation-duration: 3s;
     animation-iteration-count: infinite;
     animation-timing-function: ease-in-out;
+    @media (max-width: 500px)
+    {
+        width: 90%;
+    }
+    @media (max-width: 350px)
+    {
+        height: 400px;
+        width: 90%;
+    }
+    @media (max-width: 304px)
+    {
+        height: 440px;
+        width: 90%;
+    }
     @keyframes floating {
         0% { transform: translate(0,  0px); }
         50%  { transform: translate(0, 20px); }
@@ -32,6 +46,15 @@
         text-align: center;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+        @media (max-width: 350px)
+        {
+            font-size: 27px;
+            margin-top: 90px;
+        }
+        @media (max-width: 500px)
+        {
+            font-size: 35px;
+        }
     }
     .inputs
     {
@@ -39,7 +62,7 @@
         flex-direction: column;
         // background-color: red;
         width: 70%;
-        // height: 300px;
+        
     }
     input
     {
@@ -49,6 +72,10 @@
         border: 1px solid transparent;
         text-align: center;
         font-size: 16px;
+        @media (max-width: 350px)
+        {
+            height: 35px;
+        }
         &:focus
         {
             outline: none;
@@ -58,6 +85,10 @@
             font-size: 15px;
             color: $placehlder;
             text-align: center;
+            @media (max-width: 350px)
+            {
+                font-size: 12px;
+            }
         }
     }
     
@@ -71,6 +102,11 @@
         font-weight: bold;
         transition: 0.5s all;
         cursor: pointer;
+        @media (max-width: 350px)
+        {
+            height: 40px;
+            font-size: 14px;
+        }
         &:hover
         {
             background-color: $hoverR;

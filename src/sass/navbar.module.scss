@@ -5,12 +5,16 @@
 @mixin menu-styles {
     color: white;
     font-size: 30px;
-    margin-top: 20px;
-    margin-left: 110px;
     cursor: pointer;
-    margin-left: 251px;
-    display: inline;
-/* Add other styles as needed */
+    position: absolute;
+    left: 250px;
+    top: 20px;
+    z-index: 10;
+    transition: 2s all;
+    @media (max-width: 550px)
+    {
+        left: 255px;
+    }
 }
 @mixin navbar-styles {
     width: 300px;
@@ -18,10 +22,16 @@
     background-color: $pColor1;
     display: flex;
     flex-direction: column;
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
     transition: 1s all;
-    // display: none;
-/* Add other styles as needed */
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    &::-webkit-scrollbar {
+        width: 0px;
+      }
+    overflow-y: scroll;
 }
 @mixin containItemNav-styles
 {
@@ -32,7 +42,7 @@
     cursor: pointer;
     &:hover
     {
-        background: $pColorR;  /* fallback for old browsers */
+        background: $pColorR;  
         background: -webkit-linear-gradient(to left, $pColor1, $pColorR);  /* Chrome 10-25, Safari 5.1-6 */
         background: linear-gradient(to left, $pColor1, $pColorR); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     }
@@ -46,6 +56,10 @@
     padding-left: 20px;
     color: white;
     font-size: 17px;
+    @media (max-width: 550px)
+    {
+        width: 91%;
+    }
 }
 @mixin twoItem-styles
 {
@@ -61,10 +75,56 @@
 }
 .navbar {
     @include navbar-styles;
+   
     left: -230px;
-        
+    @media (max-width: 550px)
+    {
+        left: -240px;
+    }
+    @media (max-width: 350px)
+    {
+        left: -300px;
+        box-shadow: none;
+        // overflow: auto;
+    }
+    @media (max-width: 300px)
+    {
+        width: 100vw;
+    }
     .menu {
       @include menu-styles;
+
+      @media (max-width: 350px)
+        {
+            // margin-left: 400px;
+            background-color: $pColor1;
+            border-radius: 5px;
+            padding: 5px;
+            position: fixed;
+            left: 230px;
+            top: 80px;
+            border: 0.5px solid white;
+            z-index: 20px;
+        }
+    }
+    .nameUser
+    {
+        color: white;
+        font-family: $myfont;
+        margin-top: 30px;
+        text-align: center;
+        border-bottom: 1px solid white;
+        p{
+            margin-bottom: 30px;
+            cursor: pointer;
+        }
+        .img
+        {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-top: 40px
+        }
     }
     .containItemNav
     {
@@ -80,7 +140,11 @@
     }
     .twoUl
     {
-        margin-top: 100px;
+        margin-top: 0px;
+        .Link
+        {
+            text-decoration: none;
+        }
     }
   }
 
@@ -88,9 +152,18 @@
 {
     @include navbar-styles;
     left: 0px;
-  
+    @media (max-width: 300px)
+    {
+        width: 100vw;
+    }
     .menu {
       @include menu-styles;
+      @media (max-width: 300px)
+        {
+            position: absolute;
+            left: 237px;
+            top: 20px;
+        }
     }
     .containItemNav
     {
@@ -104,6 +177,25 @@
             background: $pColor3;  /* fallback for old browsers */
         }
     }
+    .nameUser
+    {
+        color: white;
+        font-family: $myfont;
+        margin-top: 30px;
+        text-align: center;
+        border-bottom: 1px solid white;
+        p{
+            margin-bottom: 30px;
+            cursor: pointer;
+        }
+        .img
+        {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-top: 40px
+        }
+    }
     .oneItem
     {
         @include oneItem-styles;
@@ -115,7 +207,12 @@
     }
     .twoUl
     {
-        margin-top: 100px;
+        margin-top: 0px;
+        .Link
+        {
+            text-decoration: none;
+            color: red;
+        }
     }
 }
 

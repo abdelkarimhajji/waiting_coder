@@ -1,0 +1,44 @@
+@import "./global.module.scss";
+@import 'mathsass';
+
+.container
+{
+    width: 100%;
+    min-height: 50px;
+    border-top: 2px solid $pColorR;
+    // margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .child
+    {  
+        display: flex;
+        width: 60%;
+        justify-content: space-evenly;
+        align-items: center;
+        font-family: $myfont;
+        font-size: 14px;
+        font-weight: bold;
+        color: $pColorR;
+        flex-wrap: wrap;
+        @media (max-width: 1200px)
+        {
+            width: 80%;
+        }
+        // @media (max-width: 933px)
+        // {
+        //     width: 80%;
+        // }
+        
+        p
+        {
+            cursor: pointer;
+            transition: 0.5s all;
+            &:hover
+            {
+                text-decoration: underline;
+                color: $hoverR;
+            }
+        }
+    }
+}

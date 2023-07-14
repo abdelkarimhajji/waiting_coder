@@ -1,0 +1,173 @@
+@import "./global.module.scss";
+@import 'mathsass';
+
+@mixin item-styles
+{
+    width: 100%;
+    min-height: 400px;
+    background-color: white;
+    border: 0.5px solid rgba(157, 157, 157, 0.125);
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    margin-bottom: 30px;
+    margin-left: 5px;
+    font-family: $myfont;
+}
+.container
+{
+    width: 100%;
+    height: auto;
+    background-color: rgba(225, 225, 225, 0.11);
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-evenly;
+    @media (max-width: 768px)
+    {
+        flex-direction: column;
+        align-items: center;
+        // margin-left: 2   px;
+    }
+    .program
+    {
+        width: 47%;
+        @media (max-width: 768px)
+        {
+            width: 89%;
+        }
+        .itemsProgram
+        {
+            @include item-styles;
+            .contInsidProgram{
+                margin: 30px;
+                .titleProgram
+                {
+                    display: flex;
+                    p{
+                        font-weight: bold;
+                        font-size: 18px;
+                        width: 90%;
+                        margin-left: 10px;
+                    }
+                    .iconLanguage
+                    {
+                        width: 10%;
+                        display: block;
+                        font-size: 20px;
+                        color: $pColorR;
+                        font-weight: 100;
+                        margin-top: 21px;
+                    }
+                }
+                .UnderConatProgram
+                {
+                    margin-top: 30px;
+                    padding-left: 20px;
+                    // background-color: red;
+                    .conatProItm
+                    {
+                        display: flex;
+                        transition: 0.5s all;
+                        cursor: pointer;
+                        &:hover
+                        {
+                            background-color: rgba(208, 206, 206, 0.549);
+                        }
+                        p{
+                            // background-color: aqua;
+                            width: 86%;
+                        }
+                        .TiHtml5
+                        {
+                            display: block;
+                            width: 7%;
+                            font-size: 30px;
+                            margin-top: 9px;
+                            color: $pColorR;
+                            padding-left: 20px;
+                        }
+                        .TbHandClick
+                        {
+                            display: block;
+                            font-size: 25px;
+                            color: $pColorR;
+                            margin-top: 13px;
+                            padding-right: 20px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    .events
+    {
+        width: 47%;
+        @media (max-width: 768px)
+        {
+            width: 89%;
+        }
+        .itemsEvents
+        {
+            @include item-styles;
+            .contInsidEvents
+            {
+                margin: 30px;
+                .titleEvents
+                {
+                    display: flex;
+                    p{
+                        font-weight: bold;
+                        font-size: 18px;
+                        width: 90%;
+                        margin-left: 10px;
+                    }
+                    .iconTitle
+                    {
+                        width: 10%;
+                        display: block;
+                        font-size: 20px;
+                        color: $pColorR;
+                        font-weight: 100;
+                        margin-top: 21px;
+                    }
+                }
+                .UnderConatEvent
+                {
+                    margin-top: 30px;
+                    padding-left: 20px;
+                    // background-color: red;
+                    .conatEventItm
+                    {
+                        display: flex;
+                        transition: 0.5s all;
+                        cursor: pointer;
+                        &:hover
+                        {
+                            background-color: rgba(208, 206, 206, 0.549);
+                        }
+                        p{
+                            // background-color: aqua;
+                            width: 86%;
+                        }
+                        .TiHtml5
+                        {
+                            display: block;
+                            width: 7%;
+                            font-size: 30px;
+                            margin-top: 9px;
+                            color: $pColorR;
+                            padding-left: 20px;
+                        }
+                        .TbHandClick
+                        {
+                            display: block;
+                            font-size: 25px;
+                            color: $pColorR;
+                            margin-top: 13px;
+                            padding-right: 20px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

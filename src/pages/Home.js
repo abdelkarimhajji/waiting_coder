@@ -1,30 +1,35 @@
-import React, { useState, useEffect } from "react";
-import { useLocation, Navigate } from "react-router-dom";
-import Navbar from "../components/Navbar"
-import Searsh from "../components/Searsh"
-import Level from "../components/Level"
-import style from "../sass/home.module.scss"
+import React, { useState, useEffect, useContext } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import Searsh from "../components/Searsh";
+import Level from "../components/Level";
+import MainHome from "../components/MainHome";
+import Footer from "../components/Footer";
+import style from "../sass/home.module.scss";
+import { UserContext } from "../utils/UserContext";
 
 function Home() {
   const location = useLocation();
   const { state } = location;
   const number = state && state.number ? state.number : 0;
-  // Set a default value or handle it based on your requirement
-  
-  useEffect(() => {
-    console.log(number);
-  }, []);
-  const [updatedNumber, setUpdatedNumber] = useState(number);
+  const { value, setValue, isLogin, setIsLogin } = useContext(UserContext);
+  const navigate = useNavigate();
 
-  // Redirect to SignIn component if number is not 1
-  if (updatedNumber !== 1) {
-    return <Navigate to="/" replace />;
-  }
-  
-  const handleButtonClick = () => {
-    // Update the number state when the button is clicked
-    setUpdatedNumber(updatedNumber + 1);
-  };
+  const [updatedNumber, setUpdatedNumber] = useState(number);
+  const [valid, setValid] = useState(0);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  // useEffect(() => {
+  //   if (parseInt(localStorage.getItem("login")) !== 1) {
+  //     // setValue(0);
+  //     navigate("/", { replace: true });
+  //   } else {
+  //     // setValue(1);
+  //   }
+  // }, [navigate]);
 
   return (
     <div className={style.container}>
@@ -34,7 +39,8 @@ function Home() {
       <div className={style.nextNav}>
         <Searsh />
         <Level />
-        {/* <button onClick={handleButtonClick}>Update Number</button> */}
+        <MainHome />
+        <Footer />
       </div>
     </div>
   );
