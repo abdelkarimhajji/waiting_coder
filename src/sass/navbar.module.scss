@@ -79,9 +79,9 @@
     left: -230px;
     @media (max-width: 550px)
     {
-        left: -240px;
+        left: -238px;
     }
-    @media (max-width: 350px)
+    @media (max-width: 370px)
     {
         left: -300px;
         box-shadow: none;
@@ -93,19 +93,32 @@
     }
     .menu {
       @include menu-styles;
-
-      @media (max-width: 350px)
+    
+        @media (max-width: 370px)
+        {
+            left: 264px;
+        }
+      @media (max-width: 370px)
         {
             // margin-left: 400px;
             background-color: $pColor1;
             border-radius: 5px;
             padding: 5px;
             position: fixed;
-            left: 230px;
+            left: 300px;
             top: 80px;
             border: 0.5px solid white;
             z-index: 20px;
         }
+        @media (max-width: 350px)
+        {
+            left: 230px;
+        }
+        @media (max-width: 270px)
+        {
+            left: 190px;
+        }
+        
     }
     .nameUser
     {

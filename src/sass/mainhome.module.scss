@@ -4,12 +4,11 @@
 @mixin item-styles
 {
     width: 100%;
-    min-height: 400px;
+    min-height: 330px;
     background-color: white;
     border: 0.5px solid rgba(157, 157, 157, 0.125);
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     margin-bottom: 30px;
-    margin-left: 5px;
     font-family: $myfont;
 }
 .container
@@ -51,10 +50,10 @@
                     {
                         width: 10%;
                         display: block;
-                        font-size: 20px;
+                        font-size: 25px;
                         color: $pColorR;
                         font-weight: 100;
-                        margin-top: 21px;
+                        margin-top: 17px;
                     }
                 }
                 .UnderConatProgram
@@ -78,11 +77,11 @@
                         .TiHtml5
                         {
                             display: block;
-                            width: 7%;
+                            // width: 7%;
                             font-size: 30px;
                             margin-top: 9px;
                             color: $pColorR;
-                            padding-left: 20px;
+                            // padding-left: 20px;
                         }
                         .TbHandClick
                         {
@@ -90,7 +89,7 @@
                             font-size: 25px;
                             color: $pColorR;
                             margin-top: 13px;
-                            padding-right: 20px;
+                            // padding-right: 20px;
                         }
                     }
                 }
@@ -151,7 +150,7 @@
                         .TiHtml5
                         {
                             display: block;
-                            width: 7%;
+                            // width: 7%;
                             font-size: 30px;
                             margin-top: 9px;
                             color: $pColorR;
@@ -169,5 +168,13 @@
                 }
             }
         }
+    }
+    .link{
+        text-decoration: none;
+        color: black;
+    }
+    .par
+    {
+        padding-left: -20px;
     }
 }

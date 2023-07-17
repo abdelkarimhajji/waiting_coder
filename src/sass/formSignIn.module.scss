@@ -18,6 +18,7 @@
     animation-duration: 3s;
     animation-iteration-count: infinite;
     animation-timing-function: ease-in-out;
+    -webkit-tap-highlight-color: transparent;
     @media (max-width: 500px)
     {
         width: 90%;
@@ -117,5 +118,7 @@
     {
         color: $error;
         font-weight: bold;
+        text-align: center;
+
     }
 }

@@ -1,15 +1,15 @@
 import React, { useContext, useEffect } from 'react';
-import style from "../sass/language.module.scss";
+import style from "../sass/project.module.scss";
 import { FaYoutube } from 'react-icons/fa';
 import { AiOutlineUserAdd } from 'react-icons/ai';
 import FormSignIn from "../components/FormSignIn";
 import { UserContext } from '../utils/UserContext';
 import Navbar from '../components/Navbar';
 import Searsh from '../components/Searsh'
-import MainLanguage from '../components/MainLanguage'
 import Footer from '../components/Footer'
-function Language() {
+import MainProject from '../components/MainProject';
 
+function Project() {
 //   const {value, setValue, isLogin, setIsLogin} = useContext(UserContext);
 
   return (
@@ -19,11 +19,11 @@ function Language() {
         </div>
         <div className={style.nextNav}>
             <Searsh />
-            <MainLanguage />
+            <MainProject />
             <Footer />
         </div>
     </div>
   );
 }
 
-export default Language;
+export default Project;

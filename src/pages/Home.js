@@ -21,15 +21,7 @@ function Home() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  // useEffect(() => {
-  //   if (parseInt(localStorage.getItem("login")) !== 1) {
-  //     // setValue(0);
-  //     navigate("/", { replace: true });
-  //   } else {
-  //     // setValue(1);
-  //   }
-  // }, [navigate]);
+  console.log("login cha7al " + localStorage.getItem("login"));
 
   return (
     <div className={style.container}>

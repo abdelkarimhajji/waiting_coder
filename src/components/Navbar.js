@@ -52,6 +52,7 @@ function Navbar(props) {
     };
   }, [hovered]);
   const logout = () => {
+    console.log("i am rest to 0");
     localStorage.setItem('login', 0);
     // setIsLogin(0);
   };
@@ -86,15 +87,18 @@ function Navbar(props) {
             <p className={style.oneItem}>Tools</p>
             <p className={style.twoItem}><TbToolsOff className={style.AiOutlineMenuFold} /></p>
           </div>
+          <Link to="/Project" className={style.Link}>
           <div className={style.containItemNav}>
             <p className={style.oneItem}>Projects</p>
             <p className={style.twoItem}><PiProjectorScreenChartBold className={style.AiOutlineMenuFold} /></p>
           </div>
+          </Link>
+          <Link to="/Profile" className={style.Link}>
           <div className={style.containItemNav}>
             <p className={style.oneItem}>Profiles</p>
             <p className={style.twoItem}><FiUsers className={style.AiOutlineMenuFold} /></p>
           </div>
-         
+          </Link>
           <div className={style.containItemNav}>
             <p className={style.oneItem}>Events</p>
             <p className={style.twoItem}><BsFillCalendar2EventFill className={style.AiOutlineMenuFold} /></p>

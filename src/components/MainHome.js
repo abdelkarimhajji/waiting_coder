@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useLocation, Navigate } from "react-router-dom";
+import React, { useState, useEffect} from "react";
+import { useLocation, Navigate , Link } from "react-router-dom";
 import style from "../sass/mainhome.module.scss"
 import { AiFillCaretDown, AiOutlineProject} from 'react-icons/ai';
 import { FaCode, FaUpload, FaStar } from 'react-icons/fa'
@@ -11,6 +11,7 @@ import { FiFigma} from 'react-icons/fi'
 import { PiProjectorScreenChartBold } from 'react-icons/pi'
 import {BsFillCalendar2EventFill } from 'react-icons/bs'
 import {GiStarShuriken} from 'react-icons/gi'
+// import Language from "../pages/Language";
 function MainHome() {
     
   return (
@@ -24,16 +25,20 @@ function MainHome() {
                         <AiFillCaretDown className={style.iconLanguage}/>
                     </div>
                     <div className={style.UnderConatProgram}>
+                    <Link to="/Language#html" className={style.link}>
                         <div className={style.conatProItm}>
                             <TiHtml5 className={style.TiHtml5}/>
                             <p className="par"> - HTML5</p>
                             <TbHandClick className={style.TbHandClick} />
                         </div>
+                    </Link>
+                        <Link to="/Language#css" className={style.link}>
                         <div className={style.conatProItm}>
                             <DiCss3 className={style.TiHtml5}/>
-                            <p className="par"> - CSS3</p>
+                            <p className={style.par} > - CSS3</p>
                             <TbHandClick className={style.TbHandClick} />
                         </div>
+                        </Link>
                         <div className={style.conatProItm}>
                             <TbBrandJavascript className={style.TiHtml5}/>
                             <p className="par"> - JavaScript</p>

@@ -1,0 +1,173 @@
+@import "./global.module.scss";
+@import 'mathsass';
+
+.container {
+    min-height: 100vh; /* Change min-height to auto */
+    background-color: #f7f7f7;
+    display: flex;
+    flex-direction: column;
+    padding-top: 100px;
+    padding-left: 60px;
+    padding-right: 60px;
+    align-items: center;
+    font-family: $myfont;
+    user-select: none;
+    // -webkit-tap-highlight-color: transparent;
+    @media (max-width:450px)
+    {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .containTitle
+    {
+        width: 100%;
+        height: 60px;
+        background-color: $pColor1;
+        margin-bottom:60px;
+        display: flex;
+        padding-right: 30px;
+        @media (max-width:450px)
+        {
+            width: 90%;
+        }
+        .PiProjectorScreenChartBold
+        {
+            margin-top: 13px;
+            margin-left: 40px;
+            font-size: 30px;
+            color: $pColorR;
+        }
+        .title{
+            margin-left: 15px;
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+            color: $pColorR;
+            width: 88%;
+            @media(max-width:350px){
+                font-size: 15px;
+            }
+        }
+        .AiFillCaretDown
+        {
+            color: $pColorR;
+            font-size: 25px;
+            margin-top:17px;
+            margin-left: 40px;
+            @media(max-width:700px)
+            {
+                font-size: 30px;
+            }
+            @media(max-width:500px)
+            {
+                font-size: 35px;
+                margin-top:14px;
+            }
+        }
+    }
+    .containProject
+    {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 70px;
+        @media (max-width:597px)
+        {
+            width: 90%;
+        }
+        .project {
+            width: 27%;
+            min-height: 500px;
+            border-radius: 20px;
+            background-color: #ffffff;
+            // margin-left: 1%;
+            margin-top: 35px;
+            border: 1px solid #e7e7e7;
+            cursor: pointer;
+            
+            @media (max-width:904px)
+            {
+                width: 46%;
+            }
+            @media (max-width:658px)
+            {
+                width: 100%;
+                justify-content: center;
+                display: 0 auto;
+            }
+            
+            .containerDiscreption
+            {
+                padding-left: 15px;
+                padding-right: 15px;
+                height: auto;
+                word-wrap: break-word;
+                text-align: justify;
+                
+            }
+            .titleProject
+            {
+                font-weight: bold;
+                font-size: 19px;
+                text-align: justify;
+            }
+            .moreDetails
+            {
+                display: block;
+                width: 200px;
+                height: 37px;
+                color: white;
+                background-color: $pColor3;
+                border: 1px solid $pColor1;
+                margin: 0 auto;
+                margin-top: 10px;
+                margin-bottom: 30px;
+                cursor: pointer;
+                font-family: $myfont;
+                transition:0.3s all;
+                &:hover
+                {
+                    background-color: white;
+                    color: $pColor1;
+                    border: 1px solid $pColor1;
+                }
+                @media (max-width:1017px)
+                {
+                    width: 150px;
+                }
+            }
+            .description
+            {
+                font-size: 15px;
+                margin-bottom: 30px;
+                min-height: 130px;
+                @media (max-width:1130px)
+                {
+                    min-height: 200px;
+                }
+            }
+        }
+        .containImg
+        {
+            width: 100%;
+            overflow: hidden;
+            height: 200px;
+            border-radius: 20px 20px 0px 0px ;
+        }
+        .img
+        {
+            width: 100%; 
+            height: 100%; 
+            transition: transform 0.5s ease; 
+            border-radius: 20px 20px 0px 0px ;
+            &:hover
+            {
+                transform: scale(1.2); 
+            }
+        }
+        
+    }
+}
