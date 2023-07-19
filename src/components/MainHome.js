@@ -44,7 +44,16 @@ function MainHome() {
                             <p className="par"> - JavaScript</p>
                             <TbHandClick className={style.TbHandClick} />
                         </div>
-                        
+                        <div className={style.conatProItm}>
+                            <TbBrandJavascript className={style.TiHtml5}/>
+                            <p className="par"> - JavaScript</p>
+                            <TbHandClick className={style.TbHandClick} />
+                        </div>
+                        <div className={style.conatProItm}>
+                            <TbBrandJavascript className={style.TiHtml5}/>
+                            <p className="par"> - JavaScript</p>
+                            <TbHandClick className={style.TbHandClick} />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -65,6 +74,11 @@ function MainHome() {
                         <div className={style.conatProItm}>
                             <BiLogoGithub className={style.TiHtml5}/>
                             <p className="par"> - Github</p>
+                            <TbHandClick className={style.TbHandClick} />
+                        </div>
+                        <div className={style.conatProItm}>
+                            <FiFigma className={style.TiHtml5}/>
+                            <p className="par"> - Figma</p>
                             <TbHandClick className={style.TbHandClick} />
                         </div>
                         <div className={style.conatProItm}>
@@ -99,6 +113,11 @@ function MainHome() {
                             <p className="par"> - Figma</p>
                             <TbHandClick className={style.TbHandClick} />
                         </div>
+                        <div className={style.conatProItm}>
+                            <FaUpload className={style.TiHtml5}/>
+                            <p className="par"> - Figma</p>
+                            <TbHandClick className={style.TbHandClick} />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -112,6 +131,21 @@ function MainHome() {
                             <AiFillCaretDown className={style.iconTitle}/>
                         </div>
                         <div className={style.UnderConatEvent}>
+                            <div className={style.conatEventItm}>
+                                <GiStarShuriken className={style.TiHtml5}/>
+                                <p className="par"> - Vscode</p>
+                                <TbHandClick className={style.TbHandClick} />
+                            </div>
+                            <div className={style.conatEventItm}>
+                                <GiStarShuriken className={style.TiHtml5}/>
+                                <p className="par"> - Vscode</p>
+                                <TbHandClick className={style.TbHandClick} />
+                            </div>
+                            <div className={style.conatEventItm}>
+                                <GiStarShuriken className={style.TiHtml5}/>
+                                <p className="par"> - Vscode</p>
+                                <TbHandClick className={style.TbHandClick} />
+                            </div>
                             <div className={style.conatEventItm}>
                                 <GiStarShuriken className={style.TiHtml5}/>
                                 <p className="par"> - Vscode</p>

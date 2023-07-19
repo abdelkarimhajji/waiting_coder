@@ -3,12 +3,11 @@ import { useLocation, useNavigate , Link} from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Searsh from "../components/Searsh";
 import Footer from "../components/Footer";
-import style from "../sass/eachprofile.module.scss";
+import style from "../sass/detailsproject.module.scss";
 import { UserContext } from "../utils/UserContext";
-import EachLevel from "../components/EachLevel";
-import MainEachProfile from '../components/MainEachProfile';
+import MainDetailsProject from '../components/MainDetailsProject'
 
-function EachProfile() {
+function DetailsProject() {
   
 useEffect(() => {
     window.scrollTo(0, 0);
@@ -21,12 +20,11 @@ useEffect(() => {
       </div>
       <div className={style.nextNav}>
         <Searsh />
-        <EachLevel />
-        <MainEachProfile />
+        <MainDetailsProject />
         <Footer />
       </div>
     </div>
   );
 }
 
-export default EachProfile;
+export default DetailsProject;

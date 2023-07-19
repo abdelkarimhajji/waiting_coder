@@ -21,9 +21,21 @@
         padding-left: 0;
         padding-right: 0;
     }
-    .containerProfile
+    .link
     {
         width: 70%;
+        min-height: 300px;
+        // background-color: red;
+        display: flex;
+        border-radius: 20px;
+        margin-bottom: 60px;
+        text-decoration: none;
+        color: $pColor3;
+        cursor: pointer;
+    }
+    .containerProfile
+    {
+        width: 100%;
         min-height: 300px;
         // background-color: red;
         display: flex;
@@ -35,10 +47,10 @@
         {
             width: 100%;
         }
-        @media(max-width:768px)
+        @media(max-width:938px)
         {
             flex-direction:column;
-            width: 70%;
+            width: 100%;
         }
         
         .containerImg
@@ -49,12 +61,29 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            @media(max-width: 1385px)
+            {
+                width: 40%;   
+            }
+            @media(max-width:930px)
+            {
+                width: 100%;
+                min-height: 350px;
+            }
+            @media(max-width:480px)
+            {
+                min-height: 250px;
+            }
             img
             {
                 width: 90%;
-                height: 270px;
+                height: 250px;
                 border-radius: 25px;
                 box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+                @media(max-width:930px)
+                {
+                    height: 320px;
+                }
                 @media(max-width:480px)
                 {
                    border-radius: 50%;
@@ -67,18 +96,7 @@
                     height: 170px;
                 }
             }
-            @media(max-width: 1385px)
-            {
-                width: 40%;   
-            }
-            @media(max-width:768px)
-            {
-                width: 100%;
-            }
-            @media(max-width:480px)
-            {
-                min-height: 250px;
-            }
+            
         }
         .containerInfo
         {
@@ -91,7 +109,7 @@
             {
                 width: 60%;
             }
-            @media(max-width:768px)
+            @media(max-width:930px)
             {
                 width: 100%;
             }
@@ -104,6 +122,7 @@
             {
                 font-size: 25px;
                 font-weight: bold;
+                text-align: justify;
                 @media(max-width: 480px)
                 {
                     font-size: 20px;
@@ -119,7 +138,7 @@
             }
             .rectangul
             {
-                width: 50%;
+                width: 60%;
                 min-height: 80px;
                 background-color: #e5e5e5;
                 display: flex;
@@ -130,11 +149,11 @@
                 border-radius: 15px;
                 @media(max-width: 1385px)
                 {
-                    width: 80%;
+                    width: 90%;
                 }
                 @media(max-width: 550px)
                 {
-                    width: 88%;
+                    width: 90%;
                 }
                 @media(max-width: 480px)
                 {

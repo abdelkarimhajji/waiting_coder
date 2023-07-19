@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Searsh from "../components/Searsh";
 import Footer from "../components/Footer";
@@ -14,6 +14,7 @@ function MainProfile() {
   return (
     <div className={style.container}>
         {/* start card */}
+    <Link to="/EachProfile" className={style.link}>
       <div className={style.containerProfile}>
         <div className={style.containerImg}>
             <img src={karim} alt="" />
@@ -41,8 +42,10 @@ function MainProfile() {
             </div>
         </div>
       </div>
+      </Link>
       {/* finish card */}
       {/* start card */}
+      <Link to="/EachProfile" className={style.link}>
       <div className={style.containerProfile}>
         <div className={style.containerImg}>
             <img src={karim} alt="" />
@@ -70,6 +73,7 @@ function MainProfile() {
             </div>
         </div>
       </div>
+      </Link>
       {/* finish card */}
     </div>
   );

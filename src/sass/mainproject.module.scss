@@ -12,7 +12,7 @@
     align-items: center;
     font-family: $myfont;
     user-select: none;
-    // -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: transparent;
     @media (max-width:450px)
     {
         padding-left: 10px;

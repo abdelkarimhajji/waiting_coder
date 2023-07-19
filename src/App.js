@@ -10,6 +10,9 @@ import Language from './pages/Language';
 import NotFound from './pages/NotFound';
 import Project from './pages/Project';
 import Profile from './pages/Profile';
+import EachProfile from './pages/EachProfile';
+import DetailsProject from './pages/DetailsProject';
+
 function App() {
   const [value, setValue] = useState(0);
   const [isLogin, setIsLogin] = useState(0);
@@ -23,6 +26,8 @@ function App() {
           <Route path="/Language" element={parseInt(localStorage.getItem("login")) ? <Language /> : <Navigate to="/" /> } />
           <Route path="/Project" element={parseInt(localStorage.getItem("login")) ? <Project /> : <Navigate to="/" /> } />
           <Route path="/Profile" element={parseInt(localStorage.getItem("login")) ? <Profile /> : <Navigate to="/" /> } />
+          <Route path="/EachProfile" element={parseInt(localStorage.getItem("login")) ? <EachProfile /> : <Navigate to="/" />} />
+          <Route path="/DetailsProject" element={parseInt(localStorage.getItem("login")) ? <DetailsProject /> : <Navigate to="/" />} />
           <Route path="/NotFound" element={parseInt(localStorage.getItem("login")) ? <NotFound /> : <Navigate to="/" />} />
           <Route path="*" element={parseInt(localStorage.getItem("login")) ? <Navigate to="/NotFound"/> : <Navigate to="/"/>} />
         </Routes>

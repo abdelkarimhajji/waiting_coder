@@ -4,7 +4,7 @@
 @mixin item-styles
 {
     width: 100%;
-    min-height: 330px;
+    height: 330px;
     background-color: white;
     border: 0.5px solid rgba(157, 157, 157, 0.125);
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
@@ -19,6 +19,7 @@
     padding-top: 30px;
     display: flex;
     justify-content: space-evenly;
+    -webkit-tap-highlight-color: transparent;
     @media (max-width: 768px)
     {
         flex-direction: column;
@@ -35,6 +36,7 @@
         .itemsProgram
         {
             @include item-styles;
+            overflow-y: scroll;
             .contInsidProgram{
                 margin: 30px;
                 .titleProgram
@@ -107,8 +109,10 @@
         .itemsEvents
         {
             @include item-styles;
+            overflow-y: scroll;
             .contInsidEvents
             {
+                // overflow-y: scroll;
                 margin: 30px;
                 .titleEvents
                 {
@@ -123,10 +127,10 @@
                     {
                         width: 10%;
                         display: block;
-                        font-size: 20px;
+                        font-size: 25px;
                         color: $pColorR;
                         font-weight: 100;
-                        margin-top: 21px;
+                        margin-top: 15px;
                     }
                 }
                 .UnderConatEvent

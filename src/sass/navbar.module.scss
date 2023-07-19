@@ -75,7 +75,7 @@
 }
 .navbar {
     @include navbar-styles;
-   
+    -webkit-tap-highlight-color: transparent;
     left: -230px;
     @media (max-width: 550px)
     {
@@ -165,6 +165,7 @@
 {
     @include navbar-styles;
     left: 0px;
+    -webkit-tap-highlight-color: transparent;
     @media (max-width: 300px)
     {
         width: 100vw;

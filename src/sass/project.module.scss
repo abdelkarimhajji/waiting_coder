@@ -5,6 +5,7 @@
 .container
 {
     display: flex;
+    -webkit-tap-highlight-color: transparent;
     .navbar
     {
         width: 70px;

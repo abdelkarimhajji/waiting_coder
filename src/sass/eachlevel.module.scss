@@ -1,0 +1,186 @@
+@import "./global.module.scss";
+@import 'mathsass';
+
+
+.container
+{
+   min-height: 300px;
+   background-image: url('../imgs/binary_level.jpg');
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: cover;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-family: $myfont;
+   -webkit-tap-highlight-color: transparent;
+   
+   @media(max-width:768px)
+   {
+      width: 100%;
+      min-height: 500px;
+   }
+   .containerTransp
+   {
+      width: 90%;
+      min-height: 250px;
+      background-color: #1f212bc9;
+      display: flex;
+      padding-left: 10px;
+      padding-right: 10px;
+      @media(max-width:768px)
+      {
+         width: 100%;
+         min-height: 500px;
+         background-color: $pColor1;
+         flex-direction: column;
+         padding-top: 30px;
+      }
+      .containerImg
+      {
+         width: 20%;
+         height: 250px;
+         // background-color: red;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         @media(max-width: 1374px)
+         {
+            width: 30%;
+         }
+         @media (max-width:1124px)
+         {
+            width: 35%;
+         }
+         @media(max-width:768px)
+         {
+            width: 100%;
+         }
+         img
+         {
+            width: 200px;
+            height: 200px;
+            border-radius: 20px;
+            @media (max-width:860px)
+            {
+               width: 150px;
+               height: 150px;
+            }
+            @media(max-width:768px)
+            {
+               width: 250px;
+               height: 250px;
+               border-radius: 50%;
+               margin-top: 20px;
+            }
+         }
+      }
+      .containerInfo
+      {
+         width: 20%;
+         height: 250px;
+         // background-color: yellow;
+         padding-left: 50px;
+         color: white;
+         padding-top: 10px;
+         @media(max-width: 1374px)
+         {
+            width: 30%;
+         }
+         @media (max-width:1124px)
+         {
+            width: 35%;
+         }
+         @media (max-width:860px)
+         {
+            padding-left: 5px;
+         }
+         @media(max-width:768px)
+         {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+         }
+         .name
+         {
+            font-weight: bold;
+            font-size: 23px;
+            @media (max-width: 1350px)
+            {
+               font-size: 19px;
+            }
+         }
+         p
+         {
+            font-size: 14px;
+         }
+      }
+      .containerLevel
+      {
+         width: 60%;
+         height: 250px;
+         // background-color: black;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         flex-direction: column;
+         @media(max-width:768px)
+         {
+            width: 100%;
+         }
+         select
+        {
+            width: 300px;
+            height: 45px;
+            padding-left: 15px;
+            color: white;
+            background-color: #1b1c2312;
+            border: none;
+            font-family: $myfont;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 15px;
+            transition: 0.5s all;
+            cursor: pointer;
+            &:hover{
+                background-color: $pColor1;
+            }
+            @media (max-width: 300px)
+            {
+                width: 100%;
+            }
+            &:focus
+            {
+                outline: none;
+            }
+            option
+            {
+                font-family: $myfont;
+            }
+        }
+        .level
+        {
+            @include flexCenter-styles;
+            width: 84%;
+            height: 40px;
+            border-radius: 10px;
+            color: white;
+            background: linear-gradient(to right, #02babd 50%, #6d6d6d5f 50%);
+            backdrop-filter: blur(10px);
+            z-index: 1;
+            margin-top: 10px;
+            @media (max-width: 768px)
+            {
+                margin-bottom: 10px;
+            }
+            p{
+                font-family: $myfont;
+                font-weight:normal;
+                font-size: 17px;
+            }
+        }
+      }
+   }
+}

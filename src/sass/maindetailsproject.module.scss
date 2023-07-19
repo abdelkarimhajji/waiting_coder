@@ -1,0 +1,73 @@
+@import "./global.module.scss";
+@import 'mathsass';
+
+
+.container
+{
+    -webkit-tap-highlight-color: transparent;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+    align-items: center;
+    padding-top: 100px;
+    font-family: $myfont;
+    background-color:#f7f7f7;
+    .containerMoreDetails
+    {
+        width: 80%;
+        height: 70px;
+        background-color: $pColor3;
+        padding-left: 30px;
+        padding-right: 50px;
+        display: flex;
+        margin-bottom: 100px;
+        align-items: center;
+        color: $pColorR;
+        @media (max-width: 500px)
+        {
+            width: 70%;
+        }
+        @media (max-width: 280px)
+        {
+            width: 65%;
+        }
+        .title
+        {
+            width: 95%;
+            padding-left: 20px;
+        }
+        .icon
+        {
+            font-size: 23px;
+        }
+    }
+    .partOneExplaine
+    {
+        width: 60%;
+        min-height: 800px;
+        background-color: white;
+        // padding:50px;
+        border-radius: 20px;
+        img
+        {
+            width: 100%;
+            display: block;
+            margin: 0 auto;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            margin-bottom: 30px;
+        }
+        .title
+        {
+            font-weight: bold;
+            font-size: 23px;
+            margin-left: 20px;
+            margin-bottom: 40px;
+        }
+        .discription
+        {
+            margin-left: 20px;
+        }
+    }
+}
