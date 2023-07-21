@@ -99,10 +99,12 @@ function Navbar(props) {
             <p className={style.twoItem}><FiUsers className={style.AiOutlineMenuFold} /></p>
           </div>
           </Link>
+          <Link to="/Event">
           <div className={style.containItemNav}>
             <p className={style.oneItem}>Events</p>
             <p className={style.twoItem}><BsFillCalendar2EventFill className={style.AiOutlineMenuFold} /></p>
           </div>
+          </Link>
           <Link to="/" className={style.Link} onClick={logout}>
           <div className={style.containItemNav}>
             <p className={style.oneItem}>Sign Out</p>

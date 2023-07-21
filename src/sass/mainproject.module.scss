@@ -78,7 +78,7 @@
         {
             width: 90%;
         }
-        .project {
+        .Link {
             width: 27%;
             min-height: 500px;
             border-radius: 20px;
@@ -87,7 +87,17 @@
             margin-top: 35px;
             border: 1px solid #e7e7e7;
             cursor: pointer;
-            
+            text-decoration: none;
+            color: $pColor1;
+            @media (max-width:1300px)
+            {
+                width: 30%;
+            }
+            @media (max-width: 1130px)
+            {
+                width: 45%;
+                // min-height: 300px;
+            }
             @media (max-width:904px)
             {
                 width: 46%;
@@ -147,6 +157,10 @@
                 @media (max-width:1130px)
                 {
                     min-height: 200px;
+                }
+                @media (max-width:1130px)
+                {
+                    min-height: 140px;
                 }
             }
         }

@@ -1,0 +1,340 @@
+@import "./global.module.scss";
+@import 'mathsass';
+
+.container {
+    min-height: 100vh;
+    background-color: #f7f7f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: $myfont;
+    // padding-left: 50px;
+    .containerPush {
+        width: 80%;
+        background-color: #f7f7f7;
+        // background-color: red;
+        min-height: 700px;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        padding: 0px;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        position: relative; /* Add relative positioning */
+        @media(max-width:1200px)
+        {
+            width: 90%;
+        }
+        @media (max-width:830px)
+        {
+            min-height: 1350px;
+        }
+        @media(max-width:400px)
+        {
+            width: 90%;
+        }
+        .push {
+            height: 135px;
+            background-color: white;
+            border: 0.5px solid $pColorR;
+            position: absolute;
+            bottom: 0; /* Position at the bottom of the parent */
+            width: 100%; /* Set the width to fill the parent */
+            .containerInput
+            {
+                display: flex;
+                align-items: center;
+                padding-left:100px;
+                justify-content: center;
+                @media (max-width:1300px)
+                {
+                    padding-left: 30px;
+                }
+                @media(max-width:850px)
+                {
+                    padding-left: 20px;
+                }
+                @media(max-width:320px)
+                {
+                    padding-left: 0px;
+                }   
+                
+            }
+            .title
+            {
+                margin-left: 20px;
+                font-weight: bold;
+            }
+            .inputPush
+            {
+                width: 80%;
+                height: 40px;
+                border: 1px solid $pColorR;
+                padding-left: 20px;
+                color: #5b5b5b;
+                font-size: 16px;
+                font-family: $myfont;
+                @media(max-width:320px)
+                {
+                    padding-left: 3px;
+                }  
+                &:focus
+                {
+                    outline: none;
+                }
+                @media(max-width:750px)
+                {
+                    width: 75%;
+                }
+                @media(max-width:650px)
+                {
+                    width: 70%;
+                }
+                @media(max-width:550px)
+                {
+                    width: 60%;
+                }
+            }
+            .containerAllIcon
+            {
+                width: 15%;
+            }
+            .containerIcon
+            {
+                width: 50px;
+                height: 50px;
+                background-color: $pColor3;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50%;
+                margin-left: 30px;
+                cursor: pointer;
+                transition: 0.5s all;
+                @media (max-width:980px)
+                {
+                    margin-left: 20px;
+                }
+
+                @media (max-width:850px)
+                {
+                    margin-left: 10px;
+                }
+                &:hover
+                {
+                    background-color: #3e4459;
+                }
+            }
+            .icon
+            {
+                font-size: 30px;
+                color:$pColorR;
+            }
+        }
+      }
+      
+      .containerProjectLink
+      {
+        display: flex;
+        min-height: 564px;
+        background-color: #f7f7f7;
+        @media (max-width:830px)
+        {
+            flex-direction: column;
+        }
+        .chooseProject
+        {
+            width: 40%;
+            background-color: white;
+            @media (max-width:1000px)
+            {
+                width: 50%;
+            }
+            @media (max-width:830px)
+            {
+                width: 100%;
+                font-weight: bold;
+                border-top-right-radius: 20px;
+                border-top-left-radius: 20px;
+                margin-bottom: 30px;
+            }
+            .containerTitle
+            {
+                background-color: $pColor3;
+                padding: 20px;
+                border-top-left-radius: 20px;
+                @media (max-width:830px)
+                {
+                    border-top-right-radius: 20px;
+                }
+                .title
+                {
+                    text-align: center;
+                    margin: 0;
+                    padding: 0;
+                    font-size: 17px;
+                    font-weight: bold;
+                    color: white;
+                }
+            }
+            .allProjects
+            {
+                overflow-y: scroll;
+                height: 500px;
+                .porject
+                {
+                    height: 70px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    // background-color: red;
+                    text-align: justify;
+                    padding: 10px;
+                    // padding-left: 15px;
+                    padding-right: 15px;
+                    transition: 0.5s all;
+                    cursor: pointer;
+                    &:hover
+                    {
+                        background-color: #2a2d384d;
+                    }
+                    p
+                    {
+                        font-size: 15px;
+                    }
+                    .containerIcon
+                    {
+                        width: 50%;
+                        height: 100%;
+                        // background-color: bisque;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        @media (max-width:850px)
+                        {
+                            display: none;
+                        }
+                        @media (max-width:830px)
+                        {
+                            display: flex;
+                            width: 10%;
+                        }
+                        .icon
+                        {
+                            font-size: 30px;
+                            color: $pColorR;
+                            display: block;
+                        }
+                    }
+                }
+            }
+            
+        }
+        .displayLink
+        {
+            width: 70%;
+            background-color: white;
+            @media (max-width:1000px)
+            {
+                width: 60%;
+            }
+            @media (max-width:830px)
+            {
+                width: 100%;
+                border-top-right-radius: 20px;
+                border-top-left-radius: 20px;
+                // font-weight: bold;
+            }
+            // background-color: red;
+            .containerTitle
+            {
+                background-color: #2a2d38da;
+                padding: 20px;
+                border-top-right-radius: 20px;
+                @media (max-width:830px)
+                {
+                    border-top-left-radius: 20px;
+                }
+                .title
+                {
+                    margin: 0;
+                    padding: 0;
+                    text-align: center;
+                    font-size: 17px;
+                    font-weight: bold;
+                    color: white;
+                }
+            }
+            .allMessages {
+                overflow-y: scroll;
+                overflow-x: hidden;
+                // background-color: red;   
+                height: 470px;
+                padding-top: 30px;  
+                .containerSendLink
+                {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-end;
+                    margin-bottom: 20px;
+                    padding-right: 20px;
+                    .nameSend
+                    {
+                        padding-right: 20px;
+                        font-weight: bold;
+                    }
+                }
+                /* styles.scss */
+                .sendLink {
+                    /* Your original styles */
+                    width: 80%;
+                    min-height: 10px;
+                    background-color: $pColorR;
+                    border-radius: 20px;
+                    padding-left: 20px;
+                    display: flex;
+                    align-items: center;
+                    color: white;
+                    overflow-x: scroll;
+                    padding-right: 10px;
+                    padding-top: 10px;
+                    padding-bottom: 10px;
+                    &::-webkit-scrollbar {
+                    height: 0px;
+                    width: 0px;
+                    }
+                }
+                .containerResLink
+                {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: start;
+                    padding-left: 20px;
+                    .nameRes
+                    {
+                        margin-left: 20px;
+                        font-weight: bold;
+                    }
+                }
+                .resLink {
+                   width: 80%;
+                   min-height: 10px;
+                   border-radius: 20px;
+                   background-color: $pColorR;
+                   display: flex;
+                   align-items: center;
+                   padding-right: 10px;
+                    padding-top: 10px;
+                    padding-bottom: 10px;
+                   padding-left: 20px;
+                   color: white;
+                   overflow-x: scroll;
+                   &::-webkit-scrollbar {
+                    height: 0px;
+                    width: 0px;
+                    }
+                 }
+              } 
+        }
+      }
+      
+}

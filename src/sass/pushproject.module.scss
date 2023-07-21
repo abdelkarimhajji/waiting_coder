@@ -1,0 +1,24 @@
+@import "./global.module.scss";
+@import 'mathsass';
+
+.container
+{
+    // min-height: 100vh;
+    height: auto;
+    display: flex;
+    -webkit-tap-highlight-color: transparent;
+    .navbar
+    {
+        width: 70px;
+        min-height: 100vh;
+        display: inline;
+        @media (max-width: 370px)
+        {
+            width: 0;
+        }
+    }
+    .nextNav
+    {
+        width: 100vw;
+    }
+}

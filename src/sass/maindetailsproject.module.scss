@@ -13,10 +13,11 @@
     padding-top: 100px;
     font-family: $myfont;
     background-color:#f7f7f7;
+    -webkit-tap-highlight-color: transparent;
     .containerMoreDetails
     {
-        width: 80%;
-        height: 70px;
+        width: 85%;
+        height: 65px;
         background-color: $pColor3;
         padding-left: 30px;
         padding-right: 50px;
@@ -24,6 +25,10 @@
         margin-bottom: 100px;
         align-items: center;
         color: $pColorR;
+        @media (max-width: 800px)
+        {
+            width: 75%;
+        }
         @media (max-width: 500px)
         {
             width: 70%;
@@ -36,6 +41,12 @@
         {
             width: 95%;
             padding-left: 20px;
+            font-size: 18px;
+            @media (max-width: 280px)
+            {
+                font-size: 15px;
+                padding-left: 2px;
+            }
         }
         .icon
         {
@@ -45,10 +56,20 @@
     .partOneExplaine
     {
         width: 60%;
-        min-height: 800px;
+        min-height: 680px;
         background-color: white;
         // padding:50px;
+        margin-bottom: 20px;
         border-radius: 20px;
+        text-align: justify;
+        @media (max-width: 850px)
+        {
+            min-height: 550px;
+        }
+        @media (max-width: 768px)
+        {
+            width: 80%;
+        }
         img
         {
             width: 100%;
@@ -64,10 +85,165 @@
             font-size: 23px;
             margin-left: 20px;
             margin-bottom: 40px;
+            width: 90%;
         }
         .discription
         {
             margin-left: 20px;
+            width: 90%;
+            color: #454545;
+        }
+        .langNeedProject
+        {
+            margin-left: 20px;
+            text-decoration: underline;
+            color: $pColorR;
+        }
+    }
+    .partTwoResourse
+    {
+        width: 60%;
+        min-height: 200px;
+        background-color: white;
+        border-radius: 20px;
+        padding-top: 20px;
+        margin-bottom: 30px;
+        padding-bottom: 30px;
+        @media (max-width: 768px)
+        {
+            width: 80%;
+        }
+    }
+    .title{
+        font-size: 20px;
+        font-weight: bold;
+        margin-left: 20px;
+    }
+    .allResource
+    {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .EachResourse
+    {
+        display: flex;
+        align-items: center;
+        // background-color: red;
+        cursor: pointer;
+        width: 30%;
+        border-radius: 20px;
+        padding-left:10px;
+        border: 1px solid $pColorR;
+        @media(max-width: 1400px)
+        {
+            width: 45%;
+        }
+        @media (max-width:850px)
+        {
+            width: 95%;
+        }
+        p
+        {
+            margin-left: 10px;
+        }
+    }
+    .partThreeContext
+    {
+        width: 60%;
+        min-height: 250px;
+        background-color: white;
+        border-radius: 20px;
+        margin-bottom: 30px;
+        padding-top: 20px;
+        @media (max-width: 768px)
+        {
+            width: 80%;
+        }
+        .title
+        {
+            text-align: justify;
+            @media (max-width: 768px)
+            {
+                // font-size: 16px;
+                margin-bottom: 50px;
+            }
+        }
+        .decription
+        {
+            width: 90%;
+            margin-left: 20px;
+            font-size: 15px;
+            text-align: justify;
+            color: #454545;
+        }
+    }
+    .partFoorDeliverables
+    {
+        width: 60%;
+        min-height: 150px;
+        background-color: white;
+        border-radius: 20px;
+        margin-bottom: 30px;
+        padding-top: 20px;
+        @media (max-width: 768px)
+        {
+            width: 80%;
+        }
+        .description
+        {
+            width: 90%;
+            margin-left: 20px;
+            color: #454545;
+            text-align: justify;
+        }
+    }
+    .partFivePush
+    {
+        width: 60%;
+        min-height: 150px;
+        background-color: white;
+        margin-bottom: 30px;
+        border-radius: 20px;
+        @media (max-width: 768px)
+        {
+            width: 80%;
+        }
+        .description
+        {
+            width: 90%;
+            text-align: justify;
+            color: #454545;
+            margin-left: 20px;
+            margin-bottom: 30px;
+        }
+        .link
+        {
+            text-decoration: none;
+        }
+        .push
+        {
+            display: block;
+            margin: 0 auto;
+            margin-bottom: 20px;
+            width: 200px;
+            height: 40px;
+            background-color: $pColor3;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: 0.5s all;
+            border: 1px solid white;
+            text-decoration: none;
+            &:hover
+            {
+                background-color: white;
+                color: $pColor1;
+                border: 1px solid $pColor1;
+            }
         }
     }
 }

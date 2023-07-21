@@ -74,15 +74,9 @@ function MainLanguage() {
             </div>
             <div className={style.link}>
               <p className={style.clickLink}>this link ok ....</p>
-              <button className={style.validateLink} onClick={displayWindow}>
-                click me
-              </button>
             </div>
             <div className={style.link}>
               <p className={style.clickLink}>this link ok ....</p>
-              <button className={style.validateLink} onClick={displayWindow}>
-                click me
-              </button>
             </div>
           </div>
         </div>
@@ -103,15 +97,15 @@ function MainLanguage() {
             </div>
             <div className={style.link}>
               <p className={style.clickLink}>this link ok ....</p>
-              <button className={style.validateLink} onClick={displayWindow}>
+              {/* <button className={style.validateLink} onClick={displayWindow}>
                 click me
-              </button>
+              </button> */}
             </div>
             <div className={style.link}>
               <p className={style.clickLink}>this link ok ....</p>
-              <button className={style.validateLink} onClick={displayWindow}>
+              {/* <button className={style.validateLink} onClick={displayWindow}>
                 click me
-              </button>
+              </button> */}
             </div>
           </div>
         </div>

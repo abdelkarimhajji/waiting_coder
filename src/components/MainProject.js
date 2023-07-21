@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+import { useLocation, Navigate , Link } from "react-router-dom";
 import style from "../sass/mainproject.module.scss";
 import { FaYoutube } from 'react-icons/fa';
 import { AiOutlineUserAdd } from 'react-icons/ai';
@@ -20,6 +21,7 @@ function MainProject() {
             <AiFillCaretDown className={style.AiFillCaretDown} />
         </div>
         <div className={style.containProject}>
+        <Link to="/DetailsProject" className={style.Link}>
             <div className={style.project}>
               <div className={style.containImg}>
                 <img src={biographie} alt="biographie" className={style.img}/>
@@ -31,8 +33,10 @@ function MainProject() {
               </div> 
                 <button className={style.moreDetails}>More Details</button>
             </div>
+        </Link>
             {/* finish project */}
             {/* begin card project */}
+            <Link to="/DetailsProject" className={style.Link}>
             <div className={style.project}>
               <div className={style.containImg}>
                 <img src={biographie} alt="biographie" className={style.img}/>
@@ -44,8 +48,10 @@ function MainProject() {
               </div> 
               <button className={style.moreDetails}>More Details</button>
             </div>
+            </Link>
             {/* finish project */}
             {/* begin card project */}
+            <Link to="/DetailsProject" className={style.Link}>
             <div className={style.project}>
               <div className={style.containImg}>
                 <img src={biographie} alt="biographie" className={style.img}/>
@@ -57,6 +63,7 @@ function MainProject() {
               </div> 
               <button className={style.moreDetails}>More Details</button>
             </div>
+            </Link>
             {/* finish project */}
         </div>
        

@@ -11,6 +11,7 @@ import { FiFigma} from 'react-icons/fi'
 import { PiProjectorScreenChartBold } from 'react-icons/pi'
 import {BsFillCalendar2EventFill } from 'react-icons/bs'
 import {GiStarShuriken} from 'react-icons/gi'
+
 // import Language from "../pages/Language";
 function MainHome() {
     
