@@ -4,13 +4,15 @@ import Navbar from "../components/Navbar";
 import Searsh from "../components/Searsh";
 import Footer from "../components/Footer";
 import style from "../sass/profile.module.scss";
+import MainTools from '../components/MainTools';  
 import { UserContext } from "../utils/UserContext";
-import MainEvent from '../components/MainEvent';
-function Event() {
+
+function Tools() {
   
 useEffect(() => {
     window.scrollTo(0, 0);
     }, []);
+
   return (
     <div className={style.container}>
       <div className={style.navbar}>
@@ -18,11 +20,12 @@ useEffect(() => {
       </div>
       <div className={style.nextNav}>
         <Searsh />
-        <MainEvent />
+        <MainTools />
         <Footer />
       </div>
     </div>
   );
+
 }
 
-export default Event;
+export default Tools;

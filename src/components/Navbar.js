@@ -83,10 +83,12 @@ function Navbar(props) {
             <p className={style.twoItem}><FaCode className={style.AiOutlineMenuFold} /></p>
           </div>
           </Link>
+          <Link to="/Tools" className={style.Link}>
           <div className={style.containItemNav}>
             <p className={style.oneItem}>Tools</p>
             <p className={style.twoItem}><TbToolsOff className={style.AiOutlineMenuFold} /></p>
           </div>
+          </Link>
           <Link to="/Project" className={style.Link}>
           <div className={style.containItemNav}>
             <p className={style.oneItem}>Projects</p>
@@ -99,7 +101,7 @@ function Navbar(props) {
             <p className={style.twoItem}><FiUsers className={style.AiOutlineMenuFold} /></p>
           </div>
           </Link>
-          <Link to="/Event">
+          <Link to="/Event" className={style.Link}>
           <div className={style.containItemNav}>
             <p className={style.oneItem}>Events</p>
             <p className={style.twoItem}><BsFillCalendar2EventFill className={style.AiOutlineMenuFold} /></p>

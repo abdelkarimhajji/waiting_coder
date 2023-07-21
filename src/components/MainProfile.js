@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
-import Navbar from "../components/Navbar";
-import Searsh from "../components/Searsh";
-import Footer from "../components/Footer";
+import {AiFillCaretDown} from 'react-icons/ai';
 import style from "../sass/mainprofile.module.scss";
 import { UserContext } from "../utils/UserContext";
 import {GiTopPaw} from 'react-icons/gi';
+import {FiUsers} from 'react-icons/fi';
 import karim from '../imgs/karim.jpg';
 
 function MainProfile() {
@@ -13,6 +12,11 @@ function MainProfile() {
 
   return (
     <div className={style.container}>
+        <div className={style.containerTitlePage}>
+            <FiUsers className={style.iconEvent}/>
+            <p>Event(s)</p>
+            <AiFillCaretDown className={style.iconDown}/>
+        </div>
         {/* start card */}
     <Link to="/EachProfile" className={style.link}>
       <div className={style.containerProfile}>

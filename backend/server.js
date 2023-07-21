@@ -16,7 +16,7 @@
   app.use(express.json()); // Add this line to parse JSON in request body
 
   app.post('/signup', (req, res) => {
-      const selectSql = "SELECT * FROM `user` WHERE `name` = ? AND `password` = ?";
+      const selectSql = "SELECT * FROM `user` WHERE `firstName` = ? AND `password` = ?";
       const selectName = [req.body.name];
       const selectPassword = [req.body.password];
       db.query(selectSql, [selectName, selectPassword], (selectErr, selectResult) => {

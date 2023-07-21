@@ -3,5 +3,174 @@
 
 .container
 {
-    
+    background-color:#f7f7f7;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 100px;
+    font-family: $myfont;
+    .containerTitlePage
+    {
+        width: 85%;
+        height: 60px;
+        margin-bottom: 70px;
+        background-color: $pColor1;
+        color: $pColorR;
+        display: flex;
+        // justify-content: center;
+        align-items: center;
+        padding-left: 30px;
+        padding-right: 30px;
+        @media (max-width:700px)
+        {
+            width: 80%;
+        }
+        @media (max-width:320px)
+        {
+            width: 75%;
+        }
+        .iconEvent
+        {
+            font-size: 25px;
+        }
+        p
+        {
+            margin-left: 20px;
+            font-weight: bold;
+            width: 92%;
+        }
+        .iconDown
+        {
+            font-size: 25px;
+        }
+    }
+    .containerEvent
+    {
+        width: 80%;
+        height: 200px;
+        background-color: white;
+        display: flex;
+        border-radius: 20px;
+        margin-bottom: 50px;
+        box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
+        @media (max-width:1000px)
+        {
+            width: 90%;
+        }
+        @media (max-width:650px)
+        {
+            flex-direction: column;
+            height: 500px;
+        }
+        @media (max-width:400px)
+        {
+            width: 95%;
+        }
+        .date
+        {
+            width: 20%;
+            height: 100%;
+            background-color: $pColor3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            border-top-left-radius: 20px;
+            border-end-start-radius: 20px;
+            flex-direction: column;
+            @media (max-width: 1300px)
+            {
+                width: 30%;
+            }
+            @media (max-width:650px)
+            {
+                width: 100%;
+                border-end-start-radius: 0px;
+                border-top-right-radius: 20px;
+            }
+            .number
+            {
+                font-size: 50px;
+                font-weight: bold;
+                height: 2px;
+                // background-color: red;
+                @media (max-width:650px)
+                {
+                    // height: 50%;
+                    width: 100%;
+                    text-align: center;
+                    padding-top: 50px;
+                }
+            }
+            p
+            {
+                height: 50%;
+                width: 100%;
+                text-align: center;
+                // background-color: red;
+            }
+        }
+        .description
+        {
+            padding-left: 30px;
+            width: 80%;
+            text-align: justify;
+            padding-right: 30px;
+            @media (max-width: 1300px)
+            {
+                width: 70%;
+            }
+            @media (max-width:400px)
+            {
+               text-align: left;
+               padding-right: 5px;
+            }
+            .title
+            {
+                margin-left: 0px;
+                font-size: 25px;
+                font-weight: bolder;
+                color: $pColorR;
+            }
+            .containerTime
+            {
+                background-color: #fef8bd;
+                width: 17%;
+                height: 50px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 20px;
+                margin-bottom: 30px;
+                @media (max-width: 1300px)
+                {
+                    width: 25%;
+                }
+                @media (max-width: 890px)
+                {
+                    width: 40%;
+                }
+                @media (max-width:550px)
+                {
+                   width: 60%;
+                }
+                @media (max-width:400px)
+                {
+                   width: 80%;
+                }
+                .icon
+                {
+                    font-size: 30px;
+                    color: $hoverR;
+                }
+                p
+                {
+                    margin-left: 10px;
+                    color: $hoverR;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
 }

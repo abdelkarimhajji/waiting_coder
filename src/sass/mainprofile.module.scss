@@ -9,13 +9,48 @@
     min-height: 100vh;
     padding-left: 60px;
     padding-right: 60px;
-    padding-top: 60px;
+    padding-top: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
     font-family: $myfont;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
+    .containerTitlePage
+    {
+        width: 85%;
+        height: 60px;
+        margin-bottom: 70px;
+        background-color: $pColor1;
+        color: $pColorR;
+        display: flex;
+        // justify-content: center;
+        align-items: center;
+        padding-left: 30px;
+        padding-right: 30px;
+        @media (max-width:700px)
+        {
+            width: 80%;
+        }
+        @media (max-width:320px)
+        {
+            width: 75%;
+        }
+        .iconEvent
+        {
+            font-size: 25px;
+        }
+        p
+        {
+            margin-left: 20px;
+            font-weight: bold;
+            width: 92%;
+        }
+        .iconDown
+        {
+            font-size: 25px;
+        }
+    }
     @media(max-width:660px)
     {
         padding-left: 0;

@@ -2,7 +2,7 @@ import React, { useState, useEffect} from "react";
 import { useLocation, Navigate , Link } from "react-router-dom";
 import style from "../sass/mainhome.module.scss"
 import { AiFillCaretDown, AiOutlineProject} from 'react-icons/ai';
-import { FaCode, FaUpload, FaStar } from 'react-icons/fa'
+import { FaCode, FaUpload, FaStar,FaTrophy } from 'react-icons/fa'
 import {TiHtml5} from 'react-icons/ti'
 import { TbHandClick , TbToolsOff, TbBrandJavascript, TbBrandVscode} from 'react-icons/tb'
 import { DiCss3 } from 'react-icons/di'
@@ -161,8 +161,8 @@ function MainHome() {
        <div className={style.itemsEvents}>
                 <div className={style.contInsidEvents}>
                         <div className={style.titleEvents}>
-                            <BsFillCalendar2EventFill className={style.iconTitle}/>
-                            <p className="par">Events</p>
+                            <FaTrophy className={style.iconTitle}/>
+                            <p className="par">Competition</p>
                             <AiFillCaretDown className={style.iconTitle}/>
                         </div>
                         <div className={style.UnderConatEvent}>
