@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useLocation, useNavigate , Link} from "react-router-dom";
 import style from "../sass/eachlevel.module.scss"
 import { UserContext } from "../utils/UserContext";
-import karim from '../imgs/karim.jpg'
+import karim from '../imgs/karim.png'
 
 function EachLevel() {
     const [selectedValue, setSelectedValue] = useState('');
@@ -30,12 +30,6 @@ function EachLevel() {
             </div>
             <div className={style.containerLevel}>
             <select value={selectedValue} onChange={handleSelectChange} className="select">
-                <option value="">Select an option</option>
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
-            </select>
-            <select value={selectedValue2} onChange={handleSelectChange2} className="select">
                 <option value="">Select an option</option>
                 <option value="option1">Option 1</option>
                 <option value="option2">Option 2</option>

@@ -5,7 +5,7 @@ import style from "../sass/mainprofile.module.scss";
 import { UserContext } from "../utils/UserContext";
 import {GiTopPaw} from 'react-icons/gi';
 import {FiUsers} from 'react-icons/fi';
-import karim from '../imgs/karim.jpg';
+import karim from '../imgs/karim.png';
 
 function MainProfile() {
   

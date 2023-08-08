@@ -24,9 +24,6 @@
     const handleSubmit = async (e) => {
       e.preventDefault();
     
-      // console.log('Name:', name);
-      // console.log('Password:', password);
-    
       try {
         const response = await fetch('http://localhost:8081/signup', {
           method: 'POST',
@@ -38,27 +35,27 @@
             password,
           }),
         });
-    
+
         const data = await response.json();
-        setResponse(JSON.stringify(data));
+        setResponse(data);
       } catch (error) {
         console.log(error);
       }
     };
-    
+
     useEffect(() => {
-      if (response === '1') {
+      if (response.status === 1) {
           handleButtonClick();
+          localStorage.setItem('userId', response.userId);
       }
     }, [response]);
     
     useEffect(() => {
-      if (response === '-1') {
+      if (response.status !== 1) {
         setname('');
         setPassword('');
       }
     }, [response]);
-    console.log("this is value of   " + value)
     if (value == 1)
       return <Navigate to="/Home" replace />;
     return (
@@ -69,7 +66,7 @@
           <input type="password" name="password" placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)} />
           <input type="submit" className={style.submit} />
         </form>
-        <div className={style.error}>{response === '-1' && <p>Your Password or email does not exist</p>}</div>
+        <div className={style.error}>{response.status === -1 && <p>Your Password or email does not exist</p>}</div>
       </div>
     );  
   }

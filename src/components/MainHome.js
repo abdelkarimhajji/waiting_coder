@@ -11,9 +11,54 @@ import { FiFigma} from 'react-icons/fi'
 import { PiProjectorScreenChartBold } from 'react-icons/pi'
 import {BsFillCalendar2EventFill } from 'react-icons/bs'
 import {GiStarShuriken} from 'react-icons/gi'
+import {BsFiletypePhp} from 'react-icons/bs'
+import {SiXampp} from 'react-icons/si'
 
-// import Language from "../pages/Language";
-function MainHome() {
+function MainHome({selectedValues, selectedValuesTools, selectedValuesProject}) {
+    const [selectedValuesEvents, setSelectedValuesEvents] = useState([])
+    const [selectedValuesCompetitions, setSelectedValuesCompetitions] = useState([])
+    useEffect(() => {
+        console.log("Selected Values:", selectedValuesProject);
+      }, [selectedValues, selectedValuesTools, selectedValuesProject]);
+      const iconMapping = {
+        TiHtml5: TiHtml5,
+        DiCss3: DiCss3,
+        TbBrandJavascript: TbBrandJavascript,
+        BsFiletypePhp:BsFiletypePhp,
+        BiLogoGithub:BiLogoGithub,
+        TbBrandVscode:TbBrandVscode,
+        FiFigma:FiFigma,
+        SiXampp:SiXampp,
+      };
+      const Default = TiHtml5;
+
+      useEffect(() => {
+        fetch(`http://localhost:8081/api/get_events`)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            setSelectedValuesEvents(data);
+          })
+          .catch((error) => console.error(error));
+      }, []);
+    
+      useEffect(() => {
+        fetch(`http://localhost:8081/api/get_competitions`)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            setSelectedValuesCompetitions(data);
+          })
+          .catch((error) => console.error(error));
+      }, []);
     
   return (
     <div className={style.container}>
@@ -26,35 +71,15 @@ function MainHome() {
                         <AiFillCaretDown className={style.iconLanguage}/>
                     </div>
                     <div className={style.UnderConatProgram}>
-                    <Link to="/Language#html" className={style.link}>
-                        <div className={style.conatProItm}>
-                            <TiHtml5 className={style.TiHtml5}/>
-                            <p className="par"> - HTML5</p>
+                    {selectedValues.map((item, index) => (
+                    <Link key={index} to={`/Language#${item.name_langauge}`} className={style.link}>
+                            <div  className={style.conatProItm}>
+                            {React.createElement(iconMapping[item.name_icon] || Default, { className: style.TiHtml5 })}
+                            <p className="par"> - {item.name_langauge}</p>
                             <TbHandClick className={style.TbHandClick} />
-                        </div>
+                            </div>
                     </Link>
-                        <Link to="/Language#css" className={style.link}>
-                        <div className={style.conatProItm}>
-                            <DiCss3 className={style.TiHtml5}/>
-                            <p className={style.par} > - CSS3</p>
-                            <TbHandClick className={style.TbHandClick} />
-                        </div>
-                        </Link>
-                        <div className={style.conatProItm}>
-                            <TbBrandJavascript className={style.TiHtml5}/>
-                            <p className="par"> - JavaScript</p>
-                            <TbHandClick className={style.TbHandClick} />
-                        </div>
-                        <div className={style.conatProItm}>
-                            <TbBrandJavascript className={style.TiHtml5}/>
-                            <p className="par"> - JavaScript</p>
-                            <TbHandClick className={style.TbHandClick} />
-                        </div>
-                        <div className={style.conatProItm}>
-                            <TbBrandJavascript className={style.TiHtml5}/>
-                            <p className="par"> - JavaScript</p>
-                            <TbHandClick className={style.TbHandClick} />
-                        </div>
+                        ))}
                     </div>
                 </div>
             </div>
@@ -67,26 +92,13 @@ function MainHome() {
                         <AiFillCaretDown className={style.iconLanguage}/>
                     </div>
                     <div className={style.UnderConatProgram}>
-                        <div className={style.conatProItm}>
-                            <TbBrandVscode className={style.TiHtml5}/>
-                            <p className="par"> - Vscode</p>
+                    {selectedValuesTools.map((item, index) => (
+                        <div key={index} className={style.conatProItm}>
+                            {React.createElement(iconMapping[item.name_icon] || Default, { className: style.TiHtml5 })}
+                            <p className="par"> - {item.name_tool}</p>
                             <TbHandClick className={style.TbHandClick} />
                         </div>
-                        <div className={style.conatProItm}>
-                            <BiLogoGithub className={style.TiHtml5}/>
-                            <p className="par"> - Github</p>
-                            <TbHandClick className={style.TbHandClick} />
-                        </div>
-                        <div className={style.conatProItm}>
-                            <FiFigma className={style.TiHtml5}/>
-                            <p className="par"> - Figma</p>
-                            <TbHandClick className={style.TbHandClick} />
-                        </div>
-                        <div className={style.conatProItm}>
-                            <FiFigma className={style.TiHtml5}/>
-                            <p className="par"> - Figma</p>
-                            <TbHandClick className={style.TbHandClick} />
-                        </div>
+                    ))}
                     </div>
                 </div>
             </div>
@@ -99,26 +111,13 @@ function MainHome() {
                         <AiFillCaretDown className={style.iconLanguage}/>
                     </div>
                     <div className={style.UnderConatProgram}>
-                        <div className={style.conatProItm}>
+                    {selectedValuesProject.map((item, index) => (
+                        <div key={index} className={style.conatProItm}>
                             <FaUpload className={style.TiHtml5}/>
-                            <p className="par"> - Vscode</p>
+                            <p className="par"> - {item.name_project}</p>
                             <TbHandClick className={style.TbHandClick} />
                         </div>
-                        <div className={style.conatProItm}>
-                            <FaUpload className={style.TiHtml5}/>
-                            <p className="par"> - Github</p>
-                            <TbHandClick className={style.TbHandClick} />
-                        </div>
-                        <div className={style.conatProItm}>
-                            <FaUpload className={style.TiHtml5}/>
-                            <p className="par"> - Figma</p>
-                            <TbHandClick className={style.TbHandClick} />
-                        </div>
-                        <div className={style.conatProItm}>
-                            <FaUpload className={style.TiHtml5}/>
-                            <p className="par"> - Figma</p>
-                            <TbHandClick className={style.TbHandClick} />
-                        </div>
+                        ))}
                     </div>
                 </div>
             </div>
@@ -132,26 +131,13 @@ function MainHome() {
                             <AiFillCaretDown className={style.iconTitle}/>
                         </div>
                         <div className={style.UnderConatEvent}>
-                            <div className={style.conatEventItm}>
+                        {selectedValuesEvents.map((item, index) => (
+                            <div key={index} className={style.conatEventItm}>
                                 <GiStarShuriken className={style.TiHtml5}/>
-                                <p className="par"> - Vscode</p>
+                                <p className="par"> - {item.title_event}</p>
                                 <TbHandClick className={style.TbHandClick} />
                             </div>
-                            <div className={style.conatEventItm}>
-                                <GiStarShuriken className={style.TiHtml5}/>
-                                <p className="par"> - Vscode</p>
-                                <TbHandClick className={style.TbHandClick} />
-                            </div>
-                            <div className={style.conatEventItm}>
-                                <GiStarShuriken className={style.TiHtml5}/>
-                                <p className="par"> - Vscode</p>
-                                <TbHandClick className={style.TbHandClick} />
-                            </div>
-                            <div className={style.conatEventItm}>
-                                <GiStarShuriken className={style.TiHtml5}/>
-                                <p className="par"> - Vscode</p>
-                                <TbHandClick className={style.TbHandClick} />
-                            </div>
+                        ))}
                         </div>
                 </div>
                     {/* finish  contInsideEvents*/}
@@ -166,11 +152,13 @@ function MainHome() {
                             <AiFillCaretDown className={style.iconTitle}/>
                         </div>
                         <div className={style.UnderConatEvent}>
-                            <div className={style.conatEventItm}>
+                        {selectedValuesCompetitions.map((item, index) => (
+                            <div key={index} className={style.conatEventItm}>
                                 <GiStarShuriken className={style.TiHtml5}/>
-                                <p className="par"> - Vscode</p>
+                                <p className="par"> - {item.title_competition}</p>
                                 <TbHandClick className={style.TbHandClick} />
                             </div>
+                        ))}
                         </div>
                 </div>
                     {/* finish  contInsideEvents*/}

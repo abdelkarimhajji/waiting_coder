@@ -13,8 +13,6 @@ function SignIn() {
   return (
     <div className={style.container}>
       <FormSignIn />
-      {/* {value} */}
-      {/* <button onClick={() => setValue('hajji')}>update</button> */}
     </div>
   );
 }

@@ -11,6 +11,7 @@
     display: flex;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
     -webkit-tap-highlight-color: transparent;
+    margin-top: 66px;
     @include flexCenter-styles;
     @media (max-width: 768px)
     {
@@ -44,14 +45,14 @@
         select
         {
             width: 300px;
-            height: 45px;
+            height: 55px;
             padding-left: 15px;
             color: white;
-            background-color: #1b1c2312;
+            background-color: #1b1c239b;
             border: none;
             font-family: $myfont;
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 50px;
             font-size: 15px;
             transition: 0.5s all;
             cursor: pointer;
@@ -78,7 +79,7 @@
             height: 40px;
             border-radius: 10px;
             color: white;
-            background: linear-gradient(to right, #02babd 50%, #6d6d6d5f 50%);
+            // background: linear-gradient(to right, #02babd 50%, #6d6d6d5f 50%);
             backdrop-filter: blur(10px);
             z-index: 1;
             @media (max-width: 768px)

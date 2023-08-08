@@ -24,9 +24,14 @@ function MainEvent() {
         <div className={style.description}>
           <p className={style.title}>TITLE OF EVENT</p>
           <p>drr how to do this in the last fshsdfh sdfosf djjjjjjj</p>
-          <div className={style.containerTime}>
-            <MdWatchLater className={style.icon}/>
-            <p>20:23 pm</p>
+          <div className={style.parentTimeButton}>
+              <div className={style.containerTime}>
+                <MdWatchLater className={style.icon}/>
+                <p>20:23 pm</p>
+              </div>
+              <div className={style.containerButton}>
+                  <button>Register</button>
+              </div>
           </div>
         </div>
       </div>
@@ -40,13 +45,19 @@ function MainEvent() {
         <div className={style.description}>
           <p className={style.title}>TITLE OF EVENT</p>
           <p>drr how to do this in the last fshsdfh sdfosf djjjjjjj</p>
-          <div className={style.containerTime}>
-            <MdWatchLater className={style.icon}/>
-            <p>20:23 pm</p>
+          <div className={style.parentTimeButton}>
+              <div className={style.containerTime}>
+                <MdWatchLater className={style.icon}/>
+                <p>20:23 pm</p>
+              </div>
+              <div className={style.containerButton}>
+                  <button>Register</button>
+              </div>
           </div>
         </div>
       </div>
       {/* finsh container event */}
+      
     </div>
   );
 }

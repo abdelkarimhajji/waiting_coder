@@ -5,15 +5,23 @@ import { TiHtml5 } from 'react-icons/ti';
 import { AiFillCaretDown } from 'react-icons/ai';
 import { BsArrowRight } from 'react-icons/bs';
 import { Link, useLocation } from 'react-router-dom';
+import { AiOutlineProject} from 'react-icons/ai';
+import { FaUpload, FaStar,FaTrophy } from 'react-icons/fa'
+import { TbHandClick , TbToolsOff, TbBrandJavascript, TbBrandVscode} from 'react-icons/tb'
+import { DiCss3 } from 'react-icons/di'
+import {BiLogoGithub} from 'react-icons/bi'
+import { FiFigma} from 'react-icons/fi'
+import { PiProjectorScreenChartBold } from 'react-icons/pi'
+import {BsFillCalendar2EventFill } from 'react-icons/bs'
+import {GiStarShuriken} from 'react-icons/gi'
+import {BsFiletypePhp} from 'react-icons/bs'
+import {SiXampp} from 'react-icons/si'
 
 function MainLanguage() {
   const [valid, setValid] = useState(0);
+  const [setSelectValuesLanguages, setSetSelectValuesLanguages] = useState([]);
   const scrollableRef = useRef(null);
   const [scrollPosition, setScrollPosition] = useState(0);
-
-//   useEffect(() => {
-    //     window.scrollTo(0, 0);
-    //   }, []);
 
     const location = useLocation();
     const sectionRef = useRef(null);
@@ -23,7 +31,7 @@ function MainLanguage() {
     if (section && sectionRef.current) {
         sectionRef.current.scrollIntoView({ behavior: 'smooth' });
     }
-    }, [location]);
+    }, [location, setSelectValuesLanguages]);
 
   function displayWindow() {
     if (valid === 0) {
@@ -37,6 +45,32 @@ function MainLanguage() {
     }
   }
 
+  const iconMapping = {
+    TiHtml5: TiHtml5,
+    DiCss3: DiCss3,
+    TbBrandJavascript: TbBrandJavascript,
+    BsFiletypePhp:BsFiletypePhp,
+    BiLogoGithub:BiLogoGithub,
+    TbBrandVscode:TbBrandVscode,
+    FiFigma:FiFigma,
+    SiXampp:SiXampp,
+  };
+  const Default = TiHtml5;
+
+  useEffect(() => {
+    fetch(`http://localhost:8081/api/get_languages/${localStorage.getItem("selectedOptionKey")}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setSetSelectValuesLanguages(data);
+      })
+      .catch((error) => console.error(error));
+  }, []);
+  console.log(setSelectValuesLanguages)
   return (
     <>
       <div className={valid === 1 ? style.display : style.display2}>
@@ -59,13 +93,14 @@ function MainLanguage() {
           <AiFillCaretDown className={style.aifillcaerdown} />
         </div>
         {/* container of languages */}
-        <div className={style.cantAllLanguage} id="html" ref={sectionRef}>
+        {setSelectValuesLanguages.map((item, index) => (
+        <div key={index} className={style.cantAllLanguage} id="HTML5" ref={sectionRef}>
           <div className={style.titleLanguage}>
-            <TiHtml5 className={style.IconTitleLanguage} />
-            <p> - HTML5</p>
+          {React.createElement(iconMapping[item.name_icon] || Default, { className: style.IconTitleLanguage })}
+            <p> - {item.name_langauge}</p>
           </div>
           <div className={style.contentTitleLanguage}>
-            <p>This is description. This is description. This is description. This is description.</p>
+            <p>{item.description}</p>
           </div>
           <div className={style.validationLanguage}>
             <div className={style.containLink}>
@@ -73,42 +108,11 @@ function MainLanguage() {
               <p className={style.nameLink}>First link to study HTML5:</p>
             </div>
             <div className={style.link}>
-              <p className={style.clickLink}>this link ok ....</p>
-            </div>
-            <div className={style.link}>
-              <p className={style.clickLink}>this link ok ....</p>
+              <p className={style.clickLink}>{item.link}</p>
             </div>
           </div>
         </div>
-        {/* finish container of languages */}
-        {/* container of languages */}
-        <div className={style.cantAllLanguage} id="css" ref={sectionRef}>
-          <div className={style.titleLanguage}>
-            <TiHtml5 className={style.IconTitleLanguage} />
-            <p> - HTML5</p>
-          </div>
-          <div className={style.contentTitleLanguage}>
-            <p>This is description. This is description. This is description. This is description.</p>
-          </div>
-          <div className={style.validationLanguage}>
-            <div className={style.containLink}>
-              <BsArrowRight className={style.iconLink} />
-              <p className={style.nameLink}>First link to study HTML5:</p>
-            </div>
-            <div className={style.link}>
-              <p className={style.clickLink}>this link ok ....</p>
-              {/* <button className={style.validateLink} onClick={displayWindow}>
-                click me
-              </button> */}
-            </div>
-            <div className={style.link}>
-              <p className={style.clickLink}>this link ok ....</p>
-              {/* <button className={style.validateLink} onClick={displayWindow}>
-                click me
-              </button> */}
-            </div>
-          </div>
-        </div>
+        ))}
         {/* finish container of languages */}
       </div>
     </>

@@ -6,16 +6,53 @@ import { FaYoutube, FaCode } from 'react-icons/fa';
 import { TiHtml5 } from 'react-icons/ti';
 import { AiFillCaretDown } from 'react-icons/ai';
 import { BsArrowRight } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
+import { AiOutlineProject} from 'react-icons/ai';
+import { FaUpload, FaStar,FaTrophy } from 'react-icons/fa'
+import { TbHandClick , TbToolsOff, TbBrandJavascript, TbBrandVscode} from 'react-icons/tb'
+import { DiCss3 } from 'react-icons/di'
+import {BiLogoGithub} from 'react-icons/bi'
+import { FiFigma} from 'react-icons/fi'
+import { PiProjectorScreenChartBold } from 'react-icons/pi'
+import {BsFillCalendar2EventFill } from 'react-icons/bs'
+import {GiStarShuriken} from 'react-icons/gi'
+import {BsFiletypePhp} from 'react-icons/bs'
+import {SiXampp} from 'react-icons/si'
 function MainTools() {
   const location = useLocation();
     const sectionRef = useRef(null);
-
+    const [setSelectValuesTools, setSetSelectValuesTools] = useState([]);
     useEffect(() => {
     const section = location.hash ? location.hash.slice(1) : '';
     if (section && sectionRef.current) {
         sectionRef.current.scrollIntoView({ behavior: 'smooth' });
     }
     }, [location]);
+    const iconMapping = {
+      TiHtml5: TiHtml5,
+      DiCss3: DiCss3,
+      TbBrandJavascript: TbBrandJavascript,
+      BsFiletypePhp:BsFiletypePhp,
+      BiLogoGithub:BiLogoGithub,
+      TbBrandVscode:TbBrandVscode,
+      FiFigma:FiFigma,
+      SiXampp:SiXampp,
+    };
+    const Default = TiHtml5;
+    useEffect(() => {
+      fetch(`http://localhost:8081/api/get_tools/${localStorage.getItem("selectedOptionKey")}`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log("hello i am karim ok")
+          setSetSelectValuesTools(data);
+        })
+        .catch((error) => console.error(error));
+    }, [setSelectValuesTools]);
   return (
     <div className={style.container}>
         <div className={style.language}>
@@ -24,13 +61,14 @@ function MainTools() {
           <AiFillCaretDown className={style.aifillcaerdown} />
         </div>
         {/* container of languages */}
-        <div className={style.cantAllLanguage} id="html" ref={sectionRef}>
+        {setSelectValuesTools.map((item, index) => (
+        <div key={index} className={style.cantAllLanguage} id="html" ref={sectionRef}>
           <div className={style.titleLanguage}>
-            <TiHtml5 className={style.IconTitleLanguage} />
-            <p> - Github</p>
+          {React.createElement(iconMapping[item.name_icon] || Default, { className: style.IconTitleLanguage })}
+            <p> - {item.name_tool}</p>
           </div>
           <div className={style.contentTitleLanguage}>
-            <p>This is description. This is description. This is description. This is description.</p>
+            <p>{item.description}</p>
           </div>
           <div className={style.validationLanguage}>
             <div className={style.containLink}>
@@ -38,42 +76,11 @@ function MainTools() {
               <p className={style.nameLink}>First link to study HTML5:</p>
             </div>
             <div className={style.link}>
-              <p className={style.clickLink}>this link ok ....</p>
-            </div>
-            <div className={style.link}>
-              <p className={style.clickLink}>this link ok ....</p>
+              <p className={style.clickLink}>{item.link}</p>
             </div>
           </div>
         </div>
-        {/* finish container of languages */}
-        {/* container of languages */}
-        <div className={style.cantAllLanguage} id="css" ref={sectionRef}>
-          <div className={style.titleLanguage}>
-            <TiHtml5 className={style.IconTitleLanguage} />
-            <p> - VsCode</p>
-          </div>
-          <div className={style.contentTitleLanguage}>
-            <p>This is description. This is description. This is description. This is description.</p>
-          </div>
-          <div className={style.validationLanguage}>
-            <div className={style.containLink}>
-              <BsArrowRight className={style.iconLink} />
-              <p className={style.nameLink}>First link to study HTML5:</p>
-            </div>
-            <div className={style.link}>
-              <p className={style.clickLink}>this link ok ....</p>
-              {/* <button className={style.validateLink} onClick={displayWindow}>
-                click me
-              </button> */}
-            </div>
-            <div className={style.link}>
-              <p className={style.clickLink}>this link ok ....</p>
-              {/* <button className={style.validateLink} onClick={displayWindow}>
-                click me
-              </button> */}
-            </div>
-          </div>
-        </div>
+        ))}
         {/* finish container of languages */}
       </div>
   );

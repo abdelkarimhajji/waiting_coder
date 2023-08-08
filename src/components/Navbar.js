@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { AiOutlineMenuUnfold, AiOutlineMenuFold, AiOutlineHome } from 'react-icons/ai';
 import { FiUsers } from 'react-icons/fi';
 import React, { useState, useEffect, useContext } from "react";
-import karim from '../imgs/karim.jpg';
+import karim from '../imgs/karim.png';
 import { UserContext } from '../utils/UserContext';
 import { FaCode, FaUpload, FaStar } from 'react-icons/fa'
 import {TbToolsOff} from 'react-icons/tb'
@@ -53,6 +53,7 @@ function Navbar(props) {
   }, [hovered]);
   const logout = () => {
     console.log("i am rest to 0");
+    localStorage.removeItem("selectedOptionKey");
     localStorage.setItem('login', 0);
     // setIsLogin(0);
   };

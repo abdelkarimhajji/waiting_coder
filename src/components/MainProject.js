@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect , useState} from 'react';
 import { useLocation, Navigate , Link } from "react-router-dom";
 import style from "../sass/mainproject.module.scss";
 import { FaYoutube } from 'react-icons/fa';
@@ -10,8 +10,21 @@ import {AiFillCaretDown} from 'react-icons/ai';
 import biographie from '../imgs/biographie.png';
 
 function MainProject() {
-
-//   const {value, setValue, isLogin, setIsLogin} = useContext(UserContext);
+  const [setSelectValuesProjects, setSetSelectValuesProjects] = useState([]);
+  useEffect(() => {
+    fetch(`http://localhost:8081/api/get_porject/${localStorage.getItem("selectedOptionKey")}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("siiiiiiiiiiiiiiii ", localStorage.getItem("selectedOptionKey"));
+        setSetSelectValuesProjects(data); 
+      })
+      .catch((error) => console.error(error));
+  }, [localStorage.getItem("selectedOptionKey")]);
 
   return (
     <div className={style.container}>
@@ -20,54 +33,24 @@ function MainProject() {
             <p className={style.title}>Projects</p>
             <AiFillCaretDown className={style.AiFillCaretDown} />
         </div>
-        <div className={style.containProject}>
-        <Link to="/DetailsProject" className={style.Link}>
+        
+        <div  className={style.containProject}>
+        {setSelectValuesProjects.map((item, index) => (
+        <Link to="/DetailsProject"  key={index}  className={style.Link}>
             <div className={style.project}>
               <div className={style.containImg}>
-                <img src={biographie} alt="biographie" className={style.img}/>
+              <img src={require(`../imgs/${item.image_project}`)} alt={item.name_project} className={style.img} />
+                {/* <img src={biographie} alt="biographie" className={style.img}/> */}
               </div>
               <div className={style.containerDiscreption}>
-                <p className={style.titleProject}>Réaliser une Biographie d'un personnage qui vous inspire</p>
-                <p className={style.description}>Il s'agit de réaliser une page web qui présente la biographie 
-                  d'un personnage de votre choix (sportif, scientifique, artiste…) en utilisant HTML5 et CSS3 ;</p>
+                <p className={style.titleProject}>{item.name_project}</p>
+                <p className={style.description}>{item.description}</p>
               </div> 
                 <button className={style.moreDetails}>More Details</button>
             </div>
         </Link>
-            {/* finish project */}
-            {/* begin card project */}
-            <Link to="/DetailsProject" className={style.Link}>
-            <div className={style.project}>
-              <div className={style.containImg}>
-                <img src={biographie} alt="biographie" className={style.img}/>
-              </div>
-              <div className={style.containerDiscreption}>
-                <p className={style.titleProject}>Réaliser une Biographie d'un personnage qui vous inspire</p>
-                <p className={style.description}>Il s'agit de réaliser une page web qui présente la biographie 
-                  d'un personnage de votre choix (sportif, scientifique, artiste…) en utilisant HTML5 et CSS3 ;</p>
-              </div> 
-              <button className={style.moreDetails}>More Details</button>
-            </div>
-            </Link>
-            {/* finish project */}
-            {/* begin card project */}
-            <Link to="/DetailsProject" className={style.Link}>
-            <div className={style.project}>
-              <div className={style.containImg}>
-                <img src={biographie} alt="biographie" className={style.img}/>
-              </div>
-              <div className={style.containerDiscreption}>
-                <p className={style.titleProject}>Réaliser une Biographie d'un personnage qui vous inspire</p>
-                <p className={style.description}>ilisant HTML5 et CSS3 ;ilisant HTML5 et CSS3 ;ilisant HTML5 et CSS3 ;
-                ilisant HTML5 et CSS3 ;ilisant HTML5 et CSS3 ;ilisant HTML5 et CSS3 ;fcsdfff dfgf sdf</p>
-              </div> 
-              <button className={style.moreDetails}>More Details</button>
-            </div>
-            </Link>
-            {/* finish project */}
+        ))}
         </div>
-       
-       
     </div>
   );
 }

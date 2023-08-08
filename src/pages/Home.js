@@ -17,12 +17,17 @@ function Home() {
 
   const [updatedNumber, setUpdatedNumber] = useState(number);
   const [valid, setValid] = useState(0);
-
+  const [selectedValues, setSelectedValues] = useState([]);
+  const [selectedValuesTools, setSelectedValuesTools] = useState([]);
+  const [selectedValuesProject, setSelectedValuesProject] = useState([]); 
+  const [levelData, setLevelData] = useState([]);
+  const updateLevelData = (data) => {
+    setLevelData(data);
+  };
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
-  console.log("login cha7al " + localStorage.getItem("login"));
-
+  }, [selectedValues, selectedValuesTools, selectedValuesProject]);
+  // console.log("ffffffff" + selectedValuesProject)
   return (
     <div className={style.container}>
       <div className={style.navbar}>
@@ -30,8 +35,13 @@ function Home() {
       </div>
       <div className={style.nextNav}>
         <Searsh />
-        <Level />
-        <MainHome />
+        <Level
+          selectedValues={selectedValues}
+          setSelectedValues={setSelectedValues}
+          setSelectedValuesTools={setSelectedValuesTools}
+          setSelectedValuesProject={setSelectedValuesProject}
+        />
+        <MainHome selectedValues={selectedValues} selectedValuesTools={selectedValuesTools} selectedValuesProject={selectedValuesProject}/>
         <Footer />
       </div>
     </div>
