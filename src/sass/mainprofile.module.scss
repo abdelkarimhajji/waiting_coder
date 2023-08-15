@@ -16,6 +16,11 @@
     font-family: $myfont;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
+    @media(max-width : 1300px)
+    {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
     .containerTitlePage
     {
         width: 85%;
@@ -78,6 +83,10 @@
         border-radius: 20px;
         margin-bottom: 60px;
         cursor: pointer;
+        @media(max-width:1300px)
+        {
+            width: 200%;
+        }
         @media(max-width:1000px)
         {
             width: 100%;
@@ -90,42 +99,50 @@
         
         .containerImg
         {
-            width: 30%;
+            width: 300px;
             min-height: 300px;
             // background-color: antiquewhite;
+            padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
-            @media(max-width: 1385px)
+            @media(max-width: 1100px)
             {
-                width: 40%;   
+                width: 350px;   
             }
-            @media(max-width:930px)
+            @media(max-width:938px)
             {
                 width: 100%;
-                min-height: 350px;
+                min-height: 300px;
+                padding: 0;
             }
-            @media(max-width:480px)
+            @media(max-width:420px)
             {
-                min-height: 250px;
+                min-height: 200px;
+                padding-top: 20px;
             }
             img
             {
-                width: 90%;
-                height: 250px;
-                border-radius: 25px;
+                width: 280;
+                height: 280px;
+                border-radius: 50%;
                 box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-                @media(max-width:930px)
+                @media(max-width:938px)
                 {
-                    height: 320px;
+                    height: 250px;
+                    width: 250px;
                 }
                 @media(max-width:480px)
                 {
-                   border-radius: 50%;
                     width: 200px;
                     height: 200px;
                 }
-                @media(max-width:300px)
+                @media(max-width:380px)
+                {
+                    width: 190px;
+                    height: 190px;
+                }
+                @media(max-width:320px)
                 {
                     width: 170px;
                     height: 170px;
@@ -144,7 +161,7 @@
             {
                 width: 60%;
             }
-            @media(max-width:930px)
+            @media(max-width:938px)
             {
                 width: 100%;
             }
@@ -252,5 +269,42 @@
                 }
             }
         }
+    }
+    .containerPagination
+    {
+        // background-color: red;
+        width: 350px;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 100px;
+        @media(max-width: 480px)
+        {
+            width: 310px;
+        }
+        @media(max-width: 380px)
+        {
+            flex-direction: column;
+            // background-color: red;  
+            height: 100px; 
+            align-items: center;
+        }
+        button
+        {
+            width:150px;
+            height: 40px;
+            border: none;
+            // margin-left: 20px;
+            color: white;
+            background-color: $pColor1;
+            font-family: $myfont;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.5s all;
+            &:hover
+            {
+                background-color: rgb(36, 1, 1);
+            }
+        }
+       
     }
 }

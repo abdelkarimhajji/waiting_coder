@@ -26,8 +26,11 @@ function Home() {
   };
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [selectedValues, selectedValuesTools, selectedValuesProject]);
-  // console.log("ffffffff" + selectedValuesProject)
+    // console.log("you cant read it ",selectedValuesProject[0].id)
+    // if(!localStorage.getItem("idProject"))
+    //     localStorage.setItem("idProject", selectedValuesProject[0].id);
+  }, []);
+  
   return (
     <div className={style.container}>
       <div className={style.navbar}>
@@ -40,6 +43,7 @@ function Home() {
           setSelectedValues={setSelectedValues}
           setSelectedValuesTools={setSelectedValuesTools}
           setSelectedValuesProject={setSelectedValuesProject}
+          selectedValuesProject={selectedValuesProject}
         />
         <MainHome selectedValues={selectedValues} selectedValuesTools={selectedValuesTools} selectedValuesProject={selectedValuesProject}/>
         <Footer />

@@ -11,7 +11,9 @@ import MainProject from '../components/MainProject';
 
 function Project() {
 //   const {value, setValue, isLogin, setIsLogin} = useContext(UserContext);
-
+useEffect(() => {
+  window.scrollTo(0, 0);
+  }, []);
   return (
     <div className={style.container}>
         <div className={style.navbar}>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect, useId} from "react";
 import { useLocation, Navigate , Link } from "react-router-dom";
 import style from "../sass/mainhome.module.scss"
 import { AiFillCaretDown, AiOutlineProject} from 'react-icons/ai';
@@ -13,13 +13,18 @@ import {BsFillCalendar2EventFill } from 'react-icons/bs'
 import {GiStarShuriken} from 'react-icons/gi'
 import {BsFiletypePhp} from 'react-icons/bs'
 import {SiXampp} from 'react-icons/si'
+import {CgUnavailable} from 'react-icons/cg';
 
 function MainHome({selectedValues, selectedValuesTools, selectedValuesProject}) {
     const [selectedValuesEvents, setSelectedValuesEvents] = useState([])
     const [selectedValuesCompetitions, setSelectedValuesCompetitions] = useState([])
+    const userId = localStorage.getItem("userId");
+    const selectedOptionKey = localStorage.getItem("selectedOptionKey");
     useEffect(() => {
-        console.log("Selected Values:", selectedValuesProject);
+        // console.log("Selected Values:", selectedValuesProject);
       }, [selectedValues, selectedValuesTools, selectedValuesProject]);
+        // if (!localStorage.getItem("idProject"))
+        //         localStorage.setItem("idProject", selectedValuesProject[0].id);
       const iconMapping = {
         TiHtml5: TiHtml5,
         DiCss3: DiCss3,
@@ -31,9 +36,10 @@ function MainHome({selectedValues, selectedValuesTools, selectedValuesProject}) 
         SiXampp:SiXampp,
       };
       const Default = TiHtml5;
-
+      // console.log("i juset test ok : ", selectedOptionKey)
+      console.log("i juset test ok : ", userId)
       useEffect(() => {
-        fetch(`http://localhost:8081/api/get_events`)
+        fetch(`http://localhost:8081/api/get_events/${userId}/${selectedOptionKey}`)
           .then((response) => {
             if (!response.ok) {
               throw new Error("Network response was not ok");
@@ -44,7 +50,8 @@ function MainHome({selectedValues, selectedValuesTools, selectedValuesProject}) 
             setSelectedValuesEvents(data);
           })
           .catch((error) => console.error(error));
-      }, []);
+          
+      }, [userId, selectedOptionKey]);
     
       useEffect(() => {
         fetch(`http://localhost:8081/api/get_competitions`)
@@ -58,6 +65,7 @@ function MainHome({selectedValues, selectedValuesTools, selectedValuesProject}) 
             setSelectedValuesCompetitions(data);
           })
           .catch((error) => console.error(error));
+
       }, []);
     
   return (
@@ -112,12 +120,14 @@ function MainHome({selectedValues, selectedValuesTools, selectedValuesProject}) 
                     </div>
                     <div className={style.UnderConatProgram}>
                     {selectedValuesProject.map((item, index) => (
-                        <div key={index} className={style.conatProItm}>
+                        // item.display === 1 && (
+                            <div key={index} className={style.conatProItm}>
                             <FaUpload className={style.TiHtml5}/>
-                            <p className="par"> - {item.name_project}</p>
+                            <p className="par">- {item.name_project}</p>
                             <TbHandClick className={style.TbHandClick} />
-                        </div>
-                        ))}
+                            </div>
+                        // )
+                    ))}
                     </div>
                 </div>
             </div>
@@ -131,13 +141,23 @@ function MainHome({selectedValues, selectedValuesTools, selectedValuesProject}) 
                             <AiFillCaretDown className={style.iconTitle}/>
                         </div>
                         <div className={style.UnderConatEvent}>
-                        {selectedValuesEvents.map((item, index) => (
-                            <div key={index} className={style.conatEventItm}>
-                                <GiStarShuriken className={style.TiHtml5}/>
-                                <p className="par"> - {item.title_event}</p>
-                                <TbHandClick className={style.TbHandClick} />
-                            </div>
-                        ))}
+                        {Array.isArray(selectedValuesEvents) ? (
+                        selectedValuesEvents.map((item, index) => (
+                          <div key={index} className={style.conatEventItm}>
+                            <GiStarShuriken className={style.TiHtml5}/>
+                            <p className="par"> - {item.title_event}</p>
+                            <TbHandClick className={style.TbHandClick} />
+                          </div>
+                        ))
+                      ) : (
+                        <>
+                        <div  className={style.conatEventItm}>
+                        <CgUnavailable className={style.TiHtml5}/>
+                        <p> - No events available.</p>
+                        </div>
+                        </>
+                      )}
+
                         </div>
                 </div>
                     {/* finish  contInsideEvents*/}
@@ -170,3 +190,37 @@ function MainHome({selectedValues, selectedValuesTools, selectedValuesProject}) 
 }
 
 export default MainHome;
+// SELECT *
+// FROM ((((user
+// INNER JOIN specifics ON user.id = specifics.id_user)
+// INNER JOIN groups ON specifics.id_group = groups.id)
+// INNER JOIN name_specifics ON name_specifics.id = specifics.id_nameSpecifics)
+// INNER JOIN projects ON name_specifics.id = projects.id_collection) WHERE groups.group_valid = 1 and user.id = 2
+
+// SELECT *
+// FROM (((((user
+// INNER JOIN specifics ON user.id = specifics.id_user)
+// INNER JOIN groups ON specifics.id_group = groups.id)
+// INNER JOIN name_specifics ON name_specifics.id = specifics.id_nameSpecifics)
+// INNER JOIN projects ON name_specifics.id = projects.id_collection) 
+// INNER JOIN projects_display ON projects_display.id_project = projects.id) where user.id = 2  and projects_display.display = 1
+
+
+// SELECT *
+// FROM ((((user
+// INNER JOIN specifics ON user.id = specifics.id_user)
+// INNER JOIN name_specifics ON name_specifics.id = specifics.id_nameSpecifics)
+// INNER JOIN projects ON projects.id_collection = name_specifics.id)
+// INNER JOIN groups_permissions ON groups_permissions.id = projects.id)
+// where user.id_group = 1 and groups_permissions.permission = 1 and groups_permissions.finished = 0
+
+
+// last one id the good now 
+// SELECT * 
+// FROM ((((user 
+// INNER JOIN specifics ON user.id = specifics.id_user)
+// INNER JOIN name_specifics ON specifics.id_nameSpecifics = name_specifics.id)
+// INNER JOIN projects ON name_specifics.id = projects.id_collection)
+// INNER JOIN groups_permissions ON specifics.id_group = groups_permissions.id_group)
+// WHERE user.id = 2 and specifics.id_group = 1 and groups_permissions.id_project = 1 and projects.id = 1
+

@@ -8,77 +8,98 @@ import {FiUsers} from 'react-icons/fi';
 import karim from '../imgs/karim.png';
 
 function MainProfile() {
-  
+    const userId = localStorage.getItem("userId");
+    const [selectedValuesUser, setSelectedValuesUser] = useState([]);
+    const [selectedValuesCount, setSelectedValuesCount] = useState([]);
+    const [now, setNow] = useState(0);
+    const [next, setNext] = useState(3);
+    const [valid, setValid] = useState(0);
+
+      const function_next = (e) =>
+      {
+          if (e === 0)
+          {
+            if (now > 0)
+            {
+              setNow(now - 2)
+              setNext(next - 2);
+            }
+          }else if (valid === 0){
+            setNow(now + 2)
+            setNext(next + 2);
+          }
+      }
+      const get_id = (id) =>
+      {
+        localStorage.setItem("idEachProfile", id);
+      }
+    useEffect(() => {
+        fetch(`http://localhost:8081/get_user_levle/${now}/${next}`)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            setSelectedValuesUser(data);
+            if (data.length === 0) {
+              setValid(1)
+            }
+            else
+              setValid(0);
+          })
+          .catch((error) => console.error(error));
+          
+      }, [now, next]);
 
   return (
     <div className={style.container}>
         <div className={style.containerTitlePage}>
             <FiUsers className={style.iconEvent}/>
-            <p>Event(s)</p>
+            <p>Profile(s)</p>
             <AiFillCaretDown className={style.iconDown}/>
         </div>
         {/* start card */}
-    <Link to="/EachProfile" className={style.link}>
-      <div className={style.containerProfile}>
-        <div className={style.containerImg}>
-            <img src={karim} alt="" />
-        </div>
-        <div className={style.containerInfo}>
-            <p className={style.name}>Abdelkarim Hajji</p>
-            <p className={style.login}>@ahajji</p>
-            <div className={style.rectangul}>
+        {selectedValuesUser.map((userItem, userIndex) => (
+      <Link key={userIndex} to="/EachProfile" className={style.link} onClick={() => get_id(userItem.id)}>
+        <div className={style.containerProfile}>
+          <div className={style.containerImg}>
+            <img src={require(`../imgs/${userItem.image}`)} alt="" className="imgUser" />
+          </div>
+          <div className={style.containerInfo}>
+            <p className={style.name}>{userItem.firstName} {userItem.lastName}</p>
+            <p className={style.login}>@{userItem.lastName}</p>
+            {/* {selectedValuesCount.map((countItem, countIndex) => ( */}
+              <div className={style.rectangul}>
                 <div className={style.countProjects}>
-                    <p className={style.title}>Projects</p>
-                    <p>4</p>
+                  <p className={style.title}>Projects</p>
+                  <p>{userItem.valid_project_count}</p>
                 </div>
                 <div className={style.countCopitions}>
-                    <p className={style.title}>Compitions</p>
-                    <p>5</p>
+                  <p className={style.title}>Compitions</p>
+                  <p>{userItem.valid_competition_count}</p>
                 </div>
                 <div className={style.countEvents}>
-                    <p className={style.title}>Eventes</p>
-                    <p>2</p>
+                  <p className={style.title}>Eventes</p>
+                  <p>{userItem.valid_event_count}</p>
                 </div>
-            </div>
-            <div className={style.conainerLevel}>
-                <GiTopPaw className={style.icon}/>
-                <p className={style.title}>Level: 2</p>
-            </div>
+              </div>
+            {/* ))} */}
+        <div className={style.conainerLevel}>
+          <GiTopPaw className={style.icon} />
+          <p className={style.title}>Level: {userItem.level}</p>
         </div>
       </div>
-      </Link>
-      {/* finish card */}
-      {/* start card */}
-      <Link to="/EachProfile" className={style.link}>
-      <div className={style.containerProfile}>
-        <div className={style.containerImg}>
-            <img src={karim} alt="" />
-        </div>
-        <div className={style.containerInfo}>
-            <p className={style.name}>Abdelkarim Hajji</p>
-            <p className={style.login}>@ahajji</p>
-            <div className={style.rectangul}>
-                <div className={style.countProjects}>
-                    <p className={style.title}>Projects</p>
-                    <p>4</p>
-                </div>
-                <div className={style.countCopitions}>
-                    <p className={style.title}>Compitions</p>
-                    <p>5</p>
-                </div>
-                <div className={style.countEvents}>
-                    <p className={style.title}>Eventes</p>
-                    <p>2</p>
-                </div>
-            </div>
-            <div className={style.conainerLevel}>
-                <GiTopPaw className={style.icon}/>
-                <p className={style.title}>Level: 2</p>
-            </div>
-        </div>
+    </div>
+  </Link>
+))}
+
+      {/* finish card */}   
+      <div className={style.containerPagination}>
+          <button onClick={() => function_next(0)}>return</button>
+          <button onClick={() => function_next(1)}>next</button>
       </div>
-      </Link>
-      {/* finish card */}
     </div>
   );
 }

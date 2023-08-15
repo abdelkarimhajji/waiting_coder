@@ -9,8 +9,36 @@ import bio from '../imgs/biographie.png';
 
 function DetailsProject() {
   
+  const [selectedValuesProject, setSelectedValuesProject] = useState([]);
+  const [selectedValuesRessources, setSelectedValuesRessources] = useState([]);
+  const idProject = localStorage.getItem('idProject');
+  useEffect(() => {
+    fetch(`http://localhost:8081/api/get_AllPorject/${idProject}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setSelectedValuesProject(data);
+      })
+      .catch((error) => console.error(error));
+  }, [idProject]);
 
-
+  useEffect(() => {
+    fetch(`http://localhost:8081/api/get_ressourcesPorject/${idProject}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setSelectedValuesRessources(data);
+      })
+      .catch((error) => console.error(error));
+  }, [idProject]);
   return (
     <div className={style.container}>
       <div className={style.containerMoreDetails}>
@@ -18,58 +46,54 @@ function DetailsProject() {
         <p className={style.title}>More Details</p>
         <AiFillCaretDown className={style.icon}/>
       </div>
+      {selectedValuesProject.length === 0 ? (
+      <p style={{ fontSize: '25px', textAlign: 'center' }}>No data available.</p> ) : (
+        
+      selectedValuesProject.map((item, index) => (
+      <div key={index} className={style.join}>
       <div className={style.partOneExplaine}>
-        <img src={bio} alt="" />
-        <p className={style.title}>Réaliser une Biographie d'un personnage qui vous inspire</p>
-        <p className={style.discription}>Il s’agit de réaliser une page web qui présente la biographie d’un 
-            personnage de votre choix (sportif, scientifique, artiste…) en utilisant HTML5 et CSS3 ;</p>
-        <p className={style.langNeedProject}>HTML5, CSS3.</p>
+      <img src={require(`../imgs/${item.image_project}`)} alt={item.name_project} className={style.img} />
+        <p className={style.title}>{item.name_project}</p>
+        <p className={style.discription}>{item.description}</p>
+        <p className={style.langNeedProject}>{item.languages_used }</p>
       </div>
+       
       <div className={style.partTwoResourse}>
             <p className={style.title}>Ressource(s)</p>
             {/* all resourse */}
             <div className={style.allResource}>
-                <div className={style.EachResourse}>
+            {selectedValuesRessources.map((item, index) => (
+              <div key={index} className={style.EachResourse}>
                     <AiOutlinePaperClip />
-                    <p>Model.png</p>
+                    <p>{item.name_ressource }</p>
                 </div>
-                <div className={style.EachResourse}>
-                    <AiOutlinePaperClip />
-                    <p>Model.png</p>
-                </div>
-                <div className={style.EachResourse}>
-                    <AiOutlinePaperClip />
-                    <p>Model.png</p>
-                </div>
+            ))}
             </div>
             {/* finish all resourse */} 
       </div>
+       
       {/* part three */}
       <div className={style.partThreeContext}>
             <p className={style.title}>Context of the project</p>
-            <p className={style.decription}>Votre page doit obligatoirement contenir les éléments suivants : 
-                * Un titre principal sur le nom de votre personnage * Un sous-titre qui 
-                le décrit * Une image * Une description de l’image * Une bio portant les dates
-                clés et les meilleures réalisations * Un lien vers la page Wikipédia de votre
-                personnage Vous trouverez dans les pièces jointes un modèle pour s’inspirer ;
-                Pour la mise en style, vous avez le libre choix de disposer et styliser
-                les éléments de votre page. Laisser votre créativité s’exprimer ;</p>
+            <p className={style.decription}>{item.context}</p>
       </div>
       {/* part  foor */}
       <div className={style.partFoorDeliverables}>
         <p className={style.title}>Deliverables</p>
-        <p className={style.description}>Dépôt dans le Drive (Un dossier portant votre nom et prénom,
-            contenant la page HTML et CSS et le fichier WORD)
+        <p className={style.description}>
+          {item.deliverables}
         </p>
       </div>
       {/* part five */}
       <div className={style.partFivePush}>
             <p className={style.title}>Finished Project</p>
-            <p className={style.description}>So you need to click on button to go on the next page and put your link of your project in the input and click finished</p>
+            <p className={style.description}>{item.finished_project}</p>
             <Link to="/PushProject" className={style.link}>
             <button className={style.push}>Push</button>
             </Link>
       </div>
+      </div>
+     )))}
     </div>
   );
 }

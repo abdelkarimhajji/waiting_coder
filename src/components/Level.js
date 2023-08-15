@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import style from "../sass/level.module.scss";
 import karim from "../imgs/karim.png";
+import { getItem } from "localforage";
 
 function Level({ selectedValues, setSelectedValues, setSelectedValuesTools, setSelectedValuesProject}) {
   const [level, setLevel] = useState([]);
+  const [selectValuePoject, SetselectValuePoject] = useState([]);
   const [selectedOptionKey, setSelectedOptionKey] = useState(null); // Set default value here
   const gradient = `linear-gradient(to right, #02babd ${
     level.length > 0 ? level[0].background_bleu : 0
@@ -13,12 +15,14 @@ function Level({ selectedValues, setSelectedValues, setSelectedValuesTools, setS
   const handleSelectChange = (event) => {
     setSelectedValue(event.target.value);
     const selectedOption = data.find((item) => item.name === event.target.value);
-    if (selectedOption) {
+    // if (selectedOption) {
       setSelectedOptionKey(selectedOption.id);
       localStorage.setItem("selectedOptionKey", selectedOption.id);
-    }
+      // // localStorage.setItem("idProject", selectValuePoject[0].id);
+      // console.log("test ok so llllllllllll ",localStorage.getItem('idProject'));
+    // }
   };
-
+  
   useEffect(() => {
     fetch(`http://localhost:8081/api/get_languages/${selectLocalStor}`)
       .then((response) => {
@@ -43,7 +47,7 @@ function Level({ selectedValues, setSelectedValues, setSelectedValuesTools, setS
         return response.json();
       })
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setSelectedValuesTools(data);
       })
       .catch((error) => console.error(error));
@@ -58,8 +62,12 @@ function Level({ selectedValues, setSelectedValues, setSelectedValuesTools, setS
         return response.json();
       })
       .then((data) => {
-        console.log(data);
+        if (data.length > 0) {
+          localStorage.setItem("idProject", data[0].id);
+          console.log("some peaple ok ", localStorage.getItem("idProject"))
+        }
         setSelectedValuesProject(data);
+        SetselectValuePoject(data);
       })
       .catch((error) => console.error(error));
   }, [selectLocalStor]);
@@ -86,11 +94,11 @@ function Level({ selectedValues, setSelectedValues, setSelectedValuesTools, setS
         }
       })
       .catch((error) => console.error(error));
-  }, []);
-  console.log("localStorage.getItem():  ", localStorage.getItem("selectedOptionKey"))
-  console.log("${userId}  :  ",userId)
+  }, [userId]);
+  // console.log("localStorage.getItem():  ", localStorage.getItem("selectedOptionKey"))
+  // console.log("${userId}  :  ",userId)
   useEffect(() => {
-    fetch(`http://localhost:8081/api/get_levels/${userId}/${selectLocalStor}`)
+    fetch(`http://localhost:8081/api/get_levels/${userId}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok karim");
@@ -98,7 +106,7 @@ function Level({ selectedValues, setSelectedValues, setSelectedValuesTools, setS
         return response.json();
       })
       .then((data) => {
-        console.log(data)
+        // console.log(data)
         setLevel(data);
       })
       

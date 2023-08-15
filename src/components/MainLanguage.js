@@ -70,7 +70,6 @@ function MainLanguage() {
       })
       .catch((error) => console.error(error));
   }, []);
-  console.log(setSelectValuesLanguages)
   return (
     <>
       <div className={valid === 1 ? style.display : style.display2}>

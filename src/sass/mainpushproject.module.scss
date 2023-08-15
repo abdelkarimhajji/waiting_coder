@@ -7,6 +7,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 65px;
     font-family: $myfont;
     // padding-left: 50px;
     .containerPush {
@@ -53,6 +54,14 @@
                 {
                     padding-left: 20px;
                 }
+                @media(max-width:400px)
+                {
+                    padding-left: 0px;
+                }   
+                @media(max-width:320px)
+                {
+                    padding-left: 0px;
+                }   
                 @media(max-width:320px)
                 {
                     padding-left: 0px;
@@ -73,10 +82,6 @@
                 color: #5b5b5b;
                 font-size: 16px;
                 font-family: $myfont;
-                @media(max-width:320px)
-                {
-                    padding-left: 3px;
-                }  
                 &:focus
                 {
                     outline: none;
@@ -93,10 +98,21 @@
                 {
                     width: 60%;
                 }
+                @media(max-width:400px)
+                {
+                    padding-left: 0px;
+                    width: 60%;
+                }  
+                @media(max-width:320px)
+                {
+                    padding-left: 0px;
+                }  
             }
             .containerAllIcon
             {
                 width: 15%;
+                
+                
             }
             .containerIcon
             {
@@ -145,6 +161,7 @@
         {
             width: 40%;
             background-color: white;
+            border-top-left-radius: 20px;
             @media (max-width:1000px)
             {
                 width: 50%;
@@ -152,7 +169,7 @@
             @media (max-width:830px)
             {
                 width: 100%;
-                font-weight: bold;
+                // font-weight: bold;
                 border-top-right-radius: 20px;
                 border-top-left-radius: 20px;
                 margin-bottom: 30px;
@@ -162,6 +179,7 @@
                 background-color: $pColor3;
                 padding: 20px;
                 border-top-left-radius: 20px;
+            
                 @media (max-width:830px)
                 {
                     border-top-right-radius: 20px;
@@ -180,11 +198,12 @@
             {
                 overflow-y: scroll;
                 height: 500px;
+                
+                
                 .porject
                 {
                     height: 70px;
                     display: flex;
-                    justify-content: center;
                     align-items: center;
                     // background-color: red;
                     text-align: justify;
@@ -192,6 +211,7 @@
                     // padding-left: 15px;
                     padding-right: 15px;
                     transition: 0.5s all;
+                    
                     cursor: pointer;
                     &:hover
                     {
@@ -203,20 +223,23 @@
                     }
                     .containerIcon
                     {
-                        width: 50%;
+                        width: 160px;
                         height: 100%;
-                        // background-color: bisque;
+                        // background-color: red;
                         display: flex;
                         justify-content: center;
                         align-items: center;
                         @media (max-width:850px)
                         {
-                            display: none;
+                            width: 80px;
                         }
-                        @media (max-width:830px)
+                        @media (max-width:500px)
                         {
-                            display: flex;
-                            width: 10%;
+                            width: 100px;
+                        }
+                        @media (max-width:300px)
+                        {
+                            display: none;
                         }
                         .icon
                         {
@@ -233,6 +256,7 @@
         {
             width: 70%;
             background-color: white;
+            border-top-right-radius: 20px;
             @media (max-width:1000px)
             {
                 width: 60%;
@@ -265,6 +289,10 @@
                 }
             }
             .allMessages {
+                background-image: url(../imgs/binary_level.jpg);
+                background-repeat: no-repeat;
+                background-size: cover;
+                // background-attachment: fixed;
                 overflow-y: scroll;
                 overflow-x: hidden;
                 // background-color: red;   
@@ -281,6 +309,7 @@
                     {
                         padding-right: 20px;
                         font-weight: bold;
+                        color: white;
                     }
                 }
                 /* styles.scss */
@@ -313,6 +342,7 @@
                     {
                         margin-left: 20px;
                         font-weight: bold;
+                        color: white;
                     }
                 }
                 .resLink {
@@ -336,5 +366,4 @@
               } 
         }
       }
-      
 }

@@ -1,10 +1,95 @@
 @import "./global.module.scss";
 @import 'mathsass';
 
+.displayAlert
+{
+    height: 100vh;
+    width: 100%;
+    background-color: #2a2d383b;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: $myfont;
+    transition: 0.5s all;
+    .alReady
+    {
+        width: 500px;
+        height: 130px;
+        background-color: #fef8bd;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        text-align: center;
+        flex-direction: column;
+        @media (max-width: 500px)
+        {
+            width: 300px;
+        }
+        @media (max-width: 300px)
+        {
+            width: 250px;
+        }
+        button
+        {
+            width: 120px;
+            height: 35px;
+            border: 1px solid $pColor3;
+            background-color: $pColor3;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            transition: 1s all;
+            &:hover{
+                background-color: white;
+                border: 1px solid $pColor3;
+                color: $pColor3;
+            }
+        }
+    }
+}
+.displayAlert2
+{
+    height: 100vh;
+    width: 100%;
+    background-color: #2a2d383b;
+    position: absolute;
+    left: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: $myfont;
+    transition: 0.5s all;
+    top: -1100px;
+    
+    button
+        {
+            width: 120px;
+            height: 35px;
+            border: 1px solid $pColor3;
+            background-color: $pColor3;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            transition: 1s all;
+            &:hover{
+                background-color: white;
+                border: 1px solid $pColor3;
+                color: $pColor3;
+            }
+           
+        }
+}
+
 .container
 {
     background-color:#f7f7f7;
-    min-height: 100vh;
+    min-height: 100vh; 
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -77,8 +162,7 @@
             // height: 100%;
             background-color: $pColor3;
             display: flex;
-            justify-content: center;
-            align-items: center;
+            // justify-content: center;
             color: white;
             border-top-left-radius: 20px;
             border-end-start-radius: 20px;
@@ -97,22 +181,38 @@
             {
                 font-size: 50px;
                 font-weight: bold;
-                height: 2px;
-                // background-color: red;
-                @media (max-width:650px)
-                {
-                    // height: 50%;
-                    width: 100%;
-                    text-align: center;
-                    padding-top: 50px;
-                }
-            }
-            p
-            {
-                height: 50%;
+                height: 100%;
                 width: 100%;
                 text-align: center;
                 // background-color: red;
+                border-top-left-radius: 20px;
+                // @media (max-width:650px)
+                // {
+                //     // height: 50%;
+                //     width: 100%;
+                //     text-align: center;
+                //     padding-top: 50px;
+                // }
+            }
+            .month
+            {
+                height: 200%;
+                // margin-top: -50px;
+                color: $pColorR;
+                font-weight: bold;
+                border-end-start-radius: 20px;
+                width: 100%;
+                text-align: center;
+                background-color: #fef8bd;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                @media (max-width:650px)
+                {
+                    width: 100%;
+                    border-end-start-radius: 0px;
+                }
             }
         }
         .description
@@ -234,3 +334,6 @@
         }
     }
 }
+
+
+// 3imad wld 7aj depo bilmid  jay men tetouan ramouand de me7kama de5ol 3la yedek de limin machi chouk tma sa9si

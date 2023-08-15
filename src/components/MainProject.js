@@ -25,7 +25,12 @@ function MainProject() {
       })
       .catch((error) => console.error(error));
   }, [localStorage.getItem("selectedOptionKey")]);
-
+  
+  const getIdProject = (id) => {
+    localStorage.setItem('idProject', id);
+    console.log('Button clicked!', id);
+    // You can perform any actions you want here
+  };
   return (
     <div className={style.container}>
         <div className={style.containTitle}>
@@ -36,11 +41,11 @@ function MainProject() {
         
         <div  className={style.containProject}>
         {setSelectValuesProjects.map((item, index) => (
-        <Link to="/DetailsProject"  key={index}  className={style.Link}>
+          // item.after_display === 1 && (
+        <Link to="/DetailsProject"  key={index}  className={style.Link} onClick={() => getIdProject(item.id)} >
             <div className={style.project}>
               <div className={style.containImg}>
               <img src={require(`../imgs/${item.image_project}`)} alt={item.name_project} className={style.img} />
-                {/* <img src={biographie} alt="biographie" className={style.img}/> */}
               </div>
               <div className={style.containerDiscreption}>
                 <p className={style.titleProject}>{item.name_project}</p>
@@ -49,6 +54,8 @@ function MainProject() {
                 <button className={style.moreDetails}>More Details</button>
             </div>
         </Link>
+
+          //  )
         ))}
         </div>
     </div>

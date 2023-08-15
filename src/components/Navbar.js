@@ -54,10 +54,28 @@ function Navbar(props) {
   const logout = () => {
     console.log("i am rest to 0");
     localStorage.removeItem("selectedOptionKey");
+    localStorage.removeItem("userId");
+    localStorage.removeItem('idProject');
+    localStorage.removeItem('idEachProfile');
     localStorage.setItem('login', 0);
     // setIsLogin(0);
   };
-  
+  const userId = localStorage.getItem("userId");
+  const [selectedValuesUsers, setSelectedValuesUsers] = useState([]);
+  useEffect(() => {
+    fetch(`http://localhost:8081/get_user/${userId}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setSelectedValuesUsers(data);
+      })
+      .catch((error) => console.error(error));
+      
+  }, [userId]);
   return (
     <>
       <div className={hovered === true ? style.navbar : style.navbarOut}>
@@ -67,8 +85,17 @@ function Navbar(props) {
           <AiOutlineMenuFold className={style.menu} onClick={handleClick} />
         )}
         <div className={style.nameUser}>
-          <img src={karim} alt="" className={style.img} />
-          <p>Abdelkarim hajji</p>
+          {selectedValuesUsers[0] ? (
+          <div>
+            <img src={require(`../imgs/${selectedValuesUsers[0].image}`)} alt="" className={style.img} />
+            <p>@{selectedValuesUsers[0].lastName}</p>
+          </div>
+            ) : (
+              <>
+                <img src={karim} alt="" className={style.img} /> 
+                <p>admin</p>
+                </>
+            )}
         </div>
         
         <div className={style.twoUl}>

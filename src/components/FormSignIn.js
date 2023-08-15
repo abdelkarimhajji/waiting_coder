@@ -47,6 +47,7 @@
       if (response.status === 1) {
           handleButtonClick();
           localStorage.setItem('userId', response.userId);
+          localStorage.setItem("idEachProfile", response.userId);
       }
     }, [response]);
     

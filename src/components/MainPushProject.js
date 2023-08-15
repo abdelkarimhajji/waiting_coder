@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Searsh from "../components/Searsh";
@@ -9,11 +9,116 @@ import { UserContext } from "../utils/UserContext";
 import {TbSend} from 'react-icons/tb'
 import {MdLibraryAddCheck} from 'react-icons/md'
 import {MdNumbers} from 'react-icons/md';
+
 function MainPushProject() {
-  
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+    const [selectedValuesProject, setSelectedValuesProject] = useState([]);
+    const [selectedValuesProjectPush, setSelectedValuesProjectPush] = useState([]);
+    const [keepValueTeacher, setKeepValueTeacher] = useState();
+    const [seletedIdTeacher, setSeletedIdTeacher] = useState();
+    const [inputValue, setInputValue] = useState('');
+    const [idProject, SetidProject] = useState(localStorage.getItem('idProject'));
+    const userId = localStorage.getItem("userId");
+    const selectedOptionKey = localStorage.getItem("selectedOptionKey");
+    const divRef = useRef();
+    const [currentTime, setCurrentTime] = useState(new Date());
+
+
+
+    const update_id_of_project = (id) => {
+        localStorage.setItem('idProject', id);
+        SetidProject(id); // You can still update the state for subsequent renders if needed
+      };
+    //     useEffect(() => {
+    // }, [seletedIdTeacher]);
+    // console.log("seletedIdTeacher", seletedIdTeacher?.[0]?.id_teacher || "No teacher selected");
+
+
+    const getTime = () => {
+        const now = new Date();
+        const day = now.getDate();
+        const month = now.getMonth() + 1; // Months are 0-indexed, so add 1
+        const year = now.getFullYear();
+        const timeString = `${day}/${month}/${year}`;
+        return timeString;
+      };
+
+      const push_project = () => {
+        const trimmedValue = inputValue.trim();
+        setInputValue('');
+        if (trimmedValue !== '')
+        {
+            const data = { 
+            message: inputValue,
+            idUser: userId,
+            idTeacher: seletedIdTeacher[0].id_teacher,
+            timeSendMessage: getTime(),
+            idProject: idProject,
+            };
+
+        fetch('http://localhost:8081/api/push_project', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((responseData) => {
+        setInputValue('');
+        setTimeout(() => {
+            // Scroll to the bottom of the div after adding the new message
+            divRef.current.scrollTop = divRef.current.scrollHeight;
+          }, 100);
+      })
+      .catch((error) => {
+        console.error('Error pushing data:', error);
+      });
+    }
+    
+        // console.log("InputValue ", inputValue)
+      };
+    
+    useEffect(() => {
+        fetch(`http://localhost:8081/api/get_porject/${selectedOptionKey}`)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            setSelectedValuesProject(data);
+          })
+          .catch((error) => console.error(error));
+      }, [selectedOptionKey]);
+
+      useEffect(() => {
+        fetch(`http://localhost:8081/api/get_pushProject/${idProject}/${userId}`)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            setSelectedValuesProjectPush(data);
+          })
+          .catch((error) => console.error(error));
+      }, [userId, idProject, selectedValuesProjectPush]);
+
+      useEffect(() => {
+        fetch(`http://localhost:8081/api/get_idTeacher/${userId}`)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            setSeletedIdTeacher(data);
+          })
+          .catch((error) => console.error(error));
+      }, [userId]);
 
   return (
     <div className={style.container}>
@@ -25,18 +130,14 @@ function MainPushProject() {
                     <p className={style.title}>Project(s)</p>
                 </div>
                 <div className={style.allProjects}>
-                    <div className={style.porject}>
+                {selectedValuesProject.map((item, index) => (
+                    <div key={index} className={style.porject} onClick={() => update_id_of_project(item.id)}>
                         <div className={style.containerIcon}>
-                            < MdNumbers  className={style.icon}/>
+                            <MdNumbers  className={style.icon}/>
                         </div>
-                        <p>this test of projects ok so if center you can tell me that ok</p>
+                        <p>{item.name_project}</p>
                     </div>
-                    <div className={style.porject}>
-                        <div className={style.containerIcon}>
-                            < MdNumbers  className={style.icon}/>
-                        </div>
-                        <p>this test of projects ok so if center you can tell me that ok</p>
-                    </div>
+                ))}
                 </div>
                 
             </div>
@@ -44,20 +145,28 @@ function MainPushProject() {
                 <div className={style.containerTitle}>
                     <p className={style.title}>Link(s)</p>
                 </div>
-                <div className={style.allMessages}> 
+                <div  className={style.allMessages} ref={divRef}> 
+                    {selectedValuesProjectPush.map((item, index) => ( 
+                    <div key={index}>
                     {/* all Messages */}
+                    {item.message_student !== null && ( 
                     <div className={style.containerSendLink}>
-                        <p className={style.nameSend}>karim: 10/10/2020</p>
+                        <p className={style.nameSend}>{item.firstName}: {item.time_send_student}</p>
                         <div className={style.sendLink}>
-                            <p>slm i am karim slm i am m i am karim slm i am m i am karim slm i am </p>
+                            <p>{item.message_student}</p>
                         </div>
                     </div>
+                    )}
+                     {item.message_teacher !== null && ( 
                     <div className={style.containerResLink}>
-                        <p className={style.nameRes}>admin: 11/10/2020</p>
+                        <p className={style.nameRes}>{item.first_name}: {item.time_send_teacher}</p>
                         <div className={style.resLink}>
-                            <p>i am admin</p>
+                            <p>{item.message_teacher}</p>
                         </div>
                     </div>
+                     )}
+                    </div>
+                    ))}
                     {/* finsh Messages */}
                 </div>
             </div>
@@ -68,9 +177,9 @@ function MainPushProject() {
             <p className={style.title}>Put the link here:</p>
             {/* conatainer Input */}
             <div className={style.containerInput}>
-                <input type="text" className={style.inputPush} placeholder="Enter your link here"/>
+                <input type="text" className={style.inputPush}  placeholder="hello i am ok that" value={inputValue} onChange={(e) => setInputValue(e.target.value)}/>
                 <div className={style.containerAllIcon}>
-                    <div className={style.containerIcon}>
+                    <div className={style.containerIcon} onClick={() => push_project()}>
                         <TbSend className={style.icon}/>
                     </div>
                 </div>
