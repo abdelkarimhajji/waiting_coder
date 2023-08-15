@@ -4,10 +4,8 @@ import style from "../sass/eachlevel.module.scss"
 import { UserContext } from "../utils/UserContext";
 import karim from '../imgs/karim.png'
 
-function EachLevel() {
+function EachLevel({setIdCollectionValue}) {
     const [selectedValue, setSelectedValue] = useState('');
-    
-    const [selectedValue2, setSelectedValue2] = useState('');
     const [selectedValueUser, setSelectedValueUser] = useState([]);
     const [selectedNameSpecifics, setSelectedNameSpecifics] = useState([]);
     const [id, setId] = useState(localStorage.getItem("idEachProfile"));
@@ -18,9 +16,7 @@ function EachLevel() {
       setSelectedValue(event.target.value);
       // const selectedOption =  event.target.value;
       const selectedOption = selectedNameSpecifics.find((item) => item.name === event.target.value);
-      
-      
-      localStorage.setItem("idEachProfileSelect", selectedOption.id);
+      setIdCollectionValue(selectedOption.id)
     };
     useEffect(() => {
       fetch(`http://localhost:8081/get_each_user_levle/${id}`)
@@ -37,10 +33,14 @@ function EachLevel() {
         
     }, [id]);
 
-    const gradient = `linear-gradient(to right, #02babd ${
-      selectedValueUser.length > 0 ? selectedValueUser[0].background_bleu : 0
-    }%, #1b1c2312 0%)`;
-    
+    const backgroundBlue =
+      selectedValueUser.length > 0 && selectedValueUser[0].background_bleu
+        ? selectedValueUser[0].background_bleu
+        : 0;
+
+    const gradient = `linear-gradient(to right, #02babd ${backgroundBlue}%, #1b1c2312 0%)`;
+
+    console.log("i want to see ok ", selectedValueUser)
     useEffect(() => {
       fetch(`http://localhost:8081/name_specifics/${id}`)
         .then((response) => {
@@ -56,12 +56,11 @@ function EachLevel() {
               return 0;
             });
           setSelectedNameSpecifics(data);
-          localStorage.setItem("idEachProfileSelect", data[0].id);
+          setIdCollectionValue(data[0].id)
         })
         .catch((error) => console.error(error));
     }, [id]);
 
-// console.log(localStorage.getItem("idEachProfileSelect"))
   return (
     <div className={style.container}>
       {selectedValueUser.map((item, index) => (

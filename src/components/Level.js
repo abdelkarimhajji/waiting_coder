@@ -5,7 +5,6 @@ import { getItem } from "localforage";
 
 function Level({ selectedValues, setSelectedValues, setSelectedValuesTools, setSelectedValuesProject}) {
   const [level, setLevel] = useState([]);
-  const [selectValuePoject, SetselectValuePoject] = useState([]);
   const [selectedOptionKey, setSelectedOptionKey] = useState(null); // Set default value here
   const gradient = `linear-gradient(to right, #02babd ${
     level.length > 0 ? level[0].background_bleu : 0
@@ -67,7 +66,6 @@ function Level({ selectedValues, setSelectedValues, setSelectedValuesTools, setS
           console.log("some peaple ok ", localStorage.getItem("idProject"))
         }
         setSelectedValuesProject(data);
-        SetselectValuePoject(data);
       })
       .catch((error) => console.error(error));
   }, [selectLocalStor]);

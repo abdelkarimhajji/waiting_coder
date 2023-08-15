@@ -14,11 +14,63 @@ import {TiHtml5} from 'react-icons/ti';
 import {FaUpload} from 'react-icons/fa';
 import {GiStarShuriken} from 'react-icons/gi';
 import {BsFillCalendar2EventFill} from 'react-icons/bs';
-function MainEachProfile() {
-  
+function MainEachProfile({idCollectionValue}) {
+
+    const [selectLocalStor, setSelectLocalStor] = useState()
+    const [selectedValues, setSelectedValues] = useState([])
+    const [selectValuePoject, setselectValuePoject] = useState([])
+    const [selectedValuesTools, setSelectedValuesTools] =  useState([])
 useEffect(() => {
     window.scrollTo(0, 0);
     }, []);
+    useEffect(() => {
+        fetch(`http://localhost:8081/api/get_languages/${idCollectionValue}`)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            console.log(data);
+            setSelectedValues(data);
+          })
+          .catch((error) => console.error(error));
+      }, [idCollectionValue]);
+
+      useEffect(() => {
+        fetch(`http://localhost:8081/api/get_porject/${idCollectionValue}`)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            if (data.length > 0) {
+              localStorage.setItem("idProject", data[0].id);
+              console.log("some peaple ok ", localStorage.getItem("idProject"))
+            }
+            setselectValuePoject(data);
+          })
+          .catch((error) => console.error(error));
+      }, [idCollectionValue]);
+
+
+      useEffect(() => {
+        fetch(`http://localhost:8081/api/get_tools/${idCollectionValue}`)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            // console.log(data);
+            setSelectedValuesTools(data);
+          })
+          .catch((error) => console.error(error));
+      }, [idCollectionValue]);
 
   return (
     <div className={style.container}>
@@ -27,26 +79,18 @@ useEffect(() => {
                 <div className={style.contInsidProgram}>
                     <div className={style.titleProgram}>
                         <PiProjectorScreenChartBold className={style.iconLanguage}/>
-                        <p className="par">Projects</p>
+                        <p className="par">Languages</p>
                         <AiFillCaretDown className={style.iconLanguage}/>
                     </div>
                     <div className={style.UnderConatProgram}>
-                    <Link to="/Language#html" className={style.link}>
-                        <div className={style.conatProItm}>
-                            <FaUpload className={style.TiHtml5}/>
-                            <p className="par"> - HTML5</p>
-                        </div>
-                    </Link>
-                        <Link to="/Language#css" className={style.link}>
-                        <div className={style.conatProItm}>
-                            <FaUpload className={style.TiHtml5}/>
-                            <p className={style.par} > - CSS3</p>
-                        </div>
+                        {selectedValues.map((item, index) => (
+                        <Link key={index} to="/Language#html" className={style.link}>
+                            <div className={style.conatProItm}>
+                                <FaUpload className={style.TiHtml5}/>
+                                <p className="par"> - {item.name_langauge}</p>
+                            </div>
                         </Link>
-                        <div className={style.conatProItm}>
-                            <FaUpload className={style.TiHtml5}/>
-                            <p className="par"> - JavaScript</p>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </div>
@@ -55,16 +99,18 @@ useEffect(() => {
                 <div className={style.contInsidProgram}>
                     <div className={style.titleProgram}>
                         <FaCode className={style.iconLanguage}/>
-                        <p className="par">Languages</p>
+                        <p className="par">Projects</p>
                         <AiFillCaretDown className={style.iconLanguage}/>
                     </div>
                     <div className={style.UnderConatProgram}>
-                    <Link to="/Language#html" className={style.link}>
+                    {selectValuePoject.map((item, index) => (
+                    <Link key={index} to="/Language#html" className={style.link}>
                         <div className={style.conatProItm}>
                             <TiHtml5  className={style.TiHtml5}/>
-                            <p className="par"> - HTML5</p>
+                            <p className="par"> - {item.name_project}</p>
                         </div>
                     </Link>
+                    ))}
                     </div>
                 </div>
             </div>
@@ -77,24 +123,16 @@ useEffect(() => {
                 <div className={style.contInsidProgram}>
                     <div className={style.titleProgram}>
                         <BsFillCalendar2EventFill className={style.iconLanguage}/>
-                        <p className="par">Events</p>
+                        <p className="par">Tools</p>
                         <AiFillCaretDown className={style.iconLanguage}/>
                     </div>
                     <div className={style.UnderConatProgram}>
-                        <div className={style.conatProItm}>
+                        {selectedValuesTools.map((item, index) => (
+                        <div key={index} className={style.conatProItm}>
                             <GiStarShuriken className={style.TiHtml5}/>
-                            <p className="par"> - HTML5</p>
+                            <p className="par"> - {item.name_tool}</p>
                         </div>
-
-                        <div className={style.conatProItm}>
-                            <GiStarShuriken className={style.TiHtml5}/>
-                            <p className={style.par} > - CSS3</p>
-                        </div>
-
-                        <div className={style.conatProItm}>
-                            <GiStarShuriken className={style.TiHtml5}/>
-                            <p className="par"> - JavaScript</p>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </div>

@@ -23,10 +23,12 @@ function MainProfile() {
             {
               setNow(now - 2)
               setNext(next - 2);
+              window.scrollTo(0, 0);
             }
           }else if (valid === 0){
             setNow(now + 2)
             setNext(next + 2);
+            window.scrollTo(0, 0);
           }
       }
       const get_id = (id) =>

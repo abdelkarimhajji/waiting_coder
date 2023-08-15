@@ -9,7 +9,8 @@ import EachLevel from "../components/EachLevel";
 import MainEachProfile from '../components/MainEachProfile';
 
 function EachProfile() {
-  
+
+  const [idCollectionValue, setIdCollectionValue] = useState();
 useEffect(() => {
     window.scrollTo(0, 0);
     }, []);
@@ -21,8 +22,8 @@ useEffect(() => {
       </div>
       <div className={style.nextNav}>
         <Searsh />
-        <EachLevel />
-        <MainEachProfile />
+        <EachLevel setIdCollectionValue={setIdCollectionValue}/>
+        <MainEachProfile idCollectionValue={idCollectionValue}/>
         <Footer />
       </div>
     </div>
