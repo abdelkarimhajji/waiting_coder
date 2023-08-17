@@ -18,31 +18,33 @@ function EachLevel({setIdCollectionValue}) {
       const selectedOption = selectedNameSpecifics.find((item) => item.name === event.target.value);
       setIdCollectionValue(selectedOption.id)
     };
-    useEffect(() => {
-      fetch(`http://localhost:8081/get_each_user_levle/${id}`)
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-          return response.json();
-        })
-        .then((data) => {
-          setSelectedValueUser(data);
-        })
-        .catch((error) => console.error(error));
-        
-    }, [id]);
+    // console.log()
+    const location = useLocation();
+    console.log(location.pathname); // Current pathname
+    console.log(location.search);   // Query parameters
+    console.log(location.hash);     // URL hash
+  useEffect(() => {
+    fetch(`http://localhost:8081/get_each_user_levle/${localStorage.getItem('idEachProfile')}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setSelectedValueUser(data);
+      })
+      .catch((error) => console.error(error));
+  }, [localStorage.getItem('idEachProfile')]);
 
     const backgroundBlue =
       selectedValueUser.length > 0 && selectedValueUser[0].background_bleu
         ? selectedValueUser[0].background_bleu
         : 0;
-
     const gradient = `linear-gradient(to right, #02babd ${backgroundBlue}%, #1b1c2312 0%)`;
 
-    console.log("i want to see ok ", selectedValueUser)
     useEffect(() => {
-      fetch(`http://localhost:8081/name_specifics/${id}`)
+      fetch(`http://localhost:8081/name_specifics/${localStorage.getItem('idEachProfile')}`)
         .then((response) => {
           if (!response.ok) {
             throw new Error("Network response was not ok");
@@ -59,35 +61,36 @@ function EachLevel({setIdCollectionValue}) {
           setIdCollectionValue(data[0].id)
         })
         .catch((error) => console.error(error));
-    }, [id]);
+    }, [localStorage.getItem('idEachProfile')]);
 
   return (
     <div className={style.container}>
-      {selectedValueUser.map((item, index) => (
-        <div key={index} className={style.containerTransp}>
-            <div className={style.containerImg}>
-            <img src={require(`../imgs/${item.image}`)} alt={item.firstName}/>
-            </div>
-            <div className={style.containerInfo}>
-                <p className={style.name}>{item.firstName}</p>
-                <p>@{item.lastName}</p>
-                <p>Count Projects: {item.valid_project_count}</p>
-                <p>Count Events: {item.valid_event_count}</p>
-                <p>Count Compitions: {item.valid_competition_count}</p>
-            </div>
-            <div className={style.containerLevel}>
-            <select value={selectedValue} onChange={handleSelectChange} className="select">
-              {selectedNameSpecifics.map((item, index) => (
-                <option key={index} value={item.name}>{item.name}</option>
-              ))}
-            </select>
-            <div className={style.level} style={{ backgroundImage: gradient }}>
-              {item.level > 0 ? <p>level - {item.level}%</p> : <p>No level data available</p>}
-            </div>
-            </div>
+  {selectedValueUser.map((item, index) => (
+    <div key={index} className={style.containerTransp}>
+      <div className={style.containerImg}>
+        <img src={require(`../imgs/${item.image}`)} alt={item.firstName}/>
+      </div>
+      <div className={style.containerInfo}>
+        <p className={style.name}>{item.firstName}</p>
+        <p>@{item.lastName}</p>
+        <p>Count Projects: {item.valid_project_count}</p>
+        <p>Count Events: {item.valid_event_count}</p>
+        <p>Count Compitions: {item.valid_competition_count}</p>
+      </div>
+      <div className={style.containerLevel}>
+        <select value={selectedValue} onChange={handleSelectChange} className="select">
+          {selectedNameSpecifics.map((specific, index) => (
+            <option key={index} value={specific.name}>{specific.name}</option>
+          ))}
+        </select>
+        <div className={style.level} style={{ backgroundImage: gradient }}>
+          {item.level > 0 ? <p>level - {item.level}%</p> : <p>No level data available</p>}
         </div>
-    ))}
+      </div>
     </div>
+  ))}
+</div>
+
   );
 }
 

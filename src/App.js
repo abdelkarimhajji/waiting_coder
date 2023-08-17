@@ -15,6 +15,8 @@ import DetailsProject from './pages/DetailsProject';
 import PushProject from './pages/PushProject';
 import Event from './pages/Event';
 import Tools from './pages/Tools';
+import Competition from './pages/Competition';
+
 
 function App() {
   const [value, setValue] = useState(0);
@@ -35,6 +37,7 @@ function App() {
           <Route path="/DetailsProject" element={parseInt(localStorage.getItem("login")) ? <DetailsProject /> : <Navigate to="/" />} />
           <Route path="/Event" element={parseInt(localStorage.getItem("login")) ? <Event /> : <Navigate to="/" />} />
           <Route path="/Tools" element={parseInt(localStorage.getItem("login")) ? <Tools /> : <Navigate to="/" />} />
+          <Route path="/competition" element={parseInt(localStorage.getItem("login")) ? <Competition /> : <Navigate to="/" />} />
           <Route path="/NotFound" element={parseInt(localStorage.getItem("login")) ? <NotFound /> : <Navigate to="/" />} />
           <Route path="*" element={parseInt(localStorage.getItem("login")) ? <Navigate to="/NotFound"/> : <Navigate to="/"/>} />
         </Routes>

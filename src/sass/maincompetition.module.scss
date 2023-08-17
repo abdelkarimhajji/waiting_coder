@@ -1,0 +1,285 @@
+@import "./global.module.scss";
+@import 'mathsass';
+
+
+.container {
+    min-height: 100vh; /* Change min-height to auto */
+    background-color: #f7f7f7;
+    display: flex;
+    flex-direction: column;
+    padding-top: 0px;
+    padding-left: 60px;
+    padding-right: 60px;
+    align-items: center;
+    font-family: $myfont;
+    user-select: none;  
+    -webkit-tap-highlight-color: transparent;
+    @media (max-width:450px)
+    {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    
+    .containTitle
+    {
+        width: 90%;
+        height: 60px;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+        margin-bottom: 50px;
+        background-color: $pColor1;
+        color: $pColorR;
+        display: flex;
+        align-items: center;
+        padding-left: 40px;
+        padding-right: 40px;
+        position: relative;
+        margin-top: 100px;
+        @media (max-width: 768px)
+        {
+            width: 80%;
+        }
+        @media (max-width: 400px)
+        {
+            width: 75%;
+        }
+        p
+        {
+            display: inline;
+            font-family: $myfont;
+            margin-left: 20px;
+            font-size: 18px;
+            // width: 70%;
+        }
+        .PiProjectorScreenChartBold
+        {
+            font-size: 23px;
+        }
+        .AiFillCaretDown
+        {
+            position: absolute;
+            left: 95%;
+            font-size: 23px;
+            @media (max-width: 768px)
+            {
+                left: 90%;
+            }
+            @media (max-width: 400px)
+            {
+                left: 85%;
+            }
+            // display: block;
+        }
+    }
+        
+    .containCompetition
+    {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        align-items: center;
+        justify-content: space-around;
+        margin-bottom: 70px;
+        @media (max-width:597px)
+        {
+            width: 90%;
+        }
+        .card
+        {
+            // background-color: red;
+            width: 27%;
+            height: 660px;
+            border-radius: 20px;
+            // background: linear-gradient(to bottom, #e0e0e0, $pColor1);
+            background: linear-gradient(to bottom, #e0e0e0 0%, $pColorR 0%, $pColor1 100%);
+
+            @media (max-width:1300px)
+            {
+                width: 30%;
+            }
+            @media (max-width: 1130px)
+            {
+                width: 45%;
+                // min-height: 300px;
+            }
+            @media (max-width:904px)
+            {
+                width: 46%;
+            }
+            @media (max-width:658px)
+            {
+                width: 100%;
+                justify-content: center;
+                display: 0 auto;
+            }
+            .containerIcon
+            {
+                height: 250px;
+                padding-top: 50px;
+                // background-color: red;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                .icon
+                {
+                    font-size: 150px;
+                    color: white;
+                }
+            }
+            .containerTitle
+            {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                // color: white;
+            }
+            .description
+            {
+                text-align: justify;
+                padding-left: 10px;
+                padding-right: 10px;
+                overflow-y: scroll;
+                color: white;
+                // background-color: red;
+                height: 100px;
+                &::-webkit-scrollbar {
+                    width: 5px;
+                    transition: 0.5s all;
+                    /* Customize the scrollbar track color */
+                    &-track {
+                      background-color: #f1f1f1;
+                    }
+                  
+                    /* Customize the scrollbar thumb color */
+                    &-thumb {
+                      background-color: $pColorR;
+                    }
+                  }
+                //  overflow-y: hidden
+            }
+            .month
+            {
+                text-align: center;
+                color: white;
+            }
+            .time
+            {
+                text-align: center;
+                color: white;
+            }
+            .containerButton
+            {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 20px;
+                button {
+                    width: 200px;
+                    height: 40px;
+                    cursor: pointer;
+                    background-color: #e0e0e0; /* Initial background color */
+                    border: none;
+                    transition: background-color 0.5s ease;
+                    border: 1px solid #e0e0e0;
+                    // background: l    inear-gradient(to bottom, #e0e0e0 0%, $pColorR 0%, $pColor1 100%);
+                  
+                    &:hover {
+                      background-color: $pColor1; /* New background color on hover */
+                      border: 1px solid #e0e0e0;
+                      color: #e0e0e0;
+                    }
+                  }
+                  
+                  
+                  
+                  
+                  
+            }
+        }
+        
+    }
+}
+.displayAlert
+{
+    height: 100vh;
+    width: 100%;
+    background-color: #2a2d383b;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: $myfont;
+    transition: 0.5s all;
+    .alReady
+    {
+        width: 500px;
+        height: 130px;
+        background-color: #fef8bd;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        text-align: center;
+        flex-direction: column;
+        @media (max-width: 500px)
+        {
+            width: 300px;
+        }
+        @media (max-width: 300px)
+        {
+            width: 250px;
+        }
+        button
+        {
+            width: 120px;
+            height: 35px;
+            border: 1px solid $pColor3;
+            background-color: $pColor3;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            transition: 1s all;
+            &:hover{
+                background-color: white;
+                border: 1px solid $pColor3;
+                color: $pColor3;
+            }
+        }
+    }
+}
+.displayAlert2
+{
+    height: 100vh;
+    width: 100%;
+    background-color: #2a2d383b;
+    position: absolute;
+    left: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: $myfont;
+    transition: 0.5s all;
+    top: -1100px;
+    
+    button
+        {
+            width: 120px;
+            height: 35px;
+            border: 1px solid $pColor3;
+            background-color: $pColor3;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            transition: 1s all;
+            &:hover{
+                background-color: white;
+                border: 1px solid $pColor3;
+                color: $pColor3;
+            }
+           
+        }
+}

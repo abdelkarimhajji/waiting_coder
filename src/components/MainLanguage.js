@@ -17,21 +17,12 @@ import {GiStarShuriken} from 'react-icons/gi'
 import {BsFiletypePhp} from 'react-icons/bs'
 import {SiXampp} from 'react-icons/si'
 
+
 function MainLanguage() {
   const [valid, setValid] = useState(0);
   const [setSelectValuesLanguages, setSetSelectValuesLanguages] = useState([]);
-  const scrollableRef = useRef(null);
+  
   const [scrollPosition, setScrollPosition] = useState(0);
-
-    const location = useLocation();
-    const sectionRef = useRef(null);
-
-    useEffect(() => {
-    const section = location.hash ? location.hash.slice(1) : '';
-    if (section && sectionRef.current) {
-        sectionRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-    }, [location, setSelectValuesLanguages]);
 
   function displayWindow() {
     if (valid === 0) {
@@ -93,7 +84,7 @@ function MainLanguage() {
         </div>
         {/* container of languages */}
         {setSelectValuesLanguages.map((item, index) => (
-        <div key={index} className={style.cantAllLanguage} id="HTML5" ref={sectionRef}>
+        <div key={index} className={style.cantAllLanguage} id={item.name_langauge} >
           <div className={style.titleLanguage}>
           {React.createElement(iconMapping[item.name_icon] || Default, { className: style.IconTitleLanguage })}
             <p> - {item.name_langauge}</p>
@@ -107,7 +98,7 @@ function MainLanguage() {
               <p className={style.nameLink}>First link to study HTML5:</p>
             </div>
             <div className={style.link}>
-              <p className={style.clickLink}>{item.link}</p>
+              <p className={style.clickLink}><a href={item.link} target="_blank" rel="noopener noreferrer">Click on the link</a></p>
             </div>
           </div>
         </div>

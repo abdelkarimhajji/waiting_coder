@@ -73,10 +73,10 @@ function MainTools() {
           <div className={style.validationLanguage}>
             <div className={style.containLink}>
               <BsArrowRight className={style.iconLink} />
-              <p className={style.nameLink}>First link to study HTML5:</p>
+              <p className={style.nameLink}>Click on the link</p>
             </div>
             <div className={style.link}>
-              <p className={style.clickLink}>{item.link}</p>
+              <p className={style.clickLink}><a href={item.link} target="_blank" rel="noopener noreferrer">Click on the link</a></p>
             </div>
           </div>
         </div>

@@ -10,6 +10,8 @@ import {TbToolsOff} from 'react-icons/tb'
 import {PiProjectorScreenChartBold} from 'react-icons/pi'
 import {BsFillCalendar2EventFill} from 'react-icons/bs'
 import {PiSignOutBold} from 'react-icons/pi'
+import {FaTrophy} from 'react-icons/fa'
+
 function Navbar(props) {
   const [hovered, setHovered] = useState(true);
   const [clickedElement, setClickedElement] = useState(null);
@@ -76,6 +78,9 @@ function Navbar(props) {
       .catch((error) => console.error(error));
       
   }, [userId]);
+  const close = () => {
+    setHovered(true);
+  }
   return (
     <>
       <div className={hovered === true ? style.navbar : style.navbarOut}>
@@ -99,43 +104,49 @@ function Navbar(props) {
         </div>
         
         <div className={style.twoUl}>
-        <Link to="/Home" className={style.Link}>
+        <Link to="/Home" className={style.Link} onClick={close}>
           <div className={style.containItemNav}>
             <p className={style.oneItem}>HOME</p>
             <p className={style.twoItem}><AiOutlineHome className={style.AiOutlineMenuFold} /></p>
           </div>
         </Link>
-        <Link to="/Language" className={style.Link}>
+        <Link to="/Language" className={style.Link} onClick={close}>
           <div className={style.containItemNav}>
             <p className={style.oneItem}>Languages</p>
             <p className={style.twoItem}><FaCode className={style.AiOutlineMenuFold} /></p>
           </div>
           </Link>
-          <Link to="/Tools" className={style.Link}>
+          <Link to="/Tools" className={style.Link} onClick={close}>
           <div className={style.containItemNav}>
             <p className={style.oneItem}>Tools</p>
             <p className={style.twoItem}><TbToolsOff className={style.AiOutlineMenuFold} /></p>
           </div>
           </Link>
-          <Link to="/Project" className={style.Link}>
+          <Link to="/Project" className={style.Link} onClick={close}>
           <div className={style.containItemNav}>
             <p className={style.oneItem}>Projects</p>
             <p className={style.twoItem}><PiProjectorScreenChartBold className={style.AiOutlineMenuFold} /></p>
           </div>
           </Link>
-          <Link to="/Profile" className={style.Link}>
+          <Link to="/Profile" className={style.Link} onClick={close}>
           <div className={style.containItemNav}>
             <p className={style.oneItem}>Profiles</p>
             <p className={style.twoItem}><FiUsers className={style.AiOutlineMenuFold} /></p>
           </div>
           </Link>
-          <Link to="/Event" className={style.Link}>
+          <Link to="/Event" className={style.Link} onClick={close}>
           <div className={style.containItemNav}>
             <p className={style.oneItem}>Events</p>
             <p className={style.twoItem}><BsFillCalendar2EventFill className={style.AiOutlineMenuFold} /></p>
           </div>
           </Link>
-          <Link to="/" className={style.Link} onClick={logout}>
+          <Link to="/Competition" className={style.Link} onClick={close}>
+          <div className={style.containItemNav}>
+            <p className={style.oneItem}>Competition</p>
+            <p className={style.twoItem}><FaTrophy className={style.AiOutlineMenuFold} /></p>
+          </div>
+          </Link>
+          <Link to="/" className={style.Link}  onClick={logout}>
           <div className={style.containItemNav}>
             <p className={style.oneItem}>Sign Out</p>
             <p className={style.twoItem}><PiSignOutBold className={style.AiOutlineMenuFold} /></p>

@@ -129,4 +129,91 @@
             }
         }
     }
+   
+}
+.result
+{
+    width: 70%;
+    font-family: $myfont;
+    min-height: 50px;
+    background-color: $pColor1;
+    position: absolute;
+    top: 80px;
+    left: 150px;
+    z-index: 11;
+    padding-top: 15px;
+    
+    position: fixed;
+    // padding-left: 20px;
+    transition: 0.2s ease-in-out;
+    @media (max-width:1000px)
+    {
+        width: 65%;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    @media (max-width:768px)
+    {
+        width: 65%;
+    }
+    @media (max-width:666px)
+    {
+        width: 60%;
+    }
+    @media (max-width:570px)
+    {
+        left: 25%;
+       
+    }
+    @media (max-width:370px)
+    {
+        width: 80%;
+        left: 7%;
+    }
+    .containerEachRsult
+    {
+        width: 97%;
+        min-height: 40px;
+        background-color: #2a2d38;
+        // background-color: red;
+        cursor: pointer;
+        margin: 0 auto;
+        margin-bottom: 15px;
+        display: flex;  
+        // transition: 2s all;
+        &:hover
+        {
+            background-color: #353947;
+        }
+        .containerImgResult
+        {
+            // background-color: yellow;
+            // border: 1px solid beige;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-left: 10px;
+            img
+            {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+            }
+        }
+        .containerFirstName
+        {
+            // background-color: brown;
+            padding-left: 10px;
+            color: white;
+        }
+    }
+    .noResult{
+        padding-left: 20px;
+    }
+}
+.result2
+{
+    // transition: 0.5  s all;
+    position: absolute;
+    visibility: hidden;
 }

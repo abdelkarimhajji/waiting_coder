@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useId} from "react";
+import React, { useState, useEffect, useId, useRef} from "react";
 import { useLocation, Navigate , Link } from "react-router-dom";
 import style from "../sass/mainhome.module.scss"
 import { AiFillCaretDown, AiOutlineProject} from 'react-icons/ai';
@@ -20,6 +20,7 @@ function MainHome({selectedValues, selectedValuesTools, selectedValuesProject}) 
     const [selectedValuesCompetitions, setSelectedValuesCompetitions] = useState([])
     const userId = localStorage.getItem("userId");
     const selectedOptionKey = localStorage.getItem("selectedOptionKey");
+
     useEffect(() => {
         // console.log("Selected Values:", selectedValuesProject);
       }, [selectedValues, selectedValuesTools, selectedValuesProject]);
@@ -54,7 +55,7 @@ function MainHome({selectedValues, selectedValuesTools, selectedValuesProject}) 
       }, [userId, selectedOptionKey]);
     
       useEffect(() => {
-        fetch(`http://localhost:8081/api/get_competitions`)
+        fetch(`http://localhost:8081/api/get_competitions/${userId}/${selectedOptionKey}`)
           .then((response) => {
             if (!response.ok) {
               throw new Error("Network response was not ok");
@@ -66,7 +67,7 @@ function MainHome({selectedValues, selectedValuesTools, selectedValuesProject}) 
           })
           .catch((error) => console.error(error));
 
-      }, []);
+      }, [userId, selectedOptionKey]);
     
   return (
     <div className={style.container}>
@@ -75,17 +76,25 @@ function MainHome({selectedValues, selectedValuesTools, selectedValuesProject}) 
                 <div className={style.contInsidProgram}>
                     <div className={style.titleProgram}>
                         <FaCode className={style.iconLanguage}/>
-                        <p className="par">Languages</p>
+                          <p className="par">Languages</p>
                         <AiFillCaretDown className={style.iconLanguage}/>
                     </div>
                     <div className={style.UnderConatProgram}>
                     {selectedValues.map((item, index) => (
-                    <Link key={index} to={`/Language#${item.name_langauge}`} className={style.link}>
-                            <div  className={style.conatProItm}>
-                            {React.createElement(iconMapping[item.name_icon] || Default, { className: style.TiHtml5 })}
-                            <p className="par"> - {item.name_langauge}</p>
-                            <TbHandClick className={style.TbHandClick} />
-                            </div>
+                    <Link
+                    to={{
+                      pathname: '/Language',
+                      hash: `#${item.name_langauge}`,
+                      state: { sectionId: item.name_langauge } // Pass the section ID as state
+                    }}
+                    className={style.link}
+                    key={index}
+                  >
+                  <div  className={style.conatProItm}>
+                  {React.createElement(iconMapping[item.name_icon] || Default, { className: style.TiHtml5 })}
+                  <p className="par"> - {item.name_langauge}</p>
+                  <TbHandClick className={style.TbHandClick} />
+                  </div>
                     </Link>
                         ))}
                     </div>
@@ -101,11 +110,13 @@ function MainHome({selectedValues, selectedValuesTools, selectedValuesProject}) 
                     </div>
                     <div className={style.UnderConatProgram}>
                     {selectedValuesTools.map((item, index) => (
+                      <Link key={index} to={`/Tools#${item.name_tool}`} className={style.link}>
                         <div key={index} className={style.conatProItm}>
                             {React.createElement(iconMapping[item.name_icon] || Default, { className: style.TiHtml5 })}
                             <p className="par"> - {item.name_tool}</p>
                             <TbHandClick className={style.TbHandClick} />
                         </div>
+                      </Link>
                     ))}
                     </div>
                 </div>
@@ -121,11 +132,13 @@ function MainHome({selectedValues, selectedValuesTools, selectedValuesProject}) 
                     <div className={style.UnderConatProgram}>
                     {selectedValuesProject.map((item, index) => (
                         // item.display === 1 && (
+                          <Link key={index} to={`/Project#${item.name_project}`} className={style.link}>
                             <div key={index} className={style.conatProItm}>
                             <FaUpload className={style.TiHtml5}/>
                             <p className="par">- {item.name_project}</p>
                             <TbHandClick className={style.TbHandClick} />
                             </div>
+                            </Link>
                         // )
                     ))}
                     </div>
@@ -143,11 +156,13 @@ function MainHome({selectedValues, selectedValuesTools, selectedValuesProject}) 
                         <div className={style.UnderConatEvent}>
                         {Array.isArray(selectedValuesEvents) ? (
                         selectedValuesEvents.map((item, index) => (
+                          <Link key={index} to={`/Event#${item.title_event}`} className={style.link}>
                           <div key={index} className={style.conatEventItm}>
-                            <GiStarShuriken className={style.TiHtml5}/>
+                            <GiStarShuriken className={style.TiHtml5} style={{fontSize: '30px', marginTop: '10px'}}/>
                             <p className="par"> - {item.title_event}</p>
                             <TbHandClick className={style.TbHandClick} />
                           </div>
+                          </Link>
                         ))
                       ) : (
                         <>
@@ -172,13 +187,24 @@ function MainHome({selectedValues, selectedValuesTools, selectedValuesProject}) 
                             <AiFillCaretDown className={style.iconTitle}/>
                         </div>
                         <div className={style.UnderConatEvent}>
-                        {selectedValuesCompetitions.map((item, index) => (
-                            <div key={index} className={style.conatEventItm}>
-                                <GiStarShuriken className={style.TiHtml5}/>
-                                <p className="par"> - {item.title_competition}</p>
-                                <TbHandClick className={style.TbHandClick} />
-                            </div>
-                        ))}
+                        <div className={style.UnderConatEvent}>
+                            {Array.isArray(selectedValuesCompetitions)  ? (
+                              selectedValuesCompetitions.map((item, index) => (
+                                <Link key={index} to={`/Event#${item.title_competition}`} className={style.link}>
+                                  <div key={index} className={style.conatEventItm}>
+                                    <GiStarShuriken className={style.TiHtml5} style={{fontSize: '30px', marginTop: '10px'}}/>
+                                    <p className="par"> - {item.title_competition}</p>
+                                    <TbHandClick className={style.TbHandClick} />
+                                  </div>
+                                </Link>
+                              ))
+                            ) : (
+                              <div className={style.conatEventItm}>
+                                <CgUnavailable className={style.TiHtml5}/>
+                                <p> - No competitions available.</p>
+                              </div>
+                            )}
+                          </div>
                         </div>
                 </div>
                     {/* finish  contInsideEvents*/}

@@ -21,14 +21,14 @@ function MainProfile() {
           {
             if (now > 0)
             {
-              setNow(now - 2)
-              setNext(next - 2);
-              window.scrollTo(0, 0);
+              setNow(now - 3)
+              setNext(next - 3);
+              window.scrollTo({top :0, left: 0, behavior: 'smooth'});
             }
           }else if (valid === 0){
-            setNow(now + 2)
-            setNext(next + 2);
-            window.scrollTo(0, 0);
+            setNow(now + 3)
+            setNext(next + 3);
+            window.scrollTo({top :0, left: 0, behavior: 'smooth'});
           }
       }
       const get_id = (id) =>
@@ -56,6 +56,7 @@ function MainProfile() {
       }, [now, next]);
 
   return (
+    <>
     <div className={style.container}>
         <div className={style.containerTitlePage}>
             <FiUsers className={style.iconEvent}/>
@@ -63,7 +64,10 @@ function MainProfile() {
             <AiFillCaretDown className={style.iconDown}/>
         </div>
         {/* start card */}
-        {selectedValuesUser.map((userItem, userIndex) => (
+        {Array.isArray(!selectedValuesUser) ? (
+            <p className={style.noUsers}>No users found</p>
+          ) : (
+        selectedValuesUser.map((userItem, userIndex) => (
       <Link key={userIndex} to="/EachProfile" className={style.link} onClick={() => get_id(userItem.id)}>
         <div className={style.containerProfile}>
           <div className={style.containerImg}>
@@ -95,14 +99,17 @@ function MainProfile() {
       </div>
     </div>
   </Link>
-))}
-
-      {/* finish card */}   
-      <div className={style.containerPagination}>
+))
+)}
+{/* finish card */}   
+</div>
+    <div className={style.containerOfContainerPagination}>
+        <div className={style.containerPagination}>
           <button onClick={() => function_next(0)}>return</button>
           <button onClick={() => function_next(1)}>next</button>
-      </div>
+        </div>
     </div>
+    </>
   );
 }
 

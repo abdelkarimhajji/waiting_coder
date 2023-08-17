@@ -15,6 +15,22 @@ function MainEvent() {
   const [selectedValuesEvents, setSelectedValuesEvents] = useState([]);
   const [valid, setValid] = useState(0);
   const [valid2, setValid2] = useState(0);
+
+
+  const smoothScrollToTop = () => {
+    document.body.style.overflow = 'hidden'; // Hide overflow
+    
+    const scrollStep = -window.scrollY / (500 / 15); // Adjust the animation speed by changing the division factor
+  
+    const scrollInterval = setInterval(() => {
+      if (window.scrollY !== 0) {
+        window.scrollBy(0, scrollStep);
+      } else {
+        clearInterval(scrollInterval);
+      }
+    }, 15);
+  };
+  
   useEffect(() => {
     fetch(`http://localhost:8081/api/get_events/${userId}/${selectedOptionKey}`)
       .then((response) => {
@@ -51,12 +67,12 @@ function MainEvent() {
           {
             setValid(1);
             console.log("respose data",responseData)
-            document.body.style.overflow = 'hidden';
+            smoothScrollToTop();
           }
           else
           {
             setValid2(1);
-            console.log('iam herrrr')
+            // window.scrollT o(0, 0);
           }
       })
       .catch((error) => {
@@ -93,31 +109,35 @@ const already = () =>
         <AiFillCaretDown className={style.iconDown}/>
       </div>
       {/* begin container event */}
-      {selectedValuesEvents.map((item, index) => (
-      <div key={index} className={style.containerEvent}>
-        <div className={style.date}>
-          <div className={style.number}>
-            <p>{item.day_event}</p>
-          </div>
-          <div className={style.month}>
-            <p >{item.month_event}</p>
-          </div>
+       {selectedValuesEvents === 'No specific events found.' ? (
+            <p className={style.noUsers}>No users found</p>
+          ) : (
+  selectedValuesEvents.map((item, index) => (
+    <div key={index} className={style.containerEvent}>
+      <div className={style.date}>
+        <div className={style.number}>
+          <p>{item.day_event}</p>
         </div>
-        <div className={style.description}>
-          <p className={style.title}>{item.title_event}</p>
-          <p>{item.description_event}</p>
-          <div className={style.parentTimeButton}>
-              <div className={style.containerTime}>
-                <MdWatchLater className={style.icon}/>
-                <p>{item.time_event}</p>
-              </div>
-              <div className={style.containerButton}>
-                  <button onClick={() => register_event(item.id)}>Register</button>
-              </div>
+        <div className={style.month}>
+          <p>{item.month_event}</p>
+        </div>
+      </div>
+      <div className={style.description}>
+        <p className={style.title}>{item.title_event}</p>
+        <p>{item.description_event}</p>
+        <div className={style.parentTimeButton}>
+          <div className={style.containerTime}>
+            <MdWatchLater className={style.icon} />
+            <p>{item.time_event}</p>
+          </div>
+          <div className={style.containerButton}>
+            <button onClick={() => register_event(item.id)}>Register</button>
           </div>
         </div>
       </div>
-      ))}
+    </div>
+  )))
+}   
       {/* finsh container event */}
       
     </div>

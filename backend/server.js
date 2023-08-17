@@ -255,16 +255,76 @@ app.post('/api/register_event', (req, res) => {
   });
 });
 
+app.post('/api/register_competition', (req, res) => {
+  const { id_user, id_competition } = req.body;
 
-app.get('/api/get_competitions', (req, res) => {
-  const selectSql = `SELECT * FROM competitions WHERE display = 1`;
-  db.query(selectSql, (selectErr, selectResult) => {
-    if (selectErr) {
-      console.log(selectErr);
+  // Check if the registration already exists for the user and event
+  const checkRegistrationSql = 'SELECT * FROM registrement_competition WHERE id_user = ? AND id_competition = ?';
+  const checkRegistrationValues = [id_user, id_competition];
+
+  db.query(checkRegistrationSql, checkRegistrationValues, (checkErr, checkResult) => {
+    if (checkErr) {
+      console.error('Error checking registration:', checkErr);
+      res.status(500).json({ error: 'Error checking registration' });
+    } else if (checkResult.length > 0) {
+      // Registration already exists, return a message indicating that
+      res.json({ message: 'User is already registered for this event' });
+    } else {
+      // Registration doesn't exist, insert the new registration
+      const insertRegistrationSql = 'INSERT INTO registrement_competition (id_user, id_competition, valid) VALUES (?, ?, ?)';
+      const insertRegistrationValues = [id_user, id_competition, 0];
+
+      db.query(insertRegistrationSql, insertRegistrationValues, (insertErr, insertResult) => {
+        if (insertErr) {
+          console.error('Error inserting data:', insertErr);
+          res.status(500).json({ error: 'Error inserting data' });
+        } else {
+          console.log('Data inserted successfully');
+          res.json({ message: 'Data inserted successfully' });
+        }
+      });
+    }
+  });
+});
+
+
+
+app.get('/api/get_competitions/:userId/:nameSpecifics', (req, res) => {
+  const userId = req.params.userId;
+  const nameSpecifics =  req.params.nameSpecifics;
+  console.log("look", userId)
+  console.log("liik", nameSpecifics)
+  const selectSpecificsSql = `
+  SELECT *
+  FROM specifics 
+  INNER JOIN groups ON specifics.id_group = groups.id
+  where specifics.id_user = ? and specifics.id_nameSpecifics = ? and groups.group_finished = 0
+  `;
+  
+  db.query(selectSpecificsSql, [userId, nameSpecifics],(specificsErr, specificsResult) => {
+    if (specificsErr) {
+      console.log(specificsErr);
       return res.json("Error");
     }
-    // console.log(selectResult);
-    return res.json(selectResult);
+    if (specificsResult.length === 0) {
+      return res.json("No specific events found.");
+    }
+    const firstSpecificEvent = specificsResult[0];
+
+    if (firstSpecificEvent.group_finished === 0) {
+      const selectEventsSql = `SELECT * FROM competitions WHERE finished = 0`;
+
+      db.query(selectEventsSql, (eventsErr, eventsResult) => {
+        if (eventsErr) {
+          console.log(eventsErr);
+          return res.json("Error");
+        }
+  
+        return res.json(eventsResult);
+      });
+    } else {
+      return res.json([]);
+    }
   });
 });
 
@@ -296,7 +356,17 @@ app.get('/get_each_user_levle/:id/', (req, res) => {
 });
 
 
-
+app.get('/api/search/:input', (req, res) => {
+  const input = req.params.input;
+  const selectSql = "SELECT * FROM user WHERE firstName LIKE ? OR lastName LIKE ? ORDER BY LENGTH(firstName) LIMIT 7;";
+  db.query(selectSql,[`${input}%`, `${input}%`], (selectErr, selectResult) => {
+    if (selectErr) {
+      console.log(selectErr);
+      return res.json("Error");
+    }
+    return res.json(selectResult);
+  });
+});
 
 // Create API endpoint for fetching data from the user table
 
