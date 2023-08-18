@@ -12,7 +12,7 @@ const db = mysql.createConnection({
   password: "",
   database: "waiting_coder"
 });
-
+  
 app.use(express.json()); // Add this line to parse JSON in request body
 
 app.post('/signup', (req, res) => {

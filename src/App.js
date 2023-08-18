@@ -16,6 +16,8 @@ import PushProject from './pages/PushProject';
 import Event from './pages/Event';
 import Tools from './pages/Tools';
 import Competition from './pages/Competition';
+import Admin from './admin/pages/Admin';
+import Dashboard  from './admin/pages/Dashboard';
 
 
 function App() {
@@ -38,6 +40,8 @@ function App() {
           <Route path="/Event" element={parseInt(localStorage.getItem("login")) ? <Event /> : <Navigate to="/" />} />
           <Route path="/Tools" element={parseInt(localStorage.getItem("login")) ? <Tools /> : <Navigate to="/" />} />
           <Route path="/competition" element={parseInt(localStorage.getItem("login")) ? <Competition /> : <Navigate to="/" />} />
+          <Route path="/Admin" element={ <Admin /> } />
+          <Route path="/Dashboard" element={parseInt(localStorage.getItem("login")) ? <Dashboard /> : <Navigate to="/" />} />
           <Route path="/NotFound" element={parseInt(localStorage.getItem("login")) ? <NotFound /> : <Navigate to="/" />} />
           <Route path="*" element={parseInt(localStorage.getItem("login")) ? <Navigate to="/NotFound"/> : <Navigate to="/"/>} />
         </Routes>

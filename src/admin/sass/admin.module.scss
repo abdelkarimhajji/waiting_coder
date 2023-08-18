@@ -1,0 +1,207 @@
+@import "../../sass/global.module.scss";
+@import 'mathsass';
+
+
+.container {
+    height: 100vh;
+    display: flex;
+    font-family: $myfont;
+    .leftSide {
+      background-image: url(../../imgs/142862.jpg);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      height: 100vh;
+      width: 60%;
+      color: white;
+      position: relative;
+      @media(max-width: 1450px)
+      {
+        width: 50%;
+      }
+      @media(max-width: 880px)
+      {
+        width: 40%;
+      }
+      @media(max-width: 800px)
+        {
+            display: none;
+        }
+      .overlay {
+        background-color: #1f212b9c; 
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        .contianerTitle
+        {
+            height: 93%;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            @media(max-width: 880px)
+            {
+                height: 90%;
+            }
+            .containerContent
+            {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                .icon
+                {
+                    font-size: 50px;
+                }
+                .title
+                {
+                    font-size: 30px;
+                }
+                .description
+                {
+                    width: 90%;
+                    text-align: center;
+                    line-height: 30px;
+                }
+            }
+            // background-color: yellow;
+        }
+        .containerCopieRight
+        {
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           text-align: center;
+        }
+      }
+    }
+  
+    .loginSide {
+      background-color: $pColor1;
+      height: 100vh;
+      width: 40%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      @media(max-width: 1450px)
+      {
+        width: 50%;
+      }
+      @media(max-width: 880px)
+      {
+        width: 60%;
+      }
+      @media(max-width: 800px)
+      {
+        width: 100%;
+      }
+      .containerLogin
+      {
+        box-shadow: rgba(255, 255, 255, 0.274) 0px 18px 50px -10px;
+        background: linear-gradient(to bottom, #e0e0e0 -150%, $pColor1 );
+        border-radius: 20px;
+        // background-color: red;
+        width: 500px;
+        height: 500px;
+        @media(max-width: 1100px)
+        {
+            width: 400px;
+            height: 400px;
+        }
+        @media(max-width: 400px)
+        {
+            width: 350px;
+            height: 350px;
+        }
+        @media(max-width: 300px)
+        {
+            width: 270px;
+            height: 300px;
+        }
+            .containerIcon
+            {
+                height: 250px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                @media(max-width: 1100px)
+                {
+                    height: 170px;
+                }
+                @media(max-width: 400px)
+                {
+                    height: 130px;
+                }
+                @media(max-width: 300px)
+                {   
+                    height: 100px;
+                }
+                .icon
+                {
+                    font-size: 100px;
+                    color: white;
+                    @media(max-width: 300px)
+                    {   
+                        font-size: 70px;
+                    }
+                }
+            }
+            .containerInputs
+            {
+                // background-color: red;
+                .input
+                {
+                    font-family: $myfont;
+                    margin: 0 auto;
+                    display: block;
+                    height: 40px;
+                    width: 250px;
+                    margin-bottom: 20px;
+                    text-align: center;
+                    &:focus
+                    {
+                        outline: none;
+                        border: 2px;
+                    }
+                    @media(max-width: 300px)
+                    {   
+                        height: 35px;
+                        width: 200px;
+                    }
+                }
+            }
+            .containerSubmit
+            {
+                .submit
+                {
+                    display: block;
+                    font-family: $myfont;
+                    width: 260px;
+                    height: 45px;
+                    font-size: 15px;
+                    color: white;
+                    background-color: $pColor3;
+                    margin: 0 auto;
+                    border: none;
+                    cursor: pointer;
+                    transition: 0.5s all;
+                    border: 0.5px solid rgba(255, 255, 255, 0.374);
+                    &:hover
+                    {
+                        background-color:#262a3d9f;
+                        width: 280px;
+                        height: 50px;
+                        font-size: 16px;
+                    }
+                    @media(max-width: 300px)
+                    {   
+                        height: 40px;
+                        width: 220px;
+                    }
+                }
+            }
+      }
+    }
+  }
+  

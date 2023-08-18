@@ -54,7 +54,9 @@ function MainProfile() {
           .catch((error) => console.error(error));
           
       }, [now, next]);
+      const [displayNoUsersMessage, setDisplayNoUsersMessage] = useState(false);
 
+      setTimeout(() => setDisplayNoUsersMessage(true), 200); // 1000 milliseconds = 1 second
   return (
     <>
     <div className={style.container}>
@@ -64,42 +66,45 @@ function MainProfile() {
             <AiFillCaretDown className={style.iconDown}/>
         </div>
         {/* start card */}
-        {Array.isArray(!selectedValuesUser) ? (
-            <p className={style.noUsers}>No users found</p>
-          ) : (
-        selectedValuesUser.map((userItem, userIndex) => (
-      <Link key={userIndex} to="/EachProfile" className={style.link} onClick={() => get_id(userItem.id)}>
-        <div className={style.containerProfile}>
-          <div className={style.containerImg}>
-            <img src={require(`../imgs/${userItem.image}`)} alt="" className="imgUser" />
-          </div>
-          <div className={style.containerInfo}>
-            <p className={style.name}>{userItem.firstName} {userItem.lastName}</p>
-            <p className={style.login}>@{userItem.lastName}</p>
-            {/* {selectedValuesCount.map((countItem, countIndex) => ( */}
-              <div className={style.rectangul}>
-                <div className={style.countProjects}>
-                  <p className={style.title}>Projects</p>
-                  <p>{userItem.valid_project_count}</p>
+        {selectedValuesUser.length !== 0 ? (
+          selectedValuesUser.map((userItem, userIndex) => (
+            <Link key={userIndex} to="/EachProfile" className={style.link} onClick={() => get_id(userItem.id)}>
+              <div className={style.containerProfile}>
+                <div className={style.containerImg}>
+                  <img src={require(`../imgs/${userItem.image}`)} alt="" className="imgUser" />
                 </div>
-                <div className={style.countCopitions}>
-                  <p className={style.title}>Compitions</p>
-                  <p>{userItem.valid_competition_count}</p>
-                </div>
-                <div className={style.countEvents}>
-                  <p className={style.title}>Eventes</p>
-                  <p>{userItem.valid_event_count}</p>
-                </div>
+                <div className={style.containerInfo}>
+                  <p className={style.name}>{userItem.firstName} {userItem.lastName}</p>
+                  <p className={style.login}>@{userItem.lastName}</p>
+                  {/* {selectedValuesCount.map((countItem, countIndex) => ( */}
+                    <div className={style.rectangul}>
+                      <div className={style.countProjects}>
+                        <p className={style.title}>Projects</p>
+                        <p>{userItem.valid_project_count}</p>
+                      </div>
+                      <div className={style.countCopitions}>
+                        <p className={style.title}>Compitions</p>
+                        <p>{userItem.valid_competition_count}</p>
+                      </div>
+                      <div className={style.countEvents}>
+                        <p className={style.title}>Eventes</p>
+                        <p>{userItem.valid_event_count}</p>
+                      </div>
+                    </div>
+                  {/* ))} */}
+              <div className={style.conainerLevel}>
+                <GiTopPaw className={style.icon} />
+                <p className={style.title}>Level: {userItem.level}</p>
               </div>
-            {/* ))} */}
-        <div className={style.conainerLevel}>
-          <GiTopPaw className={style.icon} />
-          <p className={style.title}>Level: {userItem.level}</p>
-        </div>
-      </div>
-    </div>
-  </Link>
-))
+            </div>
+          </div>
+        </Link>
+      ))
+      ) : (
+        displayNoUsersMessage && (
+          <p className={style.noUsers}>No users found</p>
+        )
+        
 )}
 {/* finish card */}   
 </div>
