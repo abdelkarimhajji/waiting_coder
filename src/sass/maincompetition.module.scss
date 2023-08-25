@@ -88,7 +88,7 @@
         {
             // background-color: red;
             width: 27%;
-            height: 660px;
+            min-height: 660px;
             border-radius: 20px;
             // background: linear-gradient(to bottom, #e0e0e0, $pColor1);
             background: linear-gradient(to bottom, #e0e0e0 0%, $pColorR 0%, $pColor1 100%);
@@ -131,6 +131,7 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                text-align: center;
                 // color: white;
             }
             .description
@@ -190,13 +191,30 @@
                     }
                   }
                   
-                  
-                  
-                  
-                  
             }
         }
         
+    }
+}
+
+
+
+.twoButton
+{
+    display: flex;
+    // background-color: red;
+    width: 70%;
+    justify-content: space-around;
+    @media (max-width: 500px)
+    {
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 15px;
+        height: 90px;
+    }
+    button
+    {
+        width: 50%;
     }
 }
 .displayAlert
@@ -216,7 +234,7 @@
     .alReady
     {
         width: 500px;
-        height: 130px;
+        height: 160px;
         background-color: #fef8bd;
         display: flex;
         justify-content: center;
@@ -224,13 +242,22 @@
         border-radius: 20px;
         text-align: center;
         flex-direction: column;
+        
         @media (max-width: 500px)
         {
             width: 300px;
+            height: 220px;
         }
         @media (max-width: 300px)
         {
             width: 250px;
+        }
+        p{
+            margin-bottom: 40px;
+            @media (max-width: 500px)
+            {
+                margin-bottom: 20px;
+            } 
         }
         button
         {

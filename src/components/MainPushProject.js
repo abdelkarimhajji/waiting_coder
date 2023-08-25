@@ -173,7 +173,7 @@ function MainPushProject() {
         </div> 
         {/* finish containerProjectLink */}
         {/* start push */}
-        <div className={style.push}>
+      <div className={style.push}>
             <p className={style.title}>Put the link here:</p>
             {/* conatainer Input */}
             <div className={style.containerInput}>

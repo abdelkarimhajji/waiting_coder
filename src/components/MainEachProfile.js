@@ -87,7 +87,7 @@ useEffect(() => {
                         <Link key={index} to="/Language#html" className={style.link}>
                             <div className={style.conatProItm}>
                                 <FaUpload className={style.TiHtml5}/>
-                                <p className="par"> - {item.name_langauge}</p>
+                                <p className="par"> - {item.languageName}</p>
                             </div>
                         </Link>
                         ))}

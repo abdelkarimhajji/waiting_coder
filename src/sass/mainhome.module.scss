@@ -186,4 +186,53 @@
     {
         padding-left: -20px;
     }
+    .skills
+    {
+        // background-color: red;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .readCharts
+    {
+        p
+        {
+            color: rgb(115, 115, 115);
+        }
+    }
+    
 }
+.card {
+    width: 200px;
+    height: 300px;
+    perspective: 1000px;
+    cursor: pointer;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+  }
+  
+  .card-front,
+  .card-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .card-front {
+    background-color: #e0e0e0;
+  }
+  
+  .card-back {
+    background-color: #f0f0f0;
+    transform: rotateY(180deg);
+  }
+  
+  .flipped {
+    transform: rotateY(180deg);
+  }
+  

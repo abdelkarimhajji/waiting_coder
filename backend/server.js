@@ -60,7 +60,7 @@ app.get('/api/get_levels/:id', (req, res) => {
       console.log(selectErr);
       return res.json("Error");
     }
-    console.log(selectResult);
+    // console.log(selectResult);
     return res.json(selectResult);
   });
 });
@@ -68,14 +68,45 @@ app.get('/api/get_levels/:id', (req, res) => {
 
 app.get('/api/get_languages/:selectedOptionKey', (req, res) => {
   const selectedOptionKey = req.params.selectedOptionKey;
-  const selectSql = `SELECT * FROM languages WHERE id_collection = ?`;
-  db.query(selectSql, [selectedOptionKey], (selectErr, selectResult) => {
-    if (selectErr) {
-      console.log(selectErr);
-      return res.json("Error");
+  const query = `
+  SELECT *, l.id AS idLanguage, li.id AS idLinkLanguage
+  FROM languages l
+  LEFT JOIN links_languages li ON l.id = li.id_language
+  WHERE l.id_collection = ?;
+    `;
+
+  db.query(query,[selectedOptionKey], (err, results) => {
+    if (err) {
+      console.error('Error executing query:', err);
+      res.status(500).json({ error: 'Error fetching data from the database' });
+      return;
     }
-    // console.log(selectResult);
-    return res.json(selectResult);
+    // console.log("ddddd",results)
+    const languageAndLinks = {};
+    results.forEach(row => {
+      if (!languageAndLinks[row.idLanguage]) {
+        languageAndLinks[row.idLanguage] = {
+          languageId: row.idLanguage,
+          languageName: row.name_langauge,
+          languageIcon: row.name_icon,
+          languageDescription:row.description,
+          languageIdCollection:row.id_collection,
+          links: [],
+        };
+      }
+      if (row.idLinkLanguage) {
+        languageAndLinks[row.idLanguage].links.push({
+          linkId: row.idLinkLanguage,
+          linkIdLanguage: row.id_language,
+          linkName: row.name_link,
+          link: row.link,
+        });
+      }
+    });
+
+    const projectsArray = Object.values(languageAndLinks);
+    // console.log("ffffff",projectsArray)
+    res.json(projectsArray);
   });
 });
 
@@ -125,7 +156,7 @@ app.get('/api/get_ressourcesPorject/:idProject', (req, res) => {
       console.log(selectErr);
       return res.json("Error"); 
     }
-    console.log(selectResult);
+    // console.log(selectResult);
     return res.json(selectResult);
   });
 });
@@ -188,7 +219,7 @@ app.post('/api/push_project', (req, res) => {
 app.get('/api/get_events/:userId/:nameSpecifics', (req, res) => {
   const userId = req.params.userId;
   const nameSpecifics =  req.params.nameSpecifics;
-  console.log("look", userId)
+  // console.log("look", userId)
   const selectSpecificsSql = `
   SELECT *
   FROM specifics 
@@ -207,9 +238,14 @@ app.get('/api/get_events/:userId/:nameSpecifics', (req, res) => {
     const firstSpecificEvent = specificsResult[0];
 
     if (firstSpecificEvent.group_finished === 0) {
-      const selectEventsSql = `SELECT * FROM events where finished = 0`;
-
-      db.query(selectEventsSql, (eventsErr, eventsResult) => {
+      const selectEventsSql = `SELECT events.*, 
+      CASE WHEN registrement_events.id_user IS NULL THEN 0 ELSE 1 END AS is_registered
+      FROM events
+      LEFT JOIN registrement_events ON events.id = registrement_events.id_event AND registrement_events.id_user = ?
+      WHERE events.finished = 0
+      ;
+      `;
+      db.query(selectEventsSql,[userId], (eventsErr, eventsResult) => {
         if (eventsErr) {
           console.log(eventsErr);
           return res.json("Error");
@@ -255,6 +291,43 @@ app.post('/api/register_event', (req, res) => {
   });
 });
 
+app.delete('/api/delete_registration', (req, res) => {
+  const { id_user, id_event } = req.body;
+  // Perform the delete operation in your database
+  const deleteRegistrationSql = 'DELETE FROM registrement_events WHERE id_user = ? AND id_event = ?';
+  const deleteRegistrationValues = [id_user, id_event];
+
+  db.query(deleteRegistrationSql, deleteRegistrationValues, (deleteErr, deleteResult) => {
+    if (deleteErr) {
+      console.error('Error deleting registration:', deleteErr);
+      res.status(500).json({ error: 'Error deleting registration' });
+    } else {
+      console.log('Registration deleted successfully');
+      res.json({ message: 'Registration deleted successfully' });
+    }
+  });
+});
+
+app.delete('/api/delete_registration_competition', (req, res) => {
+  const { id_user, id_competition } = req.body;
+  
+  // Perform the delete operation in your database
+  const deleteRegistrationSql = 'DELETE FROM registrement_competition WHERE id_user = ? AND id_competition = ?';
+  const deleteRegistrationValues = [id_user, id_competition];
+
+  db.query(deleteRegistrationSql, deleteRegistrationValues, (deleteErr, deleteResult) => {
+    if (deleteErr) {
+      console.error('Error deleting registration:', deleteErr);
+      res.status(500).json({ error: 'Error deleting registration' });
+    } else {
+      console.log('Registration deleted successfully');
+      res.json({ message: 'Registration deleted successfully' });
+    }
+  });
+});
+
+
+
 app.post('/api/register_competition', (req, res) => {
   const { id_user, id_competition } = req.body;
 
@@ -292,8 +365,8 @@ app.post('/api/register_competition', (req, res) => {
 app.get('/api/get_competitions/:userId/:nameSpecifics', (req, res) => {
   const userId = req.params.userId;
   const nameSpecifics =  req.params.nameSpecifics;
-  console.log("look", userId)
-  console.log("liik", nameSpecifics)
+  // console.log("look", userId)
+  // console.log("liik", nameSpecifics)
   const selectSpecificsSql = `
   SELECT *
   FROM specifics 
@@ -307,14 +380,15 @@ app.get('/api/get_competitions/:userId/:nameSpecifics', (req, res) => {
       return res.json("Error");
     }
     if (specificsResult.length === 0) {
-      return res.json("No specific events found.");
+      return res.json([]);
     }
     const firstSpecificEvent = specificsResult[0];
 
     if (firstSpecificEvent.group_finished === 0) {
-      const selectEventsSql = `SELECT * FROM competitions WHERE finished = 0`;
+      const selectEventsSql = `SELECT competitions.*, CASE WHEN registrement_competition.id_user IS NULL THEN 0 ELSE 1 END AS is_registered FROM competitions LEFT JOIN registrement_competition ON competitions.id = registrement_competition.id_competition AND registrement_competition.id_user = 2 WHERE competitions.finished = 0;
+      `;
 
-      db.query(selectEventsSql, (eventsErr, eventsResult) => {
+      db.query(selectEventsSql,[userId], (eventsErr, eventsResult) => {
         if (eventsErr) {
           console.log(eventsErr);
           return res.json("Error");
@@ -356,6 +430,146 @@ app.get('/get_each_user_levle/:id/', (req, res) => {
 });
 
 
+
+app.get('/api/getProjectsAndResources', (req, res) => {
+  // console.log("kakakakak")
+  const query = `
+  SELECT p.id AS projectId, p.name_project AS projectName, p.description AS projectDescription, p.image_project AS imgProject, p.id_collection AS idCollection, p.count_exp AS Xp,
+  r.id AS resourceId, r.name_ressource AS resourceName, r.link_ressource AS resourceInfo, r.id_project AS idProjectR
+FROM projects p
+LEFT JOIN ressources_projects r ON p.id = r.id_project
+  `;
+
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error('Error executing query:', err);
+      res.status(500).json({ error: 'Error fetching data from the database' });
+      return;
+    }
+    // console.log("ddddd",results)
+    const languageAndLinks = {};
+    results.forEach(row => {
+      if (!languageAndLinks[row.projectId]) {
+        languageAndLinks[row.projectId] = {
+          projectId: row.projectId,
+          projectName: row.projectName,
+          projectDescription: row.projectDescription,
+          projectImgProject:row.imgProject,
+          projectIdCollection:row.idCollection,
+          projectXp:row.Xp,
+          resources: [],
+        };
+      }
+      if (row.resourceId) {
+        languageAndLinks[row.projectId].resources.push({
+          resourceId: row.resourceId,
+          resourceName: row.resourceName,
+          resourceInfo: row.resourceInfo,
+          resourceIdProjectR: row.idProjectR,
+        });
+      }
+    });
+
+    const projectsArray = Object.values(languageAndLinks);
+    // console.log("ffffff",projectsArray)
+    res.json(projectsArray);
+  });
+});
+
+
+
+app.get('/api/getLanguagesAndLinks/:idCollection', (req, res) => {
+  const idCollection = req.params.idCollection;
+  const query = `
+  SELECT *, l.id AS idLanguage, li.id AS idLinkLanguage
+  FROM languages l
+  LEFT JOIN links_languages li ON l.id = li.id_language
+  WHERE l.id_collection = ?;
+    `;
+
+  db.query(query,[idCollection], (err, results) => {
+    if (err) {
+      console.error('Error executing query:', err);
+      res.status(500).json({ error: 'Error fetching data from the database' });
+      return;
+    }
+    // console.log("ddddd",results)
+    const languageAndLinks = {};
+    results.forEach(row => {
+      if (!languageAndLinks[row.idLanguage]) {
+        languageAndLinks[row.idLanguage] = {
+          languageId: row.idLanguage,
+          languageName: row.name_language,
+          languageIcon: row.name_icon,
+          languageDescription:row.description,
+          languageIdCollection:row.id_collection,
+          links: [],
+        };
+      }
+      if (row.idLinkLanguage) {
+        languageAndLinks[row.idLanguage].links.push({
+          linkId: row.idLinkLanguage,
+          linkIdLanguage: row.id_language,
+          linkName: row.name_link,
+          link: row.link,
+        });
+      }
+    });
+
+    const projectsArray = Object.values(languageAndLinks);
+    // console.log("ffffff",projectsArray)
+    res.json(projectsArray);
+  });
+});
+
+// api get tools and their links
+
+app.get('/api/getToolsAndLinks/:idCollection', (req, res) => {
+  const idCollection = req.params.idCollection;
+  const query = `
+  SELECT *, t.id AS idTool, lt.id AS idLinkTool
+  FROM tools t
+  LEFT JOIN links_tools lt ON t.id = lt.id_tools
+  WHERE t.id_collection = ?;
+    `;
+
+  db.query(query,[idCollection], (err, results) => {
+    if (err) {
+      console.error('Error executing query:', err);
+      res.status(500).json({ error: 'Error fetching data from the database' });
+      return;
+    }
+    // console.log("ddddd",results)
+    const languageAndLinks = {};
+    results.forEach(row => {
+      if (!languageAndLinks[row.idTool]) {
+        languageAndLinks[row.idTool] = {
+          toolId: row.idTool,
+          toolName: row.name_tool,
+          toolIcon: row.name_icon,
+          toolDescription:row.description,
+          toolIdCollection:row.id_collection,
+          links: [],
+        };
+      }
+      if (row.idLinkTool) {
+        languageAndLinks[row.idTool].links.push({
+          linkId: row.idLinkTool,
+          linkIdTool: row.id_tools,
+          linkName: row.name_link,
+          link: row.link,
+        });
+      }
+    });
+
+    const projectsArray = Object.values(languageAndLinks);
+    // console.log("ffffff",projectsArray)
+    res.json(projectsArray);
+  });
+});
+
+
+
 app.get('/api/search/:input', (req, res) => {
   const input = req.params.input;
   const selectSql = "SELECT * FROM user WHERE firstName LIKE ? OR lastName LIKE ? ORDER BY LENGTH(firstName) LIMIT 7;";
@@ -369,6 +583,27 @@ app.get('/api/search/:input', (req, res) => {
 });
 
 // Create API endpoint for fetching data from the user table
+
+app.get('/api/get_skills/:id', (req, res) => {
+  const id = req.params.id;
+  const selectSql = `SELECT
+  name_specifics.shurt_name,
+  COALESCE(specifics.validation, 0) AS validation,
+  CASE WHEN specifics.id_user IS NULL THEN 0 ELSE 1 END AS has_specific
+FROM
+  name_specifics
+LEFT JOIN
+  specifics ON name_specifics.id = specifics.id_nameSpecifics
+          AND specifics.id_user = ?;`;
+  db.query(selectSql,[id], (selectErr, selectResult) => {
+    if (selectErr) {
+      console.log(selectErr);
+      return res.json("Error");
+    }
+    return res.json(selectResult);
+  });
+});
+
 
 app.get('/get_user/:id', (req, res) => {
   const id = req.params.id;

@@ -15,6 +15,8 @@ function MainCompetition() {
     const [selectedValuesCompetitions, setSelectedValuesCompetitions] = useState([])
     const [valid, setValid] = useState(0);
     const [valid2, setValid2] = useState(0);
+    const [competitionId, setCompetitionId] = useState();
+
     const containerClassName = valid === 1 ? style.displayAlert : style.displayAlert2;
     const containerClassName2 = valid2 === 1 ? style.displayAlert : style.displayAlert2;
     const smoothScrollToTop = () => {
@@ -43,7 +45,7 @@ function MainCompetition() {
           })
           .catch((error) => console.error(error));
 
-      }, [userId, selectedOptionKey]);
+      }, [userId, selectedOptionKey, valid, valid2]);
 
       const register = (competitionId) => {
         const data = { 
@@ -59,42 +61,91 @@ function MainCompetition() {
           })
             .then((response) => response.json())
             .then((responseData) => {
-                if(responseData.message === 'User is already registered for this event')
-                {
-                    setValid(1);
-                    console.log("respose data",responseData)
-                    smoothScrollToTop();
-                }
-                else
-                {
-                    setValid2(1);
-                    window.scrollTo(0, 0);
-                }
             })
             .catch((error) => {
               console.error('Error pushing data:', error);
           });
       }
-      const already = () =>
+
+
+      const deleteRegistration = (competitionId) => {
+        const data = {
+          id_user: userId,
+          id_competition: competitionId,
+        };
+      
+        fetch('http://localhost:8081/api/delete_registration_competition', {
+          method: 'DELETE', // Use the DELETE method for deletion
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        })
+        .then((response) => response.json())
+        .then((responseData) => {
+          // Handle the response data if needed
+          console.log(responseData.message); // Print the response message
+          // Refresh the data after deletion
+          // setValid2(valid2 + 1); // Increment valid2 to trigger useEffect refresh
+        })
+        .catch((error) => {
+          console.error('Error deleting registration:', error);
+        });
+      };
+
+      const registeR = () =>
         {
+        register(competitionId)
         setValid(0);
+        setTimeout(() => {
+            document.body.style.overflow = 'auto';
+        }, 300);
+    }
+
+    const cancel = () =>
+        {
+        deleteRegistration(competitionId)
         setValid2(0);
         setTimeout(() => {
             document.body.style.overflow = 'auto';
         }, 300);
     }
+
+    const confirmation = (eventId) => {
+
+      setValid(1);
+      smoothScrollToTop();
+      setCompetitionId(eventId)
+    }
+    const deletConfirmation = (eventId) => {
+
+      setValid2(1);
+      smoothScrollToTop();
+      setCompetitionId(eventId)
+    }
+    const No = () => {
+      document.body.style.overflow = 'auto';
+      setValid(0);
+      setValid2(0);
+    }
   return (
     <>
     <div className={containerClassName}>
     <div className={style.alReady}>
-        <p>you are already exist 😎</p>
-        <button onClick={() => already()}>ok</button>
+        <p>confirme your register 😎</p>
+        <div className={style.twoButton}>
+          <button onClick={() => registeR()}>Yes</button>
+          <button onClick={() => No()}>No</button>
+        </div>
     </div>
 </div>
 <div className={containerClassName2}>
     <div className={style.alReady}>
-        <p>you are register 👍</p>
-        <button onClick={() => already()}>ok</button>
+        <p>canel your regester 👍</p>
+        <div className={style.twoButton}>
+          <button onClick={() => cancel()}>Yes</button>
+          <button onClick={() => No()}>No</button>
+        </div>
     </div>
 </div>
     <div className={style.container}>
@@ -104,28 +155,37 @@ function MainCompetition() {
             <AiFillCaretDown className={style.AiFillCaretDown} />
         </div>
         <div className={style.containCompetition}>
-            {selectedValuesCompetitions.map((item, index) => (
-            <div key={index} className={style.card}>
-                <div className={style.containerIcon}>
-                    <GoFileZip className={style.icon}/>
-                </div>
-                <div className={style.containerTitle}>
-                    <h1>{item.title_competition}</h1>
-                </div>
-                <div className={style.description}>
-                    <p>{item.description_competition}</p>
-                </div>
-                <div className={style.month}>
-                    <h2>{item.day_competition} : {item.month_competition}</h2>
-                </div>
-                <div className={style.time}>
-                    <p>{item.time_competition}</p>
-                </div>
-                <div className={style.containerButton}>
-                    <button onClick={() => register(item.id)}>Register</button>
-                </div>
-            </div>
-        ))}
+          {selectedValuesCompetitions.length != 0 ? (
+            selectedValuesCompetitions.map((item, index) => (
+              <div key={index} className={style.card}>
+              <div className={style.containerIcon}>
+                  <GoFileZip className={style.icon}/>
+              </div>
+              <div className={style.containerTitle}>
+                  <h1>{item.title_competition}</h1>
+              </div>
+              <div className={style.description}>
+                  <p>{item.description_competition}</p>
+              </div>
+              <div className={style.month}>
+                  <h2>{item.day_competition} : {item.month_competition}</h2>
+              </div>
+              <div className={style.time}>
+                  <p>{item.time_competition}</p>
+              </div>
+              <div className={style.containerButton}>
+              {item.is_registered === 0 ? (
+                  <button onClick={() => confirmation(item.id)}>Register</button>
+                  ) : (
+                  <button onClick={() => deletConfirmation(item.id)}>UnRegister</button>
+                  )}
+              </div>
+          </div>
+
+            ))):(
+
+            <p>No events available</p>
+        )}
         </div>
     </div>
     </>

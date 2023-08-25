@@ -7,7 +7,7 @@
     display: flex;
     font-family: $myfont;
     .leftSide {
-      background-image: url(../../imgs/142862.jpg);
+      background-image: url(../../imgs/background_admin.webp);
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
@@ -200,6 +200,11 @@
                         width: 220px;
                     }
                 }
+            }
+            .error
+            {
+                text-align: center;
+                color: red;
             }
       }
     }

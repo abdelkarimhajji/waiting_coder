@@ -14,13 +14,16 @@ import {GiStarShuriken} from 'react-icons/gi'
 import {BsFiletypePhp} from 'react-icons/bs'
 import {SiXampp} from 'react-icons/si'
 import {CgUnavailable} from 'react-icons/cg';
+import { PieChart, Pie, Legend, Tooltip, ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis , Radar } from 'recharts'; 
 
 function MainHome({selectedValues, selectedValuesTools, selectedValuesProject}) {
     const [selectedValuesEvents, setSelectedValuesEvents] = useState([])
     const [selectedValuesCompetitions, setSelectedValuesCompetitions] = useState([])
+    const [test, setTest] = useState([])
+    const [skills, setSkills] = useState([])
     const userId = localStorage.getItem("userId");
     const selectedOptionKey = localStorage.getItem("selectedOptionKey");
-
+    
     useEffect(() => {
         // console.log("Selected Values:", selectedValuesProject);
       }, [selectedValues, selectedValuesTools, selectedValuesProject]);
@@ -53,7 +56,7 @@ function MainHome({selectedValues, selectedValuesTools, selectedValuesProject}) 
           .catch((error) => console.error(error));
           
       }, [userId, selectedOptionKey]);
-    
+      
       useEffect(() => {
         fetch(`http://localhost:8081/api/get_competitions/${userId}/${selectedOptionKey}`)
           .then((response) => {
@@ -68,8 +71,87 @@ function MainHome({selectedValues, selectedValuesTools, selectedValuesProject}) 
           .catch((error) => console.error(error));
 
       }, [userId, selectedOptionKey]);
+
+      useEffect(() => {
+        fetch(`http://localhost:8081/api/get_skills/${userId}`)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            setSkills(data);
+            console.log("tish ", data);
+          })
+          .catch((error) => console.error(error));
+      }, []);
+      
+      // console.log("localStorage.getItem  " + localStorage.getItem("login"))
+      const data = [
+        {
+          "subject": skills.length > 0 ? skills[0].shurt_name : "",
+          "A": skills.length > 0 ? (skills[0].validation === 1 ? 15 : 3) : 0,
+          "fullMark": 15
+        },
+        {
+          "subject": skills.length > 0 ? skills[1].shurt_name : "",
+          "A": skills.length > 0 ? (skills[1].validation === 1 ? 15 : 3) : 0,
+          "fullMark": 15
+        },
+        {
+          "subject": skills.length > 0 ? skills[2].shurt_name : "",
+          "A": skills.length > 0 ? (skills[2].validation === 1 ? 15 : 3) : 0,
+          "fullMark": 15
+        },
+        {
+          "subject": skills.length > 0 ? skills[3].shurt_name : "",
+          "A": skills.length > 0 ? (skills[3].validation === 1 ? 15 : 3) : 0,
+          "fullMark": 15
+        },
+        {
+          "subject": skills.length > 0 ? skills[4].shurt_name : "",
+          "A": skills.length > 0 ? (skills[4].validation === 1 ? 15 : 3) : 0,
+          "fullMark": 15
+        }
+      ]
+
+
+
+
+      const [chartOuterRadius, setChartOuterRadius] = useState(90);
+
+      const [fontSize, setFontSize] = useState(17);
+      useEffect(() => {
+        const handleResize = () => {
+          const screenWidth = window.innerWidth;
+    
+          if (screenWidth >= 470) {
+            setChartOuterRadius(90);
+            setFontSize(16);
+          } else if (screenWidth <= 470 && screenWidth > 430) {
+            setChartOuterRadius(70);
+            setFontSize(14);
+          } else if (screenWidth <= 430 && screenWidth > 310) {
+            setChartOuterRadius(50);
+            setFontSize(12);
+          } else if (screenWidth <= 310) {
+            setChartOuterRadius(40);
+            setFontSize(10);
+          }
+        };
+    
+        handleResize();
+    
+        window.addEventListener('resize', handleResize);
+    
+        return () => {
+          window.removeEventListener('resize', handleResize);
+        };
+      }, []);
     
   return (
+    <>
     <div className={style.container}>
        <div className={style.program}>
             <div className={style.itemsProgram}>
@@ -80,19 +162,19 @@ function MainHome({selectedValues, selectedValuesTools, selectedValuesProject}) 
                         <AiFillCaretDown className={style.iconLanguage}/>
                     </div>
                     <div className={style.UnderConatProgram}>
-                    {selectedValues.map((item, index) => (
+                    {selectedValues.map((language) => (
                     <Link
                     to={{
                       pathname: '/Language',
-                      hash: `#${item.name_langauge}`,
-                      state: { sectionId: item.name_langauge } // Pass the section ID as state
+                      hash: `#${language}`,
+                      state: { sectionId: language.languageName } // Pass the section ID as state
                     }}
                     className={style.link}
-                    key={index}
+                    key={language.languageId}
                   >
                   <div  className={style.conatProItm}>
-                  {React.createElement(iconMapping[item.name_icon] || Default, { className: style.TiHtml5 })}
-                  <p className="par"> - {item.name_langauge}</p>
+                  {React.createElement(iconMapping[language.languageIcon] || Default, { className: style.TiHtml5 })}
+                  <p className="par"> - {language.languageName}</p>
                   <TbHandClick className={style.TbHandClick} />
                   </div>
                     </Link>
@@ -188,9 +270,9 @@ function MainHome({selectedValues, selectedValuesTools, selectedValuesProject}) 
                         </div>
                         <div className={style.UnderConatEvent}>
                         <div className={style.UnderConatEvent}>
-                            {Array.isArray(selectedValuesCompetitions)  ? (
+                            {selectedValuesCompetitions.length != 0  ? (
                               selectedValuesCompetitions.map((item, index) => (
-                                <Link key={index} to={`/Event#${item.title_competition}`} className={style.link}>
+                                <Link key={index} to={`/Competition#${item.title_competition}`} className={style.link}>
                                   <div key={index} className={style.conatEventItm}>
                                     <GiStarShuriken className={style.TiHtml5} style={{fontSize: '30px', marginTop: '10px'}}/>
                                     <p className="par"> - {item.title_competition}</p>
@@ -209,19 +291,49 @@ function MainHome({selectedValues, selectedValuesTools, selectedValuesProject}) 
                 </div>
                     {/* finish  contInsideEvents*/}
             </div>
+            {/* another item */}
+            <div className={style.itemsEvents}>
+                      <div className={style.contInsidEvents}>
+                              <div className={style.titleEvents}>
+                                  <FaTrophy className={style.iconTitle}/>
+                                  <p className="par">Skills</p>
+                                  <AiFillCaretDown className={style.iconTitle}/>
+                              </div>
+                              <div className={style.skills}>
+                                <ResponsiveContainer width="100%" height={250}>
+                                <RadarChart outerRadius={chartOuterRadius}  data={data} >
+                                <PolarGrid />
+                                <PolarAngleAxis dataKey="subject" tick={{ fontSize: fontSize }}/>
+                                <PolarRadiusAxis angle={18} domain={[0, 15]} tick={{ fontSize: 12 }}/>
+                                <Radar  dataKey="A" stroke="#038688" fill="#038688" fillOpacity={0.6} />
+                                <Legend />
+                                </RadarChart>
+                                </ResponsiveContainer>
+                              </div>
+                              <div className={style.readCharts}>
+                                <p>Devlopement Web Front end : D-W-F</p>
+                                <p>Devlopement Web Back end : D-W-B</p>
+                                <p>Mobile Front-end : M-F</p>
+                                <p>Mobile Back-end : M-B</p>
+                                <p>Robitique : R</p>
+                              </div>
+                      </div>
+                          {/* finish  contInsideEvents*/}
+                  </div>
+                {/* finish  itemsEvents */}
         </div>
-       {/* finish  itemsEvents */}
     </div>
+  </>
   );
 }
 
 export default MainHome;
-// SELECT *
-// FROM ((((user
-// INNER JOIN specifics ON user.id = specifics.id_user)
-// INNER JOIN groups ON specifics.id_group = groups.id)
-// INNER JOIN name_specifics ON name_specifics.id = specifics.id_nameSpecifics)
-// INNER JOIN projects ON name_specifics.id = projects.id_collection) WHERE groups.group_valid = 1 and user.id = 2
+  // SELECT *
+  // FROM ((((user
+  // INNER JOIN specifics ON user.id = specifics.id_user)
+  // INNER JOIN groups ON specifics.id_group = groups.id)
+  // INNER JOIN name_specifics ON name_specifics.id = specifics.id_nameSpecifics)
+  // INNER JOIN projects ON name_specifics.id = projects.id_collection) WHERE groups.group_valid = 1 and user.id = 2
 
 // SELECT *
 // FROM (((((user

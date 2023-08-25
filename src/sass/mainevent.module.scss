@@ -1,6 +1,25 @@
 @import "./global.module.scss";
 @import 'mathsass';
 
+.twoButton
+{
+    display: flex;
+    // background-color: red;
+    width: 70%;
+    justify-content: space-around;
+    @media (max-width: 500px)
+    {
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 15px;
+        height: 90px;
+    }
+    button
+    {
+        width: 50%;
+    }
+}
+
 .displayAlert
 {
     height: 100vh;

@@ -11,13 +11,37 @@
     //navigate
     const navigate = useNavigate();
     //function to navigate
+    const text = '`Waiting Coder`';
+  const delay = 100; // milliseconds
 
+  const [displayText, setDisplayText] = useState('');
+  const [currentIndex, setCurrentIndex] = useState(0);  
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (currentIndex < text.length) {
+        setDisplayText(prevText => prevText + text[currentIndex]);
+        setCurrentIndex(prevIndex => prevIndex + 1);
+      }
+    }, delay);
+
+    return () => clearTimeout(timer);
+  }, [currentIndex]);
 
     const handleButtonClick = () => {
       localStorage.setItem('login', 1);
       setIsLogin(1);
       navigate("/Home");
     };
+    useEffect(() => {
+      if (parseInt(localStorage.getItem("login")) === 1)
+      {
+        console.log("looooook ",parseInt(localStorage.getItem("login")))
+        console.log("looooook ")
+          navigate("/Home");
+      }
+    }, [localStorage.getItem("login")]);
+    
+    
     // Form submission handler
     const storedData = localStorage.getItem('login');
    
@@ -59,9 +83,11 @@
     }, [response]);
     if (value == 1)
       return <Navigate to="/Home" replace />;
+
+    
     return (
       <div className={style.container}>
-        <h1>Waiting Coder</h1>
+        <h1>{displayText}</h1>
         <form className={style.inputs} onSubmit={handleSubmit}>
           <input type="text" name="email" placeholder="Enter your email" value={name} onChange={(e) => setname(e.target.value)} />
           <input type="password" name="password" placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)} />

@@ -20,5 +20,13 @@
     .nextNav
     {
         width: 100vw;
+        .chart{
+            width: 50%;
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            // background-color: red;
+        }
     }
 }

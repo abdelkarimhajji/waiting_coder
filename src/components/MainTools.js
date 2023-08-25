@@ -18,6 +18,8 @@ import {BsFillCalendar2EventFill } from 'react-icons/bs'
 import {GiStarShuriken} from 'react-icons/gi'
 import {BsFiletypePhp} from 'react-icons/bs'
 import {SiXampp} from 'react-icons/si'
+import {AiOutlineLink} from 'react-icons/ai'
+
 function MainTools() {
   const location = useLocation();
     const sectionRef = useRef(null);
@@ -40,7 +42,7 @@ function MainTools() {
     };
     const Default = TiHtml5;
     useEffect(() => {
-      fetch(`http://localhost:8081/api/get_tools/${localStorage.getItem("selectedOptionKey")}`)
+      fetch(`http://localhost:8081/api/getToolsAndLinks/${localStorage.getItem("selectedOptionKey")}`)
         .then((response) => {
           if (!response.ok) {
             throw new Error("Network response was not ok");
@@ -48,11 +50,11 @@ function MainTools() {
           return response.json();
         })
         .then((data) => {
-          console.log("hello i am karim ok")
+          console.log("hello i am karim ok", data)
           setSetSelectValuesTools(data);
         })
         .catch((error) => console.error(error));
-    }, [setSelectValuesTools]);
+    }, [localStorage.getItem("selectedOptionKey")]);
   return (
     <div className={style.container}>
         <div className={style.language}>
@@ -61,26 +63,39 @@ function MainTools() {
           <AiFillCaretDown className={style.aifillcaerdown} />
         </div>
         {/* container of languages */}
-        {setSelectValuesTools.map((item, index) => (
-        <div key={index} className={style.cantAllLanguage} id="html" ref={sectionRef}>
-          <div className={style.titleLanguage}>
-          {React.createElement(iconMapping[item.name_icon] || Default, { className: style.IconTitleLanguage })}
-            <p> - {item.name_tool}</p>
+        {setSelectValuesTools.map((tools) => (
+          
+          <div key={tools.toolId} className={style.cantAllLanguage} id={tools.languageName} >
+            {/* <section className={style.cardInner}> */}
+                {/* <div className={style.front}> */}
+                <div className={style.titleLanguage}>
+                  <div className={style.containerIcon}>
+                      {React.createElement(iconMapping[tools.toolIcon] || Default, { className: style.IconTitleLanguage })}
+                  </div>
+                  <div className={style.containerTitle}>
+                      <p>{tools.toolName}</p>
+                  </div>
+                </div>
+                <div className={style.contentTitleLanguage}>
+                  <div className={style.overFlow}>
+                      <p>{tools.toolDescription}</p>                          
+                  </div>
+                </div>
+                <div className={style.back}>
+                  <div className={style.chooseLink}>
+                      <p>choose you link</p>
+                  </div>
+                <div className={style.allLinks}>
+                {tools.links.map((link) => (
+                  <div key={link.linkId} className={style.link}>
+                    <AiOutlineLink  className={style.AiOutlineLink}/>
+                    <p className={style.clickLink}><a href={link.link} target="_blank" rel="noopener noreferrer">{link.linkName}</a></p>
+                  </div>  
+                  ))}
+                </div>
+                </div>
           </div>
-          <div className={style.contentTitleLanguage}>
-            <p>{item.description}</p>
-          </div>
-          <div className={style.validationLanguage}>
-            <div className={style.containLink}>
-              <BsArrowRight className={style.iconLink} />
-              <p className={style.nameLink}>Click on the link</p>
-            </div>
-            <div className={style.link}>
-              <p className={style.clickLink}><a href={item.link} target="_blank" rel="noopener noreferrer">Click on the link</a></p>
-            </div>
-          </div>
-        </div>
-        ))}
+          ))}
         {/* finish container of languages */}
       </div>
   );

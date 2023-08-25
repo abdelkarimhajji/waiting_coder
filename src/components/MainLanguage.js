@@ -16,7 +16,7 @@ import {BsFillCalendar2EventFill } from 'react-icons/bs'
 import {GiStarShuriken} from 'react-icons/gi'
 import {BsFiletypePhp} from 'react-icons/bs'
 import {SiXampp} from 'react-icons/si'
-
+import {AiOutlineLink} from 'react-icons/ai'
 
 function MainLanguage() {
   const [valid, setValid] = useState(0);
@@ -61,21 +61,33 @@ function MainLanguage() {
       })
       .catch((error) => console.error(error));
   }, []);
+
+  const [test, setTest] = useState([])
+  useEffect(() => {
+    fetch(`http://localhost:8081/api/getLanguagesAndLinks/${localStorage.getItem("selectedOptionKey")}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setTest(data);
+        console.log("tish ", data);
+      })
+      .catch((error) => console.error(error));
+  }, []);
+
+
+  const [isFlipped, setIsFlipped] = useState(false);
+
+  const handleButtonClick = () => {
+    setIsFlipped(!isFlipped);
+  };
+
   return (
     <>
-      <div className={valid === 1 ? style.display : style.display2}>
-        <div className={style.displayContainValid}>
-          <p>Are you sure you finished this course?</p>
-          <div className={style.buttons}>
-            <button className={style.yes} onClick={displayWindow}>
-              Yes
-            </button>
-            <button className={style.no} onClick={displayWindow}>
-              No
-            </button>
-          </div>
-        </div>
-      </div>
+     
       <div className={style.container}>
         <div className={style.language}>
           <FaCode className={style.FaCode} />
@@ -83,26 +95,40 @@ function MainLanguage() {
           <AiFillCaretDown className={style.aifillcaerdown} />
         </div>
         {/* container of languages */}
-        {setSelectValuesLanguages.map((item, index) => (
-        <div key={index} className={style.cantAllLanguage} id={item.name_langauge} >
-          <div className={style.titleLanguage}>
-          {React.createElement(iconMapping[item.name_icon] || Default, { className: style.IconTitleLanguage })}
-            <p> - {item.name_langauge}</p>
-          </div>
-          <div className={style.contentTitleLanguage}>
-            <p>{item.description}</p>
-          </div>
-          <div className={style.validationLanguage}>
-            <div className={style.containLink}>
-              <BsArrowRight className={style.iconLink} />
-              <p className={style.nameLink}>First link to study HTML5:</p>
-            </div>
-            <div className={style.link}>
-              <p className={style.clickLink}><a href={item.link} target="_blank" rel="noopener noreferrer">Click on the link</a></p>
-            </div>
-          </div>
+        {setSelectValuesLanguages.map((language) => (
+          
+        <div key={language.languageId} className={style.cantAllLanguage} id={language.languageName} >
+          {/* <section className={style.cardInner}> */}
+              {/* <div className={style.front}> */}
+              <div className={style.titleLanguage}>
+                <div className={style.containerIcon}>
+                    {React.createElement(iconMapping[language.languageIcon] || Default, { className: style.IconTitleLanguage })}
+                </div>
+                <div className={style.containerTitle}>
+                    <p>{language.languageName}</p>
+                </div>
+              </div>
+              <div className={style.contentTitleLanguage}>
+                <div className={style.overFlow}>
+                    <p>{language.languageDescription}</p>                          
+                </div>
+              </div>
+              <div className={style.back}>
+                <div className={style.chooseLink}>
+                    <p>choose you link</p>
+                </div>
+              <div className={style.allLinks}>
+              {language.links.map((link) => (
+                <div key={link.linkId} className={style.link}>
+                  <AiOutlineLink  className={style.AiOutlineLink}/>
+                  <p className={style.clickLink}><a href={link.link} target="_blank" rel="noopener noreferrer">{link.linkName}</a></p>
+                </div>  
+                ))}
+              </div>
+              </div>
         </div>
         ))}
+        
         {/* finish container of languages */}
       </div>
     </>

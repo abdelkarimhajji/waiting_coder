@@ -15,6 +15,7 @@ function MainEvent() {
   const [selectedValuesEvents, setSelectedValuesEvents] = useState([]);
   const [valid, setValid] = useState(0);
   const [valid2, setValid2] = useState(0);
+  const [envetId, setEventId] = useState();
 
 
   const smoothScrollToTop = () => {
@@ -44,10 +45,12 @@ function MainEvent() {
       })
       .catch((error) => console.error(error));
       
-  }, [userId, selectedOptionKey]);
+  }, [userId, selectedOptionKey, valid2, valid]);
   
   const containerClassName = valid === 1 ? style.displayAlert : style.displayAlert2;
   const containerClassName2 = valid2 === 1 ? style.displayAlert : style.displayAlert2;
+
+
   const register_event = (eventId) => {
     const data = { 
       id_user: userId,
@@ -62,44 +65,100 @@ function MainEvent() {
     })
       .then((response) => response.json())
       .then((responseData) => {
-
-          if(responseData.message === 'User is already registered for this event')
-          {
-            setValid(1);
-            console.log("respose data",responseData)
-            smoothScrollToTop();
-          }
-          else
-          {
-            setValid2(1);
-            // window.scrollT o(0, 0);
-          }
       })
       .catch((error) => {
         console.error('Error pushing data:', error);
     }); 
 };
+
+
+
+const deleteRegistration = (eventId) => {
+  const data = {
+    id_user: userId,
+    id_event: eventId,
+  };
+
+  fetch('http://localhost:8081/api/delete_registration', {
+    method: 'DELETE', // Use the DELETE method for deletion
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+  .then((response) => response.json())
+  .then((responseData) => {
+    // Handle the response data if needed
+    console.log(responseData.message); // Print the response message
+    // Refresh the data after deletion
+    // setValid2(valid2 + 1); // Increment valid2 to trigger useEffect refresh
+  })
+  .catch((error) => {
+    console.error('Error deleting registration:', error);
+  });
+};
+
+
+
+
 const already = () =>
 {
-  setValid(0);
+  // setValid(0);
   setValid2(0);
+  register_event(envetId);
   setTimeout(() => {
     document.body.style.overflow = 'auto';
   }, 300);
   
 }
+
+const cancel = () =>
+{
+  setValid(0);
+  // setValid2(0);
+  deleteRegistration(envetId)
+  setTimeout(() => {
+    document.body.style.overflow = 'auto';
+  }, 300);
+  
+}
+
+const confirmation = (eventId) => {
+
+  setValid2(1);
+  smoothScrollToTop();
+  setEventId(eventId)
+}
+
+const deletConfirmation = (eventId) => {
+
+  setValid(1);
+  smoothScrollToTop();
+  setEventId(eventId)
+}
+const No = () => {
+  document.body.style.overflow = 'auto';
+  setValid(0);
+  setValid2(0);
+}
   return (
     <>
     <div className={containerClassName}>
           <div className={style.alReady}>
-              <p>you are already exist 😎</p>
-              <button onClick={() => already()}>ok</button>
+              <p>cancel your register !!!</p>
+              <div className={style.twoButton}>
+                <button onClick={() => cancel ()}>ok</button>
+                <button onClick={() => No()}>No</button>
+              </div>
           </div>
     </div>
     <div className={containerClassName2}>
           <div className={style.alReady}>
-              <p>you are register 👍</p>
-              <button onClick={() => already()}>ok</button>
+              <p>conifrme your register 👍</p>
+              <div className={style.twoButton}>
+                <button onClick={() => already()}>ok</button>
+                <button onClick={() => No()}>No</button>
+              </div>
           </div>
     </div>
     <div className={style.container}>
@@ -110,7 +169,7 @@ const already = () =>
       </div>
       {/* begin container event */}
        {selectedValuesEvents === 'No specific events found.' ? (
-            <p className={style.noUsers}>No users found</p>
+            <p className={style.noUsers}>No events found</p>
           ) : (
   selectedValuesEvents.map((item, index) => (
     <div key={index} className={style.containerEvent}>
@@ -131,7 +190,11 @@ const already = () =>
             <p>{item.time_event}</p>
           </div>
           <div className={style.containerButton}>
-            <button onClick={() => register_event(item.id)}>Register</button>
+          {item.is_registered === 0 ? (
+            <button onClick={() => confirmation(item.id)}>Register</button>
+            ):(
+              <button onClick={() => deletConfirmation(item.id)}>UnRegister</button>
+            )}
           </div>
         </div>
       </div>

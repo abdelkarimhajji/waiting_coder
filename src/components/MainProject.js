@@ -40,23 +40,27 @@ function MainProject() {
         </div>
         
         <div  className={style.containProject}>
-        {setSelectValuesProjects.map((item, index) => (
-          // item.after_display === 1 && (
-        <Link to="/DetailsProject"  key={index}  className={style.Link} onClick={() => getIdProject(item.id)} >
-            <div className={style.project}>
-              <div className={style.containImg}>
-              <img src={require(`../imgs/${item.image_project}`)} alt={item.name_project} className={style.img} />
-              </div>
-              <div className={style.containerDiscreption}>
-                <p className={style.titleProject}>{item.name_project}</p>
-                <p className={style.description}>{item.description}</p>
-              </div> 
-                <button className={style.moreDetails}>More Details</button>
-            </div>
-        </Link>
+        {setSelectValuesProjects.length !== 0 ? (
+  setSelectValuesProjects.map((item, index) => (
+   
+      <Link to="/DetailsProject" key={index} className={style.Link} onClick={() => getIdProject(item.id)}>
+        <div className={style.project}>
+          <div className={style.containImg}>
+            <img src={require(`../imgs/${item.image_project}`)} alt={item.name_project} className={style.img} />
+          </div>
+          <div className={style.containerDiscreption}>
+            <p className={style.titleProject}>{item.name_project}</p>
+            <p className={style.description}>{item.description}</p>
+          </div>
+          <button className={style.moreDetails}>More Details</button>
+        </div>
+      </Link>
 
-          //  )
-        ))}
+  ))
+    ) : (
+      <p>No Project now</p>
+    )}
+
         </div>
     </div>
   );
