@@ -261,7 +261,7 @@ app.get('/api/getMonthsUesrs/:chooseYear', (req, res) => {
 
   app.get('/api/getOldGroups', (req, res) => {
     const query = `
-    SELECT * , groups.id AS IdGroup
+    SELECT * , groups.id AS IdGroup, name_specifics.id AS IdNameSpecific
     FROM groups
     INNER JOIN name_specifics ON groups.id_specific = name_specifics.id
     WHERE group_finished = 1;
@@ -278,7 +278,7 @@ app.get('/api/getMonthsUesrs/:chooseYear', (req, res) => {
 
   app.get('/api/getCurrentGroups', (req, res) => {
     const query = `
-    SELECT * , groups.id AS IdGroup
+    SELECT * , groups.id AS IdGroup, name_specifics.id AS IdNameSpecific
     FROM groups
     INNER JOIN name_specifics ON groups.id_specific = name_specifics.id
     WHERE group_finished = 0;
@@ -426,6 +426,21 @@ app.get('/api/getMonthsUesrs/:chooseYear', (req, res) => {
     const updateSql = "UPDATE groups SET group_finished = 1, date_finished = ? WHERE id = ?";
     const currentDate = new Date();
     db.query(updateSql, [currentDate, idGroup], (selectErr, selectResult) => {
+      if (selectErr) {
+        console.log(selectErr);
+        return res.json("Error");
+      }
+      return res.json(selectResult);
+    });
+  });
+
+  // get name specifics
+
+  app.put('/api/getNameSpecific/:idSpefific', (req, res) => {
+    const idSpefific = req.params.idSpefific;
+    const selectSql = "UPDATE groups SET group_finished = 1, date_finished = ? WHERE id = ?";
+    const currentDate = new Date();
+    db.query(selectSql, [idSpefific], (selectErr, selectResult) => {
       if (selectErr) {
         console.log(selectErr);
         return res.json("Error");

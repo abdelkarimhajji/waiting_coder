@@ -15,7 +15,7 @@
     padding-left:80px;
     padding-right:80px;
 
-    background-color: red;
+    // background-color: red;
     @media(max-width:1250px)
     {
         padding-left:10px;
@@ -40,7 +40,8 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding-top: 15px;
+        padding-top: 40px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
         .containerTitle
         {
             width: 40%;
@@ -70,6 +71,23 @@
                 margin-left: 10px;
                 font-weight: bold;
             }
+        }
+        .containerInputs
+        {
+            width: 100%;
+            min-height: 100px;
+            display: flex;
+            justify-content: space-around;
+            // align-items: center;
+            select
+            {
+                width: 30%;
+                height: 50px;
+                font-family: $myfont;
+                border: 1px solid #dddddd;
+                cursor: pointer;
+            }
+            // background-color: rgb(182, 125, 125);
         }
     }
 }
