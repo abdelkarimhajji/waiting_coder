@@ -1,0 +1,30 @@
+import React, { useState, useEffect, useContext } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import style from '../sass/dashboard.module.scss'
+import NavbarAdmin from '../components/NavbarAdmin'
+import Footer from "../../components/Footer";
+import SearchAdmin from '../components/SearchAdmin';
+import MainAddUsers from '../components/MainAddUsers';
+
+function AddUsers() {
+  
+useEffect(() => {
+    window.scrollTo(0, 0);
+    }, []);
+    
+  return (
+    <div className={style.container}>
+      <div className={style.navbar}>
+        <NavbarAdmin />
+      </div>
+      <div className={style.nextNav}>
+        <SearchAdmin />
+        <MainAddUsers />
+        <Footer />
+      </div>
+    </div>
+  );
+
+}
+
+export default AddUsers;

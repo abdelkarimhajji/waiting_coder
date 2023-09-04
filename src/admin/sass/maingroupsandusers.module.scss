@@ -1,0 +1,728 @@
+@import "../../sass/global.module.scss";
+@import 'mathsass';
+
+
+.container
+{
+    background-color:#f7f7f7;
+    // background-color: red;
+    min-height: 100vh; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 100px;
+    font-family: $myfont;
+    padding-left:80px;
+    padding-right:80px;
+    @media(max-width:1250px)
+    {
+        padding-left:10px;
+        padding-right:10px;
+    }
+    @media(max-width:950px)
+    {
+        padding-left:10px;
+        padding-right:10px;
+    }
+    @media (max-width:580px)
+    {
+        padding-left: 15px;
+        padding-right: 10px;
+    }
+    .containerDivsInfo
+    {
+        // background-color: red;
+        width: 100%;
+        min-height: 500px;
+        // border: 1px solid black;
+        overflow: hidden;
+        flex-wrap: wrap;
+        display: flex;
+        justify-content: space-around;
+        // padding-left:80px;
+        // padding-right:80px;
+        
+        .oneDiv
+        {
+            height: 150px;
+            width: 30%;
+            margin-bottom: 60px;
+            background-color: white;
+            border-radius: 13px;
+            cursor: pointer;
+            overflow: hidden;
+            transition: 0.5s all;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+            &:hover
+            {
+                width: 31%;
+                height: 153px;
+            }
+            @media(max-width:1270px)
+            {
+                width: 350px;
+                &:hover
+                {
+                    width: 360px;
+                    height: 153px;
+                }
+            }
+            @media (max-width:440px)
+            {
+                width: 100%;
+            }
+            .insidedOneDivContent
+            {
+                width: 100%;
+                height: 95%;
+                overflow: hidden;
+                background-color: white;
+                border-start-start-radius: 13px;
+                border-start-end-radius: 13px;
+                overflow: hidden;
+                .total
+                {
+                    height: 52%;
+                    overflow: hidden;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-end;
+                    // align-items: end;
+                    padding-left: 20px;
+                    margin-bottom: 13px;
+                    p
+                    {
+                        font-size: 20px;
+                        display: inline;
+                        overflow: hidden;
+                        font-weight: bold;
+                        padding: 0;
+                        margin: 0;
+                        color: rgb(71, 71, 71);
+                        word-wrap: break-word;
+                    }
+                }
+                .description
+                {
+                    padding-left: 20px;
+                    p
+                    {
+                        margin: 5px;
+                        font-size: 13px;
+                    }
+                }
+            }
+            .insdeOneDivUnder
+            {
+                width: 100%;
+                height: 5%;
+                background-color: $pColorR;
+                border-end-end-radius: 13px;
+                border-end-start-radius: 13px;
+                
+            }
+        }
+    }
+    .containerListUsers
+    {
+        min-height: 200px;
+        // background-color:    red;
+        width: 100%;
+        border-radius: 20px;
+        // box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        margin-bottom: 50px;
+        padding-left: 30px;
+        padding-right: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center ;
+        flex-direction: column;
+        // overflow-x: scroll;
+        // overflow-y: scroll;
+        @media (max-width: 1251px)
+        {
+            width: 90%;
+        }
+        @media (max-width: 1000px)
+        {
+            width: 85%;
+        }
+        @media (max-width: 455px)
+        {
+            padding-left: 5px;
+            padding-right: 5px;
+            width: 100%;
+        }
+        // @media (max-width: 500px)
+        // {
+        //     padding-left: 5px;
+        //     padding-right: 5px;
+        // }
+        .containerSelect
+        {
+            height: 150px;
+            background-color: white;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+            margin-bottom: 50px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+            border-radius: 20px;
+            @media (max-width: 650px)
+            {
+                flex-direction: column;
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+            select
+            {
+                width: 40%;
+                height: 50px;
+                padding-left: 30px;
+                font-family: $myfont;
+                border: 1px solid #dddddd;
+                @media (max-width: 650px)
+                {
+                    width: 90%;
+                }
+                @media (max-width: 750px)
+                {
+                    padding-left: 5px;
+                }
+            }
+        }
+        .cantainerTable
+        {
+            height: 600px;
+            overflow-x: scroll;
+            overflow-y: scroll;
+            display: flex;
+            background-color: white;
+            padding-top: 40px;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+            // justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            // align-items: center ;
+            width: 100%;
+            margin-bottom: 50px;
+            border-radius: 20px;
+            &::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+            transition: 0.5s all;
+           
+            /* Customize the scrollbar track color */
+            }
+            @media (max-width: 400px)
+            {
+                width: 280px;
+            }
+            @media (max-width: 370px)
+            {
+                width: 100%;
+            }
+            table {
+                font-family: $myfont;
+                border-collapse: collapse;
+                width: 100%;
+                @media (max-width: 700px)
+                {
+                    .displayNone
+                    {
+                        display: none;
+                    }
+                }
+                th
+                {
+                    height: 50px;
+                }
+                td
+                {
+                    height: 30px;
+                }
+                button
+                {
+                    // width: 50%;
+                    // height: 35px;
+                    padding: 12px;
+                    border-radius: 10px;
+                    border: none;
+                    border: 1px solid rgb(152, 152, 152);
+                    background-color: #2a2d38c6;
+                    color: white;
+                    font-family: $myfont;
+                    cursor: pointer;
+                    transition: 0.5s all;
+                    &:hover
+                    {
+                        background-color: #2a2d38f6;
+                    }
+                }
+              }
+              
+              td, th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                text-align: center;
+                padding: 8px;
+                // background-color: white;
+                @media (max-width: 500px)
+                {
+                    padding: 1px;
+                }
+              }
+              
+              tr:nth-child(even) {
+                // background-color: $hoverR;
+                background-color: $pColorR;
+              }
+              .trHover
+              {
+                transition: 0.5s all;
+                &:hover
+                {
+                    background-color: $hoverR;
+                    cursor: pointer;
+                }
+              }
+              .img
+              {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+              }
+              .containerTitles
+              {
+                width: 100%;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                // background-color: red;
+                @media(max-width:1000px)
+                {
+                    flex-direction: column;
+                }
+              }
+              .containerDateCreate
+              {
+                width: 48%;
+                // padding-top: 10px;
+                // padding-bottom: 10px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 50px;
+                box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+                border-radius: 10px;
+                // background-color: red;
+                @media(max-width:768px)
+                {
+                    width: 94%;
+                }
+                @media(max-width:400px)
+                {
+                    flex-direction: column;
+                    padding-top: 16px;
+                }
+                p
+                {
+                    font-weight: bold;
+                    padding-left: 25px;
+                    word-wrap: break-word;
+                    text-align: center;
+                }
+                .iconDate
+                {
+                    color: $pColorR;
+                    font-size: 25px;
+                    @media(max-width:330px)
+                    {
+                        margin-bottom: 10px;
+                    }
+                }
+              }
+        }
+        .selectAll
+        {
+            background-color: white;
+            margin-bottom: 20px;
+            width: 100%;
+            min-height: 100px;
+            border-radius: 10px;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+            display: flex;
+            align-items: center;
+            @media(max-width: 800px)
+            {
+               flex-direction: column;
+               padding-top: 25px;
+            }
+            .containerAll
+            {
+                width: 50%;
+                // overflow: hidden;
+                // padding-left: 150px;
+                // background-color: yellow;
+                @media(max-width: 800px)
+                {
+                    width: 100%;
+                    margin-bottom: 30px;
+                }
+                // label{
+                //     margin-left: 150px;
+                // }
+                .containerChecked
+                {
+                    // background-color: red;
+                    width: 50%;
+                    margin: 0 auto;
+                    @media(max-width:310px)
+                    {
+                        width: 60%;
+                    }
+                }
+            }
+            .containerValidate
+            {
+                width: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                @media(max-width: 950px)
+                {
+                    width: 40%;
+                }
+                @media(max-width: 800px)
+                {
+                    width: 100%;
+                }
+                // background-color: red;
+                button
+                {
+                    margin-left: 30px;
+                    width: 300px;
+                    height: 40px;
+                    background-color: #2a2d38d0;
+                    border: none;
+                    color: white;
+                    font-family: $myfont;
+                    cursor: pointer;
+                    transition: 0.5s all;
+                    border-radius: 10px;
+                    // @media(max-width:900px)
+                    // {
+                    //     width: 200px;
+                    // }
+                    @media(max-width: 800px)
+                    {
+                        // width: 100%;
+                        width: 250px;
+                        margin-left: 0px;
+                        margin-bottom: 20px;
+                    }
+                    @media(max-width: 370px)
+                    {
+                        // width: 100%;
+                        width: 150px;
+                        margin-left: 0px;
+                        margin-bottom: 20px;
+                    }
+                    &:hover
+                    {
+                        background-color: #2a2d38;
+                        width: 310px;
+                        height: 42px;
+                        @media(max-width: 800px)
+                        {
+                            // width: 100%;
+                            width: 270px;
+                            
+                        }
+                        @media(max-width: 370px)
+                        {
+                            // width: 100%;
+                            width: 160px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .containerGroups
+    {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        padding-top: 50px;
+        margin-bottom: 100px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        border-radius: 20px;
+        background-color: white;
+        @media(max-width: 1251px)
+        {
+            width: 90%;
+        }
+        @media(max-width:370px)
+        {
+            width: 96%;
+        }
+        .containerTitle
+        {
+            width: 40%;
+            // background-color: yellow;
+            border-radius: 10px;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 50px;
+            text-align: center;
+            @media(max-width:768px)
+            {
+                width: 80%;
+            }
+            @media(max-width:328px)
+            {
+                width: 90%;
+            }
+            .iconFolder
+            {
+                font-size: 30px;
+                color: $pColorR;
+            }
+            p
+            {
+                margin-left: 10px;
+                font-weight: bold;
+            }
+        }
+        .containerCreateGroups
+        {
+            width: 100%;
+            overflow: hidden;
+            padding-bottom: 50px;
+            
+            .containerInputs
+            {
+                // background-color: red;
+                overflow: hidden;
+                padding-right: 10px;
+                // padding-left: 10px;
+                width: 100%;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                margin-bottom: 50px;
+                @media(max-width:768px)
+                {
+                    flex-direction: column;
+                }
+                input
+                {
+                    height: 40px;
+                    width: 30%;
+                    padding-left: 10px;
+                    font-family: $myfont;
+                    border: 1px solid #dddddd;
+                    &::placeholder
+                    {
+                        color: rgba(0, 0, 0, 0.802);
+                    }
+                    &:focus
+                    {
+                        outline: none;
+                    }
+                    @media(max-width:768px)
+                    {
+                        width: 90%;
+                        margin-bottom: 20px;
+                    }
+                }
+                select
+                {
+                    height: 47px;
+                    width: 30%;
+                    padding-left: 10px;
+                    font-family: $myfont;
+                    border: 1px solid #dddddd;
+                    &:focus
+                    {
+                        outline: none;
+                    }
+                    @media(max-width:768px)
+                    {
+                        width: 92%;
+                        margin-bottom: 20px;
+                    }
+                }
+            }
+            .containerInputCreate
+            {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                width: 100%;
+                input
+                {
+                    height: 40px;
+                    width: 30%;
+                    font-family: $myfont;
+                    cursor: pointer;
+                    color: white;
+                    background-color: #2a2d38d0;
+                    border: 1px solid #2a2d38;
+                    border-radius: 10px;
+                    transition: 0.5s all;
+                    &:hover
+                    {
+                        background-color: #2a2d38;
+                        height: 43px;
+                        width: 32%;
+                    }
+                    @media(max-width:768px)
+                    {
+                        width: 60%;
+                    }
+                }
+                p
+                {
+                    color: red;
+                    padding: 0;
+                    margin-bottom: 20px;
+                    text-align: center;
+                }
+            }
+        }
+    }
+
+    .containerFinishGroup
+    {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        padding-top: 50px;
+        margin-bottom: 100px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        border-radius: 20px;
+        background-color: white;
+        @media(max-width: 1251px)
+        {
+            width: 90%;
+        }
+        @media(max-width:370px)
+        {
+            width: 96%;
+        }
+        .containerTitle
+        {
+            width: 40%;
+            // background-color: yellow;
+            border-radius: 10px;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 50px;
+            text-align: center;
+            @media(max-width:768px)
+            {
+                width: 80%;
+            }
+            @media(max-width:328px)
+            {
+                width: 90%;
+            }
+            .iconFolder
+            {
+                font-size: 30px;
+                color: $pColorR;
+            }
+            p
+            {
+                margin-left: 10px;
+                font-weight: bold;
+            }
+        }
+        .conatinerInputs
+        {
+            width: 100%;
+            min-height: 100px;
+            display: flex;
+            margin-bottom: 30px;
+            @media(max-width:800px)
+            {
+                flex-direction: column;
+            }
+            .containerSelect
+            {
+                width: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                @media(max-width:800px)
+                {
+                    width: 100%;
+                    margin-bottom: 30px;
+                }
+                select
+                {
+                    height: 47px;
+                    width: 70%;
+                    padding-left: 10px;
+                    font-family: $myfont;
+                    border: 1px solid #dddddd;
+                    &:focus
+                    {
+                        outline: none;
+                    }
+                    @media(max-width:768px)
+                    {
+                        width: 92%;
+                        margin-bottom: 20px;
+                    }
+                }
+            }
+            .containerValid
+            {
+                width: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                @media(max-width:800px)
+                {
+                    width: 100%;
+                    margin-bottom: 20px;
+                }
+                button
+                {
+                    width: 50%;
+                    height: 45px;
+                    color: white;
+                    font-family: $myfont;
+                    background-color: #2a2d38d8;
+                    border: none;
+                    border-radius: 10px;
+                    cursor: pointer;
+                    transition: 0.5s all;
+                    @media(max-width:900px)
+                    {
+                        width: 70%;
+                    }
+                    &:hover
+                    {
+                        width: 52%;
+                        height: 48px;
+                        background-color: #2a2d38;
+                    }
+                }
+            }
+        }
+    }
+}

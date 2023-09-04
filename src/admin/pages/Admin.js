@@ -4,7 +4,7 @@ import style from '../sass/admin.module.scss';
 import {FaUserShield} from 'react-icons/fa';
 import {SiCodersrank} from 'react-icons/si';
 import { UserContext } from '../../utils/UserContext';
-
+import Typewriter from 'typewriter-effect';
 
 function Admin() {
 const   [username, setUsername] = useState('');
@@ -65,22 +65,6 @@ useEffect(() => {
   }
 }, [response]);
 
-
-const text = '`Unlock the world of possibilities through the lines of code`';
-  const delay = 100; // milliseconds
-
-  const [displayText, setDisplayText] = useState('');
-  const [currentIndex, setCurrentIndex] = useState(0);  
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (currentIndex < text.length) {
-        setDisplayText(prevText => prevText + text[currentIndex]);
-        setCurrentIndex(prevIndex => prevIndex + 1);
-      }
-    }, delay);
-
-    return () => clearTimeout(timer);
-  }, [currentIndex]);
   return (
     <div className={style.container}>
        <div className={style.leftSide}>
@@ -90,7 +74,14 @@ const text = '`Unlock the world of possibilities through the lines of code`';
                         <SiCodersrank  className={style.icon}/>
                         <p className={style.title}>Waiting Coders</p>
                         <div className={style.description}>
-                            <p>{displayText}</p>
+                            {/* <p>{displayText}</p> */}
+                            <Typewriter
+                            options={{
+                              strings: ['`Unlock the world of possibilities through the lines of code`'],
+                              autoStart: true,
+                              loop: true,
+                            }}
+                          />
                         </div>
                     </div>
                 </div>
@@ -118,6 +109,7 @@ const text = '`Unlock the world of possibilities through the lines of code`';
                 }
             </div>
        </div>
+       
     </div>
   );
 }

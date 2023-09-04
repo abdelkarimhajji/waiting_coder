@@ -5,8 +5,7 @@ import NavbarAdmin from '../components/NavbarAdmin'
 import Footer from "../../components/Footer";
 import SearchAdmin from '../components/SearchAdmin';
 import MainDashboard from "../components/MainDashboard";
-// import { PieChart, Pie, Legend, Tooltip, ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis , Radar } from 'recharts';
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+
 function Dashboard() {
   
 useEffect(() => {
@@ -14,6 +13,7 @@ useEffect(() => {
     }, []);
    
     const [currentDate, setCurrentDate] = useState('');
+    
 
   const fetchCurrentDate = () => {
     const now = new Date();
@@ -31,7 +31,7 @@ useEffect(() => {
       </div>
       <div className={style.nextNav}>
         <SearchAdmin />
-        <MainDashboard />
+        <MainDashboard/>
         <Footer />
       </div>
     </div>

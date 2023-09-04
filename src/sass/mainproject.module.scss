@@ -83,7 +83,7 @@
         }
         .Link {
             width: 27%;
-            min-height: 500px;
+            min-height: 530px;
             border-radius: 20px;
             background-color: #ffffff;
             // margin-left: 1%;
@@ -94,7 +94,7 @@
             color: $pColor1;
             @media (max-width:1300px)
             {
-                width: 30%;
+                width: 40%;
             }
             @media (max-width: 1130px)
             {
@@ -111,14 +111,20 @@
                 justify-content: center;
                 display: 0 auto;
             }
-            
+            button
+            {
+                margin-bottom: 20px;
+            }
             .containerDiscreption
             {
                 padding-left: 15px;
                 padding-right: 15px;
-                height: auto;
+                
+                // height: 230px;
+                // height: auto;
                 word-wrap: break-word;
                 text-align: justify;
+                // background-color: red;
                 
             }
             .titleProject
@@ -156,7 +162,15 @@
             {
                 font-size: 15px;
                 margin-bottom: 30px;
-                min-height: 130px;
+                height: 130px;
+                overflow-y: scroll;
+                margin-bottom: 20px;
+                &::-webkit-scrollbar {
+                width: 5px;
+                height: 5px;
+                transition: 0.5s all;
+                /* Customize the scrollbar track color */
+                }
                 @media (max-width:1130px)
                 {
                     min-height: 200px;

@@ -1,0 +1,75 @@
+@import "../../sass/global.module.scss";
+@import 'mathsass';
+
+
+.container
+{
+    background-color:#f7f7f7;
+    // background-color: red;
+    min-height: 100vh; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 100px;
+    font-family: $myfont;
+    padding-left:80px;
+    padding-right:80px;
+
+    background-color: red;
+    @media(max-width:1250px)
+    {
+        padding-left:10px;
+        padding-right:10px;
+    }
+    @media(max-width:950px)
+    {
+        padding-left:10px;
+        padding-right:10px;
+    }
+    @media (max-width:580px)
+    {
+        padding-left: 15px;
+        padding-right: 10px;
+    }
+    .containerValidateProject
+    {
+        width: 100%;
+        min-height: 200px;
+        background-color: white;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 15px;
+        .containerTitle
+        {
+            width: 40%;
+            // background-color: yellow;
+            border-radius: 10px;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 50px;
+            text-align: center;
+            @media(max-width:768px)
+            {
+                width: 80%;
+            }
+            @media(max-width:328px)
+            {
+                width: 90%;
+            }
+            .iconFolder
+            {
+                font-size: 30px;
+                color: $pColorR;
+            }
+            p
+            {
+                margin-left: 10px;
+                font-weight: bold;
+            }
+        }
+    }
+}

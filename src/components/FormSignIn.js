@@ -2,6 +2,8 @@
   import style from "../sass/formSignIn.module.scss";
   import { useNavigate , Navigate } from 'react-router-dom';
   import { UserContext } from '../utils/UserContext';
+  import Typewriter from 'typewriter-effect';
+
   function FormSignIn() {
     // State variables
     const [name, setname] = useState('');
@@ -84,10 +86,30 @@
     if (value == 1)
       return <Navigate to="/Home" replace />;
 
-    
+      const handleTypingDone = () => {
+        // This function will be called when typing animation is done
+        // Set the displayText to the typed text once it's done typing
+        setDisplayText('Hello World! This is a Typewriter Effect. Enjoy using it in React!');
+      };
     return (
       <div className={style.container}>
-        <h1>{displayText}</h1>
+        <h1>              
+        {!displayText ? (
+        <Typewriter
+          options={{
+            strings: ['Hello World! This is a Typewriter Effect. Enjoy using it in React!'],
+            autoStart: true,
+            loop: false,
+          }}
+          onInit={(typewriter) => {
+            typewriter.start();
+          }}
+          onComplete={handleTypingDone}
+        />
+      ) : (
+        <div>{displayText}</div>
+      )}
+          </h1>
         <form className={style.inputs} onSubmit={handleSubmit}>
           <input type="text" name="email" placeholder="Enter your email" value={name} onChange={(e) => setname(e.target.value)} />
           <input type="password" name="password" placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)} />

@@ -48,6 +48,7 @@
             .containerContent
             {
                 display: flex;
+                width: 100%;
                 flex-direction: column;
                 align-items: center;
                 .icon
@@ -60,7 +61,8 @@
                 }
                 .description
                 {
-                    width: 90%;
+                    width: 50%;
+                    // background-color: red;
                     text-align: center;
                     line-height: 30px;
                 }
@@ -98,8 +100,9 @@
       }
       .containerLogin
       {
-        box-shadow: rgba(255, 255, 255, 0.274) 0px 18px 50px -10px;
-        background: linear-gradient(to bottom, #e0e0e0 -150%, $pColor1 );
+        // box-shadow: rgba(255, 255, 255, 0.274) 0px 18px 50px -10px;
+        
+        background: linear-gradient(to bottom, #e0e0e0 -180%, $pColor1 );
         border-radius: 20px;
         // background-color: red;
         width: 500px;

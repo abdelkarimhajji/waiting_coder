@@ -586,15 +586,10 @@ app.get('/api/search/:input', (req, res) => {
 
 app.get('/api/get_skills/:id', (req, res) => {
   const id = req.params.id;
-  const selectSql = `SELECT
-  name_specifics.shurt_name,
-  COALESCE(specifics.validation, 0) AS validation,
-  CASE WHEN specifics.id_user IS NULL THEN 0 ELSE 1 END AS has_specific
-FROM
-  name_specifics
-LEFT JOIN
-  specifics ON name_specifics.id = specifics.id_nameSpecifics
-          AND specifics.id_user = ?;`;
+  const selectSql = `SELECT name_specifics.shurt_name, COALESCE(specifics.validation, 0) 
+  AS validation, COALESCE(specifics.validation_week, 0) 
+  AS validation_week FROM name_specifics LEFT JOIN specifics 
+  ON name_specifics.id = specifics.id_nameSpecifics AND specifics.id_user = ?;`;
   db.query(selectSql,[id], (selectErr, selectResult) => {
     if (selectErr) {
       console.log(selectErr);

@@ -12,6 +12,9 @@ import {PiSignOutBold} from 'react-icons/pi'
 import {FaTrophy} from 'react-icons/fa'
 import { useLocation, useNavigate, Navigate } from "react-router-dom";
 import { UserContext } from '../../utils/UserContext';
+import {BiLineChart} from 'react-icons/bi'
+import {MdOutlineGroups} from 'react-icons/md'
+import {MdGroupAdd} from 'react-icons/md'
 
 function NavbarAdmin(props) {
   const [hovered, setHovered] = useState(true);
@@ -68,20 +71,20 @@ function NavbarAdmin(props) {
   };
   const userId = localStorage.getItem("userId");
   const [selectedValuesUsers, setSelectedValuesUsers] = useState([]);
-  useEffect(() => {
-    fetch(`http://localhost:8081/get_user/${userId}`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setSelectedValuesUsers(data);
-      })
-      .catch((error) => console.error(error));
+  // useEffect(() => {
+  //   fetch(`http://localhost:8081/get_user/${userId}`)
+  //     .then((response) => {
+  //       if (!response.ok) {
+  //         throw new Error("Network response was not ok");
+  //       }
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       setSelectedValuesUsers(data);
+  //     })
+  //     .catch((error) => console.error(error));
       
-  }, [userId]);
+  // }, [userId]);
   const close = () => {
     setHovered(true);
   }
@@ -111,15 +114,27 @@ function NavbarAdmin(props) {
         <Link to="/Admin/Dashboard" className={style.Link} onClick={close}>
           <div className={style.containItemNav}>
             <p className={style.oneItem}>HOME</p>
-            <p className={style.twoItem}><AiOutlineHome className={style.AiOutlineMenuFold} /></p>
+            <p className={style.twoItem}><BiLineChart className={style.AiOutlineMenuFold} /></p>
           </div>
         </Link>
-          <Link to="/Admin" className={style.Link}  onClick={logout}>
+        <Link to="/Admin/Groups" className={style.Link} onClick={close}>
+          <div className={style.containItemNav}>
+            <p className={style.oneItem}>Groups</p>
+            <p className={style.twoItem}><MdOutlineGroups className={style.AiOutlineMenuFold} /></p>
+          </div>
+        </Link>
+        <Link to="/Admin/AddUsers" className={style.Link}>
+          <div className={style.containItemNav}>
+            <p className={style.oneItem}>Add Users</p>
+            <p className={style.twoItem}><MdGroupAdd className={style.AiOutlineMenuFold} /></p>
+          </div>
+        </Link>
+        <Link to="/Admin" className={style.Link}  onClick={logout}>
           <div className={style.containItemNav}>
             <p className={style.oneItem}>Sign Out</p>
             <p className={style.twoItem}><PiSignOutBold className={style.AiOutlineMenuFold} /></p>
           </div>
-          </Link>
+        </Link>
         </div>
         <div>
         </div>
