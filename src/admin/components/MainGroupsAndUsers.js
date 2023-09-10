@@ -91,6 +91,7 @@ function MainGroupsAndUsers() {
             setSelectCurrentGroups(data);
             setSelectIdGroup(data[0].IdGroup)
             setDateCreated(data[0].date_created.split("T")[0])
+            setSelectedOption2(`${data[0].IdGroup}*${data[0].date_created}`)
           })
           .catch((error) => console.error(error));
         }, [valueGroupFinished]);
@@ -455,7 +456,7 @@ const finisheGroup = () =>
             <div className={style.selectAll}>
               <div className={style.containerAll}>
                 <div className={style.containerChecked}>
-                  <label htmlFor="">Checked All</label>
+                  <label >Checked All</label>
                   <input
                     type="checkbox"
                     style={{ marginLeft: '20px' }}

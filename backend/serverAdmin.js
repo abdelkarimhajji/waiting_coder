@@ -246,7 +246,7 @@ app.get('/api/getMonthsUesrs/:chooseYear', (req, res) => {
     const query = `
     SELECT * FROM ((user 
       INNER JOIN specifics ON user.id = specifics.id_user) 
-      INNER JOIN payment ON payment.id_specific = specifics.id)
+      INNER JOIN payment ON payment.id_user = user.id)
        WHERE specifics.id_group = ?
     `;
     db.query(query, [selectIdGroup],(error, results) => {
@@ -436,20 +436,52 @@ app.get('/api/getMonthsUesrs/:chooseYear', (req, res) => {
 
   // get name specifics
 
-  app.put('/api/getNameSpecific/:idSpefific', (req, res) => {
+  app.get('/api/getProjectSpecific/:idSpefific', (req, res) => {
     const idSpefific = req.params.idSpefific;
-    const selectSql = "UPDATE groups SET group_finished = 1, date_finished = ? WHERE id = ?";
-    const currentDate = new Date();
-    db.query(selectSql, [idSpefific], (selectErr, selectResult) => {
-      if (selectErr) {
-        console.log(selectErr);
-        return res.json("Error");
+    // const idSpefific = 3;
+    const selectSql = "SELECT * FROM `projects` WHERE id_collection = ?";
+    db.query(selectSql,[idSpefific], (error, results) => {
+      if (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+      } else {
+        res.json(results);
       }
-      return res.json(selectResult);
+    });
+  });
+
+  // get all student of each group
+  app.get('/api/getStudentsGroup/:idGroup/:idProject', (req, res) => {
+    const idGroup = req.params.idGroup;
+    const idProject = req.params.idProject;
+    // const idSpefific = 3;
+    const selectSql = `SELECT 
+    user.*,
+    specifics.*,
+    payment.*,
+    COALESCE(validation_projects.id_user, user.id) AS id_user,
+    COALESCE(validation_projects.id_project, 2) AS id_project,
+    validation_projects.valid_project
+FROM (
+    user 
+    INNER JOIN specifics ON user.id = specifics.id_user
+    INNER JOIN payment ON payment.id_user = user.id
+)
+LEFT JOIN validation_projects ON validation_projects.id_user = user.id AND validation_projects.id_project = ?
+WHERE specifics.id_group = ?;
+;
+`;
+    db.query(selectSql,[idProject, idGroup], (error, results) => {
+      if (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+      } else {
+        res.json(results);
+      }
     });
   });
   
-
+  
 app.listen(8082, () => {
     console.log("Listening on port 8082 ok");
   });

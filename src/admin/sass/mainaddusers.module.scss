@@ -42,6 +42,7 @@
         align-items: center;
         padding-top: 40px;
         box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        margin-bottom: 50px;
         .containerTitle
         {
             width: 40%;
@@ -89,5 +90,145 @@
             }
             // background-color: rgb(182, 125, 125);
         }
+    }
+    .containerSellectAll
+    {
+        height: 100px;
+        width: 100%;
+        margin-bottom: 50px;
+        border-radius: 20px;
+        background-color: white;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .select
+        {
+            width: 50%;
+            display: flex;
+            // justify-content: center;
+            align-items: center;
+            p
+            {
+                margin-left: 200px;
+            }
+            input
+            {
+                margin-left: 30px;
+            }
+        }
+        .valid
+        {
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            button
+            {
+                width: 40%;
+                height: 40px;
+                border: none;
+                color: white;
+                background-color: #2a2d38c6;
+                border-radius: 10px;
+                font-family: $myfont;
+                cursor: pointer;
+                transition: 0.5s all;
+                &:hover
+                {
+                    background-color: #2a2d38f6;
+                    height: 43px;
+                    width: 42%;
+                }
+            }
+        }
+    }
+    .containerTable
+    {
+        width:100%;
+        min-height: 600px;
+        background-color: white;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        overflow-y: scroll;
+        overflow-x: scroll;
+        border-radius: 20px;
+        margin-bottom: 50px;
+        &::-webkit-scrollbar {
+            width: 3px;
+            height: 3px;
+            transition: 0.5s all;
+           
+            /* Customize the scrollbar track color */
+            }
+        table {
+            font-family: $myfont;
+            border-collapse: collapse;
+            width: 100%;
+            @media (max-width: 700px)
+            {
+                .displayNone
+                {
+                    display: none;
+                }
+            }
+            th
+            {
+                height: 50px;
+            }
+            td
+            {
+                height: 30px;
+            }
+            button
+            {
+                // width: 50%;
+                // height: 35px;
+                padding: 12px;
+                border-radius: 10px;
+                border: none;
+                border: 1px solid rgb(152, 152, 152);
+                background-color: #2a2d38c6;
+                color: white;
+                font-family: $myfont;
+                cursor: pointer;
+                transition: 0.5s all;
+                &:hover
+                {
+                    background-color: #2a2d38f6;
+                }
+            }
+          }
+          
+          td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            text-align: center;
+            padding: 8px;
+            // background-color: white;
+            @media (max-width: 500px)
+            {
+                padding: 1px;
+            }
+          }
+          
+          tr:nth-child(even) {
+            // background-color: $hoverR;
+            background-color: $pColorR;
+          }
+          .trHover
+          {
+            transition: 0.5s all;
+            &:hover
+            {
+                background-color: $hoverR;
+                cursor: pointer;
+            }
+          }
+          .img
+          {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+          }
     }
 }

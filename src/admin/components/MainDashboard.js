@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, Navigate , Link} from "react-router-dom";
 import style from "../sass/maindashboard.module.scss"
-import {AiOutlineSearch} from 'react-icons/ai';
+import {AiOutlineSearch, AiOutlineBarChart} from 'react-icons/ai';
+import {GiClick} from 'react-icons/gi'
+import {BiPieChartAlt2} from 'react-icons/bi'
 import BarCharte from './BarCharte'
 import PieCharte from "./PieCharte";
 import BarCharte2 from "./BarCharte2";
@@ -15,7 +17,8 @@ function MainDashboard() {
   const [selectYears, setSelectYears] = useState([]);
   const [choosetYear, setChoosetYear] = useState();
   const [choosetYear2, setChoosetYear2] = useState();
-
+  const [valueSelect, setValueSelect] = useState()
+  const [valueSelect2, setValueSelect2] = useState()
   useEffect(() => {
     fetch(`http://localhost:8082/api/getAggregatedData`)
       .then((response) => {
@@ -43,6 +46,8 @@ function MainDashboard() {
         setSelectYears(data);
         setChoosetYear(data[0].year)
         setChoosetYear2(data[0].year)
+        setValueSelect(data[0].year)
+        setValueSelect2(data[0].year)
         // console.log("mian dashbore fetch ", data);
         // console.log("main dashborad choosetYear ", choosetYear);
       })
@@ -91,8 +96,12 @@ function MainDashboard() {
         <div className={style.containeConrainer}>
           {/* start choose */}
           <div className={style.choose}>
-            <h2>More deatils about money</h2>
-          <select onChange={handleSelectChange}>
+            {/* <h2>More deatils about money</h2> */}
+            <div className={style.containerTitle}>
+                <GiClick  className={style.iconFolder}/>
+                <p>More deatils about money</p>
+              </div>
+          <select value={valueSelect} onChange={handleSelectChange}>
             <option value="Choose another Year">Choose another Year</option>
             {selectYears.map((item, index) => (
             <option key={index} value={item.year}>Year {item.year}</option>
@@ -102,13 +111,21 @@ function MainDashboard() {
           {/* finish choose */}
           <div className={style.ContainerBarCharte}>
             <div className={style.some}>
-              <p className={style.title}>Chart of earn all year</p>
+              {/* <p className={style.title}>Chart of earn all year</p> */}
+              <div className={style.containerTitle}>
+                <BiPieChartAlt2 className={style.iconFolder}/>
+                <p>Earn all year</p>
+              </div>
               <PieCharte />
               <p>hi here i will put some </p>
               <p>dddddd</p>
             </div>
             <div className={style.barCharte}>
-              <p className={style.title}>Chart of earn all year</p>
+              {/* <p className={style.title}>Chart of earn all year</p> */}
+              <div className={style.containerTitle}>
+                <AiOutlineBarChart  className={style.iconFolder}/>
+                <p>Earn all year</p>
+              </div>
               <BarCharte choosetYear={choosetYear}/>
             </div>
           </div>
@@ -118,8 +135,12 @@ function MainDashboard() {
         <div className={style.containeConrainer}>
           {/* start choose */}
           <div className={style.choose}>
-            <h2>More deatils about Student</h2>
-          <select onChange={handleSelectChange2}>
+            {/* <h2>More deatils about Student</h2> */}
+            <div className={style.containerTitle}>
+                <GiClick  className={style.iconFolder}/>
+                <p>More deatils about money</p>
+              </div>
+          <select value={valueSelect2} onChange={handleSelectChange2}>
             <option value="Choose another Year">Choose another Year</option>
             {selectYears.map((item, index) => (
             <option key={index} value={item.year}>Year {item.year}</option>
@@ -129,11 +150,19 @@ function MainDashboard() {
           {/* finish choose */}
           <div className={style.ContainerBarCharte}>
             <div className={style.barCharte}>
-              <p className={style.title}>Chart : Number of stuent each month</p>
+              {/* <p className={style.title}>Chart : Number of stuent each month</p> */}
+              <div className={style.containerTitle}>
+                <AiOutlineBarChart  className={style.iconFolder}/>
+                <p>Number Stuent Month</p>
+              </div>
               <BarCharte2 choosetYear={choosetYear2}/>
             </div>
             <div className={style.some}>
-              <p className={style.title}>Chart : Number User in each year</p>
+              {/* <p className={style.title}>Chart : Number User in each year</p> */}
+              <div className={style.containerTitle}>
+                <BiPieChartAlt2  className={style.iconFolder}/>
+                <p>Number User in each year</p>
+              </div>
               <PieChart2 />
               <p>hi here i will put some </p>
               <p>dddddd</p>

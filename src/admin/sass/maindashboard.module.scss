@@ -1,6 +1,40 @@
 @import "../../sass/global.module.scss";
 @import 'mathsass';
 
+@mixin title-style
+{
+    .containerTitle
+        {
+            width: 80%;
+            // background-color: yellow;
+            height: 50px;
+            border-radius: 10px;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 50px;
+            text-align: center;
+            @media(max-width:768px)
+            {
+                width: 90%;
+            }
+            @media(max-width:328px)
+            {
+                width: 90%;
+            }
+            .iconFolder
+            {
+                font-size: 30px;
+                color: $pColorR;
+            }
+            p
+            {
+                margin-left: 10px;
+                font-weight: bold;
+            }
+        }
+}
 .container
 {
     background-color:#f7f7f7;
@@ -144,7 +178,7 @@
             box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
             // margin: 0 auto;
             margin-bottom: 60px;
-            border-bottom: 7px solid $pColorR;
+            // border-bottom: 7px solid $pColorR;
             padding-top: 20px;
             @media(max-width:1000px)
             {
@@ -191,6 +225,19 @@
                     height: 65px;
                 }
             }
+            @include title-style;
+            .containerTitle
+            {
+                width: 50%;
+                @media(max-width:768px)
+                {
+                    width: 90%;
+                }
+                @media(max-width:328px)
+                {
+                    width: 90%;
+                }
+            }
         }
     .ContainerBarCharte
         {
@@ -217,9 +264,10 @@
                 // justify-content: end;
                 justify-content: center;
                 align-items: center;
-                box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
-                padding-right: 20px;
-                border-bottom: 7px solid $pColorR;
+                box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+                // box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+                // padding-right: 20px;
+                // border-bottom: 7px solid $pColorR;
                 @media(max-width:1000px)
                 {
                     width: 70%;
@@ -249,11 +297,13 @@
                 align-items: center;
                 flex-direction: column;
                 border-radius: 20px;
-                box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+                box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+                // box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+                // box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
                 // border-right: 1px solid black;
                 background-color: white;
                 overflow-y: hidden;
-                border-bottom: 7px solid $pColorR;
+                // border-bottom: 7px solid $pColorR;
                 @media(max-width:1000px)
                 {
                     width: 70%;
@@ -279,7 +329,39 @@
                     font-weight: bold;
                     text-align: center;
                 }
+                @include title-style;
             }
+            @include title-style;
         }
     }
+    // .containerTitle
+    //     {
+    //         width: 40%;
+    //         // background-color: yellow;
+    //         border-radius: 10px;
+    //         box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    //         display: flex;
+    //         justify-content: center;
+    //         align-items: center;
+    //         margin-bottom: 50px;
+    //         text-align: center;
+    //         @media(max-width:768px)
+    //         {
+    //             width: 80%;
+    //         }
+    //         @media(max-width:328px)
+    //         {
+    //             width: 90%;
+    //         }
+    //         .iconFolder
+    //         {
+    //             font-size: 30px;
+    //             color: $pColorR;
+    //         }
+    //         p
+    //         {
+    //             margin-left: 10px;
+    //             font-weight: bold;
+    //         }
+    //     }
 }
