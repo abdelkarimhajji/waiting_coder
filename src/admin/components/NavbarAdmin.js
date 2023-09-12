@@ -15,6 +15,7 @@ import { UserContext } from '../../utils/UserContext';
 import {BiLineChart} from 'react-icons/bi'
 import {MdOutlineGroups} from 'react-icons/md'
 import {MdGroupAdd} from 'react-icons/md'
+import {RiPassValidLine} from 'react-icons/ri'
 
 function NavbarAdmin(props) {
   const [hovered, setHovered] = useState(true);
@@ -123,10 +124,10 @@ function NavbarAdmin(props) {
             <p className={style.twoItem}><MdOutlineGroups className={style.AiOutlineMenuFold} /></p>
           </div>
         </Link>
-        <Link to="/Admin/AddUsers" className={style.Link}>
+        <Link to="/Admin/Validate" className={style.Link}>
           <div className={style.containItemNav}>
-            <p className={style.oneItem}>Add Users</p>
-            <p className={style.twoItem}><MdGroupAdd className={style.AiOutlineMenuFold} /></p>
+            <p className={style.oneItem}>Validate</p>
+            <p className={style.twoItem}><RiPassValidLine className={style.AiOutlineMenuFold} /></p>
           </div>
         </Link>
         <Link to="/Admin" className={style.Link}  onClick={logout}>

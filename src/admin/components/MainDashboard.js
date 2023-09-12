@@ -29,7 +29,6 @@ function MainDashboard() {
       })
       .then((data) => {
         setGetAggregatedData(data);
-        console.log("tish ", data);
       })
       .catch((error) => console.error(error));
   }, []);
@@ -60,7 +59,6 @@ function MainDashboard() {
     if(selectedValue !== 'Choose another Year')
     {
       setChoosetYear(selectedValue)
-      console.log(selectedValue)
     }
   };
   const handleSelectChange2 = (event) => {
@@ -68,7 +66,6 @@ function MainDashboard() {
     if(selectedValue !== 'Choose another Year')
     {
       setChoosetYear2(selectedValue)
-      console.log(selectedValue)
     }
   };
   return (

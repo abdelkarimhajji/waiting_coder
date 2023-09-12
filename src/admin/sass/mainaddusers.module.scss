@@ -1,6 +1,72 @@
 @import "../../sass/global.module.scss";
 @import 'mathsass';
 
+@mixin title-style
+{
+    .containerTitle
+    {
+        width: 40%;
+        // background-color: yellow;
+        border-radius: 10px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 50px;
+        text-align: center;
+        @media(max-width:768px)
+        {
+            width: 80%;
+        }
+        @media(max-width:328px)
+        {
+            width: 90%;
+        }
+        .iconFolder
+        {
+            font-size: 30px;
+            color: $pColorR;
+        }
+        p
+        {
+            margin-left: 10px;
+            font-weight: bold;
+        }
+    }
+}
+@mixin selects-style
+{
+    .containerInputs
+        {
+            width: 100%;
+            min-height: 100px;
+            display: flex;
+            justify-content: space-around;
+            // align-items: center;
+            @media (max-width:550px) {
+                flex-direction: column;
+                align-items: center;
+            }
+            select
+            {
+                width: 30%;
+                height: 50px;
+                font-family: $myfont;
+                border: 1px solid #dddddd;
+                cursor: pointer;
+                @media(max-width:550px)
+                {
+                    width: 70%;
+                    margin-bottom: 20px;
+                }
+            }
+            select:last-child
+            {
+                margin-bottom: 40px;
+            }
+            // background-color: rgb(182, 125, 125);
+        }
+}
 
 .container
 {
@@ -43,57 +109,12 @@
         padding-top: 40px;
         box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
         margin-bottom: 50px;
-        .containerTitle
-        {
-            width: 40%;
-            // background-color: yellow;
-            border-radius: 10px;
-            box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 50px;
-            text-align: center;
-            @media(max-width:768px)
-            {
-                width: 80%;
-            }
-            @media(max-width:328px)
-            {
-                width: 90%;
-            }
-            .iconFolder
-            {
-                font-size: 30px;
-                color: $pColorR;
-            }
-            p
-            {
-                margin-left: 10px;
-                font-weight: bold;
-            }
-        }
-        .containerInputs
-        {
-            width: 100%;
-            min-height: 100px;
-            display: flex;
-            justify-content: space-around;
-            // align-items: center;
-            select
-            {
-                width: 30%;
-                height: 50px;
-                font-family: $myfont;
-                border: 1px solid #dddddd;
-                cursor: pointer;
-            }
-            // background-color: rgb(182, 125, 125);
-        }
+        @include title-style();
+        @include selects-style();
     }
     .containerSellectAll
     {
-        height: 100px;
+        min-height: 100px;
         width: 100%;
         margin-bottom: 50px;
         border-radius: 20px;
@@ -102,19 +123,38 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        @media(max-width:550px)
+        {
+            flex-direction: column;
+            min-height: 140px;
+            width: 100%;
+        }
         .select
         {
             width: 50%;
             display: flex;
             // justify-content: center;
             align-items: center;
+            @media(max-width:550px)
+            {
+                margin-bottom: 20px;
+            }
             p
             {
                 margin-left: 200px;
+                @media(max-width:1200px)
+                {
+                    margin-left: 80px;
+                }
+                @media(max-width: 550px)
+                {
+                    margin-left: 0;
+                }
             }
             input
             {
                 margin-left: 30px;
+
             }
         }
         .valid
@@ -123,6 +163,11 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            @media(max-width:550px)
+            {
+                margin-bottom: 20px;
+                width: 100%;
+            }
             button
             {
                 width: 40%;
@@ -140,6 +185,10 @@
                     height: 43px;
                     width: 42%;
                 }
+                @media(max-width: 1000px)
+                {
+                    width: 60%;
+                }
             }
         }
     }
@@ -152,7 +201,7 @@
         overflow-y: scroll;
         overflow-x: scroll;
         border-radius: 20px;
-        margin-bottom: 50px;
+        margin-bottom: 120px;
         &::-webkit-scrollbar {
             width: 3px;
             height: 3px;
@@ -230,5 +279,191 @@
             height: 50px;
             border-radius: 50%;
           }
+    }
+    .containerLinkProjectValid
+    {
+        width: 100%;
+        min-height: 500px;
+        // background-color: white;
+        border-radius: 20px;
+        // box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        margin-bottom: 120px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        @include title-style();
+        .containerChooseGroupProject
+        {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: white;
+            height: 200px;
+            padding-top: 40px;
+            border-radius: 20px;
+            box-shadow:rgba(0, 0, 0, 0.16) 0px 1px 4px;
+            margin-bottom: 50px;
+            @include selects-style();
+        }
+        .containerLinks
+        {
+            width: 100%;
+            height: 500px;
+            background-color: white;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+            border-radius: 20px;
+            display: flex;
+            
+            .partStudents
+            {
+                width: 30%;
+                overflow: hidden;
+                .containerTitles
+                {
+                    width: 100%;
+                    border-top-left-radius: 20px;
+                    height: 50px;
+                    background-color: $pColor3;
+                    color: white;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+                .allStudent
+                {
+                    height: 100%;
+                    overflow-y: scroll;
+                    .eachStudent
+                    {
+                        width: 100%;
+                        height: 80px;
+                        background-color: #d7d6d6b8;
+                        display: flex;
+                        cursor: pointer;
+                        transition: 0.5s all;
+                        &:hover
+                        {
+                            background-color: $pColorR;
+                        }
+                    }
+                    .eachStudentWhite
+                    {
+                        width: 100%;
+                        height: 80px;
+                        background-color: white;
+                        display: flex;
+                        cursor: pointer;
+                        transition: 0.5s all;
+                        &:hover
+                        {
+                            background-color: $pColorR;
+                        }
+                    }
+                    .containerImg
+                    {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 25%;
+                        img
+                        {
+                            width: 50px;
+                            border-radius: 50%;
+                        }
+                    }
+                    .containerName
+                    {
+                        width: 70%;
+                        display: flex;
+                        justify-self: center;
+                        align-self: center;
+                    }
+                
+                }
+            }
+            .partLinks
+            {
+                width: 70%;
+                height: 400px;
+                // overflow: hidden;
+                // background-color: red;
+                .containerTitles
+                {
+                    width: 100%;
+                    border-top-right-radius: 20px;
+                    height: 50px;
+                    background-color: $pColor1;
+                    color: white;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+                .allLinks
+                {
+                   width: 100%;
+                   height: 100%;
+                   background-image: url(../../imgs/binary_level.jpg);
+                   background-position: center;
+                   background-repeat: no-repeat;
+                   background-size: cover;
+                   overflow-y: scroll;
+                   overflow-x: hidden;
+                   padding-top: 50px;
+                   color : white;
+                   
+                   .ContainerMessageStudent
+                   {
+                        width: 100%;
+                        margin-bottom: 50px;
+                        overflow: hidden;
+                        padding-left: 20px;
+                        .message
+                        {
+                            width: 80%;
+                            height: 50px;
+                            background-color: $pColorR;
+                            border-radius: 20px;
+                            color: white;
+                            // margin-left: 20px;
+                            display: flex;
+                            align-items: center;
+                            padding-left: 20px;
+                        }
+                        .time
+                        {
+                            font-weight: bold;
+                        }
+                   }
+                   .ContainerMessageTeacher
+                   {
+                        width:100%;
+                        margin-bottom: 50px;
+                        display: flex;
+                        align-items:end;
+                        flex-direction: column;
+                        overflow: hidden;
+                        .time2
+                        {
+                            margin-right: 25px;
+                            font-weight: bold;
+                        }
+                        .message
+                        {
+                            width: 80%;
+                            height: 50px;
+                            background-color: $pColorR;
+                            border-radius: 20px;
+                            color: white;
+                            margin-right: 20px;
+                            display: flex;
+                            align-items: center;
+                            padding-left: 20px;
+
+                        }
+                   }
+                }
+            }
+        }
     }
 }

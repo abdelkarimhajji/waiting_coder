@@ -17,6 +17,8 @@ const navigate = useNavigate();
 
 useEffect(() => {
   console.log("isLoggedIn", isLoggedIn)
+  if(isLoggedIn === 1)
+    navigate("/Admin/Dashboard");
 }, [isLoggedIn]);
 
 const handleButtonClick = () => {

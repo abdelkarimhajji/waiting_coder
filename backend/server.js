@@ -405,12 +405,13 @@ app.get('/api/get_competitions/:userId/:nameSpecifics', (req, res) => {
 app.get('/get_user_levle/:now/:next', (req, res) => {
   const now = parseInt(req.params.now); // Convert to integer
   const next = parseInt(req.params.next); // Convert to integer
-  const selectSql = 'SELECT user.*, level.level, (SELECT COUNT(DISTINCT id) FROM registrement_events WHERE id_user = user.id AND valid = 1) AS valid_event_count, (SELECT COUNT(DISTINCT id) FROM registrement_competition WHERE id_user = user.id AND valid = 1) AS valid_competition_count, COUNT(DISTINCT CASE WHEN validation_projects.valid = 1 THEN validation_projects.id ELSE NULL END) AS valid_project_count FROM user LEFT JOIN validation_projects ON user.id = validation_projects.id_user LEFT JOIN level ON user.id = level.id_user GROUP BY user.id LIMIT ? OFFSET ?';
+  const selectSql = 'SELECT user.*, level.level, (SELECT COUNT(DISTINCT id) FROM registrement_events WHERE id_user = user.id AND valid = 1) AS valid_event_count, (SELECT COUNT(DISTINCT id) FROM registrement_competition WHERE id_user = user.id AND valid = 1) AS valid_competition_count, COUNT(DISTINCT CASE WHEN validation_projects.valid_project = 1 THEN validation_projects.id ELSE NULL END) AS valid_project_count FROM user LEFT JOIN validation_projects ON user.id = validation_projects.id_user LEFT JOIN level ON user.id = level.id_user GROUP BY user.id LIMIT ? OFFSET ?';
   db.query(selectSql,[next, now], (selectErr, selectResult) => {
     if (selectErr) {
       console.log(selectErr);
       return res.json("Error");
     }
+    console.log(selectResult)
     return res.json(selectResult);
   });
 });
@@ -419,7 +420,13 @@ app.get('/get_user_levle/:now/:next', (req, res) => {
 
 app.get('/get_each_user_levle/:id/', (req, res) => {
   const id = parseInt(req.params.id);
-  const selectSql = 'SELECT user.*, level.*, (SELECT COUNT(DISTINCT id) FROM registrement_events WHERE id_user = user.id AND valid = 1) AS valid_event_count, (SELECT COUNT(DISTINCT id) FROM registrement_competition WHERE id_user = user.id AND valid = 1) AS valid_competition_count, COUNT(DISTINCT CASE WHEN validation_projects.valid = 1 THEN validation_projects.id ELSE NULL END) AS valid_project_count FROM user LEFT JOIN validation_projects ON user.id = validation_projects.id_user LEFT JOIN level ON user.id = level.id_user WHERE user.id = ? GROUP BY user.id';
+  const selectSql = `SELECT user.*, level.*, (SELECT COUNT(DISTINCT id) 
+  FROM registrement_events WHERE id_user = user.id AND valid = 1) AS valid_event_count, 
+  (SELECT COUNT(DISTINCT id) FROM registrement_competition 
+  WHERE id_user = user.id AND valid = 1) AS valid_competition_count, 
+  COUNT(DISTINCT CASE WHEN validation_projects.valid_project = 1 THEN validation_projects.id ELSE NULL END) 
+  AS valid_project_count FROM user LEFT JOIN validation_projects ON user.id = validation_projects.id_user
+  LEFT JOIN level ON user.id = level.id_user WHERE user.id = ? GROUP BY user.id`;
   db.query(selectSql,[id], (selectErr, selectResult) => {
     if (selectErr) {
       console.log(selectErr);

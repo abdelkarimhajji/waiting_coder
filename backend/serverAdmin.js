@@ -456,22 +456,23 @@ app.get('/api/getMonthsUesrs/:chooseYear', (req, res) => {
     const idProject = req.params.idProject;
     // const idSpefific = 3;
     const selectSql = `SELECT 
-    user.*,
-    specifics.*,
-    payment.*,
-    COALESCE(validation_projects.id_user, user.id) AS id_user,
-    COALESCE(validation_projects.id_project, 2) AS id_project,
-    validation_projects.valid_project
-FROM (
-    user 
-    INNER JOIN specifics ON user.id = specifics.id_user
-    INNER JOIN payment ON payment.id_user = user.id
-)
-LEFT JOIN validation_projects ON validation_projects.id_user = user.id AND validation_projects.id_project = ?
-WHERE specifics.id_group = ?;
-;
-`;
-    db.query(selectSql,[idProject, idGroup], (error, results) => {
+    user.*, user.id as idOfUser, 
+    specifics.*, 
+    project.*, 
+    validation_projects.*,
+    payment.*
+    FROM 
+        user 
+    INNER JOIN specifics ON user.id = specifics.id_user 
+    INNER JOIN projects AS project ON project.id_collection = specifics.id_nameSpecifics 
+    INNER JOIN payment ON payment.id_user = user.id 
+    LEFT JOIN validation_projects ON 
+        validation_projects.id_user = user.id 
+        AND validation_projects.id_project = project.id -- Match on both user.id and project.id
+    WHERE 
+        specifics.id_group = ?
+        AND project.id = ?`;
+    db.query(selectSql,[idGroup, idProject], (error, results) => {
       if (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal server error' });
@@ -481,7 +482,138 @@ WHERE specifics.id_group = ?;
     });
   });
   
+  // validate each project of student
+  app.put('/api/validEachProject/:idUser/:idProject', (req, res) => {
+    const idUser = req.params.idUser;
+    const idProject = req.params.idProject;
+    const valid = 1;
+    // Check if the user exists in the validation_projects table
+    const selectSql = "SELECT id_user FROM validation_projects WHERE id_user = ? AND id_project = ?";
+    db.query(selectSql, [idUser, idProject], (selectErr, selectResult) => {
+      if (selectErr) {
+        console.log(selectErr);
+        return res.json("Error");
+      }
   
+      if (selectResult.length > 0) {
+        // User exists, perform an update
+        const updateSql = "UPDATE validation_projects SET valid_project = ?, date_validation = ? WHERE id_user = ? AND id_project = ?";
+        const currentDate = new Date();
+        db.query(updateSql, [valid, currentDate, idUser, idProject], (updateErr, updateResult) => {
+          if (updateErr) {
+            console.log(updateErr);
+            return res.json("Error");
+          }
+          return res.json(updateResult);
+        });
+      } else {
+        // User doesn't exist, perform an insert
+        const insertSql = "INSERT INTO validation_projects (id_user, id_project, id_teacher_validation, valid_project, date_validation) VALUES (?, ?, ?, ?, ?)";
+        const currentDate = new Date();
+        db.query(insertSql, [idUser, idProject, 2, valid, currentDate], (insertErr, insertResult) => {
+          if (insertErr) {
+            console.log(insertErr);
+            return res.json("Error");
+          }
+          return res.json(insertResult);
+        });
+      }
+    });
+  });
+  
+  app.put('/api/validAllProject/:idGroup/:idProject', (req, res) => {
+    const idProject = req.params.idProject;
+    const idGroup = req.params.idGroup;
+    const selectedIDs  = req.body
+    console.log(selectedIDs)
+   // Step 2: Loop through selected student IDs and insert or update validation status
+  const currentDate = new Date();
+  const updateSql = "UPDATE validation_projects SET valid_project = 1, date_validation = ? WHERE id_user = ? AND id_project = ?";
+  const insertSql = "INSERT INTO validation_projects (id_user, id_project, id_teacher_validation, valid_project, date_validation) VALUES (?, ?, 2, 1, ?)";
+  
+  selectedIDs.forEach((userID) => {
+  //   // Check if user exists in validation_projects table
+    const checkUserSql = "SELECT COUNT(*) AS count FROM validation_projects WHERE id_user = ? AND id_project = ?";
+    db.query(checkUserSql, [userID, idProject], (checkErr, checkResult) => {
+      if (checkErr) {
+        console.log(checkErr);
+        return res.json("Error");
+      }
+      
+      const userExists = checkResult[0].count > 0;
+      
+      // If the user doesn't exist, insert them; otherwise, update validation status
+      if (!userExists) {
+        db.query(insertSql, [userID, idProject, currentDate], (insertErr, insertResult) => {
+          if (insertErr) {
+            console.log(insertErr);
+            return res.json("Error");
+          }
+        });
+      } else {
+        db.query(updateSql, [currentDate, userID, idProject], (updateErr, updateResult) => {
+          if (updateErr) {
+            console.log(updateErr);
+            return res.json("Error");
+          }
+        });
+      }
+    });
+  });
+  
+  return res.json("Success");
+});
+
+// get all student of each group
+app.get('/api/getStudentsGroup2/:idGroup/:idProject', (req, res) => {
+  const idGroup = req.params.idGroup;
+  const idProject = req.params.idProject;
+  // const idSpefific = 3;
+  const selectSql = `SELECT 
+  user.*, user.id as idOfUser, 
+  specifics.*, 
+  project.*, 
+  validation_projects.*,
+  payment.*
+  FROM 
+      user 
+  INNER JOIN specifics ON user.id = specifics.id_user 
+  INNER JOIN projects AS project ON project.id_collection = specifics.id_nameSpecifics 
+  INNER JOIN payment ON payment.id_user = user.id 
+  LEFT JOIN validation_projects ON 
+      validation_projects.id_user = user.id 
+      AND validation_projects.id_project = project.id -- Match on both user.id and project.id
+  WHERE 
+      specifics.id_group = ?
+      AND project.id = ?`;
+  db.query(selectSql,[idGroup, idProject], (error, results) => {
+    if (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal server error' });
+    } else {
+      res.json(results);
+    }
+  });
+});
+
+app.get('/api/get_pushProject/:idProject/:idUser', (req, res) => {
+  const idProject = req.params.idProject;
+  const idUser = req.params.idUser;
+  const selectSql = `SELECT *
+  FROM ((push_porojects
+  INNER JOIN user ON user.id = push_porojects.id_user)
+  INNER JOIN teachers ON teachers.id = push_porojects.id_teacher)
+  WHERE push_porojects.id_project = ? and push_porojects.id_user = ?`;
+  db.query(selectSql, [idProject, idUser], (selectErr, selectResult) => {
+    if (selectErr) {
+      console.log(selectErr);
+      return res.json("Error"); 
+    }
+    // console.log(selectResult);
+    return res.json(selectResult);
+  });
+});
+
 app.listen(8082, () => {
     console.log("Listening on port 8082 ok");
   });

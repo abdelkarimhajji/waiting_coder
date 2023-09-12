@@ -4,7 +4,7 @@ import style from '../sass/dashboard.module.scss'
 import NavbarAdmin from '../components/NavbarAdmin'
 import Footer from "../../components/Footer";
 import SearchAdmin from '../components/SearchAdmin';
-import MainAddUsers from '../components/MainAddUsers';
+import MainValidate from '../components/MainValidate';
 
 function AddUsers() {
   
@@ -19,7 +19,7 @@ useEffect(() => {
       </div>
       <div className={style.nextNav}>
         <SearchAdmin />
-        <MainAddUsers />
+        <MainValidate />
         <Footer />
       </div>
     </div>

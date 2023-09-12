@@ -41,7 +41,21 @@ function MainPushProject() {
         const timeString = `${day}/${month}/${year}`;
         return timeString;
       };
-
+      const fetchNewData = () =>
+      {
+        fetch(`http://localhost:8081/api/get_pushProject/${idProject}/${userId}`)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            setSelectedValuesProjectPush(data);
+            
+          })
+          .catch((error) => console.error(error));
+      }
       const push_project = () => {
         const trimmedValue = inputValue.trim();
         setInputValue('');
@@ -69,13 +83,12 @@ function MainPushProject() {
             // Scroll to the bottom of the div after adding the new message
             divRef.current.scrollTop = divRef.current.scrollHeight;
           }, 100);
+          fetchNewData();
       })
       .catch((error) => {
         console.error('Error pushing data:', error);
       });
     }
-    
-        // console.log("InputValue ", inputValue)
       };
     
     useEffect(() => {
@@ -102,9 +115,10 @@ function MainPushProject() {
           })
           .then((data) => {
             setSelectedValuesProjectPush(data);
+            
           })
           .catch((error) => console.error(error));
-      }, [userId, idProject, selectedValuesProjectPush]);
+      }, [userId, idProject]);
 
       useEffect(() => {
         fetch(`http://localhost:8081/api/get_idTeacher/${userId}`)
@@ -119,7 +133,7 @@ function MainPushProject() {
           })
           .catch((error) => console.error(error));
       }, [userId]);
-
+      
   return (
     <div className={style.container}>
       <div className={style.containerPush}>

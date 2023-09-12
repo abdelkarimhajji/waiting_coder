@@ -17,7 +17,7 @@ import Competition from './pages/Competition';
 import Admin from './admin/pages/Admin';
 import Dashboard from './admin/pages/Dashboard';
 import Groups from './admin/pages/Groups'
-import AddUsers from './admin/pages/AddUsers';
+import Validate from './admin/pages/Validate';
 function App() {
   const [value, setValue] = useState(0);
   
@@ -43,7 +43,7 @@ function App() {
           <Route path="/Admin" element={<Admin />} />
           <Route path="/Admin/Dashboard" element={isLoggedIn ? <Dashboard /> : <Navigate to="/Admin" />} />
           <Route path="/Admin/Groups" element={isLoggedIn ? <Groups /> : <Navigate to="/Admin" />} />
-          <Route path="/Admin/AddUsers" element={isLoggedIn ? <AddUsers /> : <Navigate to="/Admin" />} />
+          <Route path="/Admin/Validate" element={isLoggedIn ? <Validate /> : <Navigate to="/Admin" />} />
           <Route path="/NotFound" element={isLogin ? <NotFound /> : <Navigate to="/" />} />
           <Route path="*" element={isLogin ? <Navigate to="/NotFound" /> : <Navigate to="/" />} />
         </Routes>

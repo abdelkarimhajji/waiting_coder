@@ -70,7 +70,6 @@ function SearchAdmin() {
     setValue('')
     setResultSearch([]);
   }
-  
   return (
     <>
     <div className={style.container}>
@@ -101,17 +100,21 @@ function SearchAdmin() {
       ) : (
         <div>
           {resultSearch.map((item, index) => (
-            <Link key={index} to="" style={{textDecoration: 'none'}}>
-            <div  className={style.containerEachRsult} onClick={() => get_id(item.id)}>
-              <div className={style.containerImgResult}>
-                  <img src={require(`../../imgs/${item.image}`)} alt=""/>
-              </div>
-              <div className={style.containerFirstName}>
-                  <p>{item.firstName} {item.lastName}</p>
-              </div>
-            </div>
-            </Link>
-          ))}
+      <Link key={index} to="" style={{ textDecoration: 'none' }}>
+        <div className={style.containerEachRsult} onClick={() => get_id(item.id)}>
+          <div className={style.containerImgResult}>
+            {item.image !== null ? (
+            <img src={require(`../../imgs/${item.image}`)} alt="" />
+            ):
+            (<img src={require(`../../imgs/error.png`)} alt="" />)
+          }
+          </div>
+          <div className={style.containerFirstName}>
+            <p>{item.firstName} {item.lastName}</p>
+          </div>
+        </div>
+      </Link>
+    ))}
         </div>
       )}
     </div>
