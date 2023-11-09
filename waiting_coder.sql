@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : lun. 04 sep. 2023 à 22:58
+-- Généré le : jeu. 09 nov. 2023 à 21:16
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.0.25
 
@@ -135,10 +135,11 @@ CREATE TABLE `groups` (
 --
 
 INSERT INTO `groups` (`id`, `id_specific`, `name_group`, `group_finished`, `date_finished`, `date_created`) VALUES
-(1, 3, 20, 1, '2023-09-03', '2023-11-27'),
+(1, 3, 20, 0, '2023-09-03', '2023-11-27'),
 (2, 4, 2, 0, '0000-00-00', '2023-10-02'),
-(3, 3, 3, 0, '0000-00-00', '2023-01-20'),
-(4, 6, 4, 0, '0000-00-00', '2023-10-20');
+(3, 3, 3, 1, '0000-00-00', '2023-01-20'),
+(4, 6, 4, 0, '0000-00-00', '2023-10-20'),
+(17, 5, 1337, 0, NULL, '2023-10-31');
 
 -- --------------------------------------------------------
 
@@ -276,8 +277,8 @@ CREATE TABLE `name_specifics` (
 
 INSERT INTO `name_specifics` (`id`, `name`, `shurt_name`) VALUES
 (3, 'Devlopment Web Front-end', 'D-W-F'),
-(4, 'Mobile Front-end', 'M-F'),
-(5, 'Devlopement Web Back-end', 'D-W-B'),
+(4, 'Devlopement Web Back-end', 'D-W-B'),
+(5, 'Mobile Front-end', 'M-F'),
 (6, 'Robotique', 'R'),
 (7, 'Mobile Back-end', 'M-B');
 
@@ -289,20 +290,21 @@ INSERT INTO `name_specifics` (`id`, `name`, `shurt_name`) VALUES
 
 CREATE TABLE `payment` (
   `id` int(255) NOT NULL,
-  `id_specific` int(255) NOT NULL,
   `payment` int(255) NOT NULL,
   `valid` int(25) NOT NULL,
-  `date_payment` date NOT NULL
+  `date_payment` date NOT NULL,
+  `id_user` int(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `payment`
 --
 
-INSERT INTO `payment` (`id`, `id_specific`, `payment`, `valid`, `date_payment`) VALUES
-(1, 3, 300, 1, '2023-08-24'),
-(3, 8, 300, 1, '2023-08-03'),
-(6, 4, 300, 1, '2024-05-02');
+INSERT INTO `payment` (`id`, `payment`, `valid`, `date_payment`, `id_user`) VALUES
+(1, 300, 1, '2023-08-24', 2),
+(3, 300, 1, '2023-08-03', 13),
+(6, 300, 1, '2024-05-02', 14),
+(8, 333, 0, '2023-09-22', 43);
 
 -- --------------------------------------------------------
 
@@ -338,7 +340,7 @@ INSERT INTO `projects` (`id`, `name_project`, `count_exp`, `id_collection`, `ima
 CREATE TABLE `push_porojects` (
   `id` int(255) NOT NULL,
   `id_user` int(255) NOT NULL,
-  `id_teacher` int(255) NOT NULL,
+  `id_teacher` int(255) DEFAULT NULL,
   `id_project` int(255) NOT NULL,
   `message_student` varchar(1000) DEFAULT NULL,
   `time_send_student` varchar(255) DEFAULT NULL,
@@ -351,22 +353,48 @@ CREATE TABLE `push_porojects` (
 --
 
 INSERT INTO `push_porojects` (`id`, `id_user`, `id_teacher`, `id_project`, `message_student`, `time_send_student`, `message_teacher`, `time_send_teacher`) VALUES
-(1, 2, 1, 1, 'this is link of my oroject', '2020-02-02', NULL, NULL),
-(4, 2, 1, 1, NULL, '', 'you do good keep working', '2002-02-02'),
-(8, 2, 1, 1, 'my parents are great', '2222-33-4', NULL, NULL),
-(10, 2, 1, 1, 'my parents are great', '2222-33-4', NULL, NULL),
-(11, 13, 1, 1, 'my parents are great', '2222-33-4', NULL, NULL),
-(12, 2, 1, 2, 'my parents are great', '2222-33-4', NULL, NULL),
-(75, 2, 1, 2, 'ok', '13/8/2023', NULL, NULL),
-(76, 2, 1, 1, 'yes', '13/8/2023', NULL, NULL),
-(77, 2, 1, 3, 'this my first push ok', '13/8/2023', NULL, NULL),
-(78, 2, 1, 1, 'test', '13/8/2023', NULL, NULL),
-(79, 2, 1, 2, 'new message', '13/8/2023', NULL, NULL),
-(80, 2, 1, 1, 'hiw', '17/8/2023', NULL, NULL),
-(81, 2, 1, 3, 'link zobir', '19/8/2023', NULL, NULL),
-(82, 2, 1, 1, 'fffff', '2222/4/8', NULL, NULL),
-(83, 2, 1, 1, 'zobir', '2222/4/8', NULL, NULL),
-(84, 2, 1, 1, 'slm zobir', '19/8/2023', NULL, NULL);
+(1, 2, 1, 1, 'hi techer', '24/9/2023', NULL, NULL),
+(2, 2, 2, 1, NULL, NULL, 'hi student', '24/9/2023'),
+(3, 2, 1, 1, 'hi my teacher 2', '24/9/2023', NULL, NULL),
+(4, 2, 1, 1, 'a aaa', '24/9/2023', NULL, NULL),
+(5, 2, 2, 1, NULL, NULL, 'so what do you want', '24/9/2023'),
+(6, 2, 1, 1, 'i want nothing', '24/9/2023', NULL, NULL),
+(7, 13, 2, 1, NULL, NULL, 'i am the techer', '24/9/2023'),
+(8, 14, 2, 1, NULL, NULL, 'i am the theacher ok', '24/9/2023'),
+(9, 2, 1, 1, 'dd', '24/9/2023', NULL, NULL),
+(10, 2, 1, 1, 'ddd', '24/9/2023', NULL, NULL),
+(11, 2, 1, 1, 'ddd', '24/9/2023', NULL, NULL),
+(12, 2, 1, 1, 'cccc', '24/9/2023', NULL, NULL),
+(13, 43, 2, 1, NULL, NULL, 'so i am the teacher 3', '24/9/2023'),
+(14, 2, 2, 2, NULL, NULL, 'i am the admin ok', '24/9/2023'),
+(15, 2, 2, 4, NULL, NULL, 'hi', '24/9/2023'),
+(16, 2, 2, 1, NULL, NULL, 'ok', '25/9/2023'),
+(17, 2, 1, 1, 'jddhd', '2/10/2023', NULL, NULL),
+(18, 2, 1, 1, 'ddddd', '2/10/2023', NULL, NULL),
+(19, 2, 1, 1, 'hi mehdi', '2/10/2023', NULL, NULL),
+(20, 2, 1, 1, 'sdss', '2/10/2023', NULL, NULL),
+(21, 2, 1, 1, 'hdhdhd', '4/10/2023', NULL, NULL),
+(22, 2, 1, 1, 'abderahman', '4/10/2023', NULL, NULL),
+(23, 2, 2, 2, NULL, NULL, 'hfhf', '4/10/2023'),
+(24, 2, 1, 1, 'jdjdjdj', '5/10/2023', NULL, NULL),
+(25, 2, 1, 1, 'ksskk', '7/10/2023', NULL, NULL),
+(26, 2, 1, 1, 'mohamed', '7/10/2023', NULL, NULL),
+(27, 2, 1, 1, 'yaasin', '7/10/2023', NULL, NULL),
+(28, 2, 2, 1, NULL, NULL, 'bdbd', '7/10/2023'),
+(29, 2, 1, 1, 'haahhaha', '9/10/2023', NULL, NULL),
+(30, 2, 1, 1, 'http/github/houssame', '10/10/2023', NULL, NULL),
+(31, 2, 1, 1, 'linki youssef', '10/10/2023', NULL, NULL),
+(32, 2, 2, 1, NULL, NULL, 'thanks', '10/10/2023'),
+(33, 2, 1, 1, 'rayan', '12/10/2023', NULL, NULL),
+(34, 2, 2, 1, NULL, NULL, 'good project', '12/10/2023'),
+(35, 2, 1, 1, 'this my link', '18/10/2023', NULL, NULL),
+(36, 2, 1, 1, 'http//hakim', '23/10/2023', NULL, NULL),
+(37, 2, 2, 1, NULL, NULL, 'good project', '23/10/2023'),
+(38, 2, 1, 1, 'i am youssef ', '28/10/2023', NULL, NULL),
+(39, 2, 1, 1, 'oussama', '30/10/2023', NULL, NULL),
+(40, 2, 1, 1, 'abderzak', '31/10/2023', NULL, NULL),
+(41, 2, 1, 1, 'madara', '31/10/2023', NULL, NULL),
+(42, 2, 1, 1, 'http//abderahman', '3/11/2023', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -387,8 +415,7 @@ CREATE TABLE `registrement_competition` (
 
 INSERT INTO `registrement_competition` (`id`, `id_user`, `id_competition`, `valid`) VALUES
 (3, 13, 2, 0),
-(4, 14, 2, 0),
-(18, 2, 3, 0);
+(4, 14, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -408,8 +435,7 @@ CREATE TABLE `registrement_events` (
 --
 
 INSERT INTO `registrement_events` (`id`, `id_user`, `id_event`, `valid`) VALUES
-(31, 13, 2, 0),
-(33, 2, 2, 0);
+(31, 13, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -448,17 +474,33 @@ CREATE TABLE `specifics` (
   `validation` int(255) NOT NULL,
   `validation_week` int(255) NOT NULL,
   `id_group` int(255) NOT NULL,
-  `date_register` date NOT NULL
+  `date_register` date NOT NULL,
+  `date_validation` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `specifics`
 --
 
-INSERT INTO `specifics` (`id`, `id_user`, `id_nameSpecifics`, `study_now`, `validation`, `validation_week`, `id_group`, `date_register`) VALUES
-(3, 2, 3, 0, 0, 0, 1, '2020-03-03'),
-(4, 2, 4, 1, 1, 0, 2, '2020-02-03'),
-(8, 13, 3, 1, 0, 1, 1, '2020-02-03');
+INSERT INTO `specifics` (`id`, `id_user`, `id_nameSpecifics`, `study_now`, `validation`, `validation_week`, `id_group`, `date_register`, `date_validation`) VALUES
+(3, 2, 3, 1, 1, 1, 1, '2020-03-03', '2023-09-14'),
+(4, 2, 4, 0, 1, 1, 2, '2020-02-03', NULL),
+(8, 13, 3, 1, 1, 1, 1, '2020-02-03', '2023-09-14'),
+(9, 14, 3, 1, 1, 1, 1, '2023-03-04', '2023-09-14'),
+(11, 32, 6, 1, 0, 0, 4, '2023-09-20', NULL),
+(12, 33, 3, 1, 0, 0, 1, '2023-09-20', NULL),
+(13, 34, 3, 1, 0, 0, 1, '2023-09-20', NULL),
+(14, 35, 3, 1, 0, 0, 1, '2023-09-20', NULL),
+(15, 36, 3, 1, 0, 0, 1, '2023-09-20', NULL),
+(16, 37, 3, 1, 0, 0, 1, '2023-09-21', NULL),
+(17, 38, 6, 1, 0, 0, 4, '2023-09-21', NULL),
+(18, 39, 3, 1, 0, 0, 1, '2023-09-21', NULL),
+(19, 40, 3, 1, 0, 0, 1, '2023-09-21', NULL),
+(20, 41, 3, 1, 0, 0, 1, '2023-09-22', NULL),
+(21, 42, 3, 1, 0, 0, 1, '2023-09-22', NULL),
+(22, 43, 3, 1, 1, 0, 1, '2023-09-22', '2023-10-01'),
+(23, 44, 3, 1, 0, 0, 1, '2023-09-22', NULL),
+(24, 2, 5, 0, 1, 0, 17, '2025-03-03', '2025-06-04');
 
 -- --------------------------------------------------------
 
@@ -481,7 +523,8 @@ CREATE TABLE `teachers` (
 --
 
 INSERT INTO `teachers` (`id`, `first_name`, `last_name`, `email`, `number_phone`, `address`, `image`) VALUES
-(1, 'omar', 'hajji', 'hajjikarim530@gmail.com', '0617591321', 'rue mohamed ben abdelouahabe', NULL);
+(1, 'omar', 'hajji', 'hajjikarim530@gmail.com', '0617591321', 'rue mohamed ben abdelouahabe', NULL),
+(2, 'admin', 'admin', 'admin@gamil.com', '617591321', 'rue hassan 2', 'karim.png');
 
 -- --------------------------------------------------------
 
@@ -500,7 +543,8 @@ CREATE TABLE `teacher_groups` (
 --
 
 INSERT INTO `teacher_groups` (`id`, `id_teacher`, `id_group`) VALUES
-(1, 1, 1);
+(1, 1, 1),
+(13, 1, 17);
 
 -- --------------------------------------------------------
 
@@ -553,7 +597,20 @@ INSERT INTO `user` (`id`, `firstName`, `password`, `lastName`, `email`, `phone`,
 (2, 'Abdelkarim', 'karim', 'hajji', 'hajji@gmail.com', '0617591321', 'karim.png', '2023-03-20'),
 (13, 'nassim', 'achab', 'achab', 'achab@gamil.com', '0617591321', 'oussama.png', '2023-02-10'),
 (14, 'abdo', 'abdo', 'abdo', 'abdo@gamil.com', '0617591321', 'oussama.png', '2024-10-30'),
-(15, 'achraf', 'bakkali', 'bakkali', 'bakkali@gamil.com', '0617591321', 'oussama.png', '2024-02-20');
+(15, 'achraf', 'bakkali', 'bakkali', 'bakkali@gamil.com', '0617591321', 'oussama.png', '2024-02-20'),
+(32, 'hicham', '@hajjicode', 'hajji', 'hicham@gmail.com', '0617591321', 'ahajji.jpg', '2023-09-20'),
+(33, 'test', '@testcode', 'test', 'test@gamil.com', '0617593121', 'ahajji.jpg', '2023-09-20'),
+(34, 'test', '@testcode', 'test', 'test@gamil.com', '0617591321', 'ahajji.jpg', '2023-09-20'),
+(35, 'test', '@testcode', 'test', 'test@gamil', '0617591321', 'ahajji.jpg', '2023-09-20'),
+(36, 'slm', '@slmcode', 'slm', 'slm@gmil.com', '0617591321', 'ahajji.jpg', '2023-09-20'),
+(37, 'test', '@testcode', 'test', 'test@gamildd', '0617591321', 'ahajji.jpg', '2023-09-21'),
+(38, 'ssd', '@ssdcode', 'ssd', 'ssk@gmail.com', '0617691321', 'ahajji.jpg', '2023-09-21'),
+(39, 'dddd', '@ddddcode', 'dddd', 'ddd@gamil.com', '0617591321', 'ahajji.jpg', '2023-09-21'),
+(40, 'dddd', '@ddddcode', 'dddd', 'ddd@gmial.com', '0617592123', 'ahajji.jpg', '2023-09-21'),
+(41, 'karim', '@karimcode', 'karim', 'karim@gamil.com', '0617591332', 'ahajji.jpg', '2023-09-22'),
+(42, 'karim', '@karimcode', 'karim', 'karism@gamil.com', '0617591332', 'ahajji.jpg', '2023-09-22'),
+(43, 'karim', '@karimcode', 'karim', 'karidsm@gamil.com', '0617591332', 'ahajji.jpg', '2023-09-22'),
+(44, 'jad', '@jadcode', 'jad', 'jad@gamil.com', '0617591321', 'ahajji.jpg', '2023-09-22');
 
 -- --------------------------------------------------------
 
@@ -566,7 +623,7 @@ CREATE TABLE `validation_projects` (
   `id_user` int(255) NOT NULL,
   `id_project` int(255) NOT NULL,
   `id_teacher_validation` int(255) NOT NULL,
-  `valid` int(255) NOT NULL,
+  `valid_project` int(255) NOT NULL,
   `date_validation` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -574,10 +631,19 @@ CREATE TABLE `validation_projects` (
 -- Déchargement des données de la table `validation_projects`
 --
 
-INSERT INTO `validation_projects` (`id`, `id_user`, `id_project`, `id_teacher_validation`, `valid`, `date_validation`) VALUES
-(1, 2, 1, 1, 1, '0000-00-00'),
-(2, 2, 2, 1, 1, '2020-02-02'),
-(3, 13, 1, 1, 1, '2202-02-02');
+INSERT INTO `validation_projects` (`id`, `id_user`, `id_project`, `id_teacher_validation`, `valid_project`, `date_validation`) VALUES
+(1, 2, 1, 1, 1, '2023-10-31'),
+(2, 2, 2, 1, 0, '2023-09-10'),
+(3, 13, 1, 1, 1, '2023-10-31'),
+(4, 14, 1, 2, 1, '2023-10-31'),
+(5, 13, 2, 2, 0, '2023-09-10'),
+(6, 14, 2, 2, 1, '2023-09-10'),
+(7, 2, 3, 2, 1, '2023-09-10'),
+(8, 13, 3, 2, 1, '2023-09-10'),
+(9, 14, 3, 2, 1, '2023-09-10'),
+(10, 2, 4, 2, 1, '2023-09-11'),
+(22, 43, 2, 2, 1, '2023-10-02'),
+(23, 43, 1, 2, 1, '2023-10-31');
 
 --
 -- Index pour les tables déchargées
@@ -660,7 +726,7 @@ ALTER TABLE `name_specifics`
 --
 ALTER TABLE `payment`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_specific` (`id_specific`);
+  ADD KEY `id_user` (`id_user`);
 
 --
 -- Index pour la table `projects`
@@ -778,7 +844,7 @@ ALTER TABLE `events`
 -- AUTO_INCREMENT pour la table `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT pour la table `languages`
@@ -820,7 +886,7 @@ ALTER TABLE `name_specifics`
 -- AUTO_INCREMENT pour la table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pour la table `projects`
@@ -832,19 +898,19 @@ ALTER TABLE `projects`
 -- AUTO_INCREMENT pour la table `push_porojects`
 --
 ALTER TABLE `push_porojects`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT pour la table `registrement_competition`
 --
 ALTER TABLE `registrement_competition`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT pour la table `registrement_events`
 --
 ALTER TABLE `registrement_events`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT pour la table `ressources_projects`
@@ -856,19 +922,19 @@ ALTER TABLE `ressources_projects`
 -- AUTO_INCREMENT pour la table `specifics`
 --
 ALTER TABLE `specifics`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT pour la table `teachers`
 --
 ALTER TABLE `teachers`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `teacher_groups`
 --
 ALTER TABLE `teacher_groups`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT pour la table `tools`
@@ -880,13 +946,13 @@ ALTER TABLE `tools`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT pour la table `validation_projects`
 --
 ALTER TABLE `validation_projects`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Contraintes pour les tables déchargées
@@ -932,7 +998,7 @@ ALTER TABLE `more_info_projects`
 -- Contraintes pour la table `payment`
 --
 ALTER TABLE `payment`
-  ADD CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`id_specific`) REFERENCES `specifics` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `projects`

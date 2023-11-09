@@ -3,6 +3,7 @@ import { useLocation, useNavigate , Link} from "react-router-dom";
 import style from "../sass/eachlevel.module.scss"
 import { UserContext } from "../utils/UserContext";
 import karim from '../imgs/karim.png'
+import {FcApproval} from 'react-icons/fc'
 
 function EachLevel({setIdCollectionValue}) {
     const [selectedValue, setSelectedValue] = useState('');
@@ -72,7 +73,7 @@ function EachLevel({setIdCollectionValue}) {
       </div>
       <div className={style.containerInfo}>
         <p className={style.name}>{item.firstName}</p>
-        <p>@{item.lastName}</p>
+        <p>@{item.lastName} <FcApproval /></p>
         <p>Count Projects: {item.valid_project_count}</p>
         <p>Count Events: {item.valid_event_count}</p>
         <p>Count Compitions: {item.valid_competition_count}</p>

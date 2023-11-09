@@ -344,6 +344,10 @@
                         font-weight: bold;
                         color: white;
                     }
+                    &:last-child
+                    {
+                        margin-bottom: 20px;
+                    }
                 }
                 .resLink {
                    width: 80%;

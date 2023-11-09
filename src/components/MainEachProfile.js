@@ -14,6 +14,7 @@ import {TiHtml5} from 'react-icons/ti';
 import {FaUpload} from 'react-icons/fa';
 import {GiStarShuriken} from 'react-icons/gi';
 import {BsFillCalendar2EventFill} from 'react-icons/bs';
+
 function MainEachProfile({idCollectionValue}) {
 
     const [selectLocalStor, setSelectLocalStor] = useState()

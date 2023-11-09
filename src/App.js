@@ -18,6 +18,7 @@ import Admin from './admin/pages/Admin';
 import Dashboard from './admin/pages/Dashboard';
 import Groups from './admin/pages/Groups'
 import Validate from './admin/pages/Validate';
+import AddUser from './admin/pages/AddUser';
 function App() {
   const [value, setValue] = useState(0);
   
@@ -44,6 +45,7 @@ function App() {
           <Route path="/Admin/Dashboard" element={isLoggedIn ? <Dashboard /> : <Navigate to="/Admin" />} />
           <Route path="/Admin/Groups" element={isLoggedIn ? <Groups /> : <Navigate to="/Admin" />} />
           <Route path="/Admin/Validate" element={isLoggedIn ? <Validate /> : <Navigate to="/Admin" />} />
+          <Route path="/Admin/AddUser" element={isLoggedIn ? <AddUser /> : <Navigate to="/Admin" />} />
           <Route path="/NotFound" element={isLogin ? <NotFound /> : <Navigate to="/" />} />
           <Route path="*" element={isLogin ? <Navigate to="/NotFound" /> : <Navigate to="/" />} />
         </Routes>

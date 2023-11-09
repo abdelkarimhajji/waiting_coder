@@ -130,6 +130,12 @@ function NavbarAdmin(props) {
             <p className={style.twoItem}><RiPassValidLine className={style.AiOutlineMenuFold} /></p>
           </div>
         </Link>
+        <Link to="/Admin/AddUser" className={style.Link}>
+          <div className={style.containItemNav}>
+            <p className={style.oneItem}>Validate</p>
+            <p className={style.twoItem}><MdGroupAdd className={style.AiOutlineMenuFold} /></p>
+          </div>  
+        </Link>
         <Link to="/Admin" className={style.Link}  onClick={logout}>
           <div className={style.containItemNav}>
             <p className={style.oneItem}>Sign Out</p>

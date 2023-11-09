@@ -23,15 +23,25 @@ function MainPushProject() {
     const [currentTime, setCurrentTime] = useState(new Date());
 
 
+    const goDown = () =>
+    {
+      setTimeout(() => {
+        // Scroll to the bottom of the div after adding the new message
+        divRef.current.scrollTop = divRef.current.scrollHeight;
+      }, 100);
+    }
 
     const update_id_of_project = (id) => {
         localStorage.setItem('idProject', id);
         SetidProject(id); // You can still update the state for subsequent renders if needed
+        goDown()
       };
-    //     useEffect(() => {
-    // }, [seletedIdTeacher]);
-    // console.log("seletedIdTeacher", seletedIdTeacher?.[0]?.id_teacher || "No teacher selected");
-
+      useEffect(() => {
+        setTimeout(() => {
+          // Scroll to the bottom of the div after adding the new message
+          divRef.current.scrollTop = divRef.current.scrollHeight;
+        }, 100);
+      }, []);
 
     const getTime = () => {
         const now = new Date();
@@ -52,7 +62,6 @@ function MainPushProject() {
           })
           .then((data) => {
             setSelectedValuesProjectPush(data);
-            
           })
           .catch((error) => console.error(error));
       }
@@ -115,7 +124,7 @@ function MainPushProject() {
           })
           .then((data) => {
             setSelectedValuesProjectPush(data);
-            
+            console.log(data)
           })
           .catch((error) => console.error(error));
       }, [userId, idProject]);
@@ -171,7 +180,7 @@ function MainPushProject() {
                         </div>
                     </div>
                     )}
-                     {item.message_teacher !== null && ( 
+                    {item.message_teacher !== null && ( 
                     <div className={style.containerResLink}>
                         <p className={style.nameRes}>{item.first_name}: {item.time_send_teacher}</p>
                         <div className={style.resLink}>
@@ -190,14 +199,14 @@ function MainPushProject() {
       <div className={style.push}>
             <p className={style.title}>Put the link here:</p>
             {/* conatainer Input */}
-            <div className={style.containerInput}>
+            <form className={style.containerInput}>
                 <input type="text" className={style.inputPush}  placeholder="hello i am ok that" value={inputValue} onChange={(e) => setInputValue(e.target.value)}/>
                 <div className={style.containerAllIcon}>
                     <div className={style.containerIcon} onClick={() => push_project()}>
                         <TbSend className={style.icon}/>
                     </div>
                 </div>
-            </div>
+            </form>
             {/* finsh container input */}
         </div>
         {/* finish push */}

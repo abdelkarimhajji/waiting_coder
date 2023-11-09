@@ -2,6 +2,9 @@
 const express = require("express");
 const mysql = require('mysql');
 const cors = require('cors');
+const multer = require("multer");
+const path = require("path");
+const { keyframes } = require("@emotion/react");
 
 const app = express();
 app.use(cors());
@@ -29,7 +32,6 @@ app.post('/signup', (req, res) => {
       }
     //   console.log(selectResult);
       if (selectResult.length > 0) {
-        console.log(selectResult);
         const adminId = selectResult[0].id;
         return res.json({ status: 1, adminId });
       }
@@ -107,7 +109,6 @@ app.post('/signup', (req, res) => {
         return res.json(results);
       }
     };
-  
     executeNextQuery(0);
   });
   
@@ -300,7 +301,6 @@ app.get('/api/getMonthsUesrs/:chooseYear', (req, res) => {
     // Access the individual values
     const checkedStudentIds = requestData.checkedStudentIds;
     const selectIdGroup = requestData.selectIdGroup;
-    console.log(selectIdGroup)
     // Loop through the student IDs and update the validationWeek column
     checkedStudentIds.forEach((studentId) => {
       const updateQuery = 'UPDATE specifics SET validation_week = 1 WHERE id_user = ? AND id_group = ?';
@@ -482,6 +482,30 @@ app.get('/api/getMonthsUesrs/:chooseYear', (req, res) => {
     });
   });
   
+  // get all student on group only 
+
+  app.get('/api/getStudentsGroupOnly/:idGroup', (req, res) => {
+    const idGroup = req.params.idGroup;
+    const selectSql = `SELECT 
+    user.*, user.id as idOfUser, 
+    specifics.*,  
+    payment.*
+    FROM 
+        user 
+    INNER JOIN specifics ON user.id = specifics.id_user 
+    INNER JOIN payment ON payment.id_user = user.id 
+    WHERE 
+        specifics.id_group = ?`;
+    db.query(selectSql,[idGroup], (error, results) => {
+      if (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+      } else {
+        res.json(results);
+      }
+    });
+  });
+
   // validate each project of student
   app.put('/api/validEachProject/:idUser/:idProject', (req, res) => {
     const idUser = req.params.idUser;
@@ -525,7 +549,6 @@ app.get('/api/getMonthsUesrs/:chooseYear', (req, res) => {
     const idProject = req.params.idProject;
     const idGroup = req.params.idGroup;
     const selectedIDs  = req.body
-    console.log(selectedIDs)
    // Step 2: Loop through selected student IDs and insert or update validation status
   const currentDate = new Date();
   const updateSql = "UPDATE validation_projects SET valid_project = 1, date_validation = ? WHERE id_user = ? AND id_project = ?";
@@ -603,16 +626,183 @@ app.get('/api/get_pushProject/:idProject/:idUser', (req, res) => {
   FROM ((push_porojects
   INNER JOIN user ON user.id = push_porojects.id_user)
   INNER JOIN teachers ON teachers.id = push_porojects.id_teacher)
-  WHERE push_porojects.id_project = ? and push_porojects.id_user = ?`;
+  WHERE push_porojects.id_project = ? and push_porojects.id_user = ?
+  ORDER BY push_porojects.id ASC`;
   db.query(selectSql, [idProject, idUser], (selectErr, selectResult) => {
     if (selectErr) {
       console.log(selectErr);
       return res.json("Error"); 
     }
-    // console.log(selectResult);
     return res.json(selectResult);
   });
 });
+
+app.post("/api/send_messageFromTeacher", (req, res) => {
+  const { id_user, id_teacher, message, id_project, time_send } = req.body;
+  // Insert data into the database using a database library or ORM
+  // Example with MySQL
+  const sql = "INSERT INTO push_porojects (id_user, id_teacher, id_project, message_teacher, time_send_teacher) VALUES (?, ?, ?, ?, ?)";
+  db.query(sql, [id_user, id_teacher, id_project, message, time_send], (error, result) => {
+    if (error) {
+      console.error(error);
+      return res.status(500).json({ error: "Error inserting data" });
+    }
+    return res.status(200).json({ message: "Data inserted successfully" });
+  });
+});
+
+// validate all specific
+
+app.put('/api/validAllStudentSepcific/:idGroup/:idSpefific', (req, res) => {
+  const idSpefific = req.params.idSpefific;
+  const idGroup = req.params.idGroup;
+  const selectedIDs  = req.body;
+ // Step 2: Loop through selected student IDs and insert or update validation status
+const currentDate = new Date();
+const updateSql = "UPDATE specifics SET validation = 1, date_validation = ? WHERE id_user = ? AND id_nameSpecifics = ?";
+
+selectedIDs.forEach((userID) => {
+  
+      db.query(updateSql, [currentDate, userID, idSpefific], (insertErr, insertResult) => {
+        if (insertErr) {
+          console.log(insertErr);
+          return res.json("Error");
+        }
+  });
+});
+return res.json("Success");
+});
+
+
+// valid each student specific
+
+app.put('/api/validEachStudentSpecific/:idUser/:idSpefific', (req, res) => {
+  const idUser = req.params.idUser;
+  const idSpecific = req.params.idSpefific;
+  
+  // User exists, perform an update
+  const updateSql = "UPDATE specifics SET validation = 1, date_validation = ? WHERE id_user = ? AND id_nameSpecifics = ?";
+  const currentDate = new Date();
+  
+  db.query(updateSql, [currentDate, idUser, idSpecific], (insertErr, insertResult) => {
+    if (insertErr) {
+      console.log(insertErr);
+      res.json({ status: "Error" });
+    } else {
+      res.json({ status: "Success" });
+    }
+  });
+});
+
+
+// Set up multer for file upload
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    const destinationPath = path.join(__dirname, "../../waiting_coder/src/imgs");
+    // console.log(destinationPath)
+    cb(null, destinationPath); // Specify the directory where uploaded files will be stored
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname); // Use the original filename
+  },
+});
+
+const upload = multer({ storage: storage });
+
+// Handle the file upload
+app.post("/api/upload", upload.single("image"), (req, res) => {
+  const { firstName, lastName, email, number, idSpecific, idGroup, payment } = req.body;
+  const uploadedImage = req.file;
+  const currentDate = new Date();
+  let valid = 0;
+
+  // Check if payment is equal to 300, and if so, set valid to 1
+  if (payment === '300') {
+    valid = 1;
+  }
+
+  const selectUser = 'SELECT id FROM user WHERE email = ?';
+  db.query(selectUser, [email], (error, idResult) => {
+    if (error) {
+      console.error('Error querying user:', error);
+      res.status(500).json({ message: 'Error querying user' });
+      return;
+    }
+
+    // Check if a user with the same email already exists
+    if (idResult.length !== 0) {
+      // User with the same email exists, handle it accordingly
+      console.log('User with the same email already exists');
+      // You can send a response indicating that the user already exists
+      res.status(409).json({ message: 'User already exists' });
+    } else {
+      // User with the same email doesn't exist, proceed to insert
+      const insertUser = 'INSERT INTO user(firstName, password, lastName, email, phone, image, date_registered) VALUES (?, ?, ?, ?, ?, ?, ?)';
+      db.query(insertUser, [firstName, '@' + lastName + 'code', lastName, email, number, uploadedImage.filename, currentDate], (insertError, userResult) => {
+        if (insertError) {
+          console.error('Error inserting into user:', insertError);
+          res.status(500).json({ message: 'Error inserting into user' });
+          return;
+        }
+
+        // Retrieve the ID of the newly inserted user
+        const userId = userResult.insertId;
+
+        // Insert into the `specifics` table or another table
+        const insertSpecific = 'INSERT INTO specifics(id_user, id_nameSpecifics, study_now, validation, validation_week, id_group, date_register) VALUES (?, ?, ?, ?, ?, ?, ?)';
+        db.query(insertSpecific, [userId, idSpecific, 1, 0, 0, idGroup, currentDate], (specificError, specificResult) => {
+          if (specificError) {
+            console.error('Error inserting into specifics:', specificError);
+            res.status(500).json({ message: 'Error inserting into specifics' });
+            return;
+          }
+
+          if (payment) {
+            // Payment information is provided, insert it into the `payment` table
+            const insertPayment = 'INSERT INTO payment(payment, valid, date_payment, id_user) VALUES (?, ?, ?, ?)';
+            db.query(insertPayment, [payment, valid, currentDate, userId], (paymentError, paymentResult) => {
+              if (paymentError) {
+                console.error('Error inserting into payment:', paymentError);
+                res.status(500).json({ message: 'Error inserting into payment' });
+                return;
+              }
+
+              // Send a success response if everything was successful
+              res.status(200).json({ message: "Image uploaded successfully" });
+            });
+          } else {
+            // No payment information provided, send a success response
+            res.status(200).json({ message: "Image uploaded successfully" });
+          }
+        });
+      });
+    }
+  });
+});
+
+
+// get groups with condition specific
+
+app.get('/api/getGroupsConditonSpecific/:idSpecific', (req, res) => {
+  const idSpecific = req.params.idSpecific;
+  const query = `SELECT groups.id, groups.name_group 
+  FROM groups LEFT JOIN ( SELECT id_group, COUNT(*) as count_specifics 
+  FROM specifics WHERE specifics.id_nameSpecifics = ? GROUP BY id_group ) 
+  AS grouped_specifics ON groups.id = grouped_specifics.id_group 
+  WHERE (grouped_specifics.count_specifics <= 12 OR grouped_specifics.count_specifics IS NULL) 
+  AND (groups.id_specific = ?)`;
+
+  db.query(query, [idSpecific, idSpecific], (error, results) => {
+    if (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal server error' });
+    } else {
+      res.json(results);
+    }
+  });
+});
+
+
 
 app.listen(8082, () => {
     console.log("Listening on port 8082 ok");

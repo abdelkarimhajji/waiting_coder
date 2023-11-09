@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import style from '../sass/mainaddusers.module.scss'
+import style from '../sass/mainvalidate.module.scss'
 import {HiFolderRemove} from 'react-icons/hi'
 import karim from '../../imgs/karim.png'
-
+import {BsFillSendFill} from 'react-icons/bs'
+import {TbViewfinder} from 'react-icons/tb'
 function MainValidate() {
     const [selectOldGroups, setSelectOldGroups] = useState([]);
     const [selectCurrentGroups, setSelectCurrentGroups] = useState([]);
@@ -26,9 +27,24 @@ function MainValidate() {
     const [idProject2, setIdProject2] = useState(null);
     const [checkboxes, setCheckboxes] = useState({});
     const [selectAllChecked, setSelectAllChecked] = useState(false);
-    const [count, setCount] = useState(0)
-    const [idUser, setIdUser] = useState(0)
+    const [idUser, setIdUser] = useState(0);
+    const [inputValue, setInputValue] = useState('');
+    const divRef = useRef(null);
 
+    const goDown = () =>
+    {
+      setTimeout(() => {
+        // Scroll to the bottom of the div after adding the new message
+        divRef.current.scrollTop = divRef.current.scrollHeight;
+      }, 100);
+    }
+    useEffect(() => {
+      setTimeout(() => {
+        if (divRef.current) {
+          divRef.current.scrollTop = divRef.current.scrollHeight;
+        }
+      }, 300);
+    }, []);
     useEffect(() => {
         fetch(`http://localhost:8082/api/getOldGroups`)
           .then((response) => {
@@ -63,7 +79,14 @@ function MainValidate() {
           })
           .catch((error) => console.error(error));
         }, []);
-
+        const handelRestAllCheckbox = () =>
+        {
+          const updatedCheckboxes = {};
+          for (let i = 0; i < allStudentGroup.length; i++) {
+            updatedCheckboxes[allStudentGroup[i].idOfUser] = false
+          }
+          setCheckboxes(updatedCheckboxes);
+        }
         const handelChangeOldGroup = (event) =>
         {
             const selectedValue = event.target.value;
@@ -74,11 +97,7 @@ function MainValidate() {
             setValueSelect3('')
             setAllStudentGroup([]);
             setSelectAllChecked(false)
-            const updatedCheckboxes = {};
-            for (let i = 0; i < allStudentGroup.length; i++) {
-              updatedCheckboxes[allStudentGroup[i].idOfUser] = false
-            }
-            setCheckboxes(updatedCheckboxes);
+            handelRestAllCheckbox()
         }
         const handelChangeCurruntlyGroup = (event) =>
         {
@@ -91,11 +110,7 @@ function MainValidate() {
             setValueSelect3('')
             setAllStudentGroup([]);
             setSelectAllChecked(false)
-            const updatedCheckboxes = {};
-            for (let i = 0; i < allStudentGroup.length; i++) {
-              updatedCheckboxes[allStudentGroup[i].idOfUser] = false
-            }
-            setCheckboxes(updatedCheckboxes);
+            handelRestAllCheckbox()
         }
 
         const handelChangeProject = (event) =>
@@ -104,11 +119,7 @@ function MainValidate() {
             setValueSelect3(selectedValue)
             setIdProject(selectedValue);
             setSelectAllChecked(false)
-            const updatedCheckboxes = {};
-            for (let i = 0; i < allStudentGroup.length; i++) {
-              updatedCheckboxes[allStudentGroup[i].idOfUser] = false
-            }
-            setCheckboxes(updatedCheckboxes);
+            handelRestAllCheckbox();
         }
 
         useEffect(() => {
@@ -139,36 +150,37 @@ function MainValidate() {
               })
               .then((data) => {
                 setAllStudentGroup(data);
-                console.log("all student ",data)
               })
               .catch((error) => console.error(error));
           }, [idProject]);
-         
+          
+          const handelCheckedCheckbox = () =>
+          {
+             let counts = 0
+             for(let item in checkboxes)
+             {
+                 if (checkboxes[item] === true)
+                   counts++;
+             }
+             console.log("counts ", counts)
+             if (counts === allStudentGroup.length && counts !== 0)
+             {
+               setSelectAllChecked(true)
+               counts = 0;
+             }
+             else
+               setSelectAllChecked(false)
+          }
   const toggleCheckbox = (id) => {
-    console.log("id  ",id)
-    let updatedCheckboxes = {...checkboxes};
-    let keys = Object.keys(allStudentGroup)
-    for(let i = 0; i < allStudentGroup.length; i++)
-        updatedCheckboxes[id] = !updatedCheckboxes[id];
-    
-  setCheckboxes(updatedCheckboxes)
+      const updatedCheckboxes = { ...checkboxes };
+      updatedCheckboxes[id] = !updatedCheckboxes[id];
+      setCheckboxes(updatedCheckboxes);
   };
 
-  useEffect(() => {
-    let counts = 0
-    for(let item in checkboxes)
-    {
-        if (checkboxes[item] === true)
-          counts++;
-    }
-    if (counts === 3)
-    {
-      setSelectAllChecked(true)
-      counts = 0;
-    }
-    else
-      setSelectAllChecked(false)
-  }, [checkboxes]);
+    useEffect(() => {
+      handelCheckedCheckbox()
+    }, [checkboxes]);
+  
 
   const handleSelectAll = () => {
     const newSelectAllChecked = !selectAllChecked;
@@ -180,7 +192,20 @@ function MainValidate() {
     }
     setCheckboxes(updatedCheckboxes);
   };
-  
+  const fetchNewAllStudent = () => 
+  {
+    fetch(`http://localhost:8082/api/getStudentsGroup2/${idGroup2}/${idProject2}`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      setAllStudentGroup2(data);
+    })
+    .catch((error) => console.error(error));
+  }
   const handlCklickEachValid = (idUser) => {
     fetch(`http://localhost:8082/api/validEachProject/${parseInt(idUser)}/${parseInt(idProject)}`, {
       method: 'PUT',
@@ -191,6 +216,7 @@ function MainValidate() {
       .then((response) => response.json())
       .then((responseData) => {
         fetchNewData();
+        fetchNewAllStudent();
       })
       .catch((error) => {
         console.error('Error pushing data:', error);
@@ -207,7 +233,6 @@ function MainValidate() {
       })
       .then((data) => {
         setAllStudentGroup(data);
-        console.log("all student ", data);
       })
       .catch((error) => console.error(error));
   };
@@ -221,42 +246,71 @@ function MainValidate() {
         selectedIDs.push(id);
       }
     }
-    console.log("selectedIDs ",selectedIDs)
-    fetch(`http://localhost:8082/api/validAllProject/${parseInt(idGroup)}/${parseInt(idProject)}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(selectedIDs)
-    })
-      .then((response) => response.json())
-      .then((responseData) => {
-        fetchNewData();
+    if (selectedIDs.length > 0)
+    {
+      fetch(`http://localhost:8082/api/validAllProject/${parseInt(idGroup)}/${parseInt(idProject)}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(selectedIDs)
       })
-      .catch((error) => {
-        console.error('Error pushing data:', error);
-      });
+        .then((response) => response.json())
+        .then((responseData) => {
+          handelRestAllCheckbox();
+          fetchNewData();
+        })
+        .catch((error) => {
+          console.error('Error pushing data:', error);
+        });
+    }
+
   }
 
+  const getConversation = () =>
+  {
+    fetch(`http://localhost:8082/api/get_pushProject/${idProject2}/${idUser}`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      setAllConversationStudent(data);
+    })
+    .catch((error) => console.error(error));
+  }
 
   // handel function 2 
   const handelChangeOldGroup2 = (event) =>
   {
+    // setAllStudentGroup2([])
       const selectedValue = event.target.value;
       setValueSelect4(selectedValue)
       setIdspecific2(selectedValue.split('/')[0])
       setIdGroup2(selectedValue.split('/')[1])
       setValueSelect5('')
       setValueSelect6('')
+      newProject()
+      setIdUser(null)
+      setIdProject2(null)
+      goDown();
   }
   const handelChangeCurruntlyGroup2 = (event) =>
   {
+    // setAllStudentGroup2([])
       const selectedValue = event.target.value;
       setValueSelect5(selectedValue)
       setIdspecific2(selectedValue.split('/')[0])
       setIdGroup2(selectedValue.split('/')[1])
       setValueSelect4('')
       setValueSelect6('')
+      newProject()
+      setIdUser(null)
+      setIdProject2(null)
+      goDown();
+      // getConversation()
   }
 
   const handelChangeProject2 = (event) =>
@@ -277,10 +331,11 @@ function MainValidate() {
       })
       .then((data) => {
         setAllStudentGroup2(data);
-        setIdUser(data[0].idOfUser)
+        if (data.length > 0)
+          setIdUser(data[0].idOfUser)
       })
       .catch((error) => console.error(error));
-  }, [idProject2]);
+  }, [idProject2, idGroup2]);
 
   useEffect(() => {
     fetch(`http://localhost:8082/api/getProjectSpecific/${idSpefific2}`)
@@ -300,12 +355,9 @@ function MainValidate() {
       .catch((error) => console.error(error));
   }, [idSpefific2]);
 
-  const handelClickUser = (idUser) =>
+  const newProject = () =>
   {
-      setIdUser(idUser)
-  }
-  useEffect(() => {
-    fetch(`http://localhost:8082/api/get_pushProject/${idProject2}/${idUser}`)
+    fetch(`http://localhost:8082/api/getProjectSpecific/${idSpefific2}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -313,16 +365,122 @@ function MainValidate() {
         return response.json();
       })
       .then((data) => {
-        setAllConversationStudent(data);
+        setNameSpecific2(data);
+        if (data.length > 0) {
+          setIdProject2(data[0].id);
+          setValueSelect6(data[0].id)
+        }
       })
       .catch((error) => console.error(error));
-  }, [idUser]);
+  }
+  const handelClickUser = (idUser) =>
+  {
+      setIdUser(idUser)
+      goDown()
+  }
 
+  useEffect(() => {
+    getConversation();
+  }, [idUser, idProject2]);
+
+  // handel send message
+  const getTime = () => {
+    const now = new Date();
+    const day = now.getDate();
+    const month = now.getMonth() + 1; // Months are 0-indexed, so add 1
+    const year = now.getFullYear();
+    const timeString = `${day}/${month}/${year}`;
+    return timeString;
+  };
+  const postData = {
+    id_user: idUser,
+    id_teacher: 2,
+    message: inputValue,
+    id_project: idProject2,
+    time_send: getTime(),
+  };
+  const handelCklickSendMessage = () =>
+  {
+    if(inputValue !== '' && idUser !== null) 
+    {
+      fetch('http://localhost:8082/api/send_messageFromTeacher', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(postData),
+      })
+        .then((response) => response.json())
+        .then((responseData) => {
+          setInputValue('');
+          getConversation();
+          setTimeout(() => {
+              // Scroll to the bottom of the div after adding the new message
+              divRef.current.scrollTop = divRef.current.scrollHeight;
+            }, 100);
+        })
+        .catch((error) => {
+          console.error('Error pushing data:', error);
+        });
+    }
+  }
+
+  // handel valid specific
+
+  const handelValidSpecificAll = () =>
+  {
+    const selectedIDs = [];
+
+    for (const id in checkboxes) {
+      if (checkboxes[id] === true) {
+        selectedIDs.push(id);
+      }
+    }
+    if(selectedIDs.length > 0)
+    {
+      fetch(`http://localhost:8082/api/validAllStudentSepcific/${parseInt(idGroup)}/${parseInt(idSpefific)}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(selectedIDs)
+      })
+        .then((response) => response.json())
+        .then((responseData) => {
+          handelRestAllCheckbox()
+          fetchNewData();
+        })
+        .catch((error) => {
+          console.error('Error pushing data:', error);
+        });
+    }
+  }
+  // valid each student specific
+
+  const handelVlidEachStudentSpecific = (idUser) =>
+  {
+    console.log("idUser ",idUser)
+    fetch(`http://localhost:8082/api/validEachStudentSpecific/${parseInt(idUser)}/${parseInt(idSpefific)}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((responseData) => {
+        fetchNewData();
+        fetchNewAllStudent();
+      })
+      .catch((error) => {
+        console.error('Error pushing data:', error);
+      });
+  }
+ 
   return (
     <div className={style.container}>
         <div className={style.containerValidateProject}>
             <div className={style.containerTitle}>
-                <HiFolderRemove  className={style.iconFolder}/>
+                <TbViewfinder  className={style.iconFolder}/>
                 <p>Choose Group Validate</p>
             </div>
             {/* start container inputs */}
@@ -356,6 +514,7 @@ function MainValidate() {
                 </div>
                 <div className={style.valid}>
                       <button onClick={handelValidAll}>Valid</button>
+                      <button onClick={handelValidSpecificAll}>Valid specific</button>
                 </div>
         </div>
           {/* finishe sellect all and vlaid */}
@@ -369,6 +528,7 @@ function MainValidate() {
                           <th>payemnt</th>
                           <th>select</th>
                           <th className={style.displayNone}>validate FWeek</th>
+                          <th className={style.displayNone}>validate specific</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -393,6 +553,7 @@ function MainValidate() {
                         <td className={style.displayNone}>
                         {item.valid_project === 1 ? <button>is Valid</button> : <button  onClick={() => handlCklickEachValid(item.idOfUser)}>valid</button> }
                         </td>
+                        <td className={style.displayNone}>{item.validation === 1 ? <button>is valid</button> : <button onClick={() => handelVlidEachStudentSpecific(item.idOfUser)}>valid</button>}</td>
                     </tr>    
                     ))}   
                     </tbody>
@@ -403,7 +564,7 @@ function MainValidate() {
             {/* start container choose group and project */}
             <div className={style.containerChooseGroupProject}>
                 <div className={style.containerTitle}>
-                    <HiFolderRemove  className={style.iconFolder}/>
+                    <TbViewfinder  className={style.iconFolder}/>
                     <p>Choose User Validate</p>
                 </div>
             {/* finish title */}
@@ -440,15 +601,16 @@ function MainValidate() {
                         <div key={index} className={index % 2 === 0 ? style.eachStudent : style.eachStudentWhite} onClick={() => handelClickUser(item.idOfUser)}>
                             <div className={style.containerImg}><img src={require(`../../imgs/${item.image}`)}/></div>
                             <div className={style.containerName}><p>{item.firstName} {item.lastName}</p></div>
+                            <div className={style.containerVlidate}>{item.valid_project === 1 ? <button>is Valid</button> : <button onClick={() => handlCklickEachValid(item.idOfUser)}>Validate</button>}</div>
                         </div>
                         ))}
                     </div>
                 </div>
                 <div className={style.partLinks}>
                     <div className={style.containerTitles}>Links</div>
-                    <div className={style.allLinks}>
+                    <div className={style.allLinks} ref={divRef}>
                       {allConversationStudent.map((item, index) => (
-                      <div key={index}>
+                      <div key={index} >
                         {item.message_student !== null && (
                        <div className={style.ContainerMessageStudent}>
                         <p className={style.time}>{item.firstName}: {item.time_send_student}</p>
@@ -471,6 +633,14 @@ function MainValidate() {
                 </div>
             </div>
             {/* finish container links */}
+            {/* start container response */}
+            <div className={style.containerResponse}>
+              <div className={style.coloumnForm}>
+                <div className={style.containerInput}><input value={inputValue} type="text" onChange={(event) => setInputValue(event.target.value)} placeholder="Enter Your Message ..."/></div>
+                <div className={style.containerIcone}><div className={style.cercleOutSideIcone} onClick={handelCklickSendMessage}><BsFillSendFill className={style.icone}/></div></div>
+              </div>
+            </div>
+            {/* finsih container response */} 
         </div>
     </div>
   );

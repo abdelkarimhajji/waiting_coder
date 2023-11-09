@@ -169,13 +169,14 @@ app.get('/api/get_pushProject/:idProject/:idUser', (req, res) => {
   FROM ((push_porojects
   INNER JOIN user ON user.id = push_porojects.id_user)
   INNER JOIN teachers ON teachers.id = push_porojects.id_teacher)
-  WHERE push_porojects.id_project = ? and push_porojects.id_user = ?`;
+  WHERE push_porojects.id_project = ? and push_porojects.id_user = ?
+  ORDER BY push_porojects.id ASC`;
   db.query(selectSql, [idProject, idUser], (selectErr, selectResult) => {
     if (selectErr) {
       console.log(selectErr);
       return res.json("Error"); 
     }
-    // console.log(selectResult);
+    console.log(selectResult);
     return res.json(selectResult);
   });
 });
@@ -183,7 +184,9 @@ app.get('/api/get_pushProject/:idProject/:idUser', (req, res) => {
 app.get('/api/get_idTeacher/:idUser', (req, res) => {
 
   const idUser = req.params.idUser;
-  const selectSql = `SELECT teacher_groups.id_teacher FROM (specifics INNER JOIN teacher_groups ON specifics.id_group = teacher_groups.id_group) WHERE specifics.id_user = ?`;
+  const selectSql = `SELECT teacher_groups.id_teacher 
+  FROM (specifics INNER JOIN teacher_groups ON specifics.id_group = teacher_groups.id_group) 
+  WHERE specifics.id_user = ?`;
 
   db.query(selectSql,[idUser], (selectErr, selectResult) => {
     if (selectErr) {

@@ -47,8 +47,6 @@ function MainDashboard() {
         setChoosetYear2(data[0].year)
         setValueSelect(data[0].year)
         setValueSelect2(data[0].year)
-        // console.log("mian dashbore fetch ", data);
-        // console.log("main dashborad choosetYear ", choosetYear);
       })
       .catch((error) => console.error(error));
   }, []);

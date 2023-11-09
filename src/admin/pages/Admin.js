@@ -22,11 +22,14 @@ useEffect(() => {
 }, [isLoggedIn]);
 
 const handleButtonClick = () => {
-  // localStorage.setItem('login', 1);
+  // Set localStorage and state variables when the user logs in
   localStorage.setItem('adminLogin', 1);
-  setIsLoggedIn(1)
+  setIsLoggedIn(1);
+
+  // Navigate to the Dashboard
   navigate("/Admin/Dashboard");
 };
+
 const singIn = async() =>
 {
     try {
@@ -57,15 +60,15 @@ const singIn = async() =>
 }
 
 
-useEffect(() => {
-  if (response.status === 1) {
-      handleButtonClick();
-      // localStorage.setItem('userId', response.userId);
-      // localStorage.setItem("idEachProfile", response.userId);
-      // localStorage.setItem('adminLogin', 1);
-      localStorage.setItem('adminId', response.adminId)
-  }
-}, [response]);
+// useEffect(() => {
+//   if (response.status === 1) {
+//       handleButtonClick();
+//       // localStorage.setItem('userId', response.userId);
+//       // localStorage.setItem("idEachProfile", response.userId);
+//       // localStorage.setItem('adminLogin', 1);
+//       localStorage.setItem('adminId', response.adminId)
+//   }
+// }, [response]);
 
   return (
     <div className={style.container}>
@@ -93,7 +96,7 @@ useEffect(() => {
             </div>
        </div>
        <div className={style.loginSide}>
-            <div className={style.containerLogin}>
+            <div className={style.containerLogin} >
                 <div className={style.containerIcon}>
                     <FaUserShield className={style.icon}/>
                 </div>
@@ -102,7 +105,7 @@ useEffect(() => {
                     <input type="password" placeholder="Enter your password" className={style.input}value={password} onChange={(e) => setPassword(e.target.value)}/>
                 </div>
                 <div className={style.containerSubmit}>
-                    <input type="button" value="submit" className={style.submit} onClick={singIn}/>
+                    <input type="submit" value="submit" className={style.submit} onClick={singIn}/>
                 </div>
                 {valid ?
                 <p className={style.error}>Your Password or email does not exist</p>
