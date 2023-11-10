@@ -737,8 +737,8 @@ app.post("/api/upload", upload.single("image"), (req, res) => {
       res.status(409).json({ message: 'User already exists' });
     } else {
       // User with the same email doesn't exist, proceed to insert
-      const insertUser = 'INSERT INTO user(firstName, password, lastName, email, phone, image, date_registered) VALUES (?, ?, ?, ?, ?, ?, ?)';
-      db.query(insertUser, [firstName, '@' + lastName + 'code', lastName, email, number, uploadedImage.filename, currentDate], (insertError, userResult) => {
+      const insertUserQuery = 'INSERT INTO user(firstName, password, lastName, email, phone, image, date_registered) VALUES (?, ?, ?, ?, ?, ?, ?)';
+      db.query(insertUserQuery, [firstName, '@' + lastName + 'code', lastName, email, number, uploadedImage.filename, currentDate], (insertError, userResult) => {
         if (insertError) {
           console.error('Error inserting into user:', insertError);
           res.status(500).json({ message: 'Error inserting into user' });
@@ -748,37 +748,48 @@ app.post("/api/upload", upload.single("image"), (req, res) => {
         // Retrieve the ID of the newly inserted user
         const userId = userResult.insertId;
 
-        // Insert into the `specifics` table or another table
-        const insertSpecific = 'INSERT INTO specifics(id_user, id_nameSpecifics, study_now, validation, validation_week, id_group, date_register) VALUES (?, ?, ?, ?, ?, ?, ?)';
-        db.query(insertSpecific, [userId, idSpecific, 1, 0, 0, idGroup, currentDate], (specificError, specificResult) => {
-          if (specificError) {
-            console.error('Error inserting into specifics:', specificError);
-            res.status(500).json({ message: 'Error inserting into specifics' });
+        // Insert into the `level` table
+        const insertLevelQuery = 'INSERT INTO level (id_user, level, background) VALUES (?, ?, ?)';
+        db.query(insertLevelQuery, [userId, 0, '0'], (levelInsertError, levelResult) => {
+          if (levelInsertError) {
+            console.error('Error inserting into level:', levelInsertError);
+            res.status(500).json({ message: 'Error inserting into level' });
             return;
           }
 
-          if (payment) {
-            // Payment information is provided, insert it into the `payment` table
-            const insertPayment = 'INSERT INTO payment(payment, valid, date_payment, id_user) VALUES (?, ?, ?, ?)';
-            db.query(insertPayment, [payment, valid, currentDate, userId], (paymentError, paymentResult) => {
-              if (paymentError) {
-                console.error('Error inserting into payment:', paymentError);
-                res.status(500).json({ message: 'Error inserting into payment' });
-                return;
-              }
+          // Insert into the `specifics` table or another table
+          const insertSpecific = 'INSERT INTO specifics(id_user, id_nameSpecifics, study_now, validation, validation_week, id_group, date_register) VALUES (?, ?, ?, ?, ?, ?, ?)';
+          db.query(insertSpecific, [userId, idSpecific, 1, 0, 0, idGroup, currentDate], (specificError, specificResult) => {
+            if (specificError) {
+              console.error('Error inserting into specifics:', specificError);
+              res.status(500).json({ message: 'Error inserting into specifics' });
+              return;
+            }
 
-              // Send a success response if everything was successful
+            if (payment) {
+              // Payment information is provided, insert it into the `payment` table
+              const insertPayment = 'INSERT INTO payment(payment, valid, date_payment, id_user) VALUES (?, ?, ?, ?)';
+              db.query(insertPayment, [payment, valid, currentDate, userId], (paymentError, paymentResult) => {
+                if (paymentError) {
+                  console.error('Error inserting into payment:', paymentError);
+                  res.status(500).json({ message: 'Error inserting into payment' });
+                  return;
+                }
+
+                // Send a success response if everything was successful
+                res.status(200).json({ message: "Image uploaded successfully" });
+              });
+            } else {
+              // No payment information provided, send a success response
               res.status(200).json({ message: "Image uploaded successfully" });
-            });
-          } else {
-            // No payment information provided, send a success response
-            res.status(200).json({ message: "Image uploaded successfully" });
-          }
+            }
+          });
         });
       });
     }
   });
 });
+
 
 
 // get groups with condition specific
@@ -807,3 +818,11 @@ app.get('/api/getGroupsConditonSpecific/:idSpecific', (req, res) => {
 app.listen(8082, () => {
     console.log("Listening on port 8082 ok");
   });
+
+  // const insertUser = 'INSERT INTO level (id_user, level, background_blue) VALUES (?, ?, ?)';
+  // db.query(insertUser, [userId, 0,], (insertError, userResult) => {
+  //   if (insertError) {
+  //     console.error('Error inserting into user:', insertError);
+  //     res.status(500).json({ message: 'Error inserting into user' });
+  //     return;
+    // }

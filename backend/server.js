@@ -105,7 +105,6 @@ app.get('/api/get_languages/:selectedOptionKey', (req, res) => {
     });
 
     const projectsArray = Object.values(languageAndLinks);
-    // console.log("ffffff",projectsArray)
     res.json(projectsArray);
   });
 });
@@ -131,7 +130,6 @@ app.get('/api/get_porject/:selectedOptionKey', (req, res) => {
       console.log(selectErr);
       return res.json("Error"); 
     }
-    // console.log(selectResult);
     return res.json(selectResult);
   });
 });
@@ -144,7 +142,6 @@ app.get('/api/get_AllPorject/:idProject', (req, res) => {
       console.log(selectErr);
       return res.json("Error"); 
     }
-    // console.log(selectResult);
     return res.json(selectResult);
   });
 });
@@ -176,7 +173,6 @@ app.get('/api/get_pushProject/:idProject/:idUser', (req, res) => {
       console.log(selectErr);
       return res.json("Error"); 
     }
-    console.log(selectResult);
     return res.json(selectResult);
   });
 });
@@ -193,7 +189,6 @@ app.get('/api/get_idTeacher/:idUser', (req, res) => {
       console.log(selectErr);
       return res.json("Error");
     }
-    // console.log(selectResult);
     return res.json(selectResult);
   });
 
@@ -222,7 +217,6 @@ app.post('/api/push_project', (req, res) => {
 app.get('/api/get_events/:userId/:nameSpecifics', (req, res) => {
   const userId = req.params.userId;
   const nameSpecifics =  req.params.nameSpecifics;
-  // console.log("look", userId)
   const selectSpecificsSql = `
   SELECT *
   FROM specifics 
@@ -368,8 +362,6 @@ app.post('/api/register_competition', (req, res) => {
 app.get('/api/get_competitions/:userId/:nameSpecifics', (req, res) => {
   const userId = req.params.userId;
   const nameSpecifics =  req.params.nameSpecifics;
-  // console.log("look", userId)
-  // console.log("liik", nameSpecifics)
   const selectSpecificsSql = `
   SELECT *
   FROM specifics 
@@ -442,7 +434,6 @@ app.get('/get_each_user_levle/:id/', (req, res) => {
 
 
 app.get('/api/getProjectsAndResources', (req, res) => {
-  // console.log("kakakakak")
   const query = `
   SELECT p.id AS projectId, p.name_project AS projectName, p.description AS projectDescription, p.image_project AS imgProject, p.id_collection AS idCollection, p.count_exp AS Xp,
   r.id AS resourceId, r.name_ressource AS resourceName, r.link_ressource AS resourceInfo, r.id_project AS idProjectR
@@ -456,7 +447,6 @@ LEFT JOIN ressources_projects r ON p.id = r.id_project
       res.status(500).json({ error: 'Error fetching data from the database' });
       return;
     }
-    // console.log("ddddd",results)
     const languageAndLinks = {};
     results.forEach(row => {
       if (!languageAndLinks[row.projectId]) {
@@ -481,7 +471,6 @@ LEFT JOIN ressources_projects r ON p.id = r.id_project
     });
 
     const projectsArray = Object.values(languageAndLinks);
-    // console.log("ffffff",projectsArray)
     res.json(projectsArray);
   });
 });
@@ -503,7 +492,6 @@ app.get('/api/getLanguagesAndLinks/:idCollection', (req, res) => {
       res.status(500).json({ error: 'Error fetching data from the database' });
       return;
     }
-    // console.log("ddddd",results)
     const languageAndLinks = {};
     results.forEach(row => {
       if (!languageAndLinks[row.idLanguage]) {
@@ -527,7 +515,6 @@ app.get('/api/getLanguagesAndLinks/:idCollection', (req, res) => {
     });
 
     const projectsArray = Object.values(languageAndLinks);
-    // console.log("ffffff",projectsArray)
     res.json(projectsArray);
   });
 });
@@ -549,7 +536,6 @@ app.get('/api/getToolsAndLinks/:idCollection', (req, res) => {
       res.status(500).json({ error: 'Error fetching data from the database' });
       return;
     }
-    // console.log("ddddd",results)
     const languageAndLinks = {};
     results.forEach(row => {
       if (!languageAndLinks[row.idTool]) {
@@ -573,7 +559,6 @@ app.get('/api/getToolsAndLinks/:idCollection', (req, res) => {
     });
 
     const projectsArray = Object.values(languageAndLinks);
-    // console.log("ffffff",projectsArray)
     res.json(projectsArray);
   });
 });
@@ -605,6 +590,62 @@ app.get('/api/get_skills/:id', (req, res) => {
       console.log(selectErr);
       return res.json("Error");
     }
+    return res.json(selectResult);
+  });
+});
+
+// try to get count of exp 
+
+app.get('/api/get_count_exp/:id', (req, res) => {
+  const id = req.params.id;
+  const selectSql = 
+  `SELECT SUM(projects.count_exp) / 100 as exp FROM validation_projects 
+  INNER JOIN projects on validation_projects.id_project = projects.id  
+  WHERE validation_projects.id_user = ?`;
+  db.query(selectSql,[id], (selectErr, selectResult) => {
+    if (selectErr) {
+      console.log(selectErr);
+      return res.json("Error");
+    }
+    console.log(selectResult);
+    return res.json(selectResult);
+  });
+});
+
+// try to update or inser the levl or updat it
+app.post('/api/update_level/:id', (req, res) => {
+  const { exp, id_user, background } = req.body;
+  const id = req.params.id;
+
+  // Use UPDATE statement instead of INSERT
+  const sql = 'UPDATE level SET level = ?, background = ? WHERE id_user = ?';
+
+  const values = [exp, background + 0, id_user];
+
+    // console.log("background test : ",background);
+  db.query(sql, values, (err, result) => {
+    if (err) {
+      console.error('Error updating data:', err);
+      res.status(500).json({ error: 'Error updating data' });
+    } else {
+      console.log('Data updated successfully');
+      res.json({ message: 'Data updated successfully' });
+    }
+  });
+});
+
+// validtion specific
+app.get('/api/validation_specific/:id/:idCollection', (req, res) => {
+  const id = req.params.id;
+  const idCollection = req.params.idCollection; // Corrected variable name
+  const selectSql = `SELECT validation FROM specifics WHERE id_nameSpecifics = ? and id_user = ?`;
+
+  db.query(selectSql, [idCollection, id], (selectErr, selectResult) => {
+    if (selectErr) {
+      console.log(selectErr);
+      return res.json("Error");
+    }
+    console.log(selectResult);
     return res.json(selectResult);
   });
 });

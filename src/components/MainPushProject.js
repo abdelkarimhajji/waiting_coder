@@ -199,14 +199,14 @@ function MainPushProject() {
       <div className={style.push}>
             <p className={style.title}>Put the link here:</p>
             {/* conatainer Input */}
-            <form className={style.containerInput}>
+            <div className={style.containerInput}>
                 <input type="text" className={style.inputPush}  placeholder="hello i am ok that" value={inputValue} onChange={(e) => setInputValue(e.target.value)}/>
                 <div className={style.containerAllIcon}>
                     <div className={style.containerIcon} onClick={() => push_project()}>
                         <TbSend className={style.icon}/>
                     </div>
                 </div>
-            </form>
+            </div>
             {/* finsh container input */}
         </div>
         {/* finish push */}

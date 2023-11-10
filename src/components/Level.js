@@ -6,9 +6,7 @@ import { getItem } from "localforage";
 function Level({ selectedValues, setSelectedValues, setSelectedValuesTools, setSelectedValuesProject}) {
   const [level, setLevel] = useState([]);
   const [selectedOptionKey, setSelectedOptionKey] = useState(null); // Set default value here
-  const gradient = `linear-gradient(to right, #02babd ${
-    level.length > 0 ? level[0].background_bleu : 0
-  }%, #1b1c2312 0%)`;
+  
   const [selectedValue, setSelectedValue] = useState("");
   const selectLocalStor = localStorage.getItem("selectedOptionKey");
   const handleSelectChange = (event) => {
@@ -37,6 +35,9 @@ function Level({ selectedValues, setSelectedValues, setSelectedValuesTools, setS
       .catch((error) => console.error(error));
   }, [selectLocalStor, level[0]]);
 
+  const gradient = `linear-gradient(to right, #02babd ${
+    level.length > 0 ? level[0].background : 0
+  }%, #1b1c2312 0%)`;
   useEffect(() => {
     fetch(`http://localhost:8081/api/get_tools/${selectLocalStor}`)
       .then((response) => {
@@ -93,8 +94,7 @@ function Level({ selectedValues, setSelectedValues, setSelectedValuesTools, setS
       })
       .catch((error) => console.error(error));
   }, [userId]);
-  // console.log("localStorage.getItem():  ", localStorage.getItem("selectedOptionKey"))
-  // console.log("${userId}  :  ",userId)
+  
   useEffect(() => {
     fetch(`http://localhost:8081/api/get_levels/${userId}`)
       .then((response) => {
@@ -126,6 +126,48 @@ function Level({ selectedValues, setSelectedValues, setSelectedValuesTools, setS
   if (selectedIndex !== -1) {
     sortedData.unshift(sortedData.splice(selectedIndex, 1)[0]);
   }
+const [countExp, setCountExp] = useState(0);
+  // i try to fetch data to see if i improve in my level
+  useEffect(() => {
+    var data2;
+    fetch(`http://localhost:8081/api/get_count_exp/${userId}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        try {
+          const requestData = {
+            exp: data.length > 0 && data[0].exp ? data[0].exp  || 0 : 0,
+            id_user: userId,
+            background: data.length > 0 && data[0].exp ? data[0].exp.toString().split(".")[1] || 0 : 0,
+            // Add more key-value pairs as needed
+          };
+      // console.log("test ok ",data.length > 0 ? data[0].exp.toString().split(".")[1] : 1);
+          fetch(`http://localhost:8081/api/update_level/${userId}`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestData),
+          });
+        } catch (error) {
+          console.error('Error in useEffect:', error);
+        }
+      })
+      .catch((error) => console.error(error));
+      console.log("fchkel ",data2);
+      
+  }, [userId, setCountExp]);
+
+// console.log("test", countExp[0].exp)
+
+//   i try to update level of user
+
+
+
   return (
     <div className={style.container}>
       <div className={style.contLevel}>
