@@ -513,7 +513,7 @@ function MainValidate() {
                       <input type="checkbox" checked={selectAllChecked} onChange={handleSelectAll}/>
                 </div>
                 <div className={style.valid}>
-                      <button onClick={handelValidAll}>Valid</button>
+                      <button onClick={handelValidAll}>Valid Week</button>
                       <button onClick={handelValidSpecificAll}>Valid specific</button>
                 </div>
         </div>

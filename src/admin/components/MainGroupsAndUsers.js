@@ -5,6 +5,8 @@ import {BsCalendarDateFill} from 'react-icons/bs'
 import {MdCreateNewFolder} from 'react-icons/md'
 import {BsFillCalendarXFill} from 'react-icons/bs'
 import {HiFolderRemove} from 'react-icons/hi'
+import { HiOutlineBadgeCheck } from 'react-icons/hi'
+import { MdOutlineGppBad } from 'react-icons/md'
 
 function MainGroupsAndUsers() {
   
@@ -21,6 +23,7 @@ function MainGroupsAndUsers() {
     const [getALLTeachers, setGetALLTeachers] = useState([]);
     const [valueGroupFinished, setValueGroupFinished] = useState('');
     const [dateFinished, setDateFinished] = useState(0);
+    const [addSucces, setAddSucces] = useState(2);
 
     useEffect(() => {
         fetch(`http://localhost:8082/api/getMoreInfoGroups`)
@@ -94,7 +97,7 @@ function MainGroupsAndUsers() {
             setSelectedOption2(`${data[0].IdGroup}*${data[0].date_created}`)
           })
           .catch((error) => console.error(error));
-        }, [valueGroupFinished]);
+        }, [valueGroupFinished, addSucces]);
         
         const [checkedItems, setCheckedItems] = useState({});
         const [checkedIds, setCheckedIds] = useState({});
@@ -307,6 +310,7 @@ function MainGroupsAndUsers() {
   const [selectedOption4, setSelectedOption4] = useState('');
   const [notNumber, setNotNumber] = useState(0);
   const [notChoose, setNotChoose] = useState(0);
+ 
 
   const createGroup = () => 
   {   
@@ -331,9 +335,15 @@ function MainGroupsAndUsers() {
       .then((responseData) => {
         console.log('Data from the server:', responseData.message);
         if(responseData.message === 'Name of this group alredy exist')
+        {
+          setAddSucces(0);
           setNameAlreadExist(1)
+        }
         else
-        setNameAlreadExist(0)
+        {
+          setNameAlreadExist(0)
+          setAddSucces(1)
+        }
         // Name of this group alredy exist
       })
       .catch((error) => {
@@ -368,6 +378,7 @@ useEffect(() => {
 
 
 const [selectedIdGroupFinish, setSelectedIdGroupFinish] = useState(null);
+const [finishGroup, setFinishGroup] = useState(2);
 
 
 const handleSelectGroupsFinish =  (event) =>
@@ -395,7 +406,7 @@ const finisheGroup = () =>
       .catch((error) => {
         console.error('Error pushing data:', error);
       });
-
+      setFinishGroup(1)
       setValueGroupFinished('')
       setSelectedIdGroupFinish(null)
   }
@@ -466,7 +477,7 @@ const finisheGroup = () =>
                   </div>
               </div>
               <div className={style.containerValidate} >
-                  <button onClick={handelValidateAll}>validate</button>
+                  <button onClick={handelValidateAll}>validate Week</button>
                   {/* <button onClick={handleCheckAll}>Check All</button> */}
               </div>
              
@@ -553,6 +564,11 @@ const finisheGroup = () =>
                     {notChoose === 1 && <p>Must Choose Option!!!</p>}
                     {nameAlreadExist == 1 && <p>This name already exist!!!</p>}
                       <input type="button" value="Create" onClick={createGroup} />
+                      {addSucces === 1 ? (
+                        <HiOutlineBadgeCheck className={style.create}/>
+                        ) : addSucces === 0 ? (
+                        <MdOutlineGppBad  className={style.nCreate}/>
+                      ) : null}
                     </div>
               </div>
         </div>
@@ -575,6 +591,7 @@ const finisheGroup = () =>
                     </div>
                     <div className={style.containerValid}>
                           <button onClick={finisheGroup}>Submit</button>
+                          {finishGroup === 1 ? <HiOutlineBadgeCheck className={style.create2}/>: null}
                     </div>
               </div>
         </div>

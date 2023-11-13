@@ -390,6 +390,7 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                flex-direction: column;
                 @media(max-width: 950px)
                 {
                     width: 40%;
@@ -397,6 +398,11 @@
                 @media(max-width: 800px)
                 {
                     width: 100%;
+                }
+                .create2
+                {
+                    color: red;
+                    font-size: 30px;
                 }
                 // background-color: red;
                 button
@@ -447,6 +453,7 @@
                         }
                     }
                 }
+                
             }
         }
     }
@@ -724,5 +731,24 @@
                 }
             }
         }
+    }
+    .create
+    {
+        color: green;
+        font-size: 30px;
+        margin-top: 30px;
+    }
+    .nCreate
+    {
+        color: red;
+        font-size: 30px;
+        margin-top: 30px;
+    }
+    .create2
+    {
+        color: green;
+        font-size: 30px;
+        // margin-top: 30px;
+        margin-left: 30px;
     }
 }

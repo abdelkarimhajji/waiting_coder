@@ -54,6 +54,7 @@ function MainDashboard() {
 
   const handleSelectChange = (event) => {
     const selectedValue = event.target.value;
+    setValueSelect(event.target.value);
     if(selectedValue !== 'Choose another Year')
     {
       setChoosetYear(selectedValue)
@@ -61,6 +62,7 @@ function MainDashboard() {
   };
   const handleSelectChange2 = (event) => {
     const selectedValue = event.target.value;
+    setValueSelect2(selectedValue);
     if(selectedValue !== 'Choose another Year')
     {
       setChoosetYear2(selectedValue)

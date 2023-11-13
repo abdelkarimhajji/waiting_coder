@@ -711,15 +711,10 @@ const upload = multer({ storage: storage });
 
 // Handle the file upload
 app.post("/api/upload", upload.single("image"), (req, res) => {
-  const { firstName, lastName, email, number, idSpecific, idGroup, payment } = req.body;
+  let { firstName, lastName, email, number, idSpecific, idGroup, payment } = req.body;
   const uploadedImage = req.file;
   const currentDate = new Date();
-  let valid = 0;
-
-  // Check if payment is equal to 300, and if so, set valid to 1
-  if (payment === '300') {
-    valid = 1;
-  }
+  let valid = payment === '300' ? 1 : 0;
 
   const selectUser = 'SELECT id FROM user WHERE email = ?';
   db.query(selectUser, [email], (error, idResult) => {
@@ -729,14 +724,10 @@ app.post("/api/upload", upload.single("image"), (req, res) => {
       return;
     }
 
-    // Check if a user with the same email already exists
     if (idResult.length !== 0) {
-      // User with the same email exists, handle it accordingly
       console.log('User with the same email already exists');
-      // You can send a response indicating that the user already exists
       res.status(409).json({ message: 'User already exists' });
     } else {
-      // User with the same email doesn't exist, proceed to insert
       const insertUserQuery = 'INSERT INTO user(firstName, password, lastName, email, phone, image, date_registered) VALUES (?, ?, ?, ?, ?, ?, ?)';
       db.query(insertUserQuery, [firstName, '@' + lastName + 'code', lastName, email, number, uploadedImage.filename, currentDate], (insertError, userResult) => {
         if (insertError) {
@@ -745,10 +736,8 @@ app.post("/api/upload", upload.single("image"), (req, res) => {
           return;
         }
 
-        // Retrieve the ID of the newly inserted user
         const userId = userResult.insertId;
 
-        // Insert into the `level` table
         const insertLevelQuery = 'INSERT INTO level (id_user, level, background) VALUES (?, ?, ?)';
         db.query(insertLevelQuery, [userId, 0, '0'], (levelInsertError, levelResult) => {
           if (levelInsertError) {
@@ -757,7 +746,6 @@ app.post("/api/upload", upload.single("image"), (req, res) => {
             return;
           }
 
-          // Insert into the `specifics` table or another table
           const insertSpecific = 'INSERT INTO specifics(id_user, id_nameSpecifics, study_now, validation, validation_week, id_group, date_register) VALUES (?, ?, ?, ?, ?, ?, ?)';
           db.query(insertSpecific, [userId, idSpecific, 1, 0, 0, idGroup, currentDate], (specificError, specificResult) => {
             if (specificError) {
@@ -765,30 +753,25 @@ app.post("/api/upload", upload.single("image"), (req, res) => {
               res.status(500).json({ message: 'Error inserting into specifics' });
               return;
             }
+            if(!payment)
+              payment = 0;
+            const insertPayment = 'INSERT INTO payment(payment, valid, date_payment, id_user) VALUES (?, ?, ?, ?)';
+            db.query(insertPayment, [payment , valid, currentDate, userId], (paymentError, paymentResult) => {
+              if (paymentError) {
+                console.error('Error inserting into payment:', paymentError);
+                res.status(500).json({ message: 'Error inserting into payment' });
+                return;
+              }
 
-            if (payment) {
-              // Payment information is provided, insert it into the `payment` table
-              const insertPayment = 'INSERT INTO payment(payment, valid, date_payment, id_user) VALUES (?, ?, ?, ?)';
-              db.query(insertPayment, [payment, valid, currentDate, userId], (paymentError, paymentResult) => {
-                if (paymentError) {
-                  console.error('Error inserting into payment:', paymentError);
-                  res.status(500).json({ message: 'Error inserting into payment' });
-                  return;
-                }
-
-                // Send a success response if everything was successful
-                res.status(200).json({ message: "Image uploaded successfully" });
-              });
-            } else {
-              // No payment information provided, send a success response
               res.status(200).json({ message: "Image uploaded successfully" });
-            }
+            });
           });
         });
       });
     }
   });
 });
+
 
 
 

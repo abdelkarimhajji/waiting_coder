@@ -34,11 +34,13 @@
     align-items: center;
     font-family: $myfont;
     transition: 0.5s all;
+    opacity: 1;
+    color: white;
     .alReady
     {
         width: 500px;
-        height: 130px;
-        background-color: #fef8bd;
+        height: 160px;
+        background-color: $pColor1;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -53,12 +55,19 @@
         {
             width: 250px;
         }
+        p{
+            margin-bottom: 40px;
+            @media (max-width: 500px)
+            {
+                margin-bottom: 20px;
+            } 
+        }
         button
         {
             width: 120px;
             height: 35px;
             border: 1px solid $pColor3;
-            background-color: $pColor3;
+            background-color: $hoverR;
             border-radius: 10px;
             color: white;
             cursor: pointer;
@@ -84,25 +93,55 @@
     align-items: center;
     font-family: $myfont;
     transition: 0.5s all;
-    top: -1100px;
+    top: 0px;
+    // display: none;
+    color: white;
+    visibility: hidden;
+    opacity: 0;
     
-    button
+    .alReady
+    {
+        width: 500px;
+        height: 160px;
+        background-color: $pColor1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        text-align: center;
+        flex-direction: column;
+        @media (max-width: 500px)
+        {
+            width: 300px;
+        }
+        @media (max-width: 300px)
+        {
+            width: 250px;
+        }
+        p{
+            margin-bottom: 40px;
+            @media (max-width: 500px)
+            {
+                margin-bottom: 20px;
+            } 
+        }
+        button
         {
             width: 120px;
             height: 35px;
             border: 1px solid $pColor3;
-            background-color: $pColor3;
+            background-color: $hoverR;
             border-radius: 10px;
             color: white;
             cursor: pointer;
-            transition: 1s all;
+            // transition: 1s all;
             &:hover{
                 background-color: white;
                 border: 1px solid $pColor3;
                 color: $pColor3;
             }
-           
         }
+    }
 }
 
 .container

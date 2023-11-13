@@ -144,13 +144,13 @@ const No = () => {
   return (
     <>
     <div className={containerClassName}>
-          <div className={style.alReady}>
-              <p>cancel your register !!!</p>
-              <div className={style.twoButton}>
-                <button onClick={() => cancel ()}>ok</button>
-                <button onClick={() => No()}>No</button>
-              </div>
-          </div>
+        <div className={style.alReady}>
+            <p>cancel your register !!!</p>
+            <div className={style.twoButton}>
+              <button onClick={() => cancel ()}>ok</button>
+              <button onClick={() => No()}>No</button>
+            </div>
+        </div>
     </div>
     <div className={containerClassName2}>
           <div className={style.alReady}>

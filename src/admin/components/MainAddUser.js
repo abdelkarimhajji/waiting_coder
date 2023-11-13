@@ -365,7 +365,7 @@ const handleImageChange = (event) => {
                       <td>
                         {item.firstName}
                         </td>
-                      <td>
+                      <td style={{fontWeight: "bold"}}>
                         {item.payment} DH
                       </td>
                       <td>
