@@ -796,11 +796,29 @@ app.get('/api/getGroupsConditonSpecific/:idSpecific', (req, res) => {
   });
 });
 
+// app.put('/api/updatePayment/:idUser/:payment', (req, res) => {
+//   const payment = req.params.payment;
+//   const idUser = req.params.idUser;
+//   const currentDate = new Date();
+  
+//   // Step 2: Update payment and date_payment in the payment table
+//   const updateSql = `UPDATE payment
+//                      SET payment = ?, date_payment = ?
+//                      WHERE id_user = ?`;
+  
+//   db.query(updateSql, [payment, currentDate, idUser], (updateError, updateResult) => {
+//     if (updateError) {
+//       console.error('Error updating payment:', updateError);
+//       res.status(500).json({ message: 'Error updating payment' });
+//       return;
+//     }
 
+//     // If you need to handle the result, you can do so here
+    
+//     return res.json({ message: 'Success' });
+//   });
+// });
 
-app.listen(8082, () => {
-    console.log("Listening on port 8082 ok");
-  });
 
   // const insertUser = 'INSERT INTO level (id_user, level, background_blue) VALUES (?, ?, ?)';
   // db.query(insertUser, [userId, 0,], (insertError, userResult) => {
@@ -808,4 +826,10 @@ app.listen(8082, () => {
   //     console.error('Error inserting into user:', insertError);
   //     res.status(500).json({ message: 'Error inserting into user' });
   //     return;
-    // }
+  //   }
+
+
+app.listen(8082, () => {
+    console.log("Listening on port 8082 ok");
+  });
+
