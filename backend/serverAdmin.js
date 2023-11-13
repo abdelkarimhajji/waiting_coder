@@ -796,45 +796,56 @@ app.get('/api/getGroupsConditonSpecific/:idSpecific', (req, res) => {
   });
 });
 
-// app.put('/api/updatePayment/:idUser/:newPayment', (req, res) => {
-//   const newPayment = req.params.newPayment;
-//   const idUser = req.params.idUser;
-//   const currentDate = new Date();
+app.put('/api/updatePayment/:idUser/:newPayment', (req, res) => {
+  const newPayment = req.params.newPayment;
+  const idUser = req.params.idUser;
+  const currentDate = new Date();
+  const newPaymentValue = parseInt(newPayment);
 
-//   // Step 1: Select the current payment
-//   const selectSql = `SELECT payment FROM payment WHERE id_user = ?`;
+  if (isNaN(newPaymentValue)) {
+    res.status(400).json({ message: 'Invalid newPayment value' });
+    return;
+  }
 
-//   db.query(selectSql, [idUser], (selectError, selectResult) => {
-//     if (selectError) {
-//       console.error('Error selecting payment:', selectError);
-//       res.status(500).json({ message: 'Error selecting payment' });
-//       return;
-//     }
+  // Step 1: Select the current payment
+  const selectSql = `SELECT payment FROM payment WHERE id_user = ?`;
 
-//     // Assuming selectResult is an array with the selected payment
-//     const currentPayment = selectResult[0].payment;
+  db.query(selectSql, [idUser], (selectError, selectResult) => {
+    if (selectError) {
+      console.error('Error selecting payment:', selectError);
+      res.status(500).json({ message: 'Error selecting payment' });
+      return;
+    }
 
-//     // Step 2: Calculate the updated payment
-//     const updatedPayment = currentPayment + newPayment;
+    if (selectResult.length === 0) {
+      res.status(404).json({ message: 'User not found' });
+      return;
+    }
 
-//     // Step 3: Update payment and date_payment in the payment table
-//     const updateSql = `UPDATE payment
-//                        SET payment = ?, date_payment = ?
-//                        WHERE id_user = ?`;
+    const currentPayment = selectResult[0].payment;
 
-//     db.query(updateSql, [updatedPayment, currentDate, idUser], (updateError, updateResult) => {
-//       if (updateError) {
-//         console.error('Error updating payment:', updateError);
-//         res.status(500).json({ message: 'Error updating payment' });
-//         return;
-//       }
+    // Step 2: Calculate the updated payment
+    const updatedPayment = currentPayment + newPaymentValue;
 
-//       // If you need to handle the result, you can do so here
+    // Step 3: Update payment and date_payment in the payment table
+    const updateSql = `UPDATE payment
+                       SET payment = ?, date_payment = ?
+                       WHERE id_user = ?`;
 
-//       return res.json({ message: 'Success' });
-//     });
-//   });
-// });
+    db.query(updateSql, [updatedPayment, currentDate, idUser], (updateError, updateResult) => {
+      if (updateError) {
+        console.error('Error updating payment:', updateError);
+        res.status(500).json({ message: 'Error updating payment' });
+        return;
+      }
+
+      // If you need to handle the result, you can do so here
+
+      return res.json({ message: 'Success' });
+    });
+  });
+});
+
 
 
 

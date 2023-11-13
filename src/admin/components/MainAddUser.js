@@ -254,19 +254,21 @@ const handleImageChange = (event) => {
   const updatePrice = (id) =>
   {
     console.log("id : ", id)
-    // fetch(`/api/updatePayment/${id}/${newPrice}`, {
-    //   method: 'PUT',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   // If you need to send a request body, you can do so like this:
-    //   // body: JSON.stringify({ additionalData: 'value' }),
-    // })
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     console.log(data); // This will log the success message or any other response from the server
-    //   })
-    //   .catch(error => console.error('Error:', error));
+    let intPrice = parseInt(newPrice)
+    if(newPrice && intPrice > 0 && intPrice < 1001)
+    {fetch(`http://localhost:8082/api/updatePayment/${id}/${newPrice}`, {
+      method: 'PUT',  // This should be 'PUT' since you're updating the resource.
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((responseData) => {
+        // You can add code here to handle the response data if needed.
+      })
+      .catch((error) => {
+        console.error('Error pushing data:', error);
+      });}
     
   }
   return (
