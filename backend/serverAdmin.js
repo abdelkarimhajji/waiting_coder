@@ -796,37 +796,46 @@ app.get('/api/getGroupsConditonSpecific/:idSpecific', (req, res) => {
   });
 });
 
-// app.put('/api/updatePayment/:idUser/:payment', (req, res) => {
-//   const payment = req.params.payment;
+// app.put('/api/updatePayment/:idUser/:newPayment', (req, res) => {
+//   const newPayment = req.params.newPayment;
 //   const idUser = req.params.idUser;
 //   const currentDate = new Date();
-  
-//   // Step 2: Update payment and date_payment in the payment table
-//   const updateSql = `UPDATE payment
-//                      SET payment = ?, date_payment = ?
-//                      WHERE id_user = ?`;
-  
-//   db.query(updateSql, [payment, currentDate, idUser], (updateError, updateResult) => {
-//     if (updateError) {
-//       console.error('Error updating payment:', updateError);
-//       res.status(500).json({ message: 'Error updating payment' });
+
+//   // Step 1: Select the current payment
+//   const selectSql = `SELECT payment FROM payment WHERE id_user = ?`;
+
+//   db.query(selectSql, [idUser], (selectError, selectResult) => {
+//     if (selectError) {
+//       console.error('Error selecting payment:', selectError);
+//       res.status(500).json({ message: 'Error selecting payment' });
 //       return;
 //     }
 
-//     // If you need to handle the result, you can do so here
-    
-//     return res.json({ message: 'Success' });
+//     // Assuming selectResult is an array with the selected payment
+//     const currentPayment = selectResult[0].payment;
+
+//     // Step 2: Calculate the updated payment
+//     const updatedPayment = currentPayment + newPayment;
+
+//     // Step 3: Update payment and date_payment in the payment table
+//     const updateSql = `UPDATE payment
+//                        SET payment = ?, date_payment = ?
+//                        WHERE id_user = ?`;
+
+//     db.query(updateSql, [updatedPayment, currentDate, idUser], (updateError, updateResult) => {
+//       if (updateError) {
+//         console.error('Error updating payment:', updateError);
+//         res.status(500).json({ message: 'Error updating payment' });
+//         return;
+//       }
+
+//       // If you need to handle the result, you can do so here
+
+//       return res.json({ message: 'Success' });
+//     });
 //   });
 // });
 
-
-  // const insertUser = 'INSERT INTO level (id_user, level, background_blue) VALUES (?, ?, ?)';
-  // db.query(insertUser, [userId, 0,], (insertError, userResult) => {
-  //   if (insertError) {
-  //     console.error('Error inserting into user:', insertError);
-  //     res.status(500).json({ message: 'Error inserting into user' });
-  //     return;
-  //   }
 
 
 app.listen(8082, () => {
