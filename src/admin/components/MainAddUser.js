@@ -251,24 +251,24 @@ const handleImageChange = (event) => {
       })
       .catch((error) => console.error(error));
   }, [idGroup2]);
-  // const updatePrice = (id) =>
-  // {
-  //   console.log("id : ", id)
-  //   fetch(`/api/updatePayment/${id}/${newPrice}`, {
-  //     method: 'PUT',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     // If you need to send a request body, you can do so like this:
-  //     // body: JSON.stringify({ additionalData: 'value' }),
-  //   })
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       console.log(data); // This will log the success message or any other response from the server
-  //     })
-  //     .catch(error => console.error('Error:', error));
+  const updatePrice = (id) =>
+  {
+    console.log("id : ", id)
+    // fetch(`/api/updatePayment/${id}/${newPrice}`, {
+    //   method: 'PUT',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   // If you need to send a request body, you can do so like this:
+    //   // body: JSON.stringify({ additionalData: 'value' }),
+    // })
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     console.log(data); // This will log the success message or any other response from the server
+    //   })
+    //   .catch(error => console.error('Error:', error));
     
-  // }
+  }
   return (
     <div className={style.container}>
       <div className={style.containerAddUser}>
