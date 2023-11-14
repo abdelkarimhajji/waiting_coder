@@ -270,12 +270,12 @@ const handleImageChange = (event) => {
           const newPrices = [...prices];
           newPrices[index] = ''; // Reset the corresponding price to an empty string
           setPrices(newPrices);
+          getStudents();
         })
         .catch((error) => {
           console.error('Error pushing data:', error);
         });
-        getStudents();
-    }
+      }
   };
 
   return (
