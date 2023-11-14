@@ -236,8 +236,7 @@ const handleImageChange = (event) => {
     setIdGroup2(selectedValue)
     console.log("selected value ", selectedValue)
   }
-  useEffect(() => {
-    // console.log("idGroup 2 ",idGroup2)
+  function getStudents() {
     fetch(`http://localhost:8082/api/getStudentsGroupOnly/${idGroup2}`)
       .then((response) => {
         if (!response.ok) {
@@ -250,6 +249,10 @@ const handleImageChange = (event) => {
         setAllStudentGroup(data);
       })
       .catch((error) => console.error(error));
+  }
+  useEffect(() => {
+    // console.log("idGroup 2 ",idGroup2)
+    getStudents();
   }, [idGroup2]);
   const updatePrice = (id) =>
   {
