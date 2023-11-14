@@ -257,10 +257,7 @@ const handleImageChange = (event) => {
   }, [idGroup2]);
 
   const updatePrice = (id, index) => {
-    console.log("id : ", id);
-    let intPrice = parseInt(newPrice);
-  
-    if (newPrice && intPrice > 0 && intPrice < 1001) {
+    if (parseInt(prices[index]) > 0 && parseInt(prices[index]) < 1001) {
       fetch(`http://localhost:8082/api/updatePayment/${id}/${prices[index]}`, {
         method: 'PUT',
         headers: {
@@ -277,9 +274,9 @@ const handleImageChange = (event) => {
         .catch((error) => {
           console.error('Error pushing data:', error);
         });
+        getStudents();
     }
   };
-  console.log(prices);
 
   return (
     <div className={style.container}>
@@ -406,7 +403,7 @@ const handleImageChange = (event) => {
                         />
                       </td>
                       <td className={style.displayNone}>
-                        <button onClick={() => updatePrice(item.idOfUser)}>Valid</button>
+                        <button onClick={() => updatePrice(item.idOfUser, index)}>Valid</button>
                       </td>
                   </tr>    
                 ))}
