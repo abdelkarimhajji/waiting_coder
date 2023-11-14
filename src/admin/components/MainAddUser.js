@@ -250,30 +250,37 @@ const handleImageChange = (event) => {
       })
       .catch((error) => console.error(error));
   }
+  const [prices, setPrices] = useState(Array(allStudentGroup.length).fill(''));
   useEffect(() => {
     // console.log("idGroup 2 ",idGroup2)
     getStudents();
   }, [idGroup2]);
-  const updatePrice = (id) =>
-  {
-    console.log("id : ", id)
-    let intPrice = parseInt(newPrice)
-    if(newPrice && intPrice > 0 && intPrice < 1001)
-    {fetch(`http://localhost:8082/api/updatePayment/${id}/${newPrice}`, {
-      method: 'PUT',  // This should be 'PUT' since you're updating the resource.
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((response) => response.json())
-      .then((responseData) => {
-        // You can add code here to handle the response data if needed.
+
+  const updatePrice = (id, index) => {
+    console.log("id : ", id);
+    let intPrice = parseInt(newPrice);
+  
+    if (newPrice && intPrice > 0 && intPrice < 1001) {
+      fetch(`http://localhost:8082/api/updatePayment/${id}/${prices[index]}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       })
-      .catch((error) => {
-        console.error('Error pushing data:', error);
-      });}
-    
-  }
+        .then((response) => response.json())
+        .then((responseData) => {
+          // You can add code here to handle the response data if needed.
+          const newPrices = [...prices];
+          newPrices[index] = ''; // Reset the corresponding price to an empty string
+          setPrices(newPrices);
+        })
+        .catch((error) => {
+          console.error('Error pushing data:', error);
+        });
+    }
+  };
+  console.log(prices);
+
   return (
     <div className={style.container}>
       <div className={style.containerAddUser}>
@@ -388,7 +395,15 @@ const handleImageChange = (event) => {
                         {item.payment} DH
                       </td>
                       <td>
-                        <input type="text" onChange={(event) => setNewPrice(event.target.value)}/>
+                        <input
+                          type="text"
+                          value={prices[index] || ''} // Ensure value is defined
+                          onChange={(event) => {
+                            const newPrices = [...prices];
+                            newPrices[index] = event.target.value;
+                            setPrices(newPrices);
+                          }}
+                        />
                       </td>
                       <td className={style.displayNone}>
                         <button onClick={() => updatePrice(item.idOfUser)}>Valid</button>
