@@ -280,6 +280,7 @@ const handleImageChange = (event) => {
 
   return (
     <div className={style.container}>
+      <div className={style.validUpdatePyment}></div>
       <div className={style.containerAddUser}>
         <div className={style.containerTitle}>
           <MdGroupAdd className={style.iconFolder} />
