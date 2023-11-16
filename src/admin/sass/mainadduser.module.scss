@@ -333,3 +333,49 @@
           }
     }
 }
+.validUpdatePyment
+{
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.326);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s all;
+    opacity: 1;
+    .confirmation
+    {
+        width: 350px;
+        height: 150px;
+        background-color: black;
+        border-radius: 10px;
+    }
+}
+.validUpdatePymentNone
+{
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.326);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s all;
+    .confirmation
+    {
+        width: 350px;
+        height: 150px;
+        background-color: black;
+        border-radius: 10px;
+    }
+    opacity: 0;
+    display: none;
+
+}

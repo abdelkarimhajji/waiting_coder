@@ -279,8 +279,13 @@ const handleImageChange = (event) => {
   };
 
   return (
+    <>
+    <div className={style.validUpdatePyment}>
+        <div className={style.confirmation}>
+            
+        </div>
+    </div>
     <div className={style.container}>
-      <div className={style.validUpdatePyment}></div>
       <div className={style.containerAddUser}>
         <div className={style.containerTitle}>
           <MdGroupAdd className={style.iconFolder} />
@@ -413,6 +418,7 @@ const handleImageChange = (event) => {
         </div>
         {/* finish container payment */}
     </div>
+    </>
   );
 }
 
