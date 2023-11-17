@@ -347,12 +347,48 @@
     align-items: center;
     transition: 0.5s all;
     opacity: 1;
+    font-family: $myfont;
     .confirmation
     {
-        width: 350px;
+        width: 450px;
         height: 150px;
-        background-color: black;
+        background-color: $pColor1;
         border-radius: 10px;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: $myfont;
+        p{
+            margin-top: 40px;
+            margin-bottom: 30px;
+            font-size: 15px;
+        
+        }
+    }
+    .containerInput
+    {
+        width: 350px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        input
+        {
+            width: 100px;
+            height: 35px;
+            background-color: $hoverR;
+            border: 1px solid black;
+            border-radius: 5px ;
+            cursor: pointer;
+            font-family: $myfont;
+            color: white;
+            transition: 0.5s all;
+            &:hover
+            {
+                background-color: white;
+                color: black;
+            }
+        }
     }
 }
 .validUpdatePymentNone
@@ -368,12 +404,21 @@
     justify-content: center;
     align-items: center;
     transition: 0.5s all;
-    .confirmation
+    .containerInput
     {
         width: 350px;
         height: 150px;
         background-color: black;
         border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        input
+        {
+            width: 80px;
+            height: 30px;
+            background-color: red;
+        }
     }
     opacity: 0;
     display: none;

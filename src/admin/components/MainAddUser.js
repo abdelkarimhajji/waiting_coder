@@ -282,7 +282,11 @@ const handleImageChange = (event) => {
     <>
     <div className={style.validUpdatePyment}>
         <div className={style.confirmation}>
-            
+          <p>Are you chuse you want to confirm ?</p>
+          <div className={style.containerInput}>
+            <input type="button" value="cancel" />
+            <input type="button" value="ok" />
+          </div>
         </div>
     </div>
     <div className={style.container}>
