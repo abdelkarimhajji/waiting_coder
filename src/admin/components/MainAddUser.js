@@ -255,7 +255,8 @@ const handleImageChange = (event) => {
     // console.log("idGroup 2 ",idGroup2)
     getStudents();
   }, [idGroup2]);
-
+  const [currentStyle, setCurrentStyle] = useState(0);
+  const [scrollPosition, setScrollPosition] = useState(0);
   const updatePrice = (id, index) => {
     if (parseInt(prices[index]) > 0 && parseInt(prices[index]) < 1001) {
       fetch(`http://localhost:8082/api/updatePayment/${id}/${prices[index]}`, {
@@ -276,11 +277,33 @@ const handleImageChange = (event) => {
           console.error('Error pushing data:', error);
         });
       }
+      
+      setCurrentStyle(1);
+      // window.scrollTo({ top: 0, behavior: 'smooth' });
+      console.log('Update Price function called');
   };
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollPosition(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    // Cleanup the event listener when the component is unmounted
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []); // Empty dependency array means this effect runs once when the component mounts
+
+  useEffect(() => {
+    
+  }, [currentStyle]);
+  const styleAlert = currentStyle === 0 ? style.validUpdatePymentNone : style.validUpdatePyment;
 
   return (
     <>
-    <div className={style.validUpdatePyment}>
+    <div className={styleAlert} style={{top: scrollPosition }}>
+      
         <div className={style.confirmation}>
           <p>Are you chuse you want to confirm ?</p>
           <div className={style.containerInput}>
