@@ -299,7 +299,7 @@ const handleImageChange = (event) => {
     
   }, [currentStyle]);
   const styleAlert = currentStyle === 0 ? style.validUpdatePymentNone : style.validUpdatePyment;
-  // add function to confirmat
+  
   return (
     <>
     <div className={styleAlert} style={{top: scrollPosition }}>
