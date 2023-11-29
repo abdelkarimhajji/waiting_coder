@@ -348,6 +348,7 @@
     transition: 0.5s all;
     opacity: 1;
     font-family: $myfont;
+    z-index: 10;
     .confirmation
     {
         width: 450px;
@@ -359,6 +360,7 @@
         flex-direction: column;
         align-items: center;
         font-family: $myfont;
+        transition: 0.5s all;
         p{
             margin-top: 40px;
             margin-bottom: 30px;
@@ -372,6 +374,7 @@
         display: flex;
         justify-content: space-evenly;
         align-items: center;
+        transition: 0.5s all;
         input
         {
             width: 100px;
@@ -403,7 +406,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: 0.5s all;
+    // transition: 0.1s all;
     .confirmation
     {
         width: 450px;
@@ -415,6 +418,7 @@
         flex-direction: column;
         align-items: center;
         font-family: $myfont;
+        // transition: 0.5s all;
         p{
             margin-top: 40px;
             margin-bottom: 30px;
@@ -425,12 +429,10 @@
     .containerInput
     {
         width: 350px;
-        height: 150px;
-        background-color: black;
-        border-radius: 10px;
         display: flex;
-        justify-content: center;
+        justify-content: space-evenly;
         align-items: center;
+        transition: 0.5s all;
         input
         {
             width: 100px;
@@ -441,7 +443,7 @@
             cursor: pointer;
             font-family: $myfont;
             color: white;
-            transition: 0.5s all;
+            // transition: 0.5s all;
             &:hover
             {
                 background-color: white;
@@ -450,6 +452,7 @@
         }
     }
     opacity: 0;
-    display: none;
+    z-index: -5;
+    // display: none;
 
 }

@@ -257,9 +257,12 @@ const handleImageChange = (event) => {
   }, [idGroup2]);
   const [currentStyle, setCurrentStyle] = useState(0);
   const [scrollPosition, setScrollPosition] = useState(0);
-  const updatePrice = (id, index) => {
-    if (parseInt(prices[index]) > 0 && parseInt(prices[index]) < 1001) {
-      fetch(`http://localhost:8082/api/updatePayment/${id}/${prices[index]}`, {
+  const [idStudent, setISdtudent] = useState(0);
+  const [indexStudent, setIndexSdtudent] = useState(0);
+  const updatePrice = (valid) => {
+    
+    if (parseInt(prices[indexStudent]) > 0 && parseInt(prices[indexStudent]) < 1001 && valid == "yes") {
+      fetch(`http://localhost:8082/api/updatePayment/${idStudent}/${prices[indexStudent]}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -269,19 +272,28 @@ const handleImageChange = (event) => {
         .then((responseData) => {
           // You can add code here to handle the response data if needed.
           const newPrices = [...prices];
-          newPrices[index] = ''; // Reset the corresponding price to an empty string
+          newPrices[indexStudent] = ''; // Reset the corresponding price to an empty string
           setPrices(newPrices);
           getStudents();
         })
         .catch((error) => {
           console.error('Error pushing data:', error);
         });
+        
+        console.log('Update Price function called');
       }
-      
-      setCurrentStyle(1);
-      // window.scrollTo({ top: 0, behavior: 'smooth' });
-      console.log('Update Price function called');
+      setCurrentStyle(0);
+
   };
+
+  
+  function confarmationF(id, index) {
+    setISdtudent(id)
+    setIndexSdtudent(index)
+    setCurrentStyle(1);
+  }
+
+
   useEffect(() => {
     const handleScroll = () => {
       setScrollPosition(window.scrollY);
@@ -294,12 +306,11 @@ const handleImageChange = (event) => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []); // Empty dependency array means this effect runs once when the component mounts
-
   useEffect(() => {
     
   }, [currentStyle]);
   const styleAlert = currentStyle === 0 ? style.validUpdatePymentNone : style.validUpdatePyment;
-  
+    
   return (
     <>
     <div className={styleAlert} style={{top: scrollPosition }}>
@@ -307,8 +318,8 @@ const handleImageChange = (event) => {
         <div className={style.confirmation}>
           <p>Are you chuse you want to confirm ?</p>
           <div className={style.containerInput}>
-            <input type="button" value="cancel" />
-            <input type="button" value="ok" />
+            <input type="button" value="cancel" onClick={() => updatePrice("no")}/>
+            <input type="button" value="ok" onClick={() => updatePrice("yes")} />
           </div>
         </div>
     </div>
@@ -404,7 +415,7 @@ const handleImageChange = (event) => {
                         <th>Image</th>
                         <th>Student(s)</th>
                         <th>payemnt</th>
-                        <th>Enter payemnt</th>
+                        <th className={style.displayNone}>Enter payemnt</th>
                         <th className={style.displayNone}>New Price</th>
                     </tr>
                   </thead>
@@ -424,7 +435,7 @@ const handleImageChange = (event) => {
                       <td style={{fontWeight: "bold"}}>
                         {item.payment} DH
                       </td>
-                      <td>
+                      <td className={style.displayNone}>
                         <input
                           type="text"
                           value={prices[index] || ''} // Ensure value is defined
@@ -436,7 +447,8 @@ const handleImageChange = (event) => {
                         />
                       </td>
                       <td className={style.displayNone}>
-                        <button onClick={() => updatePrice(item.idOfUser, index)}>Valid</button>
+                        <button onClick={() => confarmationF(item.idOfUser, index)}>Valid</button>
+                        {/* <button onClick={() => updatePrice(item.idOfUser, index)}>Valid</button> */}
                       </td>
                   </tr>    
                 ))}
