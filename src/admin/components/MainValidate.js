@@ -532,7 +532,8 @@ function MainValidate() {
                       </tr>
                     </thead>
                     <tbody>
-                        {allStudentGroup.map((item, index) => (
+                        {allStudentGroup.length > 0 ? (
+                          allStudentGroup.map((item, index) => (
                     <tr key={index} className={style.trHover}>
                        <td><img
                         src={item.image ? require(`../../imgs/${item.image}`) : 'fallback-image-url.jpg'}
@@ -555,7 +556,18 @@ function MainValidate() {
                         </td>
                         <td className={style.displayNone}>{item.validation === 1 ? <button>is valid</button> : <button onClick={() => handelVlidEachStudentSpecific(item.idOfUser)}>valid</button>}</td>
                     </tr>    
-                    ))}   
+                    ))): (
+                      <>
+                      <tr style={{backgroundColor: '#00bbbe'}}>
+                        <td>empty</td>
+                        <td>empty</td>
+                        <td>empty</td>
+                        <td>empty</td>
+                        <td>empty</td>
+                        <td>empty</td>
+                      </tr>
+                    </>
+                    )}   
                     </tbody>
                 </table>
         </div>
@@ -597,19 +609,25 @@ function MainValidate() {
                 <div className={style.partStudents}>
                     <div className={style.containerTitles}>Choose Student</div>
                     <div className={style.allStudent}>
-                      {allStudentGroup2.map((item, index) => (
+                      {allStudentGroup2.length > 0 ?(
+                      allStudentGroup2.map((item, index) => (
                         <div key={index} className={index % 2 === 0 ? style.eachStudent : style.eachStudentWhite} onClick={() => handelClickUser(item.idOfUser)}>
                             <div className={style.containerImg}><img src={require(`../../imgs/${item.image}`)}/></div>
                             <div className={style.containerName}><p>{item.firstName} {item.lastName}</p></div>
                             <div className={style.containerVlidate}>{item.valid_project === 1 ? <button>is Valid</button> : <button onClick={() => handlCklickEachValid(item.idOfUser)}>Validate</button>}</div>
                         </div>
-                        ))}
+                        ))):(
+                          <div  className={style.eachStudent} style={{justifyContent: "center", alignItems:"center"}}>
+                            <p>empty</p>
+                        </div>
+                        )}
                     </div>
                 </div>
                 <div className={style.partLinks}>
                     <div className={style.containerTitles}>Links</div>
                     <div className={style.allLinks} ref={divRef}>
-                      {allConversationStudent.map((item, index) => (
+                      {allConversationStudent.length > 0 ? (
+                      allConversationStudent.map((item, index) => (
                       <div key={index} >
                         {item.message_student !== null && (
                        <div className={style.ContainerMessageStudent}>
@@ -628,7 +646,13 @@ function MainValidate() {
                        </div>
                        )}
                        </div>
-                       ))}
+                       ))):(
+                        <div className={style.ContainerMessageStudent}>
+                        <div className={style.message}>
+                            <p>No message</p>
+                        </div>
+                       </div>
+                       )}
                     </div>
                 </div>
             </div>
