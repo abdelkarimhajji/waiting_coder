@@ -420,8 +420,11 @@ const handleImageChange = (event) => {
                     </tr>
                   </thead>
                   <tbody>
-                      {allStudentGroup.map((item, index) => (
-                  <tr key={index} className={style.trHover}>
+                    
+                      {allStudentGroup.length > 0 ?(
+                        allStudentGroup.map((item, index) => (
+                        
+                    <tr key={index} className={style.trHover}>
                       <td>
                       <img
                       src={item.image ? require(`../../imgs/${item.image}`) : 'fallback-image-url.jpg'}
@@ -451,7 +454,17 @@ const handleImageChange = (event) => {
                         {/* <button onClick={() => updatePrice(item.idOfUser, index)}>Valid</button> */}
                       </td>
                   </tr>    
-                ))}
+                ))) : (
+                  <>
+                    <tr style={{backgroundColor: '#00bbbe'}}>
+                      <td>empty</td>
+                      <td>empty</td>
+                      <td>empty</td>
+                      <td>empty</td>
+                      <td>empty</td>
+                    </tr>
+                  </>
+                )}
                   </tbody>
               </table>
         </div>
