@@ -63,10 +63,10 @@ function DetailsProject() {
             {/* all resourse */}
             <div className={style.allResource}>
             {selectedValuesRessources.map((item, index) => (
-              <div key={index} className={style.EachResourse}>
-                    <AiOutlinePaperClip />
+              <a href={encodeURIComponent(item.link_resource)}  key={index} className={style.EachResourse} style={{textDecoration:"none"}}>
+                    <AiOutlinePaperClip style={{color:"black"}}/>
                     <p>{item.name_ressource }</p>
-                </div>
+              </a> 
             ))}
             </div>
             {/* finish all resourse */} 
