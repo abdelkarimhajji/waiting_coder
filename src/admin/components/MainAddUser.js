@@ -282,6 +282,7 @@ const handleImageChange = (event) => {
         
         console.log('Update Price function called');
       }
+      document.body.style.overflow = 'auto';
       setCurrentStyle(0);
 
   };
@@ -291,6 +292,7 @@ const handleImageChange = (event) => {
     setISdtudent(id)
     setIndexSdtudent(index)
     setCurrentStyle(1);
+    document.body.style.overflow = 'hidden';
   }
 
 
