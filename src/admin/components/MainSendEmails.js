@@ -5,16 +5,22 @@ function MainSendEmails() {
   return (
     <div className={style.container}>
         <div className={style.containerFilter}>
-
+            <select >
+                <option value="Choose Project">Choose Project</option>
+                <option >test</option>
+            </select>
+            <select >
+                <option value="Choose Project">Choose Project</option>
+                <option >test</option>
+            </select>
+            <select >
+                <option value="Choose Project">Choose Project</option>
+                <option >test</option>
+            </select>
         </div>
         <div className={style.containerBox}>
             <div className={style.containerLeftBox}>
-                <select >
-                    <option value="Choose Project">Choose Project</option>
-                    
-                    <option >test</option>
-                    
-                </select>
+    
             </div>
             <div className={style.containerRightBox}>
 

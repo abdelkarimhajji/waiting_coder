@@ -4,12 +4,29 @@
 {
     width: 100%;
     min-height: 100vh;
-    background-color: red;
+    margin-top: 65px;
+    // overflow:hidden;
+    
     .containerFilter
     {
         width: 100%;
-        height: 150px;
-        background-color: cadetblue;
+        height: 90px;
+        // background-color: cadetblue;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        // padding-left: 50px;
+       
+        select
+        {
+            width: 300px;
+            height: 50px;
+            border-radius: 10px;
+            border: 2px solid rgba(0, 0, 0, 0.145)  ;
+            color: rgb(95, 93, 93);
+            cursor: pointer;
+            margin-left: 70px;
+        }
     }
     .containerBox
     {
