@@ -4,7 +4,7 @@ import style from '../sass/mainadduser.module.scss'
 import { MdGroupAdd } from 'react-icons/md'
 import { AiOutlineUserAdd } from 'react-icons/ai'
 import {RiGroup2Fill} from 'react-icons/ri'
-
+import {BiSolidDollarCircle} from 'react-icons/bi'
 function MainAddUser() {
 
     useEffect(() => {
@@ -411,6 +411,10 @@ const handleImageChange = (event) => {
 
       {/* start container payment */}
       <div className={style.containerTable}>
+        <div className={style.containerTitle}>
+            <BiSolidDollarCircle className={style.iconFolder} />
+            <p>Enter payment</p>
+        </div>
         <table>
                 <thead>
                     <tr>

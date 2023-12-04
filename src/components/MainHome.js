@@ -328,37 +328,4 @@ function MainHome({selectedValues, selectedValuesTools, selectedValuesProject}) 
 }
 
 export default MainHome;
-  // SELECT *
-  // FROM ((((user
-  // INNER JOIN specifics ON user.id = specifics.id_user)
-  // INNER JOIN groups ON specifics.id_group = groups.id)
-  // INNER JOIN name_specifics ON name_specifics.id = specifics.id_nameSpecifics)
-  // INNER JOIN projects ON name_specifics.id = projects.id_collection) WHERE groups.group_valid = 1 and user.id = 2
-
-// SELECT *
-// FROM (((((user
-// INNER JOIN specifics ON user.id = specifics.id_user)
-// INNER JOIN groups ON specifics.id_group = groups.id)
-// INNER JOIN name_specifics ON name_specifics.id = specifics.id_nameSpecifics)
-// INNER JOIN projects ON name_specifics.id = projects.id_collection) 
-// INNER JOIN projects_display ON projects_display.id_project = projects.id) where user.id = 2  and projects_display.display = 1
-
-
-// SELECT *
-// FROM ((((user
-// INNER JOIN specifics ON user.id = specifics.id_user)
-// INNER JOIN name_specifics ON name_specifics.id = specifics.id_nameSpecifics)
-// INNER JOIN projects ON projects.id_collection = name_specifics.id)
-// INNER JOIN groups_permissions ON groups_permissions.id = projects.id)
-// where user.id_group = 1 and groups_permissions.permission = 1 and groups_permissions.finished = 0
-
-
-// last one id the good now 
-// SELECT * 
-// FROM ((((user 
-// INNER JOIN specifics ON user.id = specifics.id_user)
-// INNER JOIN name_specifics ON specifics.id_nameSpecifics = name_specifics.id)
-// INNER JOIN projects ON name_specifics.id = projects.id_collection)
-// INNER JOIN groups_permissions ON specifics.id_group = groups_permissions.id_group)
-// WHERE user.id = 2 and specifics.id_group = 1 and groups_permissions.id_project = 1 and projects.id = 1
-
+  

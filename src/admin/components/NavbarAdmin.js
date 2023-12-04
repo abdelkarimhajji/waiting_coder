@@ -16,6 +16,7 @@ import {BiLineChart} from 'react-icons/bi'
 import {MdOutlineGroups} from 'react-icons/md'
 import {MdGroupAdd} from 'react-icons/md'
 import {RiPassValidLine} from 'react-icons/ri'
+import {BiMailSend } from 'react-icons/bi'
 
 function NavbarAdmin(props) {
   const [hovered, setHovered] = useState(true);
@@ -135,6 +136,12 @@ function NavbarAdmin(props) {
             <p className={style.oneItem}>Validate</p>
             <p className={style.twoItem}><MdGroupAdd className={style.AiOutlineMenuFold} /></p>
           </div>  
+        </Link>
+        <Link to="/Admin/Emails" className={style.Link}>
+          <div className={style.containItemNav}>
+            <p className={style.oneItem}>Send Email</p>
+            <p className={style.twoItem}><BiMailSend  className={style.AiOutlineMenuFold} /></p>
+          </div>
         </Link>
         <Link to="/Admin" className={style.Link}  onClick={logout}>
           <div className={style.containItemNav}>

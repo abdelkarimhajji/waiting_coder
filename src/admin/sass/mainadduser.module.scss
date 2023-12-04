@@ -244,12 +244,48 @@
         overflow-x: scroll;
         border-radius: 20px;
         margin-bottom: 120px;
+        display: flex;
+        flex-direction: column;
         &::-webkit-scrollbar {
             width: 3px;
             height: 3px;
             transition: 0.5s all;
            
             /* Customize the scrollbar track color */
+            }
+            .containerTitle
+            {
+                width: 40%;
+                background-color: white;
+                border-radius: 10px;
+                box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 50px;
+                text-align: center;
+                height: 50px;
+                margin: 0 auto;
+                margin-top: 40px;
+                margin-bottom: 40px;
+                @media(max-width:768px)
+                {
+                    width: 80%;
+                }
+                @media(max-width:328px)
+                {
+                    width: 90%;
+                }
+                .iconFolder
+                {
+                    font-size: 30px;
+                    color: $pColorR;
+                }
+                p
+                {
+                    margin-left: 10px;
+                    font-weight: bold;
+                }
             }
         table {
             font-family: $myfont;

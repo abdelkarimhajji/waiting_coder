@@ -6,11 +6,11 @@ import karim from '../imgs/karim.png'
 import {FcApproval} from 'react-icons/fc'
 import {FaTimesCircle} from 'react-icons/fa'
 
-function EachLevel({setIdCollectionValue}) {
+function EachLevel({setIdCollectionValue, setId}) {
     const [selectedValue, setSelectedValue] = useState('');
     const [selectedValueUser, setSelectedValueUser] = useState([]);
     const [selectedNameSpecifics, setSelectedNameSpecifics] = useState([]);
-    const [id, setId] = useState(localStorage.getItem("idEachProfile"));
+    setId(localStorage.getItem("idEachProfile"));
     const [idCollection, setIdCollection] = useState(0);
     const [validation, setValidation] = useState(0);
     const userId = localStorage.getItem("userId");
@@ -37,6 +37,7 @@ function EachLevel({setIdCollectionValue}) {
           console.log("data each", data);
         })
         .catch((error) => console.error('Error fetching user level:', error));
+        setId(localStorage.getItem("idEachProfile"));
     }, [localStorage.getItem('idEachProfile')]);
 
     
@@ -63,6 +64,7 @@ function EachLevel({setIdCollectionValue}) {
           setSelectedNameSpecifics(data);
           setIdCollectionValue(data[0].id);
           setIdCollection(data[0].id);
+          setId(localStorage.getItem("idEachProfile"));
         })
         .catch((error) => console.error('Error fetching name specifics:', error));
     }, [localStorage.getItem('idEachProfile')]);
@@ -81,9 +83,10 @@ function EachLevel({setIdCollectionValue}) {
             setValidation(data[0].validation);
         })
         .catch((error) => console.error('Error fetching validation specific:', error));
+        setId(localStorage.getItem("idEachProfile"));
     }, [localStorage.getItem('idEachProfile'), idCollection]);
 
-    console.log("ifchange ",idCollection);
+    // console.log("idddddd:   ",id);
   return (
     <div className={style.container}>
   {selectedValueUser.map((item, index) => (

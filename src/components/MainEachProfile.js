@@ -14,13 +14,17 @@ import {TiHtml5} from 'react-icons/ti';
 import {FaUpload} from 'react-icons/fa';
 import {GiStarShuriken} from 'react-icons/gi';
 import {BsFillCalendar2EventFill} from 'react-icons/bs';
+import {FaStar,FaTrophy } from 'react-icons/fa'
 
-function MainEachProfile({idCollectionValue}) {
+import { PieChart, Pie, Legend, Tooltip, ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis , Radar } from 'recharts'; 
+
+function MainEachProfile({idCollectionValue, id}) {
 
     const [selectLocalStor, setSelectLocalStor] = useState()
     const [selectedValues, setSelectedValues] = useState([])
     const [selectValuePoject, setselectValuePoject] = useState([])
     const [selectedValuesTools, setSelectedValuesTools] =  useState([])
+    const [skills, setSkills] = useState([])
 useEffect(() => {
     window.scrollTo(0, 0);
     }, []);
@@ -72,6 +76,79 @@ useEffect(() => {
           })
           .catch((error) => console.error(error));
       }, [idCollectionValue]);
+
+      useEffect(() => {
+        fetch(`http://localhost:8081/api/get_skills/${id}`)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            setSkills(data);
+            console.log("tish ", data);
+          })
+          .catch((error) => console.error(error));
+      }, [id]);
+      const data = [
+        {
+          "subject": skills.length > 0 ? skills[0].shurt_name : "",
+          "A": skills.length > 0 ? (skills[0].validation_week === 1 ? (skills[0].validation === 1 ? 15 : 3) : 0) : 0,
+          "fullMark": 15
+        },
+        {
+          "subject": skills.length > 0 ? skills[1].shurt_name : "",
+          "A": skills.length > 0 ? (skills[0].validation_week === 1 ? (skills[1].validation === 1 ? 15 : 3) : 0) : 0,
+          "fullMark": 15
+        },
+        {
+          "subject": skills.length > 0 ? skills[2].shurt_name : "",
+          "A": skills.length > 0 ? (skills[0].validation_week === 1 ? (skills[2].validation === 1 ? 15 : 3) : 0) : 0,
+          "fullMark": 15
+        },
+        {
+          "subject": skills.length > 0 ? skills[3].shurt_name : "",
+          "A": skills.length > 0 ? (skills[0].validation_week === 1 ? (skills[3].validation === 1 ? 15 : 3) : 0) : 0,
+          "fullMark": 15
+        },
+        {
+          "subject": skills.length > 0 ? skills[4].shurt_name : "",
+          "A": skills.length > 0 ? (skills[0].validation_week === 1 ? (skills[4].validation === 1 ? 15 : 3) : 0) : 0,
+          "fullMark": 15
+        }
+      ]
+// console.log("id testtt ", localStorage.getItem('idEachProfile'));
+      const [chartOuterRadius, setChartOuterRadius] = useState(90);
+
+      const [fontSize, setFontSize] = useState(17);
+      useEffect(() => {
+        const handleResize = () => {
+          const screenWidth = window.innerWidth;
+    
+          if (screenWidth >= 470) {
+            setChartOuterRadius(90);
+            setFontSize(16);
+          } else if (screenWidth <= 470 && screenWidth > 430) {
+            setChartOuterRadius(70);
+            setFontSize(14);
+          } else if (screenWidth <= 430 && screenWidth > 310) {
+            setChartOuterRadius(50);
+            setFontSize(12);
+          } else if (screenWidth <= 310) {
+            setChartOuterRadius(40);
+            setFontSize(10);
+          }
+        };
+    
+        handleResize();
+    
+        window.addEventListener('resize', handleResize);
+    
+        return () => {
+          window.removeEventListener('resize', handleResize);
+        };
+      }, [id]);
 
   return (
     <div className={style.container}>
@@ -137,8 +214,37 @@ useEffect(() => {
                     </div>
                 </div>
             </div>
+            <div className={style.itemsProgram}>
+          <div className={style.contInsidEvents}>
+                  <div className={style.titleEvents}>
+                      <FaTrophy className={style.iconTitle}/>
+                      <p className="par">Skills</p>
+                      <AiFillCaretDown className={style.iconTitle}/>
+                  </div>
+                  <div className={style.skills}>
+                    <ResponsiveContainer width="100%" height={250}>
+                    <RadarChart outerRadius={chartOuterRadius}  data={data} >
+                    <PolarGrid />
+                    <PolarAngleAxis dataKey="subject" tick={{ fontSize: fontSize }}/>
+                    <PolarRadiusAxis angle={18} domain={[0, 15]} tick={{ fontSize: 12 }}/>
+                    <Radar  dataKey="A" stroke="#038688" fill="#038688" fillOpacity={0.6} />
+                    <Legend />
+                    </RadarChart>
+                    </ResponsiveContainer>
+                  </div>
+                  <div className={style.readCharts}>
+                    <p>Devlopement Web Front end : D-W-F</p>
+                    <p>Devlopement Web Back end : D-W-B</p>
+                    <p>Mobile Front-end : M-F</p>
+                    <p>Mobile Back-end : M-B</p>
+                    <p>Robitique : R</p>
+                  </div>
+          </div>
+              {/* finish  contInsideEvents*/}
+      </div>
         </div>
        {/* finish  itemsEvents */}
+       
     </div>
   );
 }

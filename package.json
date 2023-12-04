@@ -20,7 +20,7 @@
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^4.10.1",
+    "react-icons": "^4.12.0",
     "react-router": "^6.14.1",
     "react-scripts": "5.0.1",
     "react-typewriter-effect": "^1.1.0",
