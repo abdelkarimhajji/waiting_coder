@@ -6,7 +6,7 @@
     min-height: 100vh;
     margin-top: 65px;
     font-family: $myfont;
-    // overflow:hidden;
+    overflow:hidden;
     
     .containerFilter
     {
@@ -72,20 +72,81 @@
         min-height: 100vh;
         background-color: white;
         display: flex;
+        margin-left: 3px;
         .containerLeftBox
         {
-            width: 25%;
+            width: 27%;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            
+            background-color: yellow;
+            padding-top: 1.5%;
            .boxUser
            {
             width: 90%;
-            height: 200px;
+            height: 170px;
             border-radius: 10px;
-            background-color: red;
+            background-color: white;
+            border: 2px solid rgb(173, 173, 173);
+            .topPartProfile
+            {
+                width: 100%;
+                height: 50%;
+                display: flex;
+                .containerImg
+                {
+                    width: 30%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    img
+                    {
+                        width: 50%;
+                        height: 65%;
+                        border-radius: 50%;
+                    }
+                }
+                .containerName
+                {
+                    width: 70%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-end;
+                   span
+                   {
+                    margin-bottom: 10px;    
+                   }
+                   .name
+                   {
+                    font-size: 14px;
+                   }
+                   .specific
+                   {
+                    font-weight: bold;
+                    font-size: 14px;
+                   }
+                }
+            }
+            .bottomPartProfile
+            {
+                width: 100%;
+                height: 50%;
+                display: flex;
+                .containerImg
+                {
+                    width: 30%;
+                    display: flex;
+                    justify-content: flex-end;
+                    .icon
+                    {
+                        font-size: 25px;
+                        border-radius: 50%;
+                        margin-right: 20px;
+                        color: rgb(0, 213, 255);
+                    }
+                }
+            }
            }
         }
         .containerRightBox
