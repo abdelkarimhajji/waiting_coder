@@ -20,7 +20,9 @@ function MainSendEmails() {
         </div>
         <div className={style.containerBox}>
             <div className={style.containerLeftBox}>
-    
+                <div className={style.boxUser}>
+
+                </div>
             </div>
             <div className={style.containerRightBox}>
 
