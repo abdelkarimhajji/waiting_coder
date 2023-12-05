@@ -13,8 +13,9 @@ function MainSendEmails() {
                 <option value="Choose Project">Choose Project</option>
                 <option >test</option>
             </select>
-            <div>
-                
+            <div className={style.containerSelectALl}>
+                <input type="checkbox"  />
+                <label >Sellect All</label>
             </div>
         </div>
         <div className={style.containerBox}>

@@ -5,6 +5,7 @@
     width: 100%;
     min-height: 100vh;
     margin-top: 65px;
+    font-family: $myfont;
     // overflow:hidden;
     
     .containerFilter
@@ -14,18 +15,53 @@
         // background-color: cadetblue;
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: space-around;
         // padding-left: 50px;
-       
+        @media(max-width: 700px)
+        {
+            flex-direction:column;
+            height: 220px;
+        }
         select
         {
-            width: 300px;
+            width: 25%;
             height: 50px;
             border-radius: 10px;
             border: 2px solid rgba(0, 0, 0, 0.145)  ;
             color: rgb(95, 93, 93);
             cursor: pointer;
-            margin-left: 70px;
+            font-family: $myfont;
+            @media(max-width: 700px)
+            {
+                width: 70%;
+            }
+            option
+            {
+                font-family: $myfont;
+            }
+        }
+        .containerSelectALl
+        {
+            width: 25%;
+            height: 46px;
+            border-radius: 10px;
+            border: 2px solid rgba(0, 0, 0, 0.145)  ;
+            color: rgb(95, 93, 93);
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            @media(max-width: 700px)
+            {
+                width: 70%;
+            }
+            label
+            {
+                margin-left: 20px;
+            }
+            input
+            {
+                cursor: pointer;
+            }
         }
     }
     .containerBox
