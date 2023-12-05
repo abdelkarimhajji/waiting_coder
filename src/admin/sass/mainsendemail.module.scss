@@ -20,7 +20,8 @@
         @media(max-width: 700px)
         {
             flex-direction:column;
-            height: 220px;
+            justify-content: center;
+            height: 300px;
         }
         select
         {
@@ -33,7 +34,8 @@
             font-family: $myfont;
             @media(max-width: 700px)
             {
-                width: 70%;
+                width: 80%;
+                margin-bottom: 30px;
             }
             option
             {
@@ -52,7 +54,7 @@
             align-items: center;
             @media(max-width: 700px)
             {
-                width: 70%;
+                width: 80%;
             }
             label
             {
