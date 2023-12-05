@@ -7,15 +7,16 @@
     margin-top: 65px;
     font-family: $myfont;
     overflow:hidden;
-    
+    background-color:rgba(221, 221, 221, 0.194);
     .containerFilter
     {
         width: 100%;
-        height: 90px;
+        height: 150px;
         // background-color: cadetblue;
         display: flex;
         align-items: center;
         justify-content: space-around;
+        // background-color:rgba(221, 221, 221, 0.194);
         // padding-left: 50px;
         @media(max-width: 700px)
         {
@@ -69,47 +70,84 @@
     .containerBox
     {
         width: 100%;
-        min-height: 100vh;
-        background-color: white;
+        height: 100vh;
         display: flex;
         margin-left: 3px;
+        // margin-bottom: 100px;
+
         .containerLeftBox
         {
             width: 27%;
-            min-height: 100vh;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            background-color: yellow;
+            // background-color:rgba(221, 221, 221, 0.194);
             padding-top: 1.5%;
+            overflow-y: scroll;
+            &::-webkit-scrollbar {
+                width: 0px; /* Set the width of the scrollbar */
+              }
+             
            .boxUser
            {
             width: 90%;
-            height: 170px;
+            height: 160px;
             border-radius: 10px;
             background-color: white;
-            border: 2px solid rgb(173, 173, 173);
+            border: 0.5px solid rgb(173, 173, 173);
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: 0.5s all;
+            &:hover{
+                background-color: $pColor3;
+                .topPartProfile
+                {
+                    .containerName
+                    {
+                        span{
+                            color: white;
+                        }
+                    }
+                }
+                .bottomPartProfile
+                {
+                    .containerImg
+                    {
+                        .icon
+                        {
+                            color: white;
+                        }
+                    }
+                    .containerDesctiption
+                    {
+                        span{
+                            color:white;
+                        }
+                    }
+                }
+            }
             .topPartProfile
             {
                 width: 100%;
-                height: 50%;
+                height: 80px;
                 display: flex;
                 .containerImg
                 {
-                    width: 30%;
+                    width: 25%;
                     display: flex;
                     justify-content: center;
                     align-items: center;
                     img
                     {
-                        width: 50%;
-                        height: 65%;
+                        width: 50px;
+                        height: 50px;
                         border-radius: 50%;
                     }
                 }
                 .containerName
                 {
-                    width: 70%;
+                    width: 75%;
                     display: flex;
                     flex-direction: column;
                     justify-content: flex-end;
@@ -120,10 +158,12 @@
                    .name
                    {
                     font-size: 14px;
+                    color: $hoverR;
                    }
                    .specific
                    {
                     font-weight: bold;
+                    color: $pColor1;
                     font-size: 14px;
                    }
                 }
@@ -131,19 +171,40 @@
             .bottomPartProfile
             {
                 width: 100%;
-                height: 50%;
+                height: 80px;
                 display: flex;
                 .containerImg
                 {
-                    width: 30%;
+                    width: 25%;
                     display: flex;
-                    justify-content: flex-end;
+                    // justify-content: flex-end;
+                    justify-content: center;
+                    align-items: center;
                     .icon
                     {
                         font-size: 25px;
                         border-radius: 50%;
-                        margin-right: 20px;
-                        color: rgb(0, 213, 255);
+                        // margin-right: 20px;
+                        color: $hoverR;
+                    }
+                }
+                .containerDesctiption
+                {
+                    width: 73%;
+                    height: 80px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    overflow-y: scroll;
+                    &::-webkit-scrollbar {
+                        width: 0px; /* Set the width of the scrollbar */
+                    }
+                    span
+                    {
+                        font-size: 13px;
+                        color: rgba(0, 0, 0, 0.724);
+                        word-wrap: break-word;
+                        
                     }
                 }
             }
