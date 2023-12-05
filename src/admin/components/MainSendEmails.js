@@ -13,10 +13,9 @@ function MainSendEmails() {
                 <option value="Choose Project">Choose Project</option>
                 <option >test</option>
             </select>
-            <select >
-                <option value="Choose Project">Choose Project</option>
-                <option >test</option>
-            </select>
+            <div>
+                
+            </div>
         </div>
         <div className={style.containerBox}>
             <div className={style.containerLeftBox}>
