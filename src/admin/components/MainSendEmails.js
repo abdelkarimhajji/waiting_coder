@@ -1,6 +1,7 @@
 import React from 'react'
 import style from "../sass/mainsendemail.module.scss"
 import {BiMailSend } from 'react-icons/bi'
+import { TbPasswordUser } from "react-icons/tb";
 
 function MainSendEmails() {
     
@@ -85,6 +86,24 @@ function MainSendEmails() {
                         </div>
                     </div>
                     {/* finish titel */}
+
+                    {/* start container title of message */}
+                        <div className={style.containerTitleMessage}>
+                            <h1>Examples Messages</h1>
+                            <div className={style.containerExamples}>
+                                {/* start box exmaples */}
+                                <div className={style.boxExample}>
+                                    <div className={style.containerIcon}>
+                                        <TbPasswordUser className={style.icon}/>
+                                    </div>
+                                    <div className={style.containerType}>
+                                        <p>hello</p>
+                                    </div>
+                                </div>
+                                {/* finish box examples */}
+                            </div>
+                        </div>
+                    {/* finish container title of message */}
                 </div>
                 {/* finish inside container */}
             </div>

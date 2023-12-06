@@ -215,7 +215,6 @@
         }
         .containerRightBox
         {
-            // background-color: yellow;
             width: 75%;
             min-height: 100vh;
             padding-top: 2.8%;
@@ -269,6 +268,43 @@
                         }
                     }
                 }
+                .containerTitleMessage
+                {
+                    height: 200px;
+                    background-color: red;
+                    overflow: hidden;
+                    padding-left: 20px;
+                    .containerExamples
+                    {
+                        display: flex;
+                        .boxExample
+                        {
+                            width: 20%;
+                            height: 80px;
+                            background-color: yellow;
+                            display: flex;
+
+                            .containerIcon
+                            {
+                                width: 40%;
+                                height: 80px;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                background-color: beige;
+                                
+                            }
+                            .containerType
+                            {
+                                width: 60%;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                            }
+                        }
+                    }
+                }
+                
             }
         }
     }
