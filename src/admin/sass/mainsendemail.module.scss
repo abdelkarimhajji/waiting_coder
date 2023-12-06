@@ -74,7 +74,7 @@
         display: flex;
         margin-left: 3px;
         padding-bottom: 20px;
-        // margin-bottom: 100px;
+        margin-bottom: 100px;
 
         .containerLeftBox
         {
@@ -89,7 +89,6 @@
             &::-webkit-scrollbar {
                 width: 0px; /* Set the width of the scrollbar */
               }
-            padding-bottom: 20px;
            .boxUser
            {
             width: 90%;
@@ -216,6 +215,19 @@
             // background-color: yellow;
             width: 75%;
             min-height: 100vh;
+            padding-top: 2.8%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            .insideContainerRight
+            {
+                width: 90%;
+                height: 100vh;
+                border-radius: 10px;
+                background-color: white;
+                margin-bottom: 40px;
+            }
         }
     }
 }

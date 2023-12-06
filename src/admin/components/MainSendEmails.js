@@ -74,7 +74,9 @@ function MainSendEmails() {
 
             {/* start right box */}
             <div className={style.containerRightBox}>
+                <div className={style.insideContainerRight}>
 
+                </div>
             </div>
             {/* finish right box */}
         </div>
