@@ -73,9 +73,11 @@
         min-height: 100vh;
         display: flex;
         margin-left: 3px;
-        // padding-bottom: 20px;
-        // margin-bottom: 100px;
-
+        @media(max-width:900px)
+        {
+            flex-direction: column;
+            align-items: center;
+        }
         .containerLeftBox
         {
             width: 27%;
@@ -92,6 +94,10 @@
             @media(max-width:1200px)
             {
                 width: 35%;
+            }
+            @media(max-width:900px)
+            {
+                width: 95%;
             }
            .boxUser
            {
@@ -147,6 +153,11 @@
                         width: 50px;
                         height: 50px;
                         border-radius: 50%;
+                        @media(max-width: 900px)
+                        {
+                            width: 60px;
+                            height: 60px;
+                        }
                     }
                 }
                 .containerName
@@ -193,6 +204,10 @@
                         border-radius: 50%;
                         // margin-right: 20px;
                         color: $hoverR;
+                        @media(max-width:900px)
+                        {
+                            font-size: 35px;
+                        }
                     }
                 }
                 .containerDesctiption
@@ -230,6 +245,10 @@
             @media(max-width:1200px)
             {
                 width: 65%;
+            }
+            @media(max-width:900px)
+            {
+                width: 95%;
             }
             .insideContainerRight
             {
@@ -310,6 +329,14 @@
                             {
                                 height: 73px;
                                 width: 18%;
+                                @media(max-width:1200px)
+                                {
+                                &:hover
+                                {
+                                    height: 73px;
+                                    width: 28%;
+                                }
+                                }
                             }
                             .containerIcon
                             {
