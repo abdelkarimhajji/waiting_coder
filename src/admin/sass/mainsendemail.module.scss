@@ -73,6 +73,7 @@
         height: 100vh;
         display: flex;
         margin-left: 3px;
+        padding-bottom: 20px;
         // margin-bottom: 100px;
 
         .containerLeftBox
@@ -88,7 +89,7 @@
             &::-webkit-scrollbar {
                 width: 0px; /* Set the width of the scrollbar */
               }
-             
+            padding-bottom: 20px;
            .boxUser
            {
             width: 90%;
@@ -195,16 +196,16 @@
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    overflow-y: scroll;
-                    &::-webkit-scrollbar {
-                        width: 0px; /* Set the width of the scrollbar */
-                    }
-                    span
+                    // background-color: red;
+                    .desc
                     {
                         font-size: 13px;
                         color: rgba(0, 0, 0, 0.724);
-                        word-wrap: break-word;
-                        
+                        height: 70px;
+                        overflow: hidden;
+                        &::-webkit-scrollbar {
+                            width: 0px; /* Set the width of the scrollbar */
+                        }
                     }
                 }
             }
