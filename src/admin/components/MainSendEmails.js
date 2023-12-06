@@ -2,6 +2,7 @@ import React from 'react'
 import style from "../sass/mainsendemail.module.scss"
 import {BiMailSend } from 'react-icons/bi'
 import { TbPasswordUser } from "react-icons/tb";
+import { IoIosHappy } from "react-icons/io";
 
 function MainSendEmails() {
     
@@ -94,16 +95,45 @@ function MainSendEmails() {
                                 {/* start box exmaples */}
                                 <div className={style.boxExample}>
                                     <div className={style.containerIcon}>
-                                        <TbPasswordUser className={style.icon}/>
+                                        <IoIosHappy className={style.icon}/>
                                     </div>
                                     <div className={style.containerType}>
-                                        <p>hello</p>
+                                        <p>Welcome</p>
                                     </div>
                                 </div>
                                 {/* finish box examples */}
+
+                                 {/* start box exmaples */}
+                                 <div className={style.boxExample}>
+                                    <div className={style.containerIcon}>
+                                        <TbPasswordUser className={style.icon}/>
+                                    </div>
+                                    <div className={style.containerType}>
+                                        <p>Send Password</p>
+                                    </div>
+                                </div>
+                                {/* finish box examples */}
+
+
+                                 {/* start box exmaples */}
+                                 <div className={style.boxExample}>
+                                    <div className={style.containerIcon}>
+                                        <TbPasswordUser className={style.icon}/>
+                                    </div>
+                                    <div className={style.containerType}>
+                                        <p>Send Password</p>
+                                    </div>
+                                </div>
+                                {/* finish box examples */}
+
+
+                                
+
                             </div>
                         </div>
                     {/* finish container title of message */}
+
+                    
                 </div>
                 {/* finish inside container */}
             </div>

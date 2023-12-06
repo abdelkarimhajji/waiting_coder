@@ -70,11 +70,11 @@
     .containerBox
     {
         width: 100%;
-        height: 100vh;
+        min-height: 100vh;
         display: flex;
         margin-left: 3px;
-        padding-bottom: 20px;
-        margin-bottom: 100px;
+        // padding-bottom: 20px;
+        // margin-bottom: 100px;
 
         .containerLeftBox
         {
@@ -89,6 +89,10 @@
             &::-webkit-scrollbar {
                 width: 0px; /* Set the width of the scrollbar */
               }
+            @media(max-width:1200px)
+            {
+                width: 35%;
+            }
            .boxUser
            {
             width: 90%;
@@ -205,6 +209,8 @@
                         color: rgba(0, 0, 0, 0.724);
                         height: 70px;
                         overflow: hidden;
+                        word-break:break-all;
+                        text-align: justify;
                         &::-webkit-scrollbar {
                             width: 0px; /* Set the width of the scrollbar */
                         }
@@ -217,11 +223,14 @@
         {
             width: 75%;
             min-height: 100vh;
-            padding-top: 2.8%;
+            padding-top: 1.5%;
             display: flex;
             justify-content: center;
             align-items: center;
-            
+            @media(max-width:1200px)
+            {
+                width: 65%;
+            }
             .insideContainerRight
             {
                 width: 90%;
@@ -239,6 +248,10 @@
                     {
                         width: 10%;
                         height: 100%;
+                        @media(max-width: 1200px)
+                        {
+                            width: 15%;
+                        }
                         // background-color: yellow;
                         display: flex;
                         justify-content: center;
@@ -270,11 +283,13 @@
                 }
                 .containerTitleMessage
                 {
-                    height: 200px;
+                    min-height: 200px;
                     // background-color: red;
                     overflow: hidden;
                     padding-left: 20px;
                     border-bottom: 2px solid rgba(208, 208, 208, 0.358);
+                    flex-wrap: wrap;
+                    
                     .containerExamples
                     {
                         display: flex;
@@ -286,30 +301,20 @@
                             // background-color: yellow;
                             transition: 0.5s all;
                             display: flex;
+                            margin-right: 30px;
+                            @media(max-width:1200px)
+                            {
+                                width: 30%;
+                            }
                             &:hover
                             {
-                                .containerIcon
-                                {
-                                    background-color: white;
-                                    border-top: 2px solid rgba(204, 204, 204, 0.385);
-                                    border-left: 2px solid rgba(204, 204, 204, 0.385);
-                                    border-bottom: 2px solid rgba(204, 204, 204, 0.385);
-                                    .icon
-                                    {
-                                        color: $pColorR;
-                                    }
-                                }
-                                .containerType
-                                {
-                                    
-                                    background-color: $pColorR;
-                                    color: white;
-                                }
+                                height: 73px;
+                                width: 18%;
                             }
                             .containerIcon
                             {
                                 width: 40%;
-                                height: 80px;
+                                height:100%;
                                 display: flex;
                                 justify-content: center;
                                 align-items: center;
@@ -329,7 +334,7 @@
                             .containerType
                             {
                                 width: 60%;
-                                height: 80px;
+                                height: 100%;
                                 display: flex;
                                 justify-content: center;
                                 align-items: center;
@@ -339,6 +344,15 @@
                                 border-top-right-radius: 10px;
                                 border-bottom-right-radius: 10px;
                                 transition: 0.5s all;
+                                p
+                                {
+                                    font-weight: bold;
+                                    text-align: center;
+                                    @media(max-width:1000px)
+                                    {
+                                        font-size: 14px;
+                                    }
+                                }
                             }
                         }
                     }
