@@ -271,19 +271,41 @@
                 .containerTitleMessage
                 {
                     height: 200px;
-                    background-color: red;
+                    // background-color: red;
                     overflow: hidden;
                     padding-left: 20px;
+                    border-bottom: 2px solid rgba(208, 208, 208, 0.358);
                     .containerExamples
                     {
                         display: flex;
+                        cursor: pointer;
                         .boxExample
                         {
                             width: 20%;
                             height: 80px;
-                            background-color: yellow;
+                            // background-color: yellow;
+                            transition: 0.5s all;
                             display: flex;
-
+                            &:hover
+                            {
+                                .containerIcon
+                                {
+                                    background-color: white;
+                                    border-top: 2px solid rgba(204, 204, 204, 0.385);
+                                    border-left: 2px solid rgba(204, 204, 204, 0.385);
+                                    border-bottom: 2px solid rgba(204, 204, 204, 0.385);
+                                    .icon
+                                    {
+                                        color: $pColorR;
+                                    }
+                                }
+                                .containerType
+                                {
+                                    
+                                    background-color: $pColorR;
+                                    color: white;
+                                }
+                            }
                             .containerIcon
                             {
                                 width: 40%;
@@ -291,15 +313,32 @@
                                 display: flex;
                                 justify-content: center;
                                 align-items: center;
-                                background-color: beige;
-                                
+                                background-color: $pColorR;
+                                border-top-left-radius: 10px;
+                                border-bottom-left-radius: 10px;
+                                transition: 0.5s all;
+                                border-top: 2px solid rgba(204, 204, 204, 0.385);
+                                border-left: 2px solid rgba(204, 204, 204, 0.385);
+                                border-bottom: 2px solid rgba(204, 204, 204, 0.385);
+                                .icon
+                                {
+                                    font-size: 30px;
+                                    color: white;
+                                }
                             }
                             .containerType
                             {
                                 width: 60%;
+                                height: 80px;
                                 display: flex;
                                 justify-content: center;
                                 align-items: center;
+                                border-top: 2px solid rgba(204, 204,    204, 0.385);
+                                border-right: 2px solid rgba(204, 204, 204, 0.385);
+                                border-bottom: 2px solid rgba(204, 204, 204, 0.385);
+                                border-top-right-radius: 10px;
+                                border-bottom-right-radius: 10px;
+                                transition: 0.5s all;
                             }
                         }
                     }
