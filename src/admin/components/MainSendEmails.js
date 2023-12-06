@@ -5,7 +5,6 @@ import {BiMailSend } from 'react-icons/bi'
 function MainSendEmails() {
     
     const divsToRender = [1, 2, 3, 4, 5, 6, 7];
-
   return (
     <div className={style.container}>
         <div className={style.containerFilter}>
@@ -26,10 +25,9 @@ function MainSendEmails() {
         <div className={style.containerBox}>
             {/* start left box */}
             <div className={style.containerLeftBox}>
-            {divsToRender.map((item, index) => (
-                <>
                 {/* start make one box */}
-                <div className={style.boxUser}>
+            {divsToRender.map((item, index) => (
+                <div key={index} className={style.boxUser}>
                     {/* start make top part of boxUser profile */}
                     <div className={style.topPartProfile}>
                         {/* start make  part left of img */}
@@ -66,7 +64,6 @@ function MainSendEmails() {
                     </div>
                     {/* finish make bottom part of boxUser profile */}
                 </div>
-                </>
                 ))}
                 {/* finish make one box */}
             </div>
@@ -74,9 +71,22 @@ function MainSendEmails() {
 
             {/* start right box */}
             <div className={style.containerRightBox}>
+                {/* start inside container */}
                 <div className={style.insideContainerRight}>
+                    {/* start titel */}
+                    <div className={style.containerTitel}>
+                        <div className={style.containerImg}>
+                            <img src={require(`../../imgs/ahajji.jpg`)} alt="" className={style.img} />
+                        </div>
 
+                        <div className={style.containerName}>
+                            <span className={style.name}>Abdelkarim Hajji</span>
+                            <span className={style.specific}>Devlopement web Front-end</span>
+                        </div>
+                    </div>
+                    {/* finish titel */}
                 </div>
+                {/* finish inside container */}
             </div>
             {/* finish right box */}
         </div>
