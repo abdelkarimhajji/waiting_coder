@@ -126,14 +126,15 @@ function MainSendEmails() {
                                 </div>
                                 {/* finish box examples */}
 
-
-                                
-
                             </div>
                         </div>
                     {/* finish container title of message */}
+                    {/* start container send message */}
+                    <div className={style.containersendM}>
 
-                    
+                    </div>
+                    {/* finish container send message */}
+                        
                 </div>
                 {/* finish inside container */}
             </div>
