@@ -74,6 +74,7 @@
         min-height: 100vh;
         display: flex;
         margin-left: 3px;
+        margin-bottom: 20px; 
         @media(max-width:900px)
         {
             flex-direction: column;
@@ -258,6 +259,7 @@
                 border-radius: 10px;
                 background-color: white;
                 margin-bottom: 40px;
+                overflow: hidden;
                 .containerTitel
                 {
                     height: 80px;
