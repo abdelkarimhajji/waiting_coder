@@ -330,7 +330,6 @@
                             display: flex;
                             font-size: 13px;
                             margin-right: 30px;
-                            // background-color: red;
                             @media(max-width:1200px)
                             {
                                 width: 22%;
@@ -354,6 +353,14 @@
                                 {
                                     height: 65px;
                                     width: 20%;
+                                }
+                                }
+                                @media(max-width:650px)
+                                {
+                                &:hover
+                                {
+                                    width: 90%;
+                                    height: 60px;
                                 }
                                 }
                             }
