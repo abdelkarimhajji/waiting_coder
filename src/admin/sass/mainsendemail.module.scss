@@ -429,6 +429,15 @@
                         min-height: 70px;
                         // background-color: yellow;
                         border-bottom: 2px solid  rgba(208, 208, 208, 0.358);
+                        display: flex;
+                        .part1
+                        {
+                            width: 7%;
+                            background-color: yellow;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                        }
                     }
                 }
             }

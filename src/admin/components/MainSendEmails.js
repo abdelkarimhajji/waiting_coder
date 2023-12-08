@@ -132,7 +132,12 @@ function MainSendEmails() {
                     {/* start container send message */}
                     <div className={style.containersendM}>
                             <div className={style.containerSenders}>
+                                <div className={style.part1}>
+                                    <p>To : </p>
+                                </div>
+                                <div className={style.part2}>
 
+                                </div>
                             </div>
                     </div>
                     {/* finish container send message */}
