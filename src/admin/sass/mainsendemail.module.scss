@@ -423,6 +423,12 @@
                     height: 100%;
                     width: 100%;
                     background-color: red;
+                    .containerSenders
+                    {
+                        width: 100%;
+                        min-height: 70px;
+                        background-color: yellow;
+                    }
                 }
             }
         }

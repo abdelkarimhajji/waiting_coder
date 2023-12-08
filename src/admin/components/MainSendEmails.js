@@ -131,7 +131,9 @@ function MainSendEmails() {
                     {/* finish container title of message */}
                     {/* start container send message */}
                     <div className={style.containersendM}>
+                            <div className={style.containerSenders}>
 
+                            </div>
                     </div>
                     {/* finish container send message */}
                         
