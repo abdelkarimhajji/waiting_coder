@@ -136,7 +136,7 @@ function MainSendEmails() {
                                     <p>To : </p>
                                 </div>
                                 <div className={style.part2}>
-
+                                    test
                                 </div>
                             </div>
                     </div>
