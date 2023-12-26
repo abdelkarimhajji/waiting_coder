@@ -37,8 +37,8 @@
     useEffect(() => {
       if (parseInt(localStorage.getItem("login")) === 1)
       {
-        console.log("looooook ",parseInt(localStorage.getItem("login")))
-        console.log("looooook ")
+        // console.log("looooook ",parseInt(localStorage.getItem("login")))
+        // console.log("looooook ")
           navigate("/Home");
       }
     }, [localStorage.getItem("login")]);
@@ -57,7 +57,7 @@
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            name,
+            name,  
             password,
           }),
         });
