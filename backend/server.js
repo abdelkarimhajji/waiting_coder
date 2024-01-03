@@ -34,7 +34,7 @@ app.post('/signup', (req, res) => {
     return res.json({ status: -1 });
 });
 });
-console.log("helli",process.env.ACCESS_TOKEN_SECRET);
+
 
 
 // Create an API endpoint for fetching data for a specific user's name specifics
