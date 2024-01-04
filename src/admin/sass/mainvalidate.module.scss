@@ -542,10 +542,7 @@
         {
             width: 100%;
             display: flex;
-            // justify-content: center;
-            // align-items: center;
             min-height: 120px;
-            // background-color: red;
         }
         .containerInput
         {
@@ -582,6 +579,10 @@
             display: flex;
             justify-content: start;
             align-items: end;
+            @media(max-width:500px)
+            {
+                width: 20%;
+            }
             .cercleOutSideIcone
             {
                 width: 50px;
