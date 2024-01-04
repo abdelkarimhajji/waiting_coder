@@ -218,6 +218,7 @@ function MainValidate() {
       .then((responseData) => {
         fetchNewData();
         fetchNewAllStudent();
+        fetchNewAllStudent();
       })
       .catch((error) => {
         console.error('Error pushing data:', error);
