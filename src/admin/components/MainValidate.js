@@ -207,6 +207,7 @@ function MainValidate() {
     .catch((error) => console.error(error));
   }
   const handlCklickEachValid = (idUser) => {
+    console.log("idUser ",idUser)
     fetch(`http://localhost:8082/api/validEachProject/${parseInt(idUser)}/${parseInt(idProject)}`, {
       method: 'PUT',
       headers: {
@@ -513,7 +514,7 @@ function MainValidate() {
                       <input type="checkbox" checked={selectAllChecked} onChange={handleSelectAll}/>
                 </div>
                 <div className={style.valid}>
-                      <button onClick={handelValidAll}>Valid Week</button>
+                      <button onClick={handelValidAll}>Valid Project</button>
                       <button onClick={handelValidSpecificAll}>Valid specific</button>
                 </div>
         </div>
@@ -527,7 +528,7 @@ function MainValidate() {
                           <th>Student(s)</th>
                           <th>payemnt</th>
                           <th>select</th>
-                          <th className={style.displayNone}>validate FWeek</th>
+                          <th className={style.displayNone}>validate Project</th>
                           <th className={style.displayNone}>validate specific</th>
                       </tr>
                     </thead>
@@ -552,7 +553,7 @@ function MainValidate() {
                           />
                         </td>
                         <td className={style.displayNone}>
-                        {item.valid_project === 1 ? <button>is Valid</button> : <button  onClick={() => handlCklickEachValid(item.idOfUser)}>valid</button> }
+                        {item.valid_project === 1 ? <button>---is Valid</button> : <button  onClick={() => handlCklickEachValid(item.idOfUser)}>valid</button> }
                         </td>
                         <td className={style.displayNone}>{item.validation === 1 ? <button>is valid</button> : <button onClick={() => handelVlidEachStudentSpecific(item.idOfUser)}>valid</button>}</td>
                     </tr>    
@@ -611,11 +612,13 @@ function MainValidate() {
                     <div className={style.allStudent}>
                       {allStudentGroup2.length > 0 ?(
                       allStudentGroup2.map((item, index) => (
+                        <>
                         <div key={index} className={index % 2 === 0 ? style.eachStudent : style.eachStudentWhite} onClick={() => handelClickUser(item.idOfUser)}>
                             <div className={style.containerImg}><img src={require(`../../imgs/${item.image}`)}/></div>
                             <div className={style.containerName}><p>{item.firstName} {item.lastName}</p></div>
-                            <div className={style.containerVlidate}>{item.valid_project === 1 ? <button>is Valid</button> : <button onClick={() => handlCklickEachValid(item.idOfUser)}>Validate</button>}</div>
                         </div>
+                        <div className={style.containerVlidate}>{item.valid_project === 1 ? <button>is Valid</button> : <button onClick={() => handlCklickEachValid(item.idOfUser)}>Validate</button>}</div>
+                        </>
                         ))):(
                           <div  className={style.eachStudent} style={{justifyContent: "center", alignItems:"center"}}>
                             <p>empty</p>
