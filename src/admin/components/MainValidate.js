@@ -613,13 +613,13 @@ function MainValidate() {
                     <div className={style.allStudent}>
                       {allStudentGroup2.length > 0 ?(
                       allStudentGroup2.map((item, index) => (
-                        <>
-                        <div key={index} className={index % 2 === 0 ? style.eachStudent : style.eachStudentWhite} onClick={() => handelClickUser(item.idOfUser)}>
-                            <div className={style.containerImg}><img src={require(`../../imgs/${item.image}`)}/></div>
-                            <div className={style.containerName}><p>{item.firstName} {item.lastName}</p></div>
+                        <div key={index} className={index % 2 === 0 ? style.parentValidConversation : style.parentValidConversation2}>
+                          <div className={index % 2 === 0 ? style.eachStudent : style.eachStudentWhite} onClick={() => handelClickUser(item.idOfUser)}>
+                              <div className={style.containerImg}><img src={require(`../../imgs/${item.image}`)}/></div>
+                              <div className={style.containerName}><p>{item.firstName} {item.lastName}</p></div>
+                          </div>
+                          <div className={style.containerVlidate}>{item.valid_project === 1 ? <button>is Valid</button> : <button onClick={() => handlCklickEachValid(item.idOfUser)}>Validate</button>}</div>
                         </div>
-                        <div className={style.containerVlidate}>{item.valid_project === 1 ? <button>is Valid</button> : <button onClick={() => handlCklickEachValid(item.idOfUser)}>Validate</button>}</div>
-                        </>
                         ))):(
                           <div  className={style.eachStudent} style={{justifyContent: "center", alignItems:"center"}}>
                             <p>empty</p>
