@@ -347,30 +347,31 @@
                         border-top-right-radius: 20px;
                     }
                 }
-                .parentValidConversation
-                {
-                    background-color: #d7d6d6f6;
-                    display: flex;
-                    transition: 0.5s all;
-                    &:hover
-                    {
-                        background-color: $pColorR;
-                    }
-                }
-                .parentValidConversation2
-                {
-                    background-color: white;
-                    display: flex;
-                    transition: 0.5s all;
-                    &:hover
-                    {
-                        background-color: $pColorR;
-                    }
-                }
+                
                 .allStudent
                 {
                     height: 100%;
                     overflow-y: scroll;
+                    .parentValidConversation
+                    {
+                        background-color: #d7d6d6f6;
+                        display: flex;
+                        transition: 0.5s all;
+                        &:hover
+                        {
+                            background-color: $pColorR;
+                        }
+                    }
+                    .parentValidConversation2
+                    {
+                        background-color: white;
+                        display: flex;
+                        transition: 0.5s all;
+                        &:hover
+                        {
+                            background-color: $pColorR;
+                        }
+                    }
                     .eachStudent
                     {
                         width: 100%;

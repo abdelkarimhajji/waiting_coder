@@ -528,6 +528,7 @@ app.get('/api/getMonthsUesrs/:chooseYear', (req, res) => {
             console.log(updateErr);
             return res.json("Error");
           }
+          
           return res.json(updateResult);
         });
       } else {
@@ -539,6 +540,7 @@ app.get('/api/getMonthsUesrs/:chooseYear', (req, res) => {
             console.log(insertErr);
             return res.json("Error");
           }
+          console.log("hiii\n")
           return res.json(insertResult);
         });
       }
