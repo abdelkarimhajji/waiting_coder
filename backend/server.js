@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require("express");
 const mysql = require('mysql');
 const cors = require('cors');
+const jwt = require('jsonwebtoken'); // Add this line
 
 const app = express();
 app.use(cors());
@@ -28,7 +29,9 @@ app.post('/signup', (req, res) => {
     if (selectResult.length > 0) {
       // console.log(selectResult);
       const userId = selectResult[0].id;
-      return res.json({ status: 1, userId });
+      const token = jwt.sign({ id: userId }, process.env.ACCESS_TOKEN_SECRET); // Generate a JWT
+      console.log("hiiiiiiiiii\n");
+      return res.json({ status: 1, userId, accessToken: token }); // Send the JWT to the client
     }
     else
     return res.json({ status: -1 });
