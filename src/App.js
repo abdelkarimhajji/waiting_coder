@@ -25,25 +25,58 @@ function App() {
   
   const [isLogin, setIsLogin] = useState(parseInt(localStorage.getItem("login")) || 0);
   const [isLoggedIn, setIsLoggedIn] = useState(parseInt(localStorage.getItem("adminLogin")) || 0);
-  
+
+
+  useEffect(() => {
+    console.log("isLogin karimhajhjjjji");
+    console.log("isLogin karimhajhjjjji");
+    console.log("isLogin karimhajhjjjji");
+    console.log("isLogin karimhajhjjjji");
+    console.log("isLogin karimhajhjjjji");
+    console.log("isLogin karimhajhjjjji");
+    console.log("isLogin karimhajhjjjji");
+    console.log("isLogin karimhajhjjjji");
+    console.log("isLogin karimhajhjjjji");
+    console.log("isLogin karimhajhjjjji");
+    console.log("isLogin karimhajhjjjji");
+    console.log("isLogin karimhajhjjjji");
+    console.log("isLogin karimhajhjjjji");
+    console.log("isLogin karimhajhjjjji");
+    console.log("isLogin karimhajhjjjji");
+    console.log("isLogin karimhajhjjjji");
+    console.log("isLogin karimhajhjjjji");
+    console.log("isLogin karimhajhjjjji");
+    console.log("isLogin karimhajhjjjji");
+    console.log("isLogin karimhajhjjjji");
+    console.log("isLogin karimhajhjjjji");
+    console.log("isLogin karimhajhjjjji");
+    console.log("isLogin karimhajhjjjji");
+    console.log("isLogin karimhajhjjjji");
+    console.log("isLogin karimhajhjjjji");
+    console.log("isLogin karimhajhjjjji");
+    console.log("isLogin karimhajhjjjji");
+    console.log("isLogin karimhajhjjjji");
+    console.log("isLogin karimhajhjjjji");
+    console.log("isLogin karimhajhjjjji");
+    console.log("isLogin karimhajhjjjji");
+    console.log("isLogin karimhajhjjjji");
+    console.log("isLogin karimhajhjjjji");
+    console.log("isLogin karimhajhjjjji");
+    console.log("isLogin karimhajhjjjji");
+    console.log("isLogin karimhajhjjjji");
+    console.log("isLogin karimhajhjjjji");
+    console.log("isLogin karimhajhjjjji");
+    console.log("isLogin karimhajhjjjji");
+    console.log("isLogin karimhajhjjjji");
+    
+  }, []);
   
   return (
     <BrowserRouter>
       <UserContext.Provider value={{ value, setValue, isLogin, setIsLogin , isLoggedIn, setIsLoggedIn}}>
         <Routes>
-          {/* <Route exact path="/" element={<SignIn />} />
+          <Route exact path="/" element={<SignIn />} />
           <Route path="/Home" element={isLogin ? <Home /> : <Navigate to="/" />} />
-          <Route path="/PushProject" element={isLogin ? <PushProject /> : <Navigate to="/" />} />
-          <Route path="/Language" element={isLogin ? <Language /> : <Navigate to="/" />} />
-          <Route path="/Project" element={isLogin ? <Project /> : <Navigate to="/" />} />
-          <Route path="/Profile" element={isLogin ? <Profile /> : <Navigate to="/" />} />
-          <Route path="/EachProfile" element={isLogin ? <EachProfile /> : <Navigate to="/" />} />
-          <Route path="/DetailsProject" element={isLogin ? <DetailsProject /> : <Navigate to="/" />} />
-          <Route path="/Event" element={isLogin ? <Event /> : <Navigate to="/" />} />
-          <Route path="/Tools" element={isLogin ? <Tools /> : <Navigate to="/" />} />
-          <Route path="/competition" element={isLogin ? <Competition /> : <Navigate to="/" />} /> */}
-           <Route exact path="/" element={<SignIn />} />
-          <Route path="/Home" element={ <Home />} />
           <Route path="/PushProject" element={isLogin ? <PushProject /> : <Navigate to="/" />} />
           <Route path="/Language" element={isLogin ? <Language /> : <Navigate to="/" />} />
           <Route path="/Project" element={isLogin ? <Project /> : <Navigate to="/" />} />
