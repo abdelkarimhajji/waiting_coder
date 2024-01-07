@@ -27,49 +27,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(parseInt(localStorage.getItem("adminLogin")) || 0);
 
 
-  useEffect(() => {
-    console.log("isLogin karimhajhjjjji");
-    console.log("isLogin karimhajhjjjji");
-    console.log("isLogin karimhajhjjjji");
-    console.log("isLogin karimhajhjjjji");
-    console.log("isLogin karimhajhjjjji");
-    console.log("isLogin karimhajhjjjji");
-    console.log("isLogin karimhajhjjjji");
-    console.log("isLogin karimhajhjjjji");
-    console.log("isLogin karimhajhjjjji");
-    console.log("isLogin karimhajhjjjji");
-    console.log("isLogin karimhajhjjjji");
-    console.log("isLogin karimhajhjjjji");
-    console.log("isLogin karimhajhjjjji");
-    console.log("isLogin karimhajhjjjji");
-    console.log("isLogin karimhajhjjjji");
-    console.log("isLogin karimhajhjjjji");
-    console.log("isLogin karimhajhjjjji");
-    console.log("isLogin karimhajhjjjji");
-    console.log("isLogin karimhajhjjjji");
-    console.log("isLogin karimhajhjjjji");
-    console.log("isLogin karimhajhjjjji");
-    console.log("isLogin karimhajhjjjji");
-    console.log("isLogin karimhajhjjjji");
-    console.log("isLogin karimhajhjjjji");
-    console.log("isLogin karimhajhjjjji");
-    console.log("isLogin karimhajhjjjji");
-    console.log("isLogin karimhajhjjjji");
-    console.log("isLogin karimhajhjjjji");
-    console.log("isLogin karimhajhjjjji");
-    console.log("isLogin karimhajhjjjji");
-    console.log("isLogin karimhajhjjjji");
-    console.log("isLogin karimhajhjjjji");
-    console.log("isLogin karimhajhjjjji");
-    console.log("isLogin karimhajhjjjji");
-    console.log("isLogin karimhajhjjjji");
-    console.log("isLogin karimhajhjjjji");
-    console.log("isLogin karimhajhjjjji");
-    console.log("isLogin karimhajhjjjji");
-    console.log("isLogin karimhajhjjjji");
-    console.log("isLogin karimhajhjjjji");
-    
-  }, []);
+
   
   return (
     <BrowserRouter>

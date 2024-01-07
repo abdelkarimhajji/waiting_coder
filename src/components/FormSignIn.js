@@ -112,6 +112,7 @@
           <input type="text" name="email" placeholder="Enter your email" value={name} onChange={(e) => setname(e.target.value)} />
           <input type="password" name="password" placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)} />
           <input type="submit" className={style.submit} />
+          <input type="submit" value="Signin with 42" className={style.submit} />
         </form>
         <div className={style.error}>{response.status === -1 && <p>Your Password or email does not exist</p>}</div>
       </div>
