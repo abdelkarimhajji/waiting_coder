@@ -43,7 +43,9 @@
     if (user) {
       setUserData(JSON.parse(user));
       localStorage.setItem('login', 1);
+      setIsLogin(1);
       navigate("/Home");
+      localStorage.setItem('userId', 2);
       console.log(JSON.parse(user));
     }
     // console.log("hii")
