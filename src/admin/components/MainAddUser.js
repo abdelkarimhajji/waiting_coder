@@ -432,11 +432,19 @@ const handleImageChange = (event) => {
                         
                     <tr key={index} className={style.trHover}>
                       <td>
-                      <img
-                      src={item.image ? require(`../../imgs/${item.image}`) : 'fallback-image-url.jpg'}
-                      alt={item.firstName}
-                      className={style.img}
-                      />
+                      {item.phone === "null" ? (
+                          <img
+                          src={item.image}
+                          alt={item.firstName}
+                          className={style.img}
+                          />
+                        ) : (
+                          <img
+                          src={item.image ? require(`../../imgs/${item.image}`) : 'fallback-image-url.jpg'}
+                          alt={item.firstName}
+                          className={style.img}
+                          />
+                        )}
                       </td>
                       <td>
                         {item.firstName}
