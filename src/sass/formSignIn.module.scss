@@ -29,11 +29,13 @@
         height: 440px;
         width: 90%;
     }
+
     @media (max-width: 304px)
     {
         height: 440px;
         width: 90%;
     }
+
     @keyframes floating {
         0% { transform: translate(0,  0px); }
         50%  { transform: translate(0, 20px); }
@@ -103,6 +105,7 @@
         font-size: 17px;
         font-weight: bold;
         transition: 0.5s all;
+        margin-bottom: 0;
         cursor: pointer;
         @media (max-width: 350px)
         {
