@@ -41,14 +41,32 @@
     const urlParams = new URLSearchParams(window.location.search);
     const user = urlParams.get('user');
     if (user) {
+      const userData = JSON.parse(user);
       setUserData(JSON.parse(user));
+      fetch(`http://localhost:8081/api/registerIntra`,{
+        method: 'POST',
+        headers:{
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({userData: userData})
+      })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        localStorage.setItem('userId', data.idUser);
+        // console.log("loook at the a",data.idUser)
+      })
+      .catch((error) => console.error(error));
       localStorage.setItem('login', 1);
       setIsLogin(1);
       navigate("/Home");
-      localStorage.setItem('userId', 2);
-      console.log(JSON.parse(user));
+      
+      // console.log(JSON.parse(user));
     }
-    // console.log("hii")
   }, []);
 
   
