@@ -552,7 +552,7 @@ function MainValidate() {
                           <th>select</th>
                           <th className={style.displayNone}>validate Project</th>
                           <th className={style.displayNone}>validate specific</th>
-                      </tr>
+                      </tr> 
                     </thead>
                     <tbody>
                         {allStudentGroup.length > 0 ? (
