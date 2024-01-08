@@ -574,7 +574,7 @@ function MainValidate() {
                         )}
                         </td>
                         <td>{item.firstName}</td>
-                        <td>{item.payment} DH</td>
+                        <td>{item.payment} DH</td> 
                         <td>
                         <input
                             type="checkbox"
