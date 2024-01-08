@@ -569,7 +569,7 @@ function MainValidate() {
                           <img
                           src={item.image ? require(`../../imgs/${item.image}`) : 'fallback-image-url.jpg'}
                           alt={item.firstName}
-                          className={style.img} 
+                          className={style.img}  
                           />
                         )}
                         </td>
