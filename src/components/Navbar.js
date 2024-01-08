@@ -92,7 +92,13 @@ function Navbar(props) {
         <div className={style.nameUser}>
           {selectedValuesUsers[0] ? (
           <div>
-            <img src={require(`../imgs/${selectedValuesUsers[0].image}`)} alt="" className={style.img} />
+            
+            {selectedValuesUsers[0].phone === "null" ? (
+              <img src={selectedValuesUsers[0].image} alt={selectedValuesUsers[0].image} className={style.img}/>
+
+            ) : (
+              <img src={require(`../imgs/${selectedValuesUsers[0].image}`)} alt="" className={style.img} />
+            )}
             <p>@{selectedValuesUsers[0].lastName}</p>
           </div>
             ) : (

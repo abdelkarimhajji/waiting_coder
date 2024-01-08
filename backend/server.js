@@ -673,7 +673,7 @@ app.post("/api/registerIntra", (req, res) => {
   let {userData } = req.body;
   const uploadedImage = req.file;
   const currentDate = new Date();
-  
+  console.log(userData)
   let valid =  0;
   const selectUser = 'SELECT id FROM user WHERE email = ?';
   db.query(selectUser, [userData.email], (error, idResult) => {
@@ -722,7 +722,7 @@ app.post("/api/registerIntra", (req, res) => {
                 return;
               }
 
-              res.status(200).json({ message: "Image uploaded successfully" });
+              res.status(200).json({ message: "Image uploaded successfully" ,idUser: userId });
             });
           });
         });

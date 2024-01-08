@@ -12,20 +12,21 @@ function Searsh() {
   const userId = localStorage.getItem('userId');
   const [value, setValue] = useState('');
   useEffect(() => {
-    // Fetch data from the '/data' endpoint
-    fetch(`http://localhost:8081/get_user/${userId}`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-        setData(data);
-        console.log(data); // Log the data in the frontend console
-      })
-      .catch(error => console.error(error));
-  }, []);
+    // Delay the fetch request by 2 seconds
+      fetch(`http://localhost:8081/get_user/${userId}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(data => {
+          setData(data);
+          console.log("why not work kkkkkkkkk : ",data); // Log the data in the frontend console
+        })
+        .catch(error => console.error(error));
+
+  }, [userId]);
   
   useEffect(() => {
     console.log(value)
@@ -84,7 +85,12 @@ function Searsh() {
           <p className="nameUser">{data[0].firstName}</p>
         </div>
         <div className={style.photo}>
-          <img src={require(`../imgs/${data[0].image}`)} alt="" className="imgUser" />
+          
+          {data[0].phone === "null" ? (
+            <img src={data[0].image} alt={data[0].firstName} className="imgUser" />
+          ) : (
+            <img src={require(`../imgs/${data[0].image}`)} alt="" className="imgUser" />
+          )}
         </div>
       </div>
     ) : (
@@ -104,7 +110,12 @@ function Searsh() {
             <Link key={index} to="/EachProfile" style={{textDecoration: 'none'}}>
             <div  className={style.containerEachRsult} onClick={() => get_id(item.id)}>
               <div className={style.containerImgResult}>
-                  <img src={require(`../imgs/${item.image}`)} alt=""/>
+              {item.phone === "null" ? (
+                  <img src={item.image} alt={item.image} className="imgUser" />
+                ) : (
+                  <img src={require(`../imgs/${item.image}`)} alt={item.firstName}/>
+                )}
+                  
               </div>
               <div className={style.containerFirstName}>
                   <p>{item.firstName} {item.lastName}</p>

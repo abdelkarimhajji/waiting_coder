@@ -92,7 +92,11 @@ function EachLevel({setIdCollectionValue, setId}) {
   {selectedValueUser.map((item, index) => (
     <div key={index} className={style.containerTransp}>
       <div className={style.containerImg}>
+        {item.phone === "null" ? (
+          <img src={item.image} alt={item.firstName}/>
+        ) : (
         <img src={require(`../imgs/${item.image}`)} alt={item.firstName}/>
+        )}
       </div>
       <div className={style.containerInfo}>
         <p className={style.name}>{item.firstName}</p>
