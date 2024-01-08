@@ -86,7 +86,6 @@ function EachLevel({setIdCollectionValue, setId}) {
         setId(localStorage.getItem("idEachProfile"));
     }, [localStorage.getItem('idEachProfile'), idCollection]);
 
-    // console.log("idddddd:   ",id);
   return (
     <div className={style.container}>
   {selectedValueUser.map((item, index) => (
