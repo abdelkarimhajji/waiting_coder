@@ -87,7 +87,7 @@ function MainHome({selectedValues, selectedValuesTools, selectedValuesProject}) 
             console.log("tish ", data);
           })
           .catch((error) => console.error(error));
-      }, []);
+      }, [userId]);
       
       // console.log("localStorage.getItem  " + localStorage.getItem("login"))
       const data = [
