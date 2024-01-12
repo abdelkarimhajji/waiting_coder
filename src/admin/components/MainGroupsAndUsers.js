@@ -510,7 +510,14 @@ const finisheGroup = () =>
                     <tbody>
                     {selectUserInfo.map((item, index) => (
                     <tr key={index} className={style.trHover}>
-                        <td> <img src={require(`../../imgs/${item.image}`)} alt={item.firstName} className={style.img} /></td>
+                        <td>
+                          {item.phone === "null" ? (
+                              <img src={item.image} alt={item.firstName} className={style.img} />
+                            ):(
+                              
+                              <img src={require(`../../imgs/${item.image}`)} alt={item.firstName} className={style.img} />
+                          )}
+                        </td>
                         <td>{item.firstName} {item.lastName}</td>
                         <td>{item.payment} DH</td>
                         <td className={style.displayNone}><button>edit</button></td>
