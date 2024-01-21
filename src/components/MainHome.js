@@ -166,11 +166,11 @@ function MainHome({selectedValues, selectedValuesTools, selectedValuesProject}) 
                     <Link
                     to={{
                       pathname: '/Language',
-                      hash: `#${language}`,
                       state: { sectionId: language.languageName } // Pass the section ID as state
                     }}
                     className={style.link}
                     key={language.languageId}
+                    
                   >
                   <div  className={style.conatProItm}>
                   {React.createElement(iconMapping[language.languageIcon] || Default, { className: style.TiHtml5 })}

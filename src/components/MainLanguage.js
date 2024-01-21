@@ -23,7 +23,28 @@ function MainLanguage() {
   const [setSelectValuesLanguages, setSetSelectValuesLanguages] = useState([]);
   
   const [scrollPosition, setScrollPosition] = useState(0);
+  const location = useLocation();
+const sectionId = location.state?.sectionId;
 
+console.log('gggggg sectionId:', sectionId); // Check if the sectionId is being passed correctly
+
+useEffect(() => {
+  console.log('useEffect triggered'); // Check if the useEffect hook is being triggered
+
+  const timer = setTimeout(() => {
+    if (sectionId) {
+      const sectionElement = document.getElementById(sectionId);
+      console.log('sectionElement:', sectionElement); // Check if the sectionId matches an id in the DOM
+
+      if (sectionElement) {
+        console.log('scrollIntoView called'); // Check if the scrollIntoView function is being called
+        sectionElement.scrollIntoView();
+      }
+    }
+  }, 1000);
+
+  return () => clearTimeout(timer);
+}, [sectionId]);
   function displayWindow() {
     if (valid === 0) {
       document.body.style.transition = '1s all';
@@ -97,7 +118,7 @@ function MainLanguage() {
         {/* container of languages */}
         {setSelectValuesLanguages.map((language) => (
           
-        <div key={language.languageId} className={style.cantAllLanguage} id={language.languageName} >
+        <div key={language.languageId} className={style.cantAllLanguage} id={language.languageName}>
           {/* <section className={style.cardInner}> */}
               {/* <div className={style.front}> */}
               <div className={style.titleLanguage}>
@@ -114,7 +135,7 @@ function MainLanguage() {
                 </div>
               </div>
               <div className={style.back}>
-                <div className={style.chooseLink}>
+                <div className={style.chooseLink} >
                     <p>choose you link</p>
                 </div>
               <div className={style.allLinks}>
