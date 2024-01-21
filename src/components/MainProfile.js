@@ -10,33 +10,49 @@ import karim from '../imgs/karim.png';
 function MainProfile() {
     const userId = localStorage.getItem("userId");
     const [selectedValuesUser, setSelectedValuesUser] = useState([]);
-    const [selectedValuesCount, setSelectedValuesCount] = useState([]);
-    const [now, setNow] = useState(0);
-    const [next, setNext] = useState(3);
-    const [valid, setValid] = useState(0);
+    const [selectedCountUsers, setSelectedCountUsers] = useState([]);
+    const [next, setNext] = useState(0);
+    const [numbers, setnumbers] = useState(4);
+    const [totalPages, setTotalPages] = useState(0);
+    const [count, setCount] = useState(1);
 
-      const function_next = (e) =>
-      {
-          if (e === 0)
+
+      
+    const get_id = (id) =>
+    {
+      localStorage.setItem("idEachProfile", id);
+    }
+    function callNextUsers(count) {
+      console.log("dddd ",count);
+      setNext(7 * count);
+    }
+    function nextNumbers() 
+    {
+        if (numbers + 4 > totalPages) {
+          let i = 0;
+          let j = numbers;
+          while(j < totalPages)
           {
-            if (now > 0)
-            {
-              setNow(now - 3)
-              setNext(next - 3);
-              window.scrollTo({top :0, left: 0, behavior: 'smooth'});
-            }
-          }else if (valid === 0){
-            setNow(now + 3)
-            setNext(next + 3);
-            window.scrollTo({top :0, left: 0, behavior: 'smooth'});
+            i++;
+            j++;
           }
-      }
-      const get_id = (id) =>
-      {
-        localStorage.setItem("idEachProfile", id);
-      }
+          setnumbers(i);
+          setCount(count + i + 1);
+        }
+    }
+    function beforeNumbers()
+    {
+        if (numbers < 4)
+          setnumbers(4);
+        if(count > 4)
+            setCount(count - 4);
+    }
+    function getLastUsers() 
+    {
+      setNext(7 * totalPages);
+    }
     useEffect(() => {
-        fetch(`http://localhost:8081/get_user_levle/${now}/${next}`)
+        fetch(`http://localhost:8081/api/get_user_levle/${next}`)
           .then((response) => {
             if (!response.ok) {
               throw new Error("Network response was not ok");
@@ -45,18 +61,26 @@ function MainProfile() {
           })
           .then((data) => {
             setSelectedValuesUser(data);
-            if (data.length === 0) {
-              setValid(1)
-            }
-            else
-              setValid(0);
+            
           })
           .catch((error) => console.error(error));
-          
-      }, [now, next]);
-      const [displayNoUsersMessage, setDisplayNoUsersMessage] = useState(false);
+      }, [next]);
 
-      setTimeout(() => setDisplayNoUsersMessage(true), 200); // 1000 milliseconds = 1 second
+      useEffect(() => {
+        fetch(`http://localhost:8081/api/get_user_count`)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            setSelectedCountUsers(data);
+            setTotalPages(parseInt((data.count / 7)));
+          })
+          .catch((error) => console.error(error));
+      }, [next]);
+     
   return (
     <>
     <div className={style.container}>
@@ -71,7 +95,14 @@ function MainProfile() {
             <Link key={userIndex} to="/EachProfile" className={style.link} onClick={() => get_id(userItem.id)}>
               <div className={style.containerProfile}>
                 <div className={style.containerImg}>
-                  <img src={require(`../imgs/${userItem.image}`)} alt="" className="imgUser" />
+                  {
+                    userItem.phone === "null" ? (
+                      <img src={userItem.image} alt={userItem.firstName} className="imgUser" />
+                    ):(
+                      <img src={require(`../imgs/${userItem.image}`)} alt={userItem.firstName} className="imgUser" />
+                    )
+                  }
+                  
                 </div>
                 <div className={style.containerInfo}>
                   <p className={style.name}>{userItem.firstName} {userItem.lastName}</p>
@@ -101,19 +132,30 @@ function MainProfile() {
         </Link>
       ))
       ) : (
-        displayNoUsersMessage && (
+        
           <p className={style.noUsers}>No users found</p>
-        )
+        
         
 )}
-{/* finish card */}   
-</div>
-    <div className={style.containerOfContainerPagination}>
-        <div className={style.containerPagination}>
-          <button onClick={() => function_next(0)}>return</button>
-          <button onClick={() => function_next(1)}>next</button>
-        </div>
+{/* finish card */} 
+<div  className={style.chooseNumber}>
+  <div className={style.beforeButton} onClick={beforeNumbers}>
+      <p>&lt;&lt;</p>
+  </div>
+{Array.from({ length: numbers }, (_, i) => (
+    <div key={i} className={style.button} onClick={() => callNextUsers(count+i)}>
+        <p>{count + i}</p>
     </div>
+  ))}
+  <div className={style.nextButton} onClick={nextNumbers}>
+        <p>&gt;&gt;</p>
+  </div>
+    <div className={style.lastButton} onClick={getLastUsers}>
+        <p>{totalPages}</p>
+    </div>
+  </div>
+</div>
+
     </>
   );
 }

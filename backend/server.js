@@ -401,19 +401,7 @@ app.get('/api/get_competitions/:userId/:nameSpecifics', (req, res) => {
   });
 });
 
-app.get('/get_user_levle/:now/:next', (req, res) => {
-  const now = parseInt(req.params.now); // Convert to integer
-  const next = parseInt(req.params.next); // Convert to integer
-  const selectSql = 'SELECT user.*, level.level, (SELECT COUNT(DISTINCT id) FROM registrement_events WHERE id_user = user.id AND valid = 1) AS valid_event_count, (SELECT COUNT(DISTINCT id) FROM registrement_competition WHERE id_user = user.id AND valid = 1) AS valid_competition_count, COUNT(DISTINCT CASE WHEN validation_projects.valid_project = 1 THEN validation_projects.id ELSE NULL END) AS valid_project_count FROM user LEFT JOIN validation_projects ON user.id = validation_projects.id_user LEFT JOIN level ON user.id = level.id_user GROUP BY user.id LIMIT ? OFFSET ?';
-  db.query(selectSql,[next, now], (selectErr, selectResult) => {
-    if (selectErr) {
-      console.log(selectErr);
-      return res.json("Error");
-    }
-    console.log(selectResult)
-    return res.json(selectResult);
-  });
-});
+
 
 
 
@@ -728,6 +716,43 @@ app.post("/api/registerIntra", (req, res) => {
         });
       });
     }
+  });
+});
+// how users
+
+
+
+// Endpoint to get the total count of users
+app.get('/api/get_user_count', (req, res) => {
+  const sql = "SELECT COUNT(*) as count FROM user";
+
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.log(err);
+      return res.json("Error");
+    }
+
+    const count = result[0].count;
+    return res.json({ count });
+  });
+});
+
+// Endpoint to get a specific set of users
+app.get('/api/get_user_levle/:next', (req, res) => {
+  const now = parseInt(req.params.now); // Convert to integer
+  const next = parseInt(req.params.next); // Convert to integer
+  const selectSql = `SELECT user.*, level.level, (SELECT COUNT(DISTINCT id) FROM registrement_events WHERE id_user = user.id AND valid = 1)
+  AS valid_event_count, (SELECT COUNT(DISTINCT id) FROM registrement_competition WHERE id_user = user.id AND valid = 1)
+  AS valid_competition_count, COUNT(DISTINCT CASE WHEN validation_projects.valid_project = 1 THEN validation_projects.id ELSE NULL END)
+  AS valid_project_count FROM user LEFT JOIN validation_projects ON user.id = validation_projects.id_user
+  LEFT JOIN level ON user.id = level.id_user GROUP BY user.id LIMIT 7 OFFSET ?`;
+  db.query(selectSql,[next], (selectErr, selectResult) => {
+    if (selectErr) {
+      console.log(selectErr);
+      return res.json("Error");
+    }
+    console.log(selectResult)
+    return res.json(selectResult);
   });
 });
 

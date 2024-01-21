@@ -10,7 +10,7 @@ function EachLevel({setIdCollectionValue, setId}) {
     const [selectedValue, setSelectedValue] = useState('');
     const [selectedValueUser, setSelectedValueUser] = useState([]);
     const [selectedNameSpecifics, setSelectedNameSpecifics] = useState([]);
-    setId(localStorage.getItem("idEachProfile"));
+    // setId(localStorage.getItem("idEachProfile"));
     const [idCollection, setIdCollection] = useState(0);
     const [validation, setValidation] = useState(0);
     const userId = localStorage.getItem("userId");
@@ -22,7 +22,7 @@ function EachLevel({setIdCollectionValue, setId}) {
       setIdCollectionValue(selectedOption.id)
       setIdCollection(selectedOption.id)
     };
-    // console.log()
+    console.log()
     const location = useLocation();
     useEffect(() => {
       fetch(`http://localhost:8081/get_each_user_levle/${localStorage.getItem('idEachProfile')}`)
