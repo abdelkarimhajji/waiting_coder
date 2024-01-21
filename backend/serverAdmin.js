@@ -56,7 +56,16 @@ app.post('/signup', (req, res) => {
 
   app.get('/api/search/:input', (req, res) => {
     const input = req.params.input;
-    const selectSql = "SELECT id, firstName, lastName, image, userType FROM ( SELECT id, firstName, lastName, image, 'user' as userType FROM user WHERE firstName LIKE ? OR lastName LIKE ? UNION ALL SELECT id, first_name, last_name, image, 'admin' as userType FROM admin WHERE first_name LIKE ? OR last_name LIKE ? UNION ALL SELECT id, first_name, last_name, image, 'teacher' as userType FROM teachers WHERE first_name LIKE ? OR last_name LIKE ? ) AS combined_results ORDER BY LENGTH(firstName) LIMIT 7;";
+    const selectSql = `SELECT id, firstName, lastName, image, userType, phone FROM 
+    ( 
+        SELECT id, firstName, lastName, image, 'user' as userType, phone FROM user WHERE firstName LIKE ? OR lastName LIKE ? 
+        UNION ALL 
+        SELECT id, first_name as firstName, last_name as lastName, image, 'admin' as userType, NULL as phone FROM admin WHERE first_name LIKE ? OR last_name LIKE ? 
+        UNION ALL 
+        SELECT id, first_name as firstName, last_name as lastName, image, 'teacher' as userType, NULL as phone FROM teachers WHERE first_name LIKE ? OR last_name LIKE ? 
+    ) AS combined_results 
+    ORDER BY LENGTH(firstName) 
+    LIMIT 7;`;
     db.query(selectSql,[`${input}%`, `${input}%`, `${input}%`, `${input}%`, `${input}%`, `${input}%`], (selectErr, selectResult) => {
       if (selectErr) {
         console.log(selectErr);

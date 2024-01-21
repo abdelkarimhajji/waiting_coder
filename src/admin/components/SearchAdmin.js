@@ -22,7 +22,6 @@ function SearchAdmin() {
       })
       .then(data => {
         setData(data);
-        console.log("get info admin ",data); // Log the data in the frontend console
       })
       .catch(error => console.error(error));
   }, []);
@@ -45,6 +44,7 @@ function SearchAdmin() {
       })
       .then(data => {
         setResultSearch(data);
+        console.log("get info admin ",data); // Log the data in the frontend console
       })
       .catch(error => console.error(error));
   }, [value]);
@@ -103,10 +103,13 @@ function SearchAdmin() {
       <Link key={index} to="" style={{ textDecoration: 'none' }}>
         <div className={style.containerEachRsult} onClick={() => get_id(item.id)}>
           <div className={style.containerImgResult}>
-            {item.image !== null ? (
-            <img src={require(`../../imgs/${item.image}`)} alt="" />
-            ):
-            (<img src={require(`../../imgs/error.png`)} alt="" />)
+            { 
+                item.phone === "null" ? (
+                  <img src={item.image} alt={item.firstName} />
+                ):(
+                  <img src={require(`../../imgs/${item.image}`)} alt="" />
+                )
+            
           }
           </div>
           <div className={style.containerFirstName}>
