@@ -15,19 +15,19 @@ function MainProfile() {
     const [numbers, setnumbers] = useState(4);
     const [totalPages, setTotalPages] = useState(0);
     const [count, setCount] = useState(1);
-
+    const [valid, setValid] = useState(0);
 
       
     const get_id = (id) =>
     {
       localStorage.setItem("idEachProfile", id);
     }
-    function callNextUsers(count) {
-      console.log("dddd ",count);
+    function callNextUsers(count, i) {
       if (count == 1)
         setNext(0);
       else
         setNext(7 * (count));
+      setValid(i);
     }
     function nextNumbers() 
     {
@@ -42,6 +42,7 @@ function MainProfile() {
           setnumbers(i);
           setCount(count + i + 1);
         }
+        setValid(-1);
     }
     function beforeNumbers()
     {
@@ -49,10 +50,12 @@ function MainProfile() {
           setnumbers(4);
         if(count > 4)
             setCount(count - 4);
+        setValid(-1);
     }
     function getLastUsers() 
     {
       setNext(7 * totalPages);
+      setValid(-2);
     }
     useEffect(() => {
         fetch(`http://localhost:8081/api/get_user_levle/${next}`)
@@ -146,14 +149,14 @@ function MainProfile() {
       <p>&lt;&lt;</p>
   </div>
 {Array.from({ length: numbers }, (_, i) => (
-    <div key={i} className={style.button} onClick={() => callNextUsers(count+i)}>
+    <div key={i} className={valid === i ? style.buttonActive : style.button} onClick={() => callNextUsers(count+i, i)}>
         <p>{count + i}</p>
     </div>
   ))}
   <div className={style.nextButton} onClick={nextNumbers}>
         <p>&gt;&gt;</p>
   </div>
-    <div className={style.lastButton} onClick={getLastUsers}>
+    <div className={valid === -2 ? style.buttonActive : style.lastButton} onClick={getLastUsers}>
         <p>{totalPages}</p>
     </div>
   </div>
