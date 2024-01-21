@@ -307,6 +307,12 @@
     {
         background-color: #d9d9d9;
     }
+    .buttonActive
+    {
+        @include style-button;
+        background-color: $pColor1;
+        color: white;
+    }
     .lastButton
     {
        @include style-button;

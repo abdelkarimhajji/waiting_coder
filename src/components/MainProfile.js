@@ -24,7 +24,10 @@ function MainProfile() {
     }
     function callNextUsers(count) {
       console.log("dddd ",count);
-      setNext(7 * count);
+      if (count == 1)
+        setNext(0);
+      else
+        setNext(7 * (count));
     }
     function nextNumbers() 
     {
