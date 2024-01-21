@@ -73,7 +73,22 @@
         font-size: 30px;
     }
 }
+
+.underNavBarTrue
+{
+    display: block;
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    z-index: 9;
+}
+.underNavBarFalse
+{
+    display: none;
+}
 .navbar {
+
     @include navbar-styles;
     -webkit-tap-highlight-color: transparent;
     left: -230px;

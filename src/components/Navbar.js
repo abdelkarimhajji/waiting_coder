@@ -27,23 +27,10 @@ function Navbar(props) {
   useEffect(() => {
     const handleWindowClick = (event) => {
       const className = event?.target?.className;
-      if ((className == 'home_nextNav__ly6kh' || className == 'level_contLevel__MgiZe'
-        || className == 'search_search__Qsxif' || className == 'level_level__e5II8' 
-        || className == 'nameUser' || className == 'imgUser' || className == 'select'
-        || className == 'search_photo__14TYx' || className == 'search_user__5phco' 
-        || className == 'search_name__tG9en' || className == "search_container__633Wd"
-        || className == 'level_photoPhon__mQ-xD' || className =='mainhome_container__4cLCr'
-        || className == 'mainhome_itemsProgram__ohGGv' || className == "mainhome_itemsEvents__gchN6"
-        || className == "mainhome_program__HKcK6" || className == "mainhome_itemsProgram__ohGGv"
-        || className == 'mainhome_itemsEvents__gchN6' || className == "mainhome_events__DwRPV"
-        || className == 'mainhome_program__HKcK6' || className == 'mainhome_conatEventItm__2w9U2'
-        || className == 'mainhome_contInsidEvents__GQYo6' || className == 'mainhome_titleEvents__pQdD8'
-        || className == 'mainhome_titleProgram__2jm9g' || className == 'mainhome_contInsidProgram__-d0V2'
-        || className == 'par'
-        || className == 'level_container__FNb5F' ) && hovered === false) {
+      if(className === "navbar_underNavBarTrue__F5nPx")
         handleClick();
-      }
-      console.log("Clas s:   " + className );
+      
+      // console.log("Clas s:   " + className );
       // setClickedElement(className);
     };
 
@@ -83,6 +70,9 @@ function Navbar(props) {
   }
   return (
     <>
+      <div className={hovered === false ? style.underNavBarTrue : style.underNavBarFalse}>
+
+      </div>
       <div className={hovered === true ? style.navbar : style.navbarOut}>
         {hovered === true ? (
           <AiOutlineMenuUnfold className={style.menu} onClick={handleClick} />
