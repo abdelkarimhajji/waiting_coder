@@ -552,20 +552,29 @@ function MainValidate() {
                           <th>select</th>
                           <th className={style.displayNone}>validate Project</th>
                           <th className={style.displayNone}>validate specific</th>
-                      </tr>
+                      </tr> 
                     </thead>
                     <tbody>
                         {allStudentGroup.length > 0 ? (
                           allStudentGroup.map((item, index) => (
                     <tr key={index} className={style.trHover}>
-                       <td><img
-                        src={item.image ? require(`../../imgs/${item.image}`) : 'fallback-image-url.jpg'}
-                        alt={item.firstName}
-                        className={style.img}
-                        />
+                       <td>
+                        {item.phone === "null" ? (
+                          <img
+                          src={item.image}
+                          alt={item.firstName}
+                          className={style.img}
+                          />
+                        ) : (
+                          <img
+                          src={item.image ? require(`../../imgs/${item.image}`) : 'fallback-image-url.jpg'}
+                          alt={item.firstName}
+                          className={style.img}   
+                          />
+                        )}
                         </td>
                         <td>{item.firstName}</td>
-                        <td>{item.payment} DH</td>
+                        <td>{item.payment} DH</td> 
                         <td>
                         <input
                             type="checkbox"
@@ -636,7 +645,21 @@ function MainValidate() {
                       allStudentGroup2.map((item, index) => (
                         <div key={index} className={index % 2 === 0 ? style.parentValidConversation : style.parentValidConversation2}>
                           <div className={index % 2 === 0 ? style.eachStudent : style.eachStudentWhite} onClick={() => handelClickUser(item.idOfUser)}>
-                              <div className={style.containerImg}><img src={require(`../../imgs/${item.image}`)}/></div>
+                              <div className={style.containerImg}>
+                              {item.phone === "null" ? (
+                              <img
+                              src={item.image}
+                              alt={item.firstName}
+                             
+                              />
+                            ) : (
+                              <img
+                              src={item.image ? require(`../../imgs/${item.image}`) : 'fallback-image-url.jpg'}
+                              alt={item.firstName}
+                            
+                              />
+                            )}
+                                </div>
                               <div className={style.containerName}><p>{item.firstName} {item.lastName}</p></div>
                           </div>
                           <div className={style.containerVlidate}>{item.valid_project === 1 ? <button>is Valid</button> : <button onClick={() => handlCklickEachValid2(item.idOfUser)}>Validate</button>}</div>

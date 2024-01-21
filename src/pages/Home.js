@@ -26,6 +26,7 @@ function Home() {
   };
   useEffect(() => {
     window.scrollTo(0, 0);
+    
     // console.log("you cant read it ",selectedValuesProject[0].id)
     // if(!localStorage.getItem("idProject"))
     //     localStorage.setItem("idProject", selectedValuesProject[0].id);

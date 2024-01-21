@@ -86,13 +86,16 @@ function EachLevel({setIdCollectionValue, setId}) {
         setId(localStorage.getItem("idEachProfile"));
     }, [localStorage.getItem('idEachProfile'), idCollection]);
 
-    // console.log("idddddd:   ",id);
   return (
     <div className={style.container}>
   {selectedValueUser.map((item, index) => (
     <div key={index} className={style.containerTransp}>
       <div className={style.containerImg}>
+        {item.phone === "null" ? (
+          <img src={item.image} alt={item.firstName}/>
+        ) : (
         <img src={require(`../imgs/${item.image}`)} alt={item.firstName}/>
+        )}
       </div>
       <div className={style.containerInfo}>
         <p className={style.name}>{item.firstName}</p>

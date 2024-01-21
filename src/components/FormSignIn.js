@@ -9,6 +9,7 @@
     const [name, setname] = useState('');
     const [password, setPassword] = useState('');
     const [response, setResponse] = useState('');
+    const [userData, setUserData] = useState(null);
     const {value, setValue, isLogin, setIsLogin} = useContext(UserContext);
     //navigate
     const navigate = useNavigate();
@@ -16,6 +17,7 @@
     const text = '`Waiting Coder`';
   const delay = 100; // milliseconds
 
+  
   const [displayText, setDisplayText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);  
   useEffect(() => {
@@ -29,6 +31,45 @@
     return () => clearTimeout(timer);
   }, [currentIndex]);
 
+
+  // Register with intra 42
+      
+  const callAuth42 = () => {
+    window.location.href = "http://localhost:3000/auth/42/callback";
+  };
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const user = urlParams.get('user');
+    if (user) {
+      const userData = JSON.parse(user);
+      setUserData(JSON.parse(user));
+      fetch(`http://localhost:8081/api/registerIntra`,{
+        method: 'POST',
+        headers:{
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({userData: userData})
+      })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        localStorage.setItem('userId', data.idUser);
+        // console.log("loook at the a",data.idUser)
+      })
+      .catch((error) => console.error(error));
+      localStorage.setItem('login', 1);
+      setIsLogin(1);
+      navigate("/Home");
+      
+      // console.log(JSON.parse(user));
+    }
+  }, []);
+
+  
     const handleButtonClick = () => {
       localStorage.setItem('login', 1);
       setIsLogin(1);
@@ -81,14 +122,20 @@
         setPassword('');
       }
     }, [response]);
+     
     if (value == 1)
+    {
       return <Navigate to="/Home" replace />;
+    }
 
       const handleTypingDone = () => {
         // This function will be called when typing animation is done
         // Set the displayText to the typed text once it's done typing
         setDisplayText('Hello World! This is a Typewriter Effect. Enjoy using it in React!');
       };
+
+     
+
     return (
       <div className={style.container}>
         <h1>              
@@ -112,7 +159,7 @@
           <input type="text" name="email" placeholder="Enter your email" value={name} onChange={(e) => setname(e.target.value)} />
           <input type="password" name="password" placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)} />
           <input type="submit" className={style.submit} />
-          <input type="submit" value="Signin with 42" className={style.submit} />
+          <input type="button" value="Signin with 42" className={style.submit} onClick={callAuth42} />
         </form>
         <div className={style.error}>{response.status === -1 && <p>Your Password or email does not exist</p>}</div>
       </div>

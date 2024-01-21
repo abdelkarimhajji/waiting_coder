@@ -30,7 +30,6 @@ app.post('/signup', (req, res) => {
       // console.log(selectResult);
       const userId = selectResult[0].id;
       const token = jwt.sign({ id: userId }, process.env.ACCESS_TOKEN_SECRET); // Generate a JWT
-      console.log("hiiiiiiiiii\n");
       return res.json({ status: 1, userId, accessToken: token }); // Send the JWT to the client
     }
     else
@@ -665,6 +664,70 @@ app.get('/get_user/:id', (req, res) => {
       return res.json("Error");
     }
     return res.json(selectResult);
+  });
+});
+
+// Login with intra 42
+
+app.post("/api/registerIntra", (req, res) => {
+  let {userData } = req.body;
+  const uploadedImage = req.file;
+  const currentDate = new Date();
+  console.log(userData)
+  let valid =  0;
+  const selectUser = 'SELECT id FROM user WHERE email = ?';
+  db.query(selectUser, [userData.email], (error, idResult) => {
+    if (error) {
+      console.error('Error querying user:', error);
+      res.status(500).json({ message: 'Error querying user' });
+      return;
+    }
+
+    if (idResult.length !== 0) {
+      console.log('User with the same email already exists');
+      res.status(200).json({ message: 'User already exists' , idUser: idResult[0].id });
+    } else {
+      const insertUserQuery = 'INSERT INTO user(firstName, password, lastName, email, phone, image, date_registered) VALUES (?, ?, ?, ?, ?, ?, ?)';
+      db.query(insertUserQuery, [userData.first_name, '@' + userData.login, userData.last_name, userData.email, "null",userData.image, currentDate], (insertError, userResult) => {
+        if (insertError) {
+          console.error('Error inserting into user:', insertError);
+          res.status(500).json({ message: 'Error inserting into user'});
+          return;
+        }
+
+        const userId = userResult.insertId;
+
+        const insertLevelQuery = 'INSERT INTO level (id_user, level, background) VALUES (?, ?, ?)';
+        db.query(insertLevelQuery, [userId, 0, '0'], (levelInsertError, levelResult) => {
+          if (levelInsertError) {
+            console.error('Error inserting into level:', levelInsertError);
+            res.status(500).json({ message: 'Error inserting into level' });
+            return;
+          }
+
+          const insertSpecific = 'INSERT INTO specifics(id_user, id_nameSpecifics, study_now, validation, validation_week, id_group, date_register) VALUES (?, ?, ?, ?, ?, ?, ?)';
+          db.query(insertSpecific, [userId, 3, 1, 0, 0, 20, currentDate], (specificError, specificResult) => {
+            if (specificError) {
+              console.error('Error inserting into specifics:', specificError);
+              res.status(500).json({ message: 'Error inserting into specifics' });
+              return;
+            }
+            // if(!payment)
+            //   payment = 0;
+            const insertPayment = 'INSERT INTO payment(payment, valid, date_payment, id_user) VALUES (?, ?, ?, ?)';
+            db.query(insertPayment, [0 , valid, currentDate, userId], (paymentError, paymentResult) => {
+              if (paymentError) {
+                console.error('Error inserting into payment:', paymentError);
+                res.status(500).json({ message: 'Error inserting into payment' });
+                return;
+              }
+
+              res.status(200).json({ message: "Image uploaded successfully" ,idUser: userId });
+            });
+          });
+        });
+      });
+    }
   });
 });
 
