@@ -50,7 +50,7 @@ function Searsh() {
       .catch(error => console.error(error));
   }, [value]);
   
-  const containerClassName = valid === 1 ? style.result : style.result2;
+  let containerClassName = valid === 1 ? style.result : style.result2;
   const handleInputChange = (e) => {
     const inputValue = e.target.value;
     setValue(inputValue);
@@ -71,9 +71,31 @@ function Searsh() {
     setValue('')
     setResultSearch([]);
   }
-  
+  useEffect(() => {
+    const handleWindowClick = (event) => {
+      const className = event?.target?.className;
+      if(className === "search_underResultTrue__iVLD8")
+
+      {
+        setValid(0);
+        console.log("i am here");
+      }
+      
+      // console.log("Clas s:   " + className );
+      // setClickedElement(className);
+    };
+
+    window.addEventListener('click', handleWindowClick);
+
+    return () => {
+      window.removeEventListener('click', handleWindowClick);
+    };
+  }, [valid]);
   return (
     <>
+    <div className={valid === 1 ? style.underResultTrue : style.underResultFlase}>
+
+    </div>
     <div className={style.container}>
         <div className={style.iconSearsh}>
             <AiOutlineSearch />
