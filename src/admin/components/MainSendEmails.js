@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import style from "../sass/mainsendemail.module.scss"
 import {BiMailSend } from 'react-icons/bi'
 import { TbPasswordUser } from "react-icons/tb";
@@ -7,6 +7,25 @@ import { IoIosHappy } from "react-icons/io";
 function MainSendEmails() {
     
     const divsToRender = [1, 2, 3, 4, 5, 6, 7];
+    const [valueTitle, setValueTitle] = useState();
+    const [valudeDesc, setValueDesc] = useState();
+
+    const tileWelcom = "Welcome";
+    const descWelcom = `Send Password idididi dididid dididid iodidid ididi diodidid ididod idii Send Password idididi dididid dididid iodidid ididi diodidid ididod idii Send Password idididi dididid dididid iodidid ididi diodidid ididod idii Send Password idididi dididid dididid iodidid ididi diodidid ididod idii Send Password idididi dididid dididid iodidid ididi diodidid ididod idii Send Password idididi dididid dididid iodidid ididi diodididv ididod idii Send Password idididi dididid dididid iodidid ididi diodidid  ididod idii `
+    function callWelcome(){
+        setValueDesc(descWelcom)
+        setValueTitle(tileWelcom)
+    }
+    function callPassword()
+    {
+        setValueDesc("Send Password")
+        setValueTitle("Send Password")
+    }
+    function callGoodBy()
+    {
+        setValueDesc("GoodBy")
+        setValueTitle("GoodBy")
+    }
   return (
     <div className={style.container}>
         <div className={style.containerFilter}>
@@ -93,7 +112,7 @@ function MainSendEmails() {
                             <h1>Examples Messages</h1>
                             <div className={style.containerExamples}>
                                 {/* start box exmaples */}
-                                <div className={style.boxExample}>
+                                <div className={style.boxExample} onClick={callWelcome}>
                                     <div className={style.containerIcon}>
                                         <IoIosHappy className={style.icon}/>
                                     </div>
@@ -104,7 +123,7 @@ function MainSendEmails() {
                                 {/* finish box examples */}
 
                                  {/* start box exmaples */}
-                                 <div className={style.boxExample}>
+                                 <div className={style.boxExample} onClick={callPassword}>
                                     <div className={style.containerIcon}>
                                         <TbPasswordUser className={style.icon}/>
                                     </div>
@@ -116,12 +135,12 @@ function MainSendEmails() {
 
 
                                  {/* start box exmaples */}
-                                 <div className={style.boxExample}>
+                                 <div className={style.boxExample} onClick={callGoodBy}>
                                     <div className={style.containerIcon}>
                                         <TbPasswordUser className={style.icon}/>
                                     </div>
                                     <div className={style.containerType}>
-                                        <p>Send Password</p>
+                                        <p>GoodBy</p>
                                     </div>
                                 </div>
                                 {/* finish box examples */}
@@ -132,10 +151,10 @@ function MainSendEmails() {
                     {/* start container message */}
                     <div className={style.messageForm}>
                         <div className={style.title}>
-                            <textarea defaultValue="Send Password" type='text' maxLength="20"/>
+                            <textarea defaultValue={valueTitle} type='text' maxLength="20"/>
                         </div>
                         <div className={style.discreption}>
-                            <textarea  maxLength="1050" defaultValue='Send Password idididi dididid dididid iodidid ididi diodidid  ididod idii ' type='text'/>
+                            <textarea  maxLength="1050" defaultValue={valudeDesc} type='text'/>
                         </div>
                         <div className={style.sendEmail}>
                             <button>Send Message</button>
