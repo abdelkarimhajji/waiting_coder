@@ -255,7 +255,7 @@
             .insideContainerRight
             {
                 width: 90%;
-                height: 100vh;
+                min-height: 100vh;
                 border-radius: 10px;
                 background-color: white;
                 margin-bottom: 40px;
@@ -422,8 +422,9 @@
                 .messageForm
                 {
                     width: 100%;
-                    height: 100%;
+                    min-height: 500px;
                     padding-top: 50px;
+                    
                     .title
                     {
                         width: 100%;
@@ -444,6 +445,13 @@
                             padding-top: 25px;
                             border-radius: 10px;
                             padding-left: 10px;
+                            @media(max-width:400px)
+                            {
+                                font-size: 20px;
+                                padding-top: 20px;
+                                height: 40px;
+                                width: 220px;
+                            }
                         }
                     }
                     .discreption
@@ -468,6 +476,12 @@
                             {
                                 font-weight: bold;
                                 color: $pColor3;
+                            }
+                            @media(max-width:400px)
+                            {
+                                font-size: 14px;
+                                height: 270px;
+                                width: 212px;
                             }
                         }
                     }
