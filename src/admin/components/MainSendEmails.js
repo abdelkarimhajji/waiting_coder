@@ -132,10 +132,10 @@ function MainSendEmails() {
                     {/* start container message */}
                     <div className={style.messageForm}>
                         <div className={style.title}>
-                            <textarea defaultValue="Send Password" type='text'/>
+                            <textarea defaultValue="Send Password" type='text' maxLength="20"/>
                         </div>
                         <div className={style.discreption}>
-                            <textarea  placeholder=''defaultValue='Send Password idididi dididid dididid iodidid ididi diodidid  ididod idii ' type='text'/>
+                            <textarea  maxLength="1050" defaultValue='Send Password idididi dididid dididid iodidid ididi diodidid  ididod idii ' type='text'/>
                         </div>
                         <div className={style.sendEmail}>
                             <button>Send Message</button>

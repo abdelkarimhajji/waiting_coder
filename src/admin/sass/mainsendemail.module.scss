@@ -432,6 +432,7 @@
                         display: flex;
                         align-items: center;
                         padding-left: 10px;
+                        padding-right: 10px;
                         textarea
                         {
                             font-size: 25px;
@@ -452,15 +453,17 @@
                         margin-bottom: 15px;
                         textarea
                         {
-                            font-size: 15px;
-                            font-weight: bold;
-                            height: 270px;
+                            font-size: 16px;
+                            // font-weight: bold;
+                            height: 230px;
+                            text-align: justify;
+                           
                             outline: none;
                             border: 0.5px solid rgb(170, 170, 170);
                             border-radius: 7px;
                             resize: none;
                             width: 90%;
-                            padding: 15px 0px 0px 8px ;
+                            padding: 15px 10px 0px 8px ;
                             &::placeholder
                             {
                                 font-weight: bold;
@@ -484,6 +487,10 @@
                             color: white;
                             border-radius: 10px;
                             border: none;
+                            &:hover
+                            {
+                                background-color: $hoverR;
+                            }
                         }
                     }
                 }
