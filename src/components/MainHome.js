@@ -192,13 +192,14 @@ function MainHome({selectedValues, selectedValuesTools, selectedValuesProject}) 
                     </div>
                     <div className={style.UnderConatProgram}>
                     {selectedValuesTools.map((item, index) => (
-                      <Link key={index} to={`/Tools#${item.name_tool}`} className={style.link}>
+                      <HashLink to={`/tools#${item.name_tool}`} key={index}
+                       className={style.link}>
                         <div key={index} className={style.conatProItm}>
                             {React.createElement(iconMapping[item.name_icon] || Default, { className: style.TiHtml5 })}
                             <p className="par"> - {item.name_tool}</p>
                             <TbHandClick className={style.TbHandClick} />
                         </div>
-                      </Link>
+                      </HashLink>
                     ))}
                     </div>
                 </div>

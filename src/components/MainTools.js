@@ -55,6 +55,18 @@ function MainTools() {
         })
         .catch((error) => console.error(error));
     }, [localStorage.getItem("selectedOptionKey")]);
+
+    useEffect(() => {
+      console.log("Current scroll position:", window.scrollY);
+      const timer = setTimeout(() => {
+          window.scrollTo({
+            top: window.scrollY - 55,  
+            behavior: 'smooth'
+          });
+      }, 100);  
+      return () => clearTimeout(timer);
+    }, []);
+    
   return (
     <div className={style.container}>
         <div className={style.language}>
@@ -65,7 +77,7 @@ function MainTools() {
         {/* container of languages */}
         {setSelectValuesTools.map((tools) => (
           
-          <div key={tools.toolId} className={style.cantAllLanguage} id={tools.languageName} >
+          <div key={tools.toolId} className={style.cantAllLanguage} id={tools.toolName} >
             {/* <section className={style.cardInner}> */}
                 {/* <div className={style.front}> */}
                 <div className={style.titleLanguage}>
