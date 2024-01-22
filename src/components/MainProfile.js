@@ -24,9 +24,27 @@ function MainProfile() {
     }
     function callNextUsers(count, i) {
       if (count == 1)
+      {
         setNext(0);
+        if(i != valid)
+        {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth"  // for smooth scrolling
+          });
+        }
+      }
       else
+      {
         setNext(7 * (count));
+        if(i != valid)
+        {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth"  // for smooth scrolling
+          });
+        }
+      }
       setValid(i);
     }
     function nextNumbers() 
@@ -50,7 +68,6 @@ function MainProfile() {
         {
           setnumbers(4);
           setValid(-1);
-
         }
         if(count > 4)
         {
