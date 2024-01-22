@@ -152,7 +152,7 @@ function MainValidate() {
                 setAllStudentGroup(data);
               })
               .catch((error) => console.error(error));
-          }, [idProject]);
+          }, [idProject, idGroup]);
           
           const handelCheckedCheckbox = () =>
           {
