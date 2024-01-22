@@ -41,16 +41,22 @@ function MainProfile() {
           }
           setnumbers(i);
           setCount(count + i + 1);
+          setValid(-1);
         }
-        setValid(-1);
     }
     function beforeNumbers()
     {
         if (numbers < 4)
+        {
           setnumbers(4);
+          setValid(-1);
+
+        }
         if(count > 4)
-            setCount(count - 4);
-        setValid(-1);
+        {
+          setCount(count - 4);
+          setValid(-1);
+        }
     }
     function getLastUsers() 
     {
