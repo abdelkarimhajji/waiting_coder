@@ -93,27 +93,28 @@ function MainHome({selectedValues, selectedValuesTools, selectedValuesProject}) 
       const data = [
         {
           "subject": skills.length > 0 ? skills[0].shurt_name : "",
-          "A": skills.length > 0 ? (skills[0].validation_week === 1 ? (skills[0].validation === 1 ? 15 : 3) : 0) : 0,
+          "A": skills.length > 0 ? (skills[0].validation_week === 1 && skills[0].validation === 1 ? 15 : skills[0].validation_week === 1 ? 4 : skills[0].validation === 1 ? 15 : 1.5) : 0,
+          // "A": skills.length > 0 ? (skills[0].validation == 1 ? 15 : skills[0].validation_week == 1 ? ) : 0,
           "fullMark": 15
         },
         {
           "subject": skills.length > 0 ? skills[1].shurt_name : "",
-          "A": skills.length > 0 ? (skills[0].validation_week === 1 ? (skills[1].validation === 1 ? 15 : 3) : 0) : 0,
+          "A": skills.length > 0 ? (skills[0].validation_week === 1 && skills[1].validation === 1 ? 15 : skills[0].validation_week === 1 ? 4 : skills[1].validation === 1 ? 15 : 1.5) : 0,
           "fullMark": 15
         },
         {
           "subject": skills.length > 0 ? skills[2].shurt_name : "",
-          "A": skills.length > 0 ? (skills[0].validation_week === 1 ? (skills[2].validation === 1 ? 15 : 3) : 0) : 0,
+          "A": skills.length > 0 ? (skills[0].validation_week === 1 && skills[2].validation === 1 ? 15 : skills[0].validation_week === 1 ? 4 : skills[2].validation === 1 ? 15 : 1.5) : 0,
           "fullMark": 15
         },
         {
           "subject": skills.length > 0 ? skills[3].shurt_name : "",
-          "A": skills.length > 0 ? (skills[0].validation_week === 1 ? (skills[3].validation === 1 ? 15 : 3) : 0) : 0,
+          "A": skills.length > 0 ? (skills[0].validation_week === 1 && skills[3].validation === 1 ? 15 : skills[0].validation_week === 1 ? 4 : skills[3].validation === 1 ? 15 : 1.5) : 0,
           "fullMark": 15
         },
         {
           "subject": skills.length > 0 ? skills[4].shurt_name : "",
-          "A": skills.length > 0 ? (skills[0].validation_week === 1 ? (skills[4].validation === 1 ? 15 : 3) : 0) : 0,
+          "A": skills.length > 0 ? (skills[0].validation_week === 1 && skills[4].validation === 1 ? 15 : skills[0].validation_week === 1 ? 4 : skills[4].validation === 1 ? 15 : 1.5) : 0,
           "fullMark": 15
         }
       ]
