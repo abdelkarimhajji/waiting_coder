@@ -24,6 +24,7 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.12.0",
     "react-router": "^6.14.1",
+    "react-router-hash-link": "^2.4.3",
     "react-scripts": "5.0.1",
     "react-typewriter-effect": "^1.1.0",
     "recharts": "^2.7.3",

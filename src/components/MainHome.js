@@ -15,6 +15,7 @@ import {BsFiletypePhp} from 'react-icons/bs'
 import {SiXampp} from 'react-icons/si'
 import {CgUnavailable} from 'react-icons/cg';
 import { PieChart, Pie, Legend, Tooltip, ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis , Radar } from 'recharts'; 
+import { HashLink} from 'react-router-hash-link';
 
 function MainHome({selectedValues, selectedValuesTools, selectedValuesProject}) {
     const [selectedValuesEvents, setSelectedValuesEvents] = useState([])
@@ -93,28 +94,27 @@ function MainHome({selectedValues, selectedValuesTools, selectedValuesProject}) 
       const data = [
         {
           "subject": skills.length > 0 ? skills[0].shurt_name : "",
-          "A": skills.length > 0 ? (skills[0].validation_week === 1 && skills[0].validation === 1 ? 15 : skills[0].validation_week === 1 ? 4 : skills[0].validation === 1 ? 15 : 1.5) : 0,
-          // "A": skills.length > 0 ? (skills[0].validation == 1 ? 15 : skills[0].validation_week == 1 ? ) : 0,
+          "A": skills.length > 0 ? (skills[0].validation_week === 1 && skills[0].validation === 1 ? 15 : skills[0].validation_week === 1 ? 3 : skills[0].validation === 1 ? 15 : 1.5) : 0,
           "fullMark": 15
         },
         {
           "subject": skills.length > 0 ? skills[1].shurt_name : "",
-          "A": skills.length > 0 ? (skills[0].validation_week === 1 && skills[1].validation === 1 ? 15 : skills[0].validation_week === 1 ? 4 : skills[1].validation === 1 ? 15 : 1.5) : 0,
+          "A": skills.length > 0 ? (skills[0].validation_week === 1 && skills[1].validation === 1 ? 15 : skills[0].validation_week === 1 ? 3 : skills[1].validation === 1 ? 15 : 1.5) : 0,
           "fullMark": 15
         },
         {
           "subject": skills.length > 0 ? skills[2].shurt_name : "",
-          "A": skills.length > 0 ? (skills[0].validation_week === 1 && skills[2].validation === 1 ? 15 : skills[0].validation_week === 1 ? 4 : skills[2].validation === 1 ? 15 : 1.5) : 0,
+          "A": skills.length > 0 ? (skills[0].validation_week === 1 && skills[2].validation === 1 ? 15 : skills[0].validation_week === 1 ? 3 : skills[2].validation === 1 ? 15 : 1.5) : 0,
           "fullMark": 15
         },
         {
           "subject": skills.length > 0 ? skills[3].shurt_name : "",
-          "A": skills.length > 0 ? (skills[0].validation_week === 1 && skills[3].validation === 1 ? 15 : skills[0].validation_week === 1 ? 4 : skills[3].validation === 1 ? 15 : 1.5) : 0,
+          "A": skills.length > 0 ? (skills[0].validation_week === 1 && skills[3].validation === 1 ? 15 : skills[0].validation_week === 1 ? 3 : skills[3].validation === 1 ? 15 : 1.5) : 0,
           "fullMark": 15
         },
         {
           "subject": skills.length > 0 ? skills[4].shurt_name : "",
-          "A": skills.length > 0 ? (skills[0].validation_week === 1 && skills[4].validation === 1 ? 15 : skills[0].validation_week === 1 ? 4 : skills[4].validation === 1 ? 15 : 1.5) : 0,
+          "A": skills.length > 0 ? (skills[0].validation_week === 1 && skills[4].validation === 1 ? 15 : skills[0].validation_week === 1 ? 3 : skills[4].validation === 1 ? 15 : 1.5) : 0,
           "fullMark": 15
         }
       ]
@@ -166,11 +166,8 @@ function MainHome({selectedValues, selectedValuesTools, selectedValuesProject}) 
                     </div>
                     <div className={style.UnderConatProgram}>
                     {selectedValues.map((language) => (
-                    <Link
-                    to={{
-                      pathname: '/Language',
-                      state: { sectionId: language.languageName } // Pass the section ID as state
-                    }}
+                    <HashLink to={`/language#${language.languageName}`}
+          
                     className={style.link}
                     key={language.languageId}
                     
@@ -180,7 +177,7 @@ function MainHome({selectedValues, selectedValuesTools, selectedValuesProject}) 
                   <p className="par"> - {language.languageName}</p>
                   <TbHandClick className={style.TbHandClick} />
                   </div>
-                    </Link>
+                    </HashLink>
                         ))}
                     </div>
                 </div>

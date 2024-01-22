@@ -17,34 +17,22 @@ import {GiStarShuriken} from 'react-icons/gi'
 import {BsFiletypePhp} from 'react-icons/bs'
 import {SiXampp} from 'react-icons/si'
 import {AiOutlineLink} from 'react-icons/ai'
-
+import { HashLink} from 'react-router-hash-link';
 function MainLanguage() {
   const [valid, setValid] = useState(0);
   const [setSelectValuesLanguages, setSetSelectValuesLanguages] = useState([]);
   
   const [scrollPosition, setScrollPosition] = useState(0);
-  const location = useLocation();
-const sectionId = location.state?.sectionId;
-
-console.log('gggggg sectionId:', sectionId); // Check if the sectionId is being passed correctly
-
-useEffect(() => {
-  console.log('useEffect triggered'); // Check if the useEffect hook is being triggered
-
-  const timer = setTimeout(() => {
-    if (sectionId) {
-      const sectionElement = document.getElementById(sectionId);
-      console.log('sectionElement:', sectionElement); // Check if the sectionId matches an id in the DOM
-
-      if (sectionElement) {
-        console.log('scrollIntoView called'); // Check if the scrollIntoView function is being called
-        sectionElement.scrollIntoView();
-      }
-    }
-  }, 1000);
-
-  return () => clearTimeout(timer);
-}, [sectionId]);
+  useEffect(() => {
+    console.log("Current scroll position:", window.scrollY);
+    const timer = setTimeout(() => {
+        window.scrollTo({
+          top: window.scrollY - 55,  
+          behavior: 'smooth'
+        });
+    }, 100);  
+    return () => clearTimeout(timer);
+  }, []);
   function displayWindow() {
     if (valid === 0) {
       document.body.style.transition = '1s all';
@@ -135,7 +123,7 @@ useEffect(() => {
                 </div>
               </div>
               <div className={style.back}>
-                <div className={style.chooseLink} >
+                <div className={style.chooseLink}>
                     <p>choose you link</p>
                 </div>
               <div className={style.allLinks}>
