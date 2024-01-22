@@ -415,37 +415,79 @@
                                     }
                                 }
                             }
+                            
                         }
                     }
                 }
-                .containersendM
+                .messageForm
                 {
-                    height: 100%;
                     width: 100%;
-                    background-color: red;
-                    .containerSenders
+                    height: 100%;
+                    padding-top: 50px;
+                    .title
                     {
                         width: 100%;
-                        min-height: 70px;
+                        height: 120px;
                         // background-color: yellow;
-                        border-bottom: 2px solid  rgba(208, 208, 208, 0.358);
                         display: flex;
-                        .part1
+                        align-items: center;
+                        padding-left: 10px;
+                        textarea
                         {
-                            width: 7%;
-                            background-color: yellow;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
+                            font-size: 25px;
+                            font-weight: bold;
+                            height: 55px;
+                            outline: none;
+                            border: 0.5px solid rgb(170, 170, 170);
+                            resize: none;
+                            padding-top: 25px;
+                            border-radius: 10px;
+                            padding-left: 10px;
                         }
-                        .part2
+                    }
+                    .discreption
+                    {
+                        width: 100%;
+                        padding-left: 15px;
+                        margin-bottom: 15px;
+                        textarea
                         {
-                            display: flex;
-                            align-items: center;
-                            padding-left: 5px;
+                            font-size: 15px;
+                            font-weight: bold;
+                            height: 270px;
+                            outline: none;
+                            border: 0.5px solid rgb(170, 170, 170);
+                            border-radius: 7px;
+                            resize: none;
+                            width: 90%;
+                            padding: 15px 0px 0px 8px ;
+                            &::placeholder
+                            {
+                                font-weight: bold;
+                                color: $pColor3;
+                            }
+                        }
+                    }
+                    .sendEmail
+                    {
+                        width:100%;
+                        height: 100px;
+                        padding-left: 15px;
+                        // background-color: yellow;
+                        button
+                        {
+                            width: 120px;
+                            height: 40px;
+                            cursor: pointer;
+                            transition: 0.5s all;
+                            background-color: $pColorR;
+                            color: white;
+                            border-radius: 10px;
+                            border: none;
                         }
                     }
                 }
+                
             }
         }
     }
