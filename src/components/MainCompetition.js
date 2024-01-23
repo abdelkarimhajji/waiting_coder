@@ -15,6 +15,7 @@ function MainCompetition() {
     const [selectedValuesCompetitions, setSelectedValuesCompetitions] = useState([])
     const [valid, setValid] = useState(0);
     const [valid2, setValid2] = useState(0);
+    const [refresh, setRefresh] = useState(0);
     const [competitionId, setCompetitionId] = useState();
 
     const containerClassName = valid === 1 ? style.displayAlert : style.displayAlert2;
@@ -32,7 +33,7 @@ function MainCompetition() {
           }
         }, 15);
       };
-    useEffect(() => {
+      function get_competitions() {
         fetch(`http://localhost:8081/api/get_competitions/${userId}/${selectedOptionKey}`)
           .then((response) => {
             if (!response.ok) {
@@ -45,8 +46,11 @@ function MainCompetition() {
             console.log("seee data   ",data);
           })
           .catch((error) => console.error(error));
-
-      }, [userId, selectedOptionKey, valid, valid2]);
+      }
+    useEffect(() => {
+        
+      get_competitions();
+      }, [userId, selectedOptionKey, refresh]);
 
       const register = (competitionId) => {
         const data = { 
@@ -96,6 +100,8 @@ function MainCompetition() {
 
       const registeR = () =>
         {
+          get_competitions()
+          setRefresh(refresh + 1)
           register(competitionId)
           setValid(0);
           setTimeout(() => {
@@ -105,6 +111,8 @@ function MainCompetition() {
 
     const cancel = () =>
         {
+          get_competitions()
+          setRefresh(refresh + 1)
         deleteRegistration(competitionId)
         setValid2(0);
         setTimeout(() => {
@@ -113,7 +121,7 @@ function MainCompetition() {
     }
 
     const confirmation = (eventId) => {
-
+      
       setValid(1);
       smoothScrollToTop();
       setCompetitionId(eventId)
@@ -125,6 +133,7 @@ function MainCompetition() {
       setCompetitionId(eventId)
     }
     const No = () => {
+      setRefresh(refresh + 1)
       document.body.style.overflow = 'auto';
       setValid(0);
       setValid2(0);

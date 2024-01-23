@@ -384,7 +384,7 @@ app.get('/api/get_competitions/:userId/:nameSpecifics', (req, res) => {
     const firstSpecificEvent = specificsResult[0];
 
     if (firstSpecificEvent.group_finished === 0) {
-      const selectEventsSql = `SELECT competitions.*, CASE WHEN registrement_competition.id_user IS NULL THEN 0 ELSE 1 END AS is_registered FROM competitions LEFT JOIN registrement_competition ON competitions.id = registrement_competition.id_competition AND registrement_competition.id_user = 2 WHERE competitions.finished = 0;
+      const selectEventsSql = `SELECT competitions.*, CASE WHEN registrement_competition.id_user IS NULL THEN 0 ELSE 1 END AS is_registered FROM competitions LEFT JOIN registrement_competition ON competitions.id = registrement_competition.id_competition AND registrement_competition.id_user = ? WHERE competitions.finished = 0;
       `;
 
       db.query(selectEventsSql,[userId], (eventsErr, eventsResult) => {
