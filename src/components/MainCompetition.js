@@ -42,6 +42,7 @@ function MainCompetition() {
           })
           .then((data) => {
             setSelectedValuesCompetitions(data);
+            console.log("seee data   ",data);
           })
           .catch((error) => console.error(error));
 
@@ -95,11 +96,11 @@ function MainCompetition() {
 
       const registeR = () =>
         {
-        register(competitionId)
-        setValid(0);
-        setTimeout(() => {
-            document.body.style.overflow = 'auto';
-        }, 300);
+          register(competitionId)
+          setValid(0);
+          setTimeout(() => {
+              document.body.style.overflow = 'auto';
+          }, 300);
     }
 
     const cancel = () =>
@@ -175,6 +176,7 @@ function MainCompetition() {
               </div>
               <div className={style.containerButton}>
               {item.is_registered === 0 ? (
+              
                   <button onClick={() => confirmation(item.id)}>Register</button>
                   ) : (
                   <button onClick={() => deletConfirmation(item.id)}>UnRegister</button>
