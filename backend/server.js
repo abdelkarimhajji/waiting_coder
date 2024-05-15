@@ -220,15 +220,16 @@ app.post('/api/push_project', (req, res) => {
 
 app.get('/api/get_events/:userId/:nameSpecifics', (req, res) => {
   const userId = req.params.userId;
-  const nameSpecifics =  req.params.nameSpecifics;
+  const nameSpecifics = req.params.nameSpecifics;
+
   const selectSpecificsSql = `
-  SELECT *
-  FROM specifics 
-  INNER JOIN groups ON specifics.id_group = groups.id
-  where specifics.id_user = ? and specifics.id_nameSpecifics = ? and groups.group_finished = 0
+    SELECT *
+    FROM specifics 
+    INNER JOIN \`groups\` ON specifics.id_group = \`groups\`.id
+    WHERE specifics.id_user = ? AND specifics.id_nameSpecifics = ? AND \`groups\`.group_finished = 0
   `;
-  
-  db.query(selectSpecificsSql, [userId, nameSpecifics],(specificsErr, specificsResult) => {
+
+  db.query(selectSpecificsSql, [userId, nameSpecifics], (specificsErr, specificsResult) => {
     if (specificsErr) {
       console.log(specificsErr);
       return res.json("Error");
@@ -236,22 +237,23 @@ app.get('/api/get_events/:userId/:nameSpecifics', (req, res) => {
     if (specificsResult.length === 0) {
       return res.json("No specific events found.");
     }
+
     const firstSpecificEvent = specificsResult[0];
 
     if (firstSpecificEvent.group_finished === 0) {
-      const selectEventsSql = `SELECT events.*, 
-      CASE WHEN registrement_events.id_user IS NULL THEN 0 ELSE 1 END AS is_registered
-      FROM events
-      LEFT JOIN registrement_events ON events.id = registrement_events.id_event AND registrement_events.id_user = ?
-      WHERE events.finished = 0
-      ;
+      const selectEventsSql = `
+        SELECT events.*, 
+        CASE WHEN registrement_events.id_user IS NULL THEN 0 ELSE 1 END AS is_registered
+        FROM events
+        LEFT JOIN registrement_events ON events.id = registrement_events.id_event AND registrement_events.id_user = ?
+        WHERE events.finished = 0;
       `;
-      db.query(selectEventsSql,[userId], (eventsErr, eventsResult) => {
+
+      db.query(selectEventsSql, [userId], (eventsErr, eventsResult) => {
         if (eventsErr) {
           console.log(eventsErr);
           return res.json("Error");
         }
-  
         return res.json(eventsResult);
       });
     } else {
@@ -369,8 +371,8 @@ app.get('/api/get_competitions/:userId/:nameSpecifics', (req, res) => {
   const selectSpecificsSql = `
   SELECT *
   FROM specifics 
-  INNER JOIN groups ON specifics.id_group = groups.id
-  where specifics.id_user = ? and specifics.id_nameSpecifics = ? and groups.group_finished = 0
+  INNER JOIN \`groups\` ON specifics.id_group = \`groups\`.id
+  where specifics.id_user = ? and specifics.id_nameSpecifics = ? and \`groups\`.group_finished = 0
   `;
   
   db.query(selectSpecificsSql, [userId, nameSpecifics],(specificsErr, specificsResult) => {
@@ -407,7 +409,7 @@ app.get('/api/get_competitions/:userId/:nameSpecifics', (req, res) => {
 
 app.get('/get_each_user_levle/:id/', (req, res) => {
   const id = parseInt(req.params.id);
-  const selectSql = `SELECT user.*, level.*, (SELECT COUNT(DISTINCT id) 
+  const selectSql = `SELECT user.*, level.* , (SELECT COUNT(DISTINCT id) 
   FROM registrement_events WHERE id_user = user.id AND valid = 1) AS valid_event_count, 
   (SELECT COUNT(DISTINCT id) FROM registrement_competition 
   WHERE id_user = user.id AND valid = 1) AS valid_competition_count, 

@@ -45,6 +45,7 @@ function EachLevel({setIdCollectionValue, setId}) {
       selectedValueUser.length > 0 && selectedValueUser[0].background
         ? selectedValueUser[0].background
         : 0;
+       
     const gradient = `linear-gradient(to right, #02babd ${backgroundBlue}%, #1b1c2312 0%)`;
 
     useEffect(() => {
