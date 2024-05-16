@@ -10,7 +10,7 @@
 
     const mailOptions = {
     from: 'abdelkarim.hajji.2001@gmail.com',
-    to: 'hajjikarim530@gmail.com',
+    to: 'salmi19971@gamil.com',
     subject: 'Hello from Node.js',
     text: 'This is a test email sent from Node.js using Nodemailer.',
     };

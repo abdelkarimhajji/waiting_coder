@@ -78,7 +78,7 @@ app.post('/signup', (req, res) => {
   app.get('/api/getAggregatedData', (req, res) => {
     const queriesWithDescriptions = [
       { query: `SELECT COUNT (DISTINCT id_user) AS count FROM specifics`, description: "Total number of users" ,title: "Users"},
-      { query: `SELECT COUNT(*) AS count FROM groups WHERE 1`, description: "Total number of groups" ,title: "Groups"},
+      { query: `SELECT COUNT(*) AS count FROM waiting_coder.\`groups\` WHERE 1`, description: "Total number of groups" ,title: "Groups"},
       { query: `SELECT COUNT(*) AS count FROM teachers WHERE 1`, description: "Total number of teachers",title: "Teachers" },
       { query: `SELECT COUNT(*) AS count FROM specifics WHERE study_now = 1`, description: "Number of users currently studying" , title: "Us now"},
       { query: `SELECT SUM(payment) AS count FROM payment`, description: "Total payment collected",title: "DH" },
@@ -217,7 +217,7 @@ app.get('/api/getMonthsUesrs/:chooseYear', (req, res) => {
     FROM 
       name_specifics ns
     LEFT JOIN
-      groups g ON g.id_specific = ns.id
+    waiting_coder.\`groups\` g ON g.id_specific = ns.id
     GROUP BY 
       ns.id, ns.name;
     `;
@@ -236,7 +236,7 @@ app.get('/api/getMonthsUesrs/:chooseYear', (req, res) => {
     SELECT 
     COUNT(*) AS unfinished_group_count
     FROM 
-      groups
+    waiting_coder.\`groups\`
     WHERE 
       groups.group_finished = 0;
     `;
@@ -272,7 +272,7 @@ app.get('/api/getMonthsUesrs/:chooseYear', (req, res) => {
   app.get('/api/getOldGroups', (req, res) => {
     const query = `
     SELECT * , groups.id AS IdGroup, name_specifics.id AS IdNameSpecific
-    FROM groups
+    FROM waiting_coder.\`groups\`
     INNER JOIN name_specifics ON groups.id_specific = name_specifics.id
     WHERE group_finished = 1;
     `;
@@ -289,7 +289,7 @@ app.get('/api/getMonthsUesrs/:chooseYear', (req, res) => {
   app.get('/api/getCurrentGroups', (req, res) => {
     const query = `
     SELECT * , groups.id AS IdGroup, name_specifics.id AS IdNameSpecific
-    FROM groups
+    FROM waiting_coder.\`groups\`
     INNER JOIN name_specifics ON groups.id_specific = name_specifics.id
     WHERE group_finished = 0;
     `;
@@ -371,7 +371,7 @@ app.get('/api/getMonthsUesrs/:chooseYear', (req, res) => {
     const inputValueName = requestData.inputValueName;
   
     // Step 1: Check if the group name already exists
-    const checkGroupNameQuery = 'SELECT COUNT(*) as count FROM groups WHERE name_group = ?';
+    const checkGroupNameQuery = `SELECT COUNT(*) as count FROM waiting_coder.\`groups\` WHERE name_group = ?`;
     db.query(checkGroupNameQuery, [inputValueName], (error, results) => {
       if (error) {
         console.error('Error checking group name:', error);
@@ -791,7 +791,7 @@ app.post("/api/upload", upload.single("image"), (req, res) => {
 app.get('/api/getGroupsConditonSpecific/:idSpecific', (req, res) => {
   const idSpecific = req.params.idSpecific;
   const query = `SELECT groups.id, groups.name_group 
-  FROM groups LEFT JOIN ( SELECT id_group, COUNT(*) as count_specifics 
+  FROM waiting_coder.\`groups\` LEFT JOIN ( SELECT id_group, COUNT(*) as count_specifics 
   FROM specifics WHERE specifics.id_nameSpecifics = ? GROUP BY id_group ) 
   AS grouped_specifics ON groups.id = grouped_specifics.id_group 
   WHERE (grouped_specifics.count_specifics <= 12 OR grouped_specifics.count_specifics IS NULL) 
