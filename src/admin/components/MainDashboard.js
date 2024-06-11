@@ -20,7 +20,7 @@ function MainDashboard() {
   const [valueSelect, setValueSelect] = useState()
   const [valueSelect2, setValueSelect2] = useState()
   useEffect(() => {
-    fetch(`http://35.180.127.147:8082/api/getAggregatedData`)
+    fetch(`http://${process.env.REACT_APP_ADMIN_HOST}:${process.env.REACT_APP_ADMIN_PORT}/api/getAggregatedData`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -34,7 +34,7 @@ function MainDashboard() {
   }, []);
 
   useEffect(() => {
-    fetch(`http://35.180.127.147:8082/api/getYears`)
+    fetch(`http://${process.env.REACT_APP_ADMIN_HOST}:${process.env.REACT_APP_ADMIN_PORT}/api/getYears`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");

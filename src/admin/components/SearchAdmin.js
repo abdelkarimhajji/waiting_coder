@@ -13,7 +13,7 @@ function SearchAdmin() {
   const [value, setValue] = useState('');
   useEffect(() => {
     // Fetch data from the '/data' endpoint
-    fetch(`http://35.180.127.147:8082/api/get_admin/${adminId}`)
+    fetch(`http://${process.env.REACT_APP_ADMIN_HOST}:${process.env.REACT_APP_ADMIN_PORT}/api/get_admin/${adminId}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -35,7 +35,7 @@ function SearchAdmin() {
     }
   
     // Fetch data from the '/data' endpoint
-    fetch(`http://35.180.127.147:8082/api/search/${value}`)
+    fetch(`http://${process.env.REACT_APP_ADMIN_HOST}:${process.env.REACT_APP_ADMIN_PORT}/api/search/${value}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');

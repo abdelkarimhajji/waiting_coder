@@ -97,7 +97,7 @@ const handleImageChange = (event) => {
         idGroup !== null && (!isNaN(payment) || payment.length === 0)
       ) {
         // Send the form data to the server using a POST request
-        fetch("http://35.180.127.147:8082/api/upload", {
+        fetch(`http://${process.env.REACT_APP_ADMIN_HOST}:${process.env.REACT_APP_ADMIN_PORT}/api/upload`, {
           method: "POST",
           body: formData,
         })
@@ -151,7 +151,7 @@ const handleImageChange = (event) => {
   }
 
   useEffect(() => {
-    fetch(`http://35.180.127.147:8082/api/getAllNameSpecifics`)
+    fetch(`http://${process.env.REACT_APP_ADMIN_HOST}:${process.env.REACT_APP_ADMIN_PORT}/api/getAllNameSpecifics`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -165,7 +165,7 @@ const handleImageChange = (event) => {
   }, []);
 
   useEffect(() => {
-    fetch(`http://35.180.127.147:8082/api/getGroupsConditonSpecific/${idSpecific}`)
+    fetch(`http://${process.env.REACT_APP_ADMIN_HOST}:${process.env.REACT_APP_ADMIN_PORT}/api/getGroupsConditonSpecific/${idSpecific}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -191,7 +191,7 @@ const handleImageChange = (event) => {
 
   // select old gorup 
   useEffect(() => {
-    fetch(`http://35.180.127.147:8082/api/getOldGroups`)
+    fetch(`http://${process.env.REACT_APP_ADMIN_HOST}:${process.env.REACT_APP_ADMIN_PORT}/api/getOldGroups`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -206,7 +206,7 @@ const handleImageChange = (event) => {
 
   // select currently groups 
   useEffect(() => {
-    fetch(`http://35.180.127.147:8082/api/getCurrentGroups`)
+    fetch(`http://${process.env.REACT_APP_ADMIN_HOST}:${process.env.REACT_APP_ADMIN_PORT}/api/getCurrentGroups`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -237,7 +237,7 @@ const handleImageChange = (event) => {
     console.log("selected value ", selectedValue)
   }
   function getStudents() {
-    fetch(`http://35.180.127.147:8082/api/getStudentsGroupOnly/${idGroup2}`)
+    fetch(`http://${process.env.REACT_APP_ADMIN_HOST}:${process.env.REACT_APP_ADMIN_PORT}/api/getStudentsGroupOnly/${idGroup2}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -262,7 +262,7 @@ const handleImageChange = (event) => {
   const updatePrice = (valid) => {
     
     if (parseInt(prices[indexStudent]) > 0 && parseInt(prices[indexStudent]) < 1001 && valid == "yes") {
-      fetch(`http://35.180.127.147:8082/api/updatePayment/${idStudent}/${prices[indexStudent]}`, {
+      fetch(`http://${process.env.REACT_APP_ADMIN_HOST}:${process.env.REACT_APP_ADMIN_PORT}/api/updatePayment/${idStudent}/${prices[indexStudent]}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

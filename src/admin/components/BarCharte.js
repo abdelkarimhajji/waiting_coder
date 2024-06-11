@@ -7,7 +7,7 @@ function BarCharte({choosetYear}) {
   const [getYearnEarning, setGetYearnEarning] = useState([]);
 
   useEffect(() => {
-    fetch(`http://35.180.127.147:8082/api/getYearEarnings/${choosetYear}`)
+    fetch(`http://${process.env.REACT_APP_ADMIN_HOST}:${process.env.REACT_APP_ADMIN_PORT}/api/getYearEarnings/${choosetYear}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
