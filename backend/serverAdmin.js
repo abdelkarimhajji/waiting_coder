@@ -30,7 +30,7 @@ app.post('/signup', (req, res) => {
         console.log(selectErr);
         return res.json("Error");
       }
-    //   console.log(selectResult);
+      // console.log(selectResult);
       if (selectResult.length > 0) {
         const adminId = selectResult[0].id;
         return res.json({ status: 1, adminId });
