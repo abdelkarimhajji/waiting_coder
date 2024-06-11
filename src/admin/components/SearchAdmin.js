@@ -84,7 +84,7 @@ function SearchAdmin() {
           <p className="nameUser">admin</p>
         </div>
         <div className={style.photo}>
-          <img src={require('../../imgs/karim.JPG')} alt="" srcset="" />
+          <img src={require('../../imgs/karim.JPG')} alt="" srcSet="" />
           {/* <img src={require(`../../imgs/${data[0].image}`)} alt="" className="imgUser" /> */}
         </div>
       </div>

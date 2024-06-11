@@ -33,7 +33,7 @@ const handleButtonClick = () => {
 const singIn = async() =>
 {
     try {
-        const response = await fetch('http://35.180.127.147:8082/signup', {
+        const response = await fetch(`http://${process.env.REACT_APP_ADMIN_HOST}:${process.env.REACT_APP_ADMIN_PORT}/signup`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
