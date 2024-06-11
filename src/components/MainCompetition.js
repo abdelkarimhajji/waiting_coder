@@ -22,19 +22,9 @@ function MainCompetition() {
     const containerClassName2 = valid2 === 1 ? style.displayAlert : style.displayAlert2;
     const smoothScrollToTop = () => {
         document.body.style.overflow = 'hidden'; // Hide overflow
-        
-        const scrollStep = -window.scrollY / (500 / 15); // Adjust the animation speed by changing the division factor
-      
-        const scrollInterval = setInterval(() => {
-          if (window.scrollY !== 0) {
-            window.scrollBy(0, scrollStep);
-          } else {
-            clearInterval(scrollInterval);
-          }
-        }, 15);
       };
       function get_competitions() {
-        fetch(`http://localhost:8081/api/get_competitions/${userId}/${selectedOptionKey}`)
+        fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/api/get_competitions/${userId}/${selectedOptionKey}`)
           .then((response) => {
             if (!response.ok) {
               throw new Error("Network response was not ok");
@@ -50,14 +40,14 @@ function MainCompetition() {
     useEffect(() => {
         
       get_competitions();
-      }, [userId, selectedOptionKey, refresh]);
+      }, [userId, selectedOptionKey, refresh,selectedValuesCompetitions]);
 
       const register = (competitionId) => {
         const data = { 
             id_user: userId,
             id_competition: competitionId
             };
-          fetch('http://localhost:8081/api/register_competition', {
+          fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/api/register_competition`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -79,7 +69,7 @@ function MainCompetition() {
           id_competition: competitionId,
         };
       
-        fetch('http://localhost:8081/api/delete_registration_competition', {
+        fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/api/delete_registration_competition`, {
           method: 'DELETE', // Use the DELETE method for deletion
           headers: {
             'Content-Type': 'application/json',
@@ -124,7 +114,7 @@ function MainCompetition() {
       
       setValid(1);
       smoothScrollToTop();
-      setCompetitionId(eventId)
+      setCompetitionId(eventId);
     }
     const deletConfirmation = (eventId) => {
 

@@ -9,7 +9,7 @@ import { UserContext } from '../utils/UserContext';
 function SignIn() {
 
   const {value, setValue} = useContext(UserContext);
-
+  console.log("this is the variable form .env : ", process.env.REACT_APP_PORT);
   return (
     <div className={style.container}>
       <FormSignIn />

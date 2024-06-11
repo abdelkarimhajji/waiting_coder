@@ -81,7 +81,7 @@ function MainProfile() {
       setValid(-2);
     }
     useEffect(() => {
-        fetch(`http://localhost:8081/api/get_user_levle/${next}`)
+        fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/api/get_user_levle/${next}`)
           .then((response) => {
             if (!response.ok) {
               throw new Error("Network response was not ok");
@@ -96,7 +96,7 @@ function MainProfile() {
       }, [next]);
 
       useEffect(() => {
-        fetch(`http://localhost:8081/api/get_user_count`)
+        fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/api/get_user_count`)
           .then((response) => {
             if (!response.ok) {
               throw new Error("Network response was not ok");

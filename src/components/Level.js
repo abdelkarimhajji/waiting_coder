@@ -21,7 +21,7 @@ function Level({ selectedValues, setSelectedValues, setSelectedValuesTools, setS
   };
   
   useEffect(() => {
-    fetch(`http://localhost:8081/api/get_languages/${selectLocalStor}`)
+    fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/api/get_languages/${selectLocalStor}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -39,7 +39,7 @@ function Level({ selectedValues, setSelectedValues, setSelectedValuesTools, setS
     level.length > 0 ? level[0].background : 0
   }%, #1b1c2312 0%)`;
   useEffect(() => {
-    fetch(`http://localhost:8081/api/get_tools/${selectLocalStor}`)
+    fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/api/get_tools/${selectLocalStor}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -54,7 +54,7 @@ function Level({ selectedValues, setSelectedValues, setSelectedValuesTools, setS
   }, [selectLocalStor]);
 
   useEffect(() => {
-    fetch(`http://localhost:8081/api/get_porject/${selectLocalStor}`)
+    fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/api/get_porject/${selectLocalStor}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -75,7 +75,7 @@ function Level({ selectedValues, setSelectedValues, setSelectedValuesTools, setS
   const userId = localStorage.getItem("userId");
 
   useEffect(() => {
-    fetch(`http://localhost:8081/name_specifics/${userId}`)
+    fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/name_specifics/${userId}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -96,7 +96,7 @@ function Level({ selectedValues, setSelectedValues, setSelectedValuesTools, setS
   }, [userId]);
   
   useEffect(() => {
-    fetch(`http://localhost:8081/api/get_levels/${userId}`)
+    fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/api/get_levels/${userId}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok karim");
@@ -130,7 +130,7 @@ const [countExp, setCountExp] = useState(0);
   // i try to fetch data to see if i improve in my level
   useEffect(() => {
     var data2;
-    fetch(`http://localhost:8081/api/get_count_exp/${userId}`)
+    fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/api/get_count_exp/${userId}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -146,7 +146,7 @@ const [countExp, setCountExp] = useState(0);
             // Add more key-value pairs as needed
           };
       // console.log("test ok ",data.length > 0 ? data[0].exp.toString().split(".")[1] : 1);
-          fetch(`http://localhost:8081/api/update_level/${userId}`, {
+          fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/api/update_level/${userId}`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

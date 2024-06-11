@@ -46,7 +46,7 @@ function MainHome({selectedValues, selectedValuesTools, selectedValuesProject}) 
       // console.log("i juset test ok : ", selectedOptionKey)
       console.log("i juset test ok : ", userId)
       useEffect(() => {
-        fetch(`http://localhost:8081/api/get_events/${userId}/${selectedOptionKey}`)
+        fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/api/get_events/${userId}/${selectedOptionKey}`)
           .then((response) => {
             if (!response.ok) {
               throw new Error("Network response was not ok");
@@ -61,7 +61,7 @@ function MainHome({selectedValues, selectedValuesTools, selectedValuesProject}) 
       }, [userId, selectedOptionKey]);
       
       useEffect(() => {
-        fetch(`http://localhost:8081/api/get_competitions/${userId}/${selectedOptionKey}`)
+        fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/api/get_competitions/${userId}/${selectedOptionKey}`)
           .then((response) => {
             if (!response.ok) {
               throw new Error("Network response was not ok");
@@ -76,7 +76,7 @@ function MainHome({selectedValues, selectedValuesTools, selectedValuesProject}) 
       }, [userId, selectedOptionKey]);
 
       useEffect(() => {
-        fetch(`http://localhost:8081/api/get_skills/${userId}`)
+        fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/api/get_skills/${userId}`)
           .then((response) => {
             if (!response.ok) {
               throw new Error("Network response was not ok");

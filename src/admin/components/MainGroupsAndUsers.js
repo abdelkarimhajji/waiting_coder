@@ -26,7 +26,7 @@ function MainGroupsAndUsers() {
     const [addSucces, setAddSucces] = useState(2);
 
     useEffect(() => {
-        fetch(`http://localhost:8082/api/getMoreInfoGroups`)
+        fetch(`http://35.180.127.147:8082/api/getMoreInfoGroups`)
           .then((response) => {
             if (!response.ok) {
               throw new Error("Network response was not ok");
@@ -41,7 +41,7 @@ function MainGroupsAndUsers() {
       }, []);
     
       useEffect(() => {
-        fetch(`http://localhost:8082/api/getGroupsWorking`)
+        fetch(`http://35.180.127.147:8082/api/getGroupsWorking`)
           .then((response) => {
             if (!response.ok) {
               throw new Error("Network response was not ok");
@@ -55,7 +55,7 @@ function MainGroupsAndUsers() {
       }, []);
 
       useEffect(() => {
-        fetch(`http://localhost:8082/api/getUserSpecificPayment/${selectIdGroup}`)
+        fetch(`http://35.180.127.147:8082/api/getUserSpecificPayment/${selectIdGroup}`)
           .then((response) => {
             if (!response.ok) {
               throw new Error("Network response was not ok");
@@ -69,7 +69,7 @@ function MainGroupsAndUsers() {
       }, [selectIdGroup, isCheckAllChecked,updatedIds, selectIdGroup]);
 
       useEffect(() => {
-        fetch(`http://localhost:8082/api/getOldGroups`)
+        fetch(`http://35.180.127.147:8082/api/getOldGroups`)
           .then((response) => {
             if (!response.ok) {
               throw new Error("Network response was not ok");
@@ -83,7 +83,7 @@ function MainGroupsAndUsers() {
       }, []);
 
       useEffect(() => {
-        fetch(`http://localhost:8082/api/getCurrentGroups`)
+        fetch(`http://35.180.127.147:8082/api/getCurrentGroups`)
           .then((response) => {
             if (!response.ok) {
               throw new Error("Network response was not ok");
@@ -208,7 +208,7 @@ function MainGroupsAndUsers() {
         checkedStudentIds: checkedStudentIds,
         selectIdGroup: selectIdGroup,
       };
-    fetch('http://localhost:8082/api/validateWeekAll', {
+    fetch('http://35.180.127.147:8082/api/validateWeekAll', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -231,7 +231,7 @@ function MainGroupsAndUsers() {
   
   const handelValidate = (event, id_user) =>
   {
-    fetch('http://localhost:8082/api/updateValidationWeek', {
+    fetch('http://35.180.127.147:8082/api/updateValidationWeek', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -249,7 +249,7 @@ function MainGroupsAndUsers() {
 
 
   useEffect(() => {
-    fetch(`http://localhost:8082/api/getAllNameSpecifics`)
+    fetch(`http://35.180.127.147:8082/api/getAllNameSpecifics`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -263,7 +263,7 @@ function MainGroupsAndUsers() {
   }, []);
 
   useEffect(() => {
-    fetch(`http://localhost:8082/api/getAllTeachers`)
+    fetch(`http://35.180.127.147:8082/api/getAllTeachers`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -323,7 +323,7 @@ function MainGroupsAndUsers() {
     && idSpecific !== 'Choose Specifics' && idSpecific !== '' && selectedOption4 !== 'Choose Teacher'
     && idTeacher !== 'Choose Teacher' && idTeacher !== '')
     {
-    fetch('http://localhost:8082/api/createGroup', {
+    fetch('http://35.180.127.147:8082/api/createGroup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -393,7 +393,7 @@ const finisheGroup = () =>
   if (selectedIdGroupFinish !== null 
     && selectedIdGroupFinish !== 'Choose Group to Finishe')
   {
-    fetch(`http://localhost:8082/api/updateGroups/${parseInt(selectedIdGroupFinish)}`, {
+    fetch(`http://35.180.127.147:8082/api/updateGroups/${parseInt(selectedIdGroupFinish)}`, {
       method: 'PUT',  // This should be 'PUT' since you're updating the resource.
       headers: {
         'Content-Type': 'application/json',

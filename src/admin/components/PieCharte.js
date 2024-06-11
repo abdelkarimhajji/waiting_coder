@@ -7,7 +7,7 @@ function PieCharte() {
     const [getYearMoney, setGetYearMoney] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:8082/api/getYearMoney`)
+    fetch(`http://35.180.127.147:8082/api/getYearMoney`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");

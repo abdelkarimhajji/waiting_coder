@@ -74,7 +74,7 @@ function NavbarAdmin(props) {
   const userId = localStorage.getItem("userId");
   const [selectedValuesUsers, setSelectedValuesUsers] = useState([]);
   // useEffect(() => {
-  //   fetch(`http://localhost:8081/get_user/${userId}`)
+  //   fetch(`http://35.180.127.147:8081/get_user/${userId}`)
   //     .then((response) => {
   //       if (!response.ok) {
   //         throw new Error("Network response was not ok");

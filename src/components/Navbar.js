@@ -52,7 +52,7 @@ function Navbar(props) {
   const userId = localStorage.getItem("userId");
   const [selectedValuesUsers, setSelectedValuesUsers] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:8081/get_user/${userId}`)
+    fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/get_user/${userId}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");

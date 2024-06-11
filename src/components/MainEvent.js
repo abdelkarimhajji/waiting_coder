@@ -20,20 +20,10 @@ function MainEvent() {
 
   const smoothScrollToTop = () => {
     document.body.style.overflow = 'hidden'; // Hide overflow
-    
-    const scrollStep = -window.scrollY / (500 / 15); // Adjust the animation speed by changing the division factor
-  
-    const scrollInterval = setInterval(() => {
-      if (window.scrollY !== 0) {
-        window.scrollBy(0, scrollStep);
-      } else {
-        clearInterval(scrollInterval);
-      }
-    }, 15);
   };
   
   useEffect(() => {
-    fetch(`http://localhost:8081/api/get_events/${userId}/${selectedOptionKey}`)
+    fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/api/get_events/${userId}/${selectedOptionKey}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -45,7 +35,7 @@ function MainEvent() {
       })
       .catch((error) => console.error(error));
       
-  }, [userId, selectedOptionKey, valid2, valid]);
+  }, [userId, selectedOptionKey, valid2, valid,selectedValuesEvents]);
   
   const containerClassName = valid === 1 ? style.displayAlert : style.displayAlert2;
   const containerClassName2 = valid2 === 1 ? style.displayAlert : style.displayAlert2;
@@ -56,7 +46,7 @@ function MainEvent() {
       id_user: userId,
       id_event: eventId
       };
-    fetch('http://localhost:8081/api/register_event', {
+    fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/api/register_event`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -79,7 +69,7 @@ const deleteRegistration = (eventId) => {
     id_event: eventId,
   };
 
-  fetch('http://localhost:8081/api/delete_registration', {
+  fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/api/delete_registration`, {
     method: 'DELETE', // Use the DELETE method for deletion
     headers: {
       'Content-Type': 'application/json',

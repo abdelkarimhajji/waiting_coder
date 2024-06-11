@@ -7,7 +7,7 @@ function PieCharte2() {
     const [getYearUsers, setGetYearUsers] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:8082/api/getYearUsers`)
+    fetch(`http://35.180.127.147:8082/api/getYearUsers`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");

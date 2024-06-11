@@ -53,7 +53,7 @@ function MainPushProject() {
       };
       const fetchNewData = () =>
       {
-        fetch(`http://localhost:8081/api/get_pushProject/${idProject}/${userId}`)
+        fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/api/get_pushProject/${idProject}/${userId}`)
           .then((response) => {
             if (!response.ok) {
               throw new Error("Network response was not ok");
@@ -78,7 +78,7 @@ function MainPushProject() {
             idProject: idProject,
             };
 
-        fetch('http://localhost:8081/api/push_project', {
+        fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/api/push_project`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -101,7 +101,7 @@ function MainPushProject() {
       };
     
     useEffect(() => {
-        fetch(`http://localhost:8081/api/get_porject/${selectedOptionKey}`)
+        fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/api/get_porject/${selectedOptionKey}`)
           .then((response) => {
             if (!response.ok) {
               throw new Error("Network response was not ok");
@@ -115,7 +115,7 @@ function MainPushProject() {
       }, [selectedOptionKey]);
 
       useEffect(() => {
-        fetch(`http://localhost:8081/api/get_pushProject/${idProject}/${userId}`)
+        fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/api/get_pushProject/${idProject}/${userId}`)
           .then((response) => {
             if (!response.ok) {
               throw new Error("Network response was not ok");
@@ -130,7 +130,7 @@ function MainPushProject() {
       }, [userId, idProject]);
 
       useEffect(() => {
-        fetch(`http://localhost:8081/api/get_idTeacher/${userId}`)
+        fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/api/get_idTeacher/${userId}`)
           .then((response) => {
             if (!response.ok) {
               throw new Error("Network response was not ok");

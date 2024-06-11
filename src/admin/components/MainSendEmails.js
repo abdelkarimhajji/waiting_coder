@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState , useEffect} from 'react'
 import style from "../sass/mainsendemail.module.scss"
 import {BiMailSend } from 'react-icons/bi'
 import { TbPasswordUser } from "react-icons/tb";
@@ -10,8 +10,9 @@ function MainSendEmails() {
     const [valueTitle, setValueTitle] = useState();
     const [valudeDesc, setValueDesc] = useState();
 
-    const tileWelcom = "Welcome";
-    const descWelcom = `Send Password idididi dididid dididid iodidid ididi diodidid ididod idii Send Password idididi dididid dididid iodidid ididi diodidid ididod idii Send Password idididi dididid dididid iodidid ididi diodidid ididod idii Send Password idididi dididid dididid iodidid ididi diodidid ididod idii Send Password idididi dididid dididid iodidid ididi diodidid ididod idii Send Password idididi dididid dididid iodidid ididi diodididv ididod idii Send Password idididi dididid dididid iodidid ididi diodidid  ididod idii `
+    const tileWelcom = "Welcome ";
+    const descWelcom = `This page is still in development ... `
+
     function callWelcome(){
         setValueDesc(descWelcom)
         setValueTitle(tileWelcom)
@@ -26,15 +27,20 @@ function MainSendEmails() {
         setValueDesc("GoodBy")
         setValueTitle("GoodBy")
     }
+    useEffect(() => {
+        setValueDesc(descWelcom)
+        setValueTitle(tileWelcom)
+        
+    }, []);
   return (
     <div className={style.container}>
         <div className={style.containerFilter}>
             <select >
-                <option value="Choose Project">Choose Project</option>
+                <option value="Choose Project">Choose Classes</option>
                 <option >test</option>
             </select>
             <select >
-                <option value="Choose Project">Choose Project</option>
+                <option value="Choose Project">Choose year</option>
                 <option >test</option>
             </select>
             <div className={style.containerSelectALl}>
@@ -75,10 +81,7 @@ function MainSendEmails() {
                         {/* start make part to have desc user */}
                             <div className={style.containerDesctiption}>
                                 <span className={style.desc}>Abdelkarim hajji Abdelkarim hajji
-                                Abdelkarim hajji
-                                Abdelkarim hajji Abdelkarim hajji Abdelkarim hajji
-                                Abdelkarim hajji Abdelkarim hajji Abdelkarim hajji
-                                Abdelkarim hajji Abdelkarim hajji Abdelkarim hajji
+                                    Desplay here the last message send&nbsp;to  this user
                                 </span>
                             </div>
                         {/* finish make part to have desc user */}

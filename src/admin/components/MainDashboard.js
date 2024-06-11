@@ -20,7 +20,7 @@ function MainDashboard() {
   const [valueSelect, setValueSelect] = useState()
   const [valueSelect2, setValueSelect2] = useState()
   useEffect(() => {
-    fetch(`http://localhost:8082/api/getAggregatedData`)
+    fetch(`http://35.180.127.147:8082/api/getAggregatedData`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -34,7 +34,7 @@ function MainDashboard() {
   }, []);
 
   useEffect(() => {
-    fetch(`http://localhost:8082/api/getYears`)
+    fetch(`http://35.180.127.147:8082/api/getYears`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -111,17 +111,17 @@ function MainDashboard() {
               {/* <p className={style.title}>Chart of earn all year</p> */}
               <div className={style.containerTitle}>
                 <BiPieChartAlt2 className={style.iconFolder}/>
-                <p>Earn all year</p>
+                <p>Earn all years</p>
               </div>
               <PieCharte />
-              <p>hi here i will put some </p>
-              <p>dddddd</p>
+              <p>add here your title</p>
+              <p>*******</p>
             </div>
             <div className={style.barCharte}>
               {/* <p className={style.title}>Chart of earn all year</p> */}
               <div className={style.containerTitle}>
                 <AiOutlineBarChart  className={style.iconFolder}/>
-                <p>Earn all year</p>
+                <p>Earn all years</p>
               </div>
               <BarCharte choosetYear={choosetYear}/>
             </div>
@@ -161,8 +161,8 @@ function MainDashboard() {
                 <p>Number User in each year</p>
               </div>
               <PieChart2 />
-              <p>hi here i will put some </p>
-              <p>dddddd</p>
+              <p>add here your title</p>
+              <p>*******</p>
             </div>
           </div>
         </div>

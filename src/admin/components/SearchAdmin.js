@@ -13,7 +13,7 @@ function SearchAdmin() {
   const [value, setValue] = useState('');
   useEffect(() => {
     // Fetch data from the '/data' endpoint
-    fetch(`http://localhost:8082/api/get_admin/${adminId}`)
+    fetch(`http://35.180.127.147:8082/api/get_admin/${adminId}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -35,7 +35,7 @@ function SearchAdmin() {
     }
   
     // Fetch data from the '/data' endpoint
-    fetch(`http://localhost:8082/api/search/${value}`)
+    fetch(`http://35.180.127.147:8082/api/search/${value}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -77,18 +77,20 @@ function SearchAdmin() {
             <AiOutlineSearch />
         </div>
       <input type="search" name="search" placeholder="Search ... " value={value} className={style.search} onChange={handleInputChange}/>
-      {data.length > 0 && data[0].first_name ? (
+      {/* {data.length > 0 && data[0].first_name ? ( */}
       <div className={style.user}>
         <div className={style.name}>
-          <p className="nameUser">{data[0].first_name}</p>
+          {/* <p className="nameUser">{data[0].first_name}</p> */}
+          <p className="nameUser">admin</p>
         </div>
         <div className={style.photo}>
-          <img src={require(`../../imgs/${data[0].image}`)} alt="" className="imgUser" />
+          <img src={require('../../imgs/karim.JPG')} alt="" srcset="" />
+          {/* <img src={require(`../../imgs/${data[0].image}`)} alt="" className="imgUser" /> */}
         </div>
       </div>
-    ) : (
+    {/* ) : (
       <p></p>
-    )}
+    )} */}
     </div>
     <div className={containerClassName}>
     {resultSearch.length === 0 ? (

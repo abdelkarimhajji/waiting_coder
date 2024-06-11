@@ -43,7 +43,7 @@
     if (user) {
       const userData = JSON.parse(user);
       setUserData(JSON.parse(user));
-      fetch(`http://localhost:8081/api/registerIntra`,{
+      fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/api/registerIntra`,{
         method: 'POST',
         headers:{
           'Content-Type': 'application/json',
@@ -90,7 +90,7 @@
       e.preventDefault();
     
       try {
-        const response = await fetch('http://localhost:8081/signup', {
+        const response = await fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/signup`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
