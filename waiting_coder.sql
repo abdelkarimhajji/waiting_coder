@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : jeu. 09 nov. 2023 à 21:16
+-- Généré le : jeu. 13 juin 2024 à 00:39
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.0.25
 
@@ -34,14 +34,14 @@ CREATE TABLE `admin` (
   `email` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Déchargement des données de la table `admin`
 --
 
 INSERT INTO `admin` (`id`, `first_name`, `last_name`, `email`, `password`, `image`) VALUES
-(1, 'Bouchra', 'bakkali', 'bakkali@gmail.com', 'bakkali', 'woman.png');
+(1, 'Bouchra', 'bakkali', 'bakkali@gmail.com', 'Bakkali', 'woman.png');
 
 -- --------------------------------------------------------
 
@@ -86,9 +86,9 @@ CREATE TABLE `competitions` (
 --
 
 INSERT INTO `competitions` (`id`, `title_competition`, `description_competition`, `month_competition`, `day_competition`, `time_competition`, `finished`, `date_announcement`) VALUES
-(2, 'Hw Winer', 'then i need to update this desciption ok so here you can put adresse of where they do this competition and some info about competition', 'nov', '22', '22:13', 0, '2020/2/2'),
-(3, 'how Is the winer', 'i have alot of things to say about this competition but i don\"t have the time to say everythings so i need to say good luck', 'JAV', '30', '10:00', 0, '2022/22/2'),
-(4, '5 three', 'i have alot of things to say about this competition but i don\"t have the time to say everythings so i need to say good luck', 'JAV', '30', '10:00', 0, '2022/22/2');
+(2, 'App Architects', 'The App Architects competition is like a coding showdown where developers create cool apps to flex their coding muscles. It\'s all about creativity, problem-solving, and showing off coding skills in a fun and challenging environment.', 'nov', '22', '22:13', 0, '2020/2/2'),
+(3, 'WebCraft', 'Description: WebCraft is a competition where designers and developers showcase their creativity by crafting visually stunning and user-friendly web experiences, pushing the boundaries of digital design.', 'JAV', '30', '10:00', 0, '2022/22/2'),
+(4, 'Coding Challenge', 'CodeQuest offers programmers a platform to tackle diverse coding challenges, from algorithmic puzzles to real-world application tasks, fostering skill development and competition in the coding community.', 'JAV', '30', '10:00', 0, '2022/22/2');
 
 -- --------------------------------------------------------
 
@@ -112,8 +112,8 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`id`, `day_event`, `month_event`, `time_event`, `title_event`, `description_event`, `finished`, `date_announcement`) VALUES
-(1, '24', 'NOV', '16:30', 'Siber security', 'in this event will be give all things about syber. and this events well be in NEJMA', 0, '2202/2/2'),
-(2, '25', 'YAN', '12:30', 'AI', 'in this event will be give all things about AI. and this events well be in NEJMA', 0, '2222/2/2');
+(1, '24', 'NOV', '16:30', 'Cyber Security', 'Cyber Security: Safeguarding the Digital World. Join us to explore the latest trends, best practices, and tools to protect your online presence from cyber threats.', 0, '2024/2/2'),
+(2, '25', 'YAN', '12:30', 'TechGuard Summit', 'Where cybersecurity experts converge to discuss the latest strategies in digital defense, offering valuable insights to protect against evolving cyber threats.', 0, '2024/2/2');
 
 -- --------------------------------------------------------
 
@@ -136,10 +136,14 @@ CREATE TABLE `groups` (
 
 INSERT INTO `groups` (`id`, `id_specific`, `name_group`, `group_finished`, `date_finished`, `date_created`) VALUES
 (1, 3, 20, 0, '2023-09-03', '2023-11-27'),
-(2, 4, 2, 0, '0000-00-00', '2023-10-02'),
+(2, 4, 2, 1, '2023-11-11', '2023-10-02'),
 (3, 3, 3, 1, '0000-00-00', '2023-01-20'),
 (4, 6, 4, 0, '0000-00-00', '2023-10-20'),
-(17, 5, 1337, 0, NULL, '2023-10-31');
+(17, 5, 1337, 0, NULL, '2023-10-31'),
+(18, 5, 222, 1, '2023-11-11', '2023-11-11'),
+(19, 4, 155, 0, NULL, '2023-11-11'),
+(20, 3, 256, 0, NULL, '2023-11-12'),
+(21, 5, 255, 1, '2023-11-12', '2023-11-12');
 
 -- --------------------------------------------------------
 
@@ -173,17 +177,31 @@ INSERT INTO `languages` (`id`, `name_langauge`, `name_icon`, `description`, `id_
 
 CREATE TABLE `level` (
   `id` int(255) NOT NULL,
-  `id_user` int(255) NOT NULL,
-  `level` int(255) NOT NULL,
-  `background_bleu` int(255) NOT NULL
+  `id_user` int(255) DEFAULT NULL,
+  `level` double DEFAULT NULL,
+  `background` int(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `level`
 --
 
-INSERT INTO `level` (`id`, `id_user`, `level`, `background_bleu`) VALUES
-(2, 2, 4, 70);
+INSERT INTO `level` (`id`, `id_user`, `level`, `background`) VALUES
+(1, 2, 4.3, 30),
+(24, 13, 3.1, 310),
+(28, 79, 3.4, 40),
+(29, 80, 0, 0),
+(30, 81, 3.4, 40),
+(31, 82, 3.4, 40),
+(32, 83, 0, 0),
+(33, 84, 3.4, 40),
+(34, 85, 0, 0),
+(35, 86, 1.7, 70),
+(36, 87, 3.4, 40),
+(37, 88, 0, 0),
+(38, 89, 0, 0),
+(39, 90, 3.4, 40),
+(40, 91, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -257,7 +275,9 @@ CREATE TABLE `more_info_projects` (
 --
 
 INSERT INTO `more_info_projects` (`id`, `id_project`, `context`, `deliverables`, `languages_used`, `finished_project`) VALUES
-(1, 1, 'Votre page doit obligatoirement contenir les éléments suivants :  Un titre principal sur le nom de votre personnage  Un sous-titre qui le décrit  Une image  Une description de l’image  Une bio portant les dates clés et les meilleures réalisations  Un lien vers la page Wikipédia de votre personnage Vous trouverez dans les pièces jointes un modèle pour s’inspirer ; Pour la mise en style, vous avez le libre choix de disposer et styliser les éléments de votre page. Laisser votre créativité s’exprimer ;\r\n\r\n​\r\n\r\nDans un fichier word,vous décrivez les différentes balises HTML ainsi que les propriétés CSS que vous avez utilisé et notez leur utilité;', 'Dépôt dans le Drive (Un dossier portant votre nom et prénom, contenant la page HTML et CSS et le fichier WORD)', 'HTML5, CSS3', 'So you need to click on button to go on the next page and put your link of your project in the input and click finished');
+(1, 1, 'Votre page doit obligatoirement contenir les éléments suivants :  Un titre principal sur le nom de votre personnage  Un sous-titre qui le décrit  Une image  Une description de l’image  Une bio portant les dates clés et les meilleures réalisations  Un lien vers la page Wikipédia de votre personnage Vous trouverez dans les pièces jointes un modèle pour s’inspirer ; Pour la mise en style, vous avez le libre choix de disposer et styliser les éléments de votre page. Laisser votre créativité s’exprimer ;\r\n\r\n​\r\n\r\nDans un fichier word,vous décrivez les différentes balises HTML ainsi que les propriétés CSS que vous avez utilisé et notez leur utilité;', 'Dépôt dans le Drive (Un dossier portant votre nom et prénom, contenant la page HTML et CSS et le fichier WORD)', 'HTML5, CSS3', 'So you need to click on button to go on the next page and put your link of your project in the input and click finished'),
+(2, 2, 'Votre page doit obligatoirement contenir les éléments suivants :  Un titre principal sur le nom de votre personnage  Un sous-titre qui le décrit  Une image  Une description de l’image  Une bio portant les dates clés et les meilleures réalisations  Un lien vers la page Wikipédia de votre personnage Vous trouverez dans les pièces jointes un modèle pour s’inspirer ; Pour la mise en style, vous avez le libre choix de disposer et styliser les éléments de votre page. Laisser votre créativité s’exprimer ;\r\n\r\n​\r\n\r\nDans un fichier word,vous décrivez les différentes balises HTML ainsi que les propriétés CSS que vous avez utilisé et notez leur utilité;', 'Dépôt dans le Drive (Un dossier portant votre nom et prénom, contenant la page HTML et CSS et le fichier WORD)', 'HTML5, CSS3, JS', 'So you need to click on button to go on the next page and put your link of your project in the input and click finished'),
+(3, 3, 'Votre page doit obligatoirement contenir les éléments suivants :  Un titre principal sur le nom de votre personnage  Un sous-titre qui le décrit  Une image  Une description de l’image  Une bio portant les dates clés et les meilleures réalisations  Un lien vers la page Wikipédia de votre personnage Vous trouverez dans les pièces jointes un modèle pour s’inspirer ; Pour la mise en style, vous avez le libre choix de disposer et styliser les éléments de votre page. Laisser votre créativité s’exprimer ;\r\n\r\n​\r\n\r\nDans un fichier word,vous décrivez les différentes balises HTML ainsi que les propriétés CSS que vous avez utilisé et notez leur utilité;', 'Dépôt dans le Drive (Un dossier portant votre nom et prénom, contenant la page HTML et CSS et le fichier WORD)', 'HTML5, CSS3, JS', 'So you need to click on button to go on the next page and put your link of your project in the input and click finished');
 
 -- --------------------------------------------------------
 
@@ -301,10 +321,21 @@ CREATE TABLE `payment` (
 --
 
 INSERT INTO `payment` (`id`, `payment`, `valid`, `date_payment`, `id_user`) VALUES
-(1, 300, 1, '2023-08-24', 2),
+(1, 1442, 1, '2024-12-23', 2),
 (3, 300, 1, '2023-08-03', 13),
-(6, 300, 1, '2024-05-02', 14),
-(8, 333, 0, '2023-09-22', 43);
+(21, 0, 0, '2024-01-08', 79),
+(22, 0, 0, '2024-01-08', 80),
+(23, 0, 0, '2024-01-11', 81),
+(24, 0, 0, '2024-01-12', 82),
+(25, 0, 0, '2024-01-12', 83),
+(26, 0, 0, '2024-01-12', 84),
+(27, 0, 0, '2024-01-12', 85),
+(28, 0, 0, '2024-01-13', 86),
+(29, 0, 0, '2024-01-14', 87),
+(30, 0, 0, '2024-01-14', 88),
+(31, 0, 0, '2024-01-14', 89),
+(32, 0, 0, '2024-01-23', 90),
+(33, 0, 0, '2024-01-25', 91);
 
 -- --------------------------------------------------------
 
@@ -326,9 +357,9 @@ CREATE TABLE `projects` (
 --
 
 INSERT INTO `projects` (`id`, `name_project`, `count_exp`, `id_collection`, `image_project`, `description`) VALUES
-(1, 'Réaliser une Biographie d\'un personnage qui vous inspire', 100, 3, 'biographie.png', 'Il s’agit de réaliser une page web qui présente la biographie d’un personnage de votre choix (sportif, scientifique, artiste…) en utilisant HTML5 et CSS3 ;'),
-(2, 'Reproduire une maquette et la convertir en HTML et CSS', 90, 3, 'biographie.png', 'Vous allez reproduire une maquette d\'une page de contact que vous devrez ensuite traduire en HTML et CSS en vous appuyant sur les spécifications fournies. #solicode'),
-(3, 'Maquetter et réaliser une Landing page responsive', 70, 3, 'biographie.png', 'L’objectif de ce brief est d’adapter une maquette de votre choix, afin de créer 2 nouvelles maquettes (Desktop/Mobile) pour une Landing page responsive.  Ensuite vous devez traduire vos maquettes en code HTML et CSS selon les consignes fournies.'),
+(1, 'Create a biography of a character who inspires you', 100, 3, 'biographie.png', 'This involves creating a web page which presents the biography of a character of your choice (sportsman, scientist, artist, etc.) using HTML5 and CSS3;'),
+(2, 'Reproduce a mockup and convert it to HTML and CSS.', 170, 3, 'biographie.png', 'You will reproduce a mock-up of a contact page which you will then have to translate into HTML and CSS based on the specifications provided.'),
+(3, 'Design and create a responsive landing page', 70, 3, 'biographie.png', 'The objective of this brief is to adapt a model of your choice, in order to create 2 new models (Desktop/Mobile) for a responsive Landing page. Then you must translate your models into HTML and CSS code according to the instructions provided.'),
 (4, 'Créer une interface utilisateur de gestion de produits qui interroge un fichier JSON', 90, 4, 'biographie.png', 'Créer un fichier JSON contenant les informations des produits de votre choix, exploiter ce fichier pour créer une page responsive qui permet d\'afficher ces données, les trier et les filtrer.');
 
 -- --------------------------------------------------------
@@ -360,12 +391,10 @@ INSERT INTO `push_porojects` (`id`, `id_user`, `id_teacher`, `id_project`, `mess
 (5, 2, 2, 1, NULL, NULL, 'so what do you want', '24/9/2023'),
 (6, 2, 1, 1, 'i want nothing', '24/9/2023', NULL, NULL),
 (7, 13, 2, 1, NULL, NULL, 'i am the techer', '24/9/2023'),
-(8, 14, 2, 1, NULL, NULL, 'i am the theacher ok', '24/9/2023'),
 (9, 2, 1, 1, 'dd', '24/9/2023', NULL, NULL),
 (10, 2, 1, 1, 'ddd', '24/9/2023', NULL, NULL),
 (11, 2, 1, 1, 'ddd', '24/9/2023', NULL, NULL),
 (12, 2, 1, 1, 'cccc', '24/9/2023', NULL, NULL),
-(13, 43, 2, 1, NULL, NULL, 'so i am the teacher 3', '24/9/2023'),
 (14, 2, 2, 2, NULL, NULL, 'i am the admin ok', '24/9/2023'),
 (15, 2, 2, 4, NULL, NULL, 'hi', '24/9/2023'),
 (16, 2, 2, 1, NULL, NULL, 'ok', '25/9/2023'),
@@ -394,7 +423,20 @@ INSERT INTO `push_porojects` (`id`, `id_user`, `id_teacher`, `id_project`, `mess
 (39, 2, 1, 1, 'oussama', '30/10/2023', NULL, NULL),
 (40, 2, 1, 1, 'abderzak', '31/10/2023', NULL, NULL),
 (41, 2, 1, 1, 'madara', '31/10/2023', NULL, NULL),
-(42, 2, 1, 1, 'http//abderahman', '3/11/2023', NULL, NULL);
+(42, 2, 1, 1, 'http//abderahman', '3/11/2023', NULL, NULL),
+(43, 2, 1, 1, 'hicham.;com', '20/12/2023', NULL, NULL),
+(45, 2, 1, 1, 'haahahyosef', '21/12/2023', NULL, NULL),
+(46, 2, 2, 1, NULL, NULL, 'good', '21/12/2023'),
+(47, 2, 1, 1, 'youssef', '21/12/2023', NULL, NULL),
+(48, 2, 1, 1, 'fatima', '23/12/2023', NULL, NULL),
+(49, 2, 2, 1, NULL, NULL, 'good project', '23/12/2023'),
+(50, 80, 1, 1, 'hi', '8/1/2024', NULL, NULL),
+(51, 86, 1, 1, 'http//link', '13/1/2024', NULL, NULL),
+(52, 86, 2, 1, NULL, NULL, 'greate project', '13/1/2024'),
+(53, 89, 1, 2, 'dlm', '14/1/2024', NULL, NULL),
+(54, 90, 1, 1, 'heyyo', '23/1/2024', NULL, NULL),
+(55, 2, 1, 1, 'waeil', '29/2/2024', NULL, NULL),
+(56, 2, 1, 1, 'd', '15/5/2024', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -415,7 +457,9 @@ CREATE TABLE `registrement_competition` (
 
 INSERT INTO `registrement_competition` (`id`, `id_user`, `id_competition`, `valid`) VALUES
 (3, 13, 2, 0),
-(4, 14, 2, 0);
+(34, 90, 2, 0),
+(35, 90, 3, 0),
+(52, 2, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -435,7 +479,12 @@ CREATE TABLE `registrement_events` (
 --
 
 INSERT INTO `registrement_events` (`id`, `id_user`, `id_event`, `valid`) VALUES
-(31, 13, 2, 0);
+(31, 13, 2, 0),
+(85, 86, 2, 0),
+(86, 79, 1, 0),
+(87, 79, 2, 0),
+(89, 90, 1, 0),
+(91, 2, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -458,7 +507,15 @@ INSERT INTO `ressources_projects` (`id`, `id_project`, `name_ressource`, `link_r
 (1, 1, 'Model.png', 'link of model'),
 (2, 1, 'tutorial', 'link of model'),
 (3, 1, 'Maquette', 'put link here'),
-(4, 1, 'Font Awesome', 'put link here');
+(4, 1, 'Font Awesome', 'put link here'),
+(5, 2, 'Tutrial', 'https://www.instagram.com]'),
+(6, 2, 'Font Awesome', '[value-4]'),
+(7, 2, 'Model', '[value-3]'),
+(8, 2, 'Maquette', '[value-3]'),
+(9, 3, 'Tuturial', '[value-3]'),
+(10, 3, 'Maquette', '[value-3]'),
+(11, 3, 'Model', '[value-3]'),
+(12, 3, 'Font Aesome', '[value-3]');
 
 -- --------------------------------------------------------
 
@@ -483,24 +540,24 @@ CREATE TABLE `specifics` (
 --
 
 INSERT INTO `specifics` (`id`, `id_user`, `id_nameSpecifics`, `study_now`, `validation`, `validation_week`, `id_group`, `date_register`, `date_validation`) VALUES
-(3, 2, 3, 1, 1, 1, 1, '2020-03-03', '2023-09-14'),
-(4, 2, 4, 0, 1, 1, 2, '2020-02-03', NULL),
+(3, 2, 3, 1, 1, 1, 1, '2024-03-03', '2023-09-14'),
+(4, 2, 4, 0, 0, 1, 2, '2020-02-03', NULL),
 (8, 13, 3, 1, 1, 1, 1, '2020-02-03', '2023-09-14'),
-(9, 14, 3, 1, 1, 1, 1, '2023-03-04', '2023-09-14'),
 (11, 32, 6, 1, 0, 0, 4, '2023-09-20', NULL),
-(12, 33, 3, 1, 0, 0, 1, '2023-09-20', NULL),
-(13, 34, 3, 1, 0, 0, 1, '2023-09-20', NULL),
-(14, 35, 3, 1, 0, 0, 1, '2023-09-20', NULL),
-(15, 36, 3, 1, 0, 0, 1, '2023-09-20', NULL),
-(16, 37, 3, 1, 0, 0, 1, '2023-09-21', NULL),
-(17, 38, 6, 1, 0, 0, 4, '2023-09-21', NULL),
-(18, 39, 3, 1, 0, 0, 1, '2023-09-21', NULL),
-(19, 40, 3, 1, 0, 0, 1, '2023-09-21', NULL),
-(20, 41, 3, 1, 0, 0, 1, '2023-09-22', NULL),
-(21, 42, 3, 1, 0, 0, 1, '2023-09-22', NULL),
-(22, 43, 3, 1, 1, 0, 1, '2023-09-22', '2023-10-01'),
-(23, 44, 3, 1, 0, 0, 1, '2023-09-22', NULL),
-(24, 2, 5, 0, 1, 0, 17, '2025-03-03', '2025-06-04');
+(24, 2, 5, 0, 1, 0, 17, '2025-03-03', '2025-06-04'),
+(53, 79, 3, 1, 1, 1, 20, '2024-01-08', '2024-01-12'),
+(54, 80, 3, 1, 0, 0, 20, '2024-01-08', NULL),
+(55, 81, 3, 1, 1, 1, 20, '2024-01-11', '2024-01-13'),
+(56, 82, 3, 1, 1, 0, 20, '2024-01-12', '2024-01-12'),
+(57, 83, 3, 1, 0, 0, 20, '2024-01-12', NULL),
+(58, 84, 3, 1, 1, 1, 20, '2024-01-12', '2024-01-12'),
+(59, 85, 3, 1, 0, 0, 20, '2024-01-12', NULL),
+(60, 86, 3, 1, 0, 0, 20, '2024-01-13', NULL),
+(61, 87, 3, 1, 1, 1, 20, '2024-01-14', '2024-01-14'),
+(62, 88, 3, 1, 0, 0, 20, '2024-01-14', NULL),
+(63, 89, 3, 1, 0, 0, 20, '2024-01-14', NULL),
+(64, 90, 3, 1, 1, 0, 20, '2024-01-23', '2024-01-23'),
+(65, 91, 3, 1, 0, 0, 20, '2024-01-25', NULL);
 
 -- --------------------------------------------------------
 
@@ -544,7 +601,11 @@ CREATE TABLE `teacher_groups` (
 
 INSERT INTO `teacher_groups` (`id`, `id_teacher`, `id_group`) VALUES
 (1, 1, 1),
-(13, 1, 17);
+(13, 1, 17),
+(14, 2, 18),
+(15, 1, 19),
+(16, 1, 20),
+(17, 2, 21);
 
 -- --------------------------------------------------------
 
@@ -585,7 +646,7 @@ CREATE TABLE `user` (
   `lastName` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `phone` varchar(255) NOT NULL,
-  `image` varchar(255) DEFAULT NULL,
+  `image` varchar(400) DEFAULT NULL,
   `date_registered` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -594,23 +655,22 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `firstName`, `password`, `lastName`, `email`, `phone`, `image`, `date_registered`) VALUES
-(2, 'Abdelkarim', 'karim', 'hajji', 'hajji@gmail.com', '0617591321', 'karim.png', '2023-03-20'),
+(2, 'Abdelkarim', 'karim', 'hajji', 'hajji@gmail.com', '0617591321', 'karim.png', '2024-03-20'),
 (13, 'nassim', 'achab', 'achab', 'achab@gamil.com', '0617591321', 'oussama.png', '2023-02-10'),
-(14, 'abdo', 'abdo', 'abdo', 'abdo@gamil.com', '0617591321', 'oussama.png', '2024-10-30'),
-(15, 'achraf', 'bakkali', 'bakkali', 'bakkali@gamil.com', '0617591321', 'oussama.png', '2024-02-20'),
 (32, 'hicham', '@hajjicode', 'hajji', 'hicham@gmail.com', '0617591321', 'ahajji.jpg', '2023-09-20'),
-(33, 'test', '@testcode', 'test', 'test@gamil.com', '0617593121', 'ahajji.jpg', '2023-09-20'),
-(34, 'test', '@testcode', 'test', 'test@gamil.com', '0617591321', 'ahajji.jpg', '2023-09-20'),
-(35, 'test', '@testcode', 'test', 'test@gamil', '0617591321', 'ahajji.jpg', '2023-09-20'),
-(36, 'slm', '@slmcode', 'slm', 'slm@gmil.com', '0617591321', 'ahajji.jpg', '2023-09-20'),
-(37, 'test', '@testcode', 'test', 'test@gamildd', '0617591321', 'ahajji.jpg', '2023-09-21'),
-(38, 'ssd', '@ssdcode', 'ssd', 'ssk@gmail.com', '0617691321', 'ahajji.jpg', '2023-09-21'),
-(39, 'dddd', '@ddddcode', 'dddd', 'ddd@gamil.com', '0617591321', 'ahajji.jpg', '2023-09-21'),
-(40, 'dddd', '@ddddcode', 'dddd', 'ddd@gmial.com', '0617592123', 'ahajji.jpg', '2023-09-21'),
-(41, 'karim', '@karimcode', 'karim', 'karim@gamil.com', '0617591332', 'ahajji.jpg', '2023-09-22'),
-(42, 'karim', '@karimcode', 'karim', 'karism@gamil.com', '0617591332', 'ahajji.jpg', '2023-09-22'),
-(43, 'karim', '@karimcode', 'karim', 'karidsm@gamil.com', '0617591332', 'ahajji.jpg', '2023-09-22'),
-(44, 'jad', '@jadcode', 'jad', 'jad@gamil.com', '0617591321', 'ahajji.jpg', '2023-09-22');
+(79, 'Abdelkarim', '@ahajji', 'Hajji', 'ahajji@student.1337.ma', 'null', 'https://cdn.intra.42.fr/users/d12cd5a31ca3cecff426bbbf5e5e4aec/medium_ahajji.jpg', '2024-01-08'),
+(80, 'Nassim', '@nachab', 'Achab', 'nachab@student.1337.ma', 'null', 'https://cdn.intra.42.fr/users/0f112b961272e37b01b805b7ec9279ad/medium_nachab.jpg', '2024-01-08'),
+(81, 'Amine', '@asalmi', 'Salmi', 'asalmi@student.1337.ma', 'null', 'https://cdn.intra.42.fr/users/198b5cb321a2b0d3642ff2aba96c7714/medium_asalmi.jpg', '2024-01-11'),
+(82, 'Youssef', '@ylabrahm', 'Labrahmi', 'ylabrahm@student.1337.ma', 'null', 'https://cdn.intra.42.fr/users/84814d5acae61a80deca26986402bd54/medium_ylabrahm.jpg', '2024-01-12'),
+(83, 'Ayoub', '@aech-che', 'Ech-Chetyouy', 'aech-che@student.1337.ma', 'null', 'https://cdn.intra.42.fr/users/39341d40e39057ec142afc077f1f9fa5/medium_aech-che.jpg', '2024-01-12'),
+(84, 'Abderrazzak', '@aechaoub', 'Echaoubi', 'aechaoub@student.1337.ma', 'null', 'https://cdn.intra.42.fr/users/419855509671b0052ed65cb3eebe3250/medium_aechaoub.jpg', '2024-01-12'),
+(85, 'Mohamed', '@mel-akhd', 'El akhdar', 'mel-akhd@student.1337.ma', 'null', 'https://cdn.intra.42.fr/users/a8477982cfa837f8363a568a82c30472/medium_mel-akhd.jpg', '2024-01-12'),
+(86, 'Nabil', '@nhayoun', 'Hayoun', 'hayounn.etd@gmail.com', 'null', 'https://cdn.intra.42.fr/users/a43c3a7b3a200db8b4238f8b19501058/medium_nhayoun.jpg', '2024-01-13'),
+(87, 'Yassine', '@yaidriss', 'Idrissi', 'yaidriss@student.1337.ma', 'null', 'https://cdn.intra.42.fr/users/4288ad90963abeb88d0df99e420761f5/medium_yaidriss.jpg', '2024-01-14'),
+(88, 'Rachid', '@rennatiq', 'Ennatiqi', 'rennatiq@student.1337.ma', 'null', 'https://cdn.intra.42.fr/users/9978f3e0a77ae6dea12abe4ebd0604b6/medium_rennatiq.jpg', '2024-01-14'),
+(89, 'Ahmed', '@asekkak', 'Sekak', 'asekkak@student.1337.ma', 'null', 'https://cdn.intra.42.fr/users/07627870cd855c4b13d6242e114f3f44/medium_asekkak.jpg', '2024-01-14'),
+(90, 'Amine', '@ael-mhar', 'El Mharzi', 'ael-mhar@student.1337.ma', 'null', 'https://cdn.intra.42.fr/users/9992c6d85f1a8cc118297d718d6db71e/medium_ael-mhar.jpg', '2024-01-23'),
+(91, 'Youssef', '@youel-id', 'El Idrissi', 'youel-id@student.1337.ma', 'null', 'https://cdn.intra.42.fr/users/94c9b98a52e9626e9c5244c484053b51/medium_youel-id.jpg', '2024-01-25');
 
 -- --------------------------------------------------------
 
@@ -632,18 +692,33 @@ CREATE TABLE `validation_projects` (
 --
 
 INSERT INTO `validation_projects` (`id`, `id_user`, `id_project`, `id_teacher_validation`, `valid_project`, `date_validation`) VALUES
-(1, 2, 1, 1, 1, '2023-10-31'),
-(2, 2, 2, 1, 0, '2023-09-10'),
-(3, 13, 1, 1, 1, '2023-10-31'),
-(4, 14, 1, 2, 1, '2023-10-31'),
-(5, 13, 2, 2, 0, '2023-09-10'),
-(6, 14, 2, 2, 1, '2023-09-10'),
-(7, 2, 3, 2, 1, '2023-09-10'),
-(8, 13, 3, 2, 1, '2023-09-10'),
-(9, 14, 3, 2, 1, '2023-09-10'),
-(10, 2, 4, 2, 1, '2023-09-11'),
-(22, 43, 2, 2, 1, '2023-10-02'),
-(23, 43, 1, 2, 1, '2023-10-31');
+(1, 2, 1, 1, 1, '2024-01-04'),
+(2, 2, 2, 1, 1, '2024-01-04'),
+(3, 13, 1, 1, 1, '2024-01-04'),
+(5, 13, 2, 2, 1, '2024-01-04'),
+(7, 2, 3, 2, 1, '2024-01-04'),
+(8, 13, 3, 2, 1, '2024-01-04'),
+(10, 2, 4, 2, 0, '2023-09-11'),
+(25, 79, 1, 2, 1, '2024-01-08'),
+(26, 79, 2, 2, 1, '2024-01-08'),
+(27, 79, 3, 2, 1, '2024-01-08'),
+(28, 82, 1, 2, 1, '2024-01-12'),
+(29, 82, 2, 2, 1, '2024-01-12'),
+(30, 82, 3, 2, 1, '2024-01-12'),
+(31, 84, 1, 2, 1, '2024-01-12'),
+(32, 84, 2, 2, 1, '2024-01-12'),
+(33, 84, 3, 2, 1, '2024-01-12'),
+(34, 83, 1, 2, 1, '2024-01-13'),
+(35, 86, 2, 2, 1, '2024-01-13'),
+(36, 81, 1, 2, 1, '2024-01-13'),
+(37, 81, 2, 2, 1, '2024-01-13'),
+(38, 81, 3, 2, 1, '2024-01-13'),
+(39, 87, 1, 2, 1, '2024-01-14'),
+(40, 87, 2, 2, 1, '2024-01-14'),
+(41, 87, 3, 2, 1, '2024-01-14'),
+(43, 90, 1, 2, 1, '2024-01-23'),
+(44, 90, 3, 2, 1, '2024-01-23'),
+(45, 90, 2, 2, 1, '2024-01-23');
 
 --
 -- Index pour les tables déchargées
@@ -844,7 +919,7 @@ ALTER TABLE `events`
 -- AUTO_INCREMENT pour la table `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT pour la table `languages`
@@ -856,7 +931,7 @@ ALTER TABLE `languages`
 -- AUTO_INCREMENT pour la table `level`
 --
 ALTER TABLE `level`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT pour la table `links_languages`
@@ -874,7 +949,7 @@ ALTER TABLE `links_tools`
 -- AUTO_INCREMENT pour la table `more_info_projects`
 --
 ALTER TABLE `more_info_projects`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `name_specifics`
@@ -886,7 +961,7 @@ ALTER TABLE `name_specifics`
 -- AUTO_INCREMENT pour la table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT pour la table `projects`
@@ -898,31 +973,31 @@ ALTER TABLE `projects`
 -- AUTO_INCREMENT pour la table `push_porojects`
 --
 ALTER TABLE `push_porojects`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT pour la table `registrement_competition`
 --
 ALTER TABLE `registrement_competition`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT pour la table `registrement_events`
 --
 ALTER TABLE `registrement_events`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- AUTO_INCREMENT pour la table `ressources_projects`
 --
 ALTER TABLE `ressources_projects`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT pour la table `specifics`
 --
 ALTER TABLE `specifics`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT pour la table `teachers`
@@ -934,7 +1009,7 @@ ALTER TABLE `teachers`
 -- AUTO_INCREMENT pour la table `teacher_groups`
 --
 ALTER TABLE `teacher_groups`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT pour la table `tools`
@@ -946,13 +1021,13 @@ ALTER TABLE `tools`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- AUTO_INCREMENT pour la table `validation_projects`
 --
 ALTER TABLE `validation_projects`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- Contraintes pour les tables déchargées
