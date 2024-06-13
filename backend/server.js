@@ -29,8 +29,8 @@ app.post('/signup', (req, res) => {
     if (selectResult.length > 0) {
       // console.log(selectResult);
       const userId = selectResult[0].id;
-      const token = jwt.sign({ id: userId }, process.env.ACCESS_TOKEN_SECRET); // Generate a JWT
-      return res.json({ status: 1, userId, accessToken: token }); // Send the JWT to the client
+      // const token = jwt.sign({ id: userId }, process.env.ACCESS_TOKEN_SECRET); // Generate a JWT
+      return res.json({ status: 1, userId}); // Send the JWT to the client
     }
     else
     return res.json({ status: -1 });
