@@ -1,10 +1,8 @@
-// Server code
 require('dotenv').config();
 const express = require("express");
 const mysql = require('mysql');
 const cors = require('cors');
-const jwt = require('jsonwebtoken'); // Add this line
-
+const jwt = require('jsonwebtoken');
 const app = express();
 app.use(cors());
 
@@ -15,7 +13,7 @@ const db = mysql.createConnection({
   database: "waiting_coder"
 });
   
-app.use(express.json()); // Add this line to parse JSON in request body
+app.use(express.json()); 
 
 app.post('/signup', (req, res) => {
   const selectSql = "SELECT * FROM `user` WHERE `firstName` = ? AND `password` = ?";
@@ -27,10 +25,8 @@ app.post('/signup', (req, res) => {
       return res.json("Error");
     }
     if (selectResult.length > 0) {
-      // console.log(selectResult);
       const userId = selectResult[0].id;
-      // const token = jwt.sign({ id: userId }, process.env.ACCESS_TOKEN_SECRET); // Generate a JWT
-      return res.json({ status: 1, userId}); // Send the JWT to the client
+      return res.json({ status: 1, userId});
     }
     else
     return res.json({ status: -1 });
@@ -39,7 +35,7 @@ app.post('/signup', (req, res) => {
 
 
 
-// Create an API endpoint for fetching data for a specific user's name specifics
+
 app.get('/name_specifics/:id', (req, res) => {
   const id = req.params.id;
   const selectSql = `SELECT name_specifics.name ,name_specifics.id, specifics.study_now
@@ -51,7 +47,6 @@ app.get('/name_specifics/:id', (req, res) => {
       console.error(selectErr);
       return res.status(500).json({ error: "An error occurred while fetching data." });
     }
-    // console.log(selectResult);
     return res.json(selectResult);
   });
 });
@@ -64,7 +59,6 @@ app.get('/api/get_levels/:id', (req, res) => {
       console.log(selectErr);
       return res.json("Error");
     }
-    // console.log(selectResult);
     return res.json(selectResult);
   });
 });
@@ -85,7 +79,6 @@ app.get('/api/get_languages/:selectedOptionKey', (req, res) => {
       res.status(500).json({ error: 'Error fetching data from the database' });
       return;
     }
-    // console.log("ddddd",results)
     const languageAndLinks = {};
     results.forEach(row => {
       if (!languageAndLinks[row.idLanguage]) {
@@ -121,7 +114,6 @@ app.get('/api/get_tools/:selectedOptionKey', (req, res) => {
       console.log(selectErr);
       return res.json("Error");
     }
-    // console.log(selectResult);
     return res.json(selectResult);
   });
 });
@@ -200,11 +192,11 @@ app.get('/api/get_idTeacher/:idUser', (req, res) => {
 
 
 app.post('/api/push_project', (req, res) => {
-  const { message, idUser, idTeacher, timeSendMessage , idProject} = req.body; // Destructure the new fields from the request body
+  const { message, idUser, idTeacher, timeSendMessage , idProject} = req.body;
 
-  const sql = 'INSERT INTO push_porojects (message_student, id_user, id_teacher, id_project, time_send_student) VALUES (?, ?, ?, ?, ?)'; // Adjust the SQL query to include the new fields
+  const sql = 'INSERT INTO push_porojects (message_student, id_user, id_teacher, id_project, time_send_student) VALUES (?, ?, ?, ?, ?)'; 
 
-  const values = [message, idUser, idTeacher, idProject, timeSendMessage]; // Add the new field values to the array
+  const values = [message, idUser, idTeacher, idProject, timeSendMessage];
 
   db.query(sql, values, (err, result) => {
     if (err) {
@@ -265,7 +257,6 @@ app.get('/api/get_events/:userId/:nameSpecifics', (req, res) => {
 app.post('/api/register_event', (req, res) => {
   const { id_user, id_event } = req.body;
 
-  // Check if the registration already exists for the user and event
   const checkRegistrationSql = 'SELECT * FROM registrement_events WHERE id_user = ? AND id_event = ?';
   const checkRegistrationValues = [id_user, id_event];
 
@@ -274,10 +265,8 @@ app.post('/api/register_event', (req, res) => {
       console.error('Error checking registration:', checkErr);
       res.status(500).json({ error: 'Error checking registration' });
     } else if (checkResult.length > 0) {
-      // Registration already exists, return a message indicating that
       res.json({ message: 'User is already registered for this event' });
     } else {
-      // Registration doesn't exist, insert the new registration
       const insertRegistrationSql = 'INSERT INTO registrement_events (id_user, id_event, valid) VALUES (?, ?, ?)';
       const insertRegistrationValues = [id_user, id_event, 0];
 
@@ -296,7 +285,6 @@ app.post('/api/register_event', (req, res) => {
 
 app.delete('/api/delete_registration', (req, res) => {
   const { id_user, id_event } = req.body;
-  // Perform the delete operation in your database
   const deleteRegistrationSql = 'DELETE FROM registrement_events WHERE id_user = ? AND id_event = ?';
   const deleteRegistrationValues = [id_user, id_event];
 
@@ -314,7 +302,6 @@ app.delete('/api/delete_registration', (req, res) => {
 app.delete('/api/delete_registration_competition', (req, res) => {
   const { id_user, id_competition } = req.body;
   
-  // Perform the delete operation in your database
   const deleteRegistrationSql = 'DELETE FROM registrement_competition WHERE id_user = ? AND id_competition = ?';
   const deleteRegistrationValues = [id_user, id_competition];
 
@@ -334,7 +321,6 @@ app.delete('/api/delete_registration_competition', (req, res) => {
 app.post('/api/register_competition', (req, res) => {
   const { id_user, id_competition } = req.body;
 
-  // Check if the registration already exists for the user and event
   const checkRegistrationSql = 'SELECT * FROM registrement_competition WHERE id_user = ? AND id_competition = ?';
   const checkRegistrationValues = [id_user, id_competition];
 
@@ -343,10 +329,8 @@ app.post('/api/register_competition', (req, res) => {
       console.error('Error checking registration:', checkErr);
       res.status(500).json({ error: 'Error checking registration' });
     } else if (checkResult.length > 0) {
-      // Registration already exists, return a message indicating that
       res.json({ message: 'User is already registered for this event' });
     } else {
-      // Registration doesn't exist, insert the new registration
       const insertRegistrationSql = 'INSERT INTO registrement_competition (id_user, id_competition, valid) VALUES (?, ?, ?)';
       const insertRegistrationValues = [id_user, id_competition, 0];
 
@@ -513,7 +497,6 @@ app.get('/api/getLanguagesAndLinks/:idCollection', (req, res) => {
   });
 });
 
-// api get tools and their links
 
 app.get('/api/getToolsAndLinks/:idCollection', (req, res) => {
   const idCollection = req.params.idCollection;
@@ -571,7 +554,6 @@ app.get('/api/search/:input', (req, res) => {
   });
 });
 
-// Create API endpoint for fetching data from the user table
 
 app.get('/api/get_skills/:id', (req, res) => {
   const id = req.params.id;
@@ -588,7 +570,6 @@ app.get('/api/get_skills/:id', (req, res) => {
   });
 });
 
-// try to get count of exp 
 
 app.get('/api/get_count_exp/:id', (req, res) => {
   const id = req.params.id;
@@ -606,17 +587,14 @@ app.get('/api/get_count_exp/:id', (req, res) => {
   });
 });
 
-// try to update or inser the levl or updat it
 app.post('/api/update_level/:id', (req, res) => {
   const { exp, id_user, background } = req.body;
   const id = req.params.id;
 
-  // Use UPDATE statement instead of INSERT
   const sql = 'UPDATE level SET level = ?, background = ? WHERE id_user = ?';
 
   const values = [exp, background + 0, id_user];
 
-    // console.log("background test : ",background);
   db.query(sql, values, (err, result) => {
     if (err) {
       console.error('Error updating data:', err);
@@ -628,10 +606,8 @@ app.post('/api/update_level/:id', (req, res) => {
   });
 });
 
-// validtion specific
 app.get('/api/validation_specific/:id/:idCollection', (req, res) => {
   const id = req.params.id;
-  const idCollection = req.params.idCollection; // Corrected variable name
   const selectSql = `SELECT validation FROM specifics WHERE id_nameSpecifics = ? and id_user = ?`;
 
   db.query(selectSql, [idCollection, id], (selectErr, selectResult) => {
@@ -720,11 +696,9 @@ app.post("/api/registerIntra", (req, res) => {
     }
   });
 });
-// how users
 
 
 
-// Endpoint to get the total count of users
 app.get('/api/get_user_count', (req, res) => {
   const sql = "SELECT COUNT(*) as count FROM user";
 
@@ -739,10 +713,9 @@ app.get('/api/get_user_count', (req, res) => {
   });
 });
 
-// Endpoint to get a specific set of users
 app.get('/api/get_user_levle/:next', (req, res) => {
-  const now = parseInt(req.params.now); // Convert to integer
-  const next = parseInt(req.params.next); // Convert to integer
+  const now = parseInt(req.params.now); 
+  const next = parseInt(req.params.next); 
   const selectSql = `SELECT user.*, level.level, (SELECT COUNT(DISTINCT id) FROM registrement_events WHERE id_user = user.id AND valid = 1)
   AS valid_event_count, (SELECT COUNT(DISTINCT id) FROM registrement_competition WHERE id_user = user.id AND valid = 1)
   AS valid_competition_count, COUNT(DISTINCT CASE WHEN validation_projects.valid_project = 1 THEN validation_projects.id ELSE NULL END)

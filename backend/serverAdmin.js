@@ -1,4 +1,3 @@
-// Server code
 const express = require("express");
 const mysql = require('mysql');
 const cors = require('cors');
@@ -16,7 +15,7 @@ const db = mysql.createConnection({
   database: "waiting_coder"
 });
   
-app.use(express.json()); // Add this line to parse JSON in request body
+app.use(express.json());
 
 
 
@@ -24,13 +23,12 @@ app.post('/signup', (req, res) => {
     const selectSql = "SELECT * FROM `admin` WHERE `first_name` = ? AND `password` = ?";
     const selectName = [req.body.username];
     const selectPassword = [req.body.password];
-    // console.log(selectName, "   ", selectPassword);
     db.query(selectSql, [selectName, selectPassword], (selectErr, selectResult) => {
       if (selectErr) {
         console.log(selectErr);
         return res.json("Error");
       }
-      // console.log(selectResult);
+
       if (selectResult.length > 0) {
         const adminId = selectResult[0].id;
         return res.json({ status: 1, adminId });
@@ -91,7 +89,6 @@ app.post('/signup', (req, res) => {
   
     const results = {};
   
-    // Helper function to execute a query and handle the result
     const executeQuery = (queryObject, callback) => {
       db.query(queryObject.query, (error, result) => {
         if (error) {
@@ -103,8 +100,7 @@ app.post('/signup', (req, res) => {
         }
       });
     };
-  
-    // Execute queries in series
+
     const executeNextQuery = index => {
       if (index < queriesWithDescriptions.length) {
         executeQuery(queriesWithDescriptions[index], error => {
@@ -305,12 +301,10 @@ app.get('/api/getMonthsUesrs/:chooseYear', (req, res) => {
 
 
   app.post('/api/validateWeekAll', (req, res) => {
-    const requestData = req.body; // Access the entire object with both values
+    const requestData = req.body;
   
-    // Access the individual values
     const checkedStudentIds = requestData.checkedStudentIds;
     const selectIdGroup = requestData.selectIdGroup;
-    // Loop through the student IDs and update the validationWeek column
     checkedStudentIds.forEach((studentId) => {
       const updateQuery = 'UPDATE specifics SET validation_week = 1 WHERE id_user = ? AND id_group = ?';
       db.query(updateQuery, [studentId, selectIdGroup], (error, results) => {
@@ -326,7 +320,7 @@ app.get('/api/getMonthsUesrs/:chooseYear', (req, res) => {
 
 
   app.post('/api/updateValidationWeek', (req, res) => {
-    const { id_user } = req.body; // Assuming you're sending the user ID in the request body
+    const { id_user } = req.body; 
     const updateQuery = 'UPDATE specifics SET validation_week = 1 WHERE id_user = ?';
     db.query(updateQuery, [id_user], (error, results) => {
       if (error) {
@@ -349,8 +343,7 @@ app.get('/api/getMonthsUesrs/:chooseYear', (req, res) => {
       }
     });
   });
-  
-  // get all teachers
+
   app.get('/api/getAllTeachers', (req, res) => {
     const query = `SELECT * FROM teachers WHERE 1`;
     db.query(query, (error, results) => {
@@ -363,14 +356,13 @@ app.get('/api/getMonthsUesrs/:chooseYear', (req, res) => {
     });
   });
 
-  // create group 
+
 
   app.post('/api/createGroup', (req, res) => {
     const requestData = req.body;
     const idSpecific = requestData.idSpecific;
     const inputValueName = requestData.inputValueName;
-  
-    // Step 1: Check if the group name already exists
+
     const checkGroupNameQuery = `SELECT COUNT(*) as count FROM waiting_coder.\`groups\` WHERE name_group = ?`;
     db.query(checkGroupNameQuery, [inputValueName], (error, results) => {
       if (error) {
@@ -380,13 +372,9 @@ app.get('/api/getMonthsUesrs/:chooseYear', (req, res) => {
       }
   
       const groupCount = results[0].count;
-  
-      // If groupCount is greater than 0, it means the group name already exists.
+
       if (groupCount == 0) {
-       
-     
-  
-      // Step 2: Insert into the 'groups' table
+
       const insertGroupQuery = 'INSERT INTO groups (id_specific, name_group, group_finished, date_created) VALUES (?, ?, ?, ?)';
       const currentDate = new Date();
       db.query(insertGroupQuery, [idSpecific, inputValueName, 0, currentDate], (error, results) => {
@@ -396,7 +384,6 @@ app.get('/api/getMonthsUesrs/:chooseYear', (req, res) => {
           return;
         }
   
-        // Step 3: Fetch the last inserted ID
         db.query('SELECT LAST_INSERT_ID() as lastId', (error, results) => {
           if (error) {
             console.error('Error fetching last inserted ID:', error);
@@ -406,7 +393,6 @@ app.get('/api/getMonthsUesrs/:chooseYear', (req, res) => {
   
           const lastInsertedId = results[0].lastId;
   
-          // Step 4: Insert into the 'teacher_groups' table
           const insertTeachersGroupQuery = 'INSERT INTO teacher_groups (id_group, id_teacher) VALUES (?, ?)';
           db.query(insertTeachersGroupQuery, [lastInsertedId, requestData.idTeacher], (error, results) => {
             if (error) {
@@ -428,7 +414,6 @@ app.get('/api/getMonthsUesrs/:chooseYear', (req, res) => {
     
   });
   
-  // finsih group
 
   app.put('/api/updateGroups/:idGroup', (req, res) => {
     const idGroup = req.params.idGroup;
@@ -443,11 +428,9 @@ app.get('/api/getMonthsUesrs/:chooseYear', (req, res) => {
     });
   });
 
-  // get name specifics
 
   app.get('/api/getProjectSpecific/:idSpefific', (req, res) => {
     const idSpefific = req.params.idSpefific;
-    // const idSpefific = 3;
     const selectSql = "SELECT * FROM `projects` WHERE id_collection = ?";
     db.query(selectSql,[idSpefific], (error, results) => {
       if (error) {
@@ -459,11 +442,9 @@ app.get('/api/getMonthsUesrs/:chooseYear', (req, res) => {
     });
   });
 
-  // get all student of each group
   app.get('/api/getStudentsGroup/:idGroup/:idProject', (req, res) => {
     const idGroup = req.params.idGroup;
     const idProject = req.params.idProject;
-    // const idSpefific = 3;
     const selectSql = `SELECT 
     user.*, user.id as idOfUser, 
     specifics.*, 
@@ -491,7 +472,6 @@ app.get('/api/getMonthsUesrs/:chooseYear', (req, res) => {
     });
   });
   
-  // get all student on group only 
 
   app.get('/api/getStudentsGroupOnly/:idGroup', (req, res) => {
     const idGroup = req.params.idGroup;
@@ -515,12 +495,10 @@ app.get('/api/getMonthsUesrs/:chooseYear', (req, res) => {
     });
   });
 
-  // validate each project of student
   app.put('/api/validEachProject/:idUser/:idProject', (req, res) => {
     const idUser = req.params.idUser;
     const idProject = req.params.idProject;
     const valid = 1;
-    // Check if the user exists in the validation_projects table
     const selectSql = "SELECT id_user FROM validation_projects WHERE id_user = ? AND id_project = ?";
     db.query(selectSql, [idUser, idProject], (selectErr, selectResult) => {
       if (selectErr) {
@@ -529,7 +507,6 @@ app.get('/api/getMonthsUesrs/:chooseYear', (req, res) => {
       }
   
       if (selectResult.length > 0) {
-        // User exists, perform an update
         const updateSql = "UPDATE validation_projects SET valid_project = ?, date_validation = ? WHERE id_user = ? AND id_project = ?";
         const currentDate = new Date();
         db.query(updateSql, [valid, currentDate, idUser, idProject], (updateErr, updateResult) => {
@@ -541,7 +518,6 @@ app.get('/api/getMonthsUesrs/:chooseYear', (req, res) => {
           return res.json(updateResult);
         });
       } else {
-        // User doesn't exist, perform an insert
         const insertSql = "INSERT INTO validation_projects (id_user, id_project, id_teacher_validation, valid_project, date_validation) VALUES (?, ?, ?, ?, ?)";
         const currentDate = new Date();
         db.query(insertSql, [idUser, idProject, 2, valid, currentDate], (insertErr, insertResult) => {
@@ -560,13 +536,11 @@ app.get('/api/getMonthsUesrs/:chooseYear', (req, res) => {
     const idProject = req.params.idProject;
     const idGroup = req.params.idGroup;
     const selectedIDs  = req.body
-   // Step 2: Loop through selected student IDs and insert or update validation status
   const currentDate = new Date();
   const updateSql = "UPDATE validation_projects SET valid_project = 1, date_validation = ? WHERE id_user = ? AND id_project = ?";
   const insertSql = "INSERT INTO validation_projects (id_user, id_project, id_teacher_validation, valid_project, date_validation) VALUES (?, ?, 2, 1, ?)";
   
   selectedIDs.forEach((userID) => {
-  //   // Check if user exists in validation_projects table
     const checkUserSql = "SELECT COUNT(*) AS count FROM validation_projects WHERE id_user = ? AND id_project = ?";
     db.query(checkUserSql, [userID, idProject], (checkErr, checkResult) => {
       if (checkErr) {
@@ -576,7 +550,6 @@ app.get('/api/getMonthsUesrs/:chooseYear', (req, res) => {
       
       const userExists = checkResult[0].count > 0;
       
-      // If the user doesn't exist, insert them; otherwise, update validation status
       if (!userExists) {
         db.query(insertSql, [userID, idProject, currentDate], (insertErr, insertResult) => {
           if (insertErr) {
@@ -598,11 +571,9 @@ app.get('/api/getMonthsUesrs/:chooseYear', (req, res) => {
   return res.json("Success");
 });
 
-// get all student of each group
 app.get('/api/getStudentsGroup2/:idGroup/:idProject', (req, res) => {
   const idGroup = req.params.idGroup;
   const idProject = req.params.idProject;
-  // const idSpefific = 3;
   const selectSql = `SELECT 
   user.*, user.id as idOfUser, 
   specifics.*, 
@@ -650,8 +621,6 @@ app.get('/api/get_pushProject/:idProject/:idUser', (req, res) => {
 
 app.post("/api/send_messageFromTeacher", (req, res) => {
   const { id_user, id_teacher, message, id_project, time_send } = req.body;
-  // Insert data into the database using a database library or ORM
-  // Example with MySQL
   const sql = "INSERT INTO push_porojects (id_user, id_teacher, id_project, message_teacher, time_send_teacher) VALUES (?, ?, ?, ?, ?)";
   db.query(sql, [id_user, id_teacher, id_project, message, time_send], (error, result) => {
     if (error) {
@@ -662,13 +631,11 @@ app.post("/api/send_messageFromTeacher", (req, res) => {
   });
 });
 
-// validate all specific
 
 app.put('/api/validAllStudentSepcific/:idGroup/:idSpefific', (req, res) => {
   const idSpefific = req.params.idSpefific;
   const idGroup = req.params.idGroup;
   const selectedIDs  = req.body;
- // Step 2: Loop through selected student IDs and insert or update validation status
 const currentDate = new Date();
 const updateSql = "UPDATE specifics SET validation = 1, date_validation = ? WHERE id_user = ? AND id_nameSpecifics = ?";
 
@@ -685,13 +652,11 @@ return res.json("Success");
 });
 
 
-// valid each student specific
 
 app.put('/api/validEachStudentSpecific/:idUser/:idSpefific', (req, res) => {
   const idUser = req.params.idUser;
   const idSpecific = req.params.idSpefific;
   
-  // User exists, perform an update
   const updateSql = "UPDATE specifics SET validation = 1, date_validation = ? WHERE id_user = ? AND id_nameSpecifics = ?";
   const currentDate = new Date();
   
@@ -706,21 +671,19 @@ app.put('/api/validEachStudentSpecific/:idUser/:idSpefific', (req, res) => {
 });
 
 
-// Set up multer for file upload
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     const destinationPath = path.join(__dirname, "../../waiting_coder/src/imgs");
-    // console.log(destinationPath)
-    cb(null, destinationPath); // Specify the directory where uploaded files will be stored
+    cb(null, destinationPath);
   },
   filename: function (req, file, cb) {
-    cb(null, file.originalname); // Use the original filename
+    cb(null, file.originalname);
   },
 });
 
 const upload = multer({ storage: storage });
 
-// Handle the file upload
+
 app.post("/api/upload", upload.single("image"), (req, res) => {
   let { firstName, lastName, email, number, idSpecific, idGroup, payment } = req.body;
   const uploadedImage = req.file;
@@ -784,10 +747,6 @@ app.post("/api/upload", upload.single("image"), (req, res) => {
 });
 
 
-
-
-// get groups with condition specific
-
 app.get('/api/getGroupsConditonSpecific/:idSpecific', (req, res) => {
   const idSpecific = req.params.idSpecific;
   const query = `SELECT groups.id, groups.name_group 
@@ -818,7 +777,6 @@ app.put('/api/updatePayment/:idUser/:newPayment', (req, res) => {
     return;
   }
 
-  // Step 1: Select the current payment
   const selectSql = `SELECT payment FROM payment WHERE id_user = ?`;
 
   db.query(selectSql, [idUser], (selectError, selectResult) => {
@@ -835,10 +793,8 @@ app.put('/api/updatePayment/:idUser/:newPayment', (req, res) => {
 
     const currentPayment = selectResult[0].payment;
 
-    // Step 2: Calculate the updated payment
     const updatedPayment = currentPayment + newPaymentValue;
 
-    // Step 3: Update payment and date_payment in the payment table
     const updateSql = `UPDATE payment
                        SET payment = ?, date_payment = ?
                        WHERE id_user = ?`;
@@ -850,7 +806,6 @@ app.put('/api/updatePayment/:idUser/:newPayment', (req, res) => {
         return;
       }
 
-      // If you need to handle the result, you can do so here
 
       return res.json({ message: 'Success' });
     });
