@@ -1,10 +1,8 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
 import style from '../sass/dashboard.module.scss'
 import NavbarAdmin from '../components/NavbarAdmin'
 import Footer from "../../components/Footer";
 import SearchAdmin from '../components/SearchAdmin';
-import MainGroupsAndUsers from '../components/MainGroupsAndUsers'
 import MainSendEmails from "../components/MainSendEmails";
 
 function Emails() {

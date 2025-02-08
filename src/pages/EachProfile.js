@@ -1,10 +1,8 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useLocation, useNavigate , Link} from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Searsh from "../components/Searsh";
 import Footer from "../components/Footer";
 import style from "../sass/eachprofile.module.scss";
-import { UserContext } from "../utils/UserContext";
 import EachLevel from "../components/EachLevel";
 import MainEachProfile from '../components/MainEachProfile';
 

@@ -32,6 +32,7 @@
         padding-right: 40px;
         position: relative;
         margin-top: 100px;
+        border-radius: 10px;
         @media (max-width: 768px)
         {
             width: 80%;
@@ -137,7 +138,7 @@
             {
                 display: block;
                 width: 200px;
-                height: 37px;
+                height: 45px;
                 color: white;
                 background-color: $pColor3;
                 border: 1px solid $pColor1;
@@ -146,6 +147,7 @@
                 margin-bottom: 30px;
                 cursor: pointer;
                 font-family: $myfont;
+                border-radius: 10px;
                 transition:0.3s all;
                 &:hover
                 {

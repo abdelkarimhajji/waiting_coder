@@ -1,8 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useLocation, useNavigate , Link} from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import style from "../sass/eachlevel.module.scss"
-import { UserContext } from "../utils/UserContext";
-import karim from '../imgs/karim.png'
 import {FcApproval} from 'react-icons/fc'
 import {FaTimesCircle} from 'react-icons/fa'
 
@@ -13,7 +10,6 @@ function EachLevel({setIdCollectionValue, setId}) {
     // setId(localStorage.getItem("idEachProfile"));
     const [idCollection, setIdCollection] = useState(0);
     const [validation, setValidation] = useState(0);
-    const userId = localStorage.getItem("userId");
     
     const handleSelectChange = (event) => {
       setSelectedValue(event.target.value);
@@ -23,7 +19,7 @@ function EachLevel({setIdCollectionValue, setId}) {
       setIdCollection(selectedOption.id)
     };
     console.log()
-    const location = useLocation();
+    
     useEffect(() => {
       fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/get_each_user_levle/${localStorage.getItem('idEachProfile')}`)
         .then((response) => {
@@ -91,11 +87,11 @@ function EachLevel({setIdCollectionValue, setId}) {
     <div className={style.container}>
   {selectedValueUser.map((item, index) => (
     <div key={index} className={style.containerTransp}>
-      <div className={style.containerImg}>
+      <div className={style.containerImg} >
         {item.phone === "null" ? (
-          <img src={item.image} alt={item.firstName}/>
+          <img src={item.image} alt={item.firstName} style={{objectFit: 'cover'}}/>
         ) : (
-        <img src={require(`../imgs/${item.image}`)} alt={item.firstName}/>
+        <img src={require(`../imgs/${item.image}`)} alt={item.firstName} style={{objectFit: 'cover'}}/>
         )}
       </div>
       <div className={style.containerInfo}>

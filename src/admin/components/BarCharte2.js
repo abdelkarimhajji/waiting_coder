@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useLocation, useNavigate, Navigate } from "react-router-dom";
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import React, { useState, useEffect } from "react";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 function BarCharte2({choosetYear}) {
 
@@ -82,7 +81,6 @@ function BarCharte2({choosetYear}) {
       // amt: 2100,
     },
   ];
-  console.log("just test ok",getMonthsUesrs.find(item => item.month === 8)?.user_count  || 0,)
   return (
     <ResponsiveContainer width="100%" height="70%">
   <BarChart

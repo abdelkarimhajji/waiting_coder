@@ -1,11 +1,9 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useLocation, useNavigate , Link} from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import {Link} from "react-router-dom";
 import style from "../sass/maindetailsproject.module.scss";
-import { UserContext } from "../utils/UserContext";
 import {PiProjectorScreenChartBold} from 'react-icons/pi';
 import {AiFillCaretDown, AiOutlinePaperClip} from 'react-icons/ai'
-import bio from '../imgs/biographie.png';
-// import AiOutlinePaperClip from 'react-icons/ai';
+;
 
 function DetailsProject() {
   

@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useLocation, useNavigate, Navigate } from "react-router-dom";
-import { PieChart, Pie, Legend, Tooltip, ResponsiveContainer } from 'recharts';
+import React, { useState, useEffect } from "react";
+import { PieChart, Pie, Tooltip, ResponsiveContainer } from 'recharts';
 
 function PieCharte2() {
 

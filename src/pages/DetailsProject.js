@@ -1,10 +1,8 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useLocation, useNavigate , Link} from "react-router-dom";
+import React, { useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Searsh from "../components/Searsh";
 import Footer from "../components/Footer";
 import style from "../sass/detailsproject.module.scss";
-import { UserContext } from "../utils/UserContext";
 import MainDetailsProject from '../components/MainDetailsProject'
 
 function DetailsProject() {

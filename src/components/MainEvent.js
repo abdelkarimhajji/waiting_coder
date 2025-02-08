@@ -1,8 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import style from "../sass/mainevent.module.scss";
-import { UserContext } from "../utils/UserContext";
-import MainProfile from "./MainProfile";
 import {MdWatchLater} from 'react-icons/md';
 import {BsFillCalendar2EventFill} from 'react-icons/bs';
 import { AiFillCaretDown } from 'react-icons/ai';

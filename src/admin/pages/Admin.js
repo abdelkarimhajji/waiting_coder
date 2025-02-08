@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useLocation, useNavigate, Navigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import style from '../sass/admin.module.scss';
 import {FaUserShield} from 'react-icons/fa';
 import {SiCodersrank} from 'react-icons/si';
@@ -9,8 +9,7 @@ import Typewriter from 'typewriter-effect';
 function Admin() {
 const   [username, setUsername] = useState('');
 const   [password, setPassword] = useState('');
-const   [response, setResponse] = useState([])
-const   [valid, setValid] = useState(0)
+const   [valid, setValid] = useState(0);
 
 const {isLoggedIn, setIsLoggedIn} = useContext(UserContext);
 const navigate = useNavigate();
@@ -19,7 +18,7 @@ useEffect(() => {
   console.log("isLoggedIn", isLoggedIn)
   if(isLoggedIn === 1)
     navigate("/Admin/Dashboard");
-}, [isLoggedIn]);
+}, [isLoggedIn, navigate]);
 
 const handleButtonClick = () => {
   // Set localStorage and state variables when the user logs in
@@ -45,7 +44,6 @@ const singIn = async() =>
         });
 
         const data = await response.json();
-        setResponse(data);
         if (data.status === 1) {
           handleButtonClick(); // Call the handleButtonClick function
         } else {

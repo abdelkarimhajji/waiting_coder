@@ -1,10 +1,11 @@
-import React, { useState, useEffect , useRef} from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useState, useEffect , useRef, useCallback} from "react";
 import style from '../sass/mainadduser.module.scss'
 import { MdGroupAdd } from 'react-icons/md'
 import { AiOutlineUserAdd } from 'react-icons/ai'
 import {RiGroup2Fill} from 'react-icons/ri'
 import {BiSolidDollarCircle} from 'react-icons/bi'
+
+
 function MainAddUser() {
 
     useEffect(() => {
@@ -32,7 +33,6 @@ function MainAddUser() {
     const [valueCurrentlyGroup, setValueCurrentlyGroup] = useState('')
     const [idGroup2, setIdGroup2] = useState(null)
     const [allStudentGroup, setAllStudentGroup] = useState([]);
-    const [newPrice, setNewPrice] = useState('');
     let splitImage1 = null;
     let lastArge1 = null;
     let splitImage2 = null;
@@ -40,8 +40,6 @@ function MainAddUser() {
     let image = null;
 const handleImageChange = (event) => {
     image = event.target.files ? event.target.files[0] : null;
-    
-    console.log("hiiiiiii")
     if (image) {
         splitImage1 = image.name.split('.');
         lastArge1 = splitImage1[splitImage1.length - 1];
@@ -52,7 +50,6 @@ const handleImageChange = (event) => {
         && lastArge1 !== 'JPEG' && lastArge1 !== 'JPG' && lastArge1 !== 'webp'))) {
         setErrorSize(true);
         setSelectedImage(null);
-        console.log("i am here ", image.size);
     } else {
         setSelectedImage(image);
         setErrorSize(false);
@@ -147,7 +144,6 @@ const handleImageChange = (event) => {
     const selectedValue = event.target.value;
     setIdSpecific(selectedValue)
     setValueSpecific(selectedValue)
-    console.log("seleced value : " ,selectedValue)
   }
 
   useEffect(() => {
@@ -173,7 +169,6 @@ const handleImageChange = (event) => {
         return response.json();
       })
       .then((data) => {
-        // console.log("test o slm",data)
         setGetAllGroupOfSpecific(data);
       })
       .catch((error) => console.error(error));
@@ -185,11 +180,7 @@ const handleImageChange = (event) => {
         setIdGroup(selectedValue);
         setValueGroup(selectedValue);
   }
-  // useEffect(() => {
-  //  console.log(" selectedImage  : ", selectedImage)
-  // }, [selectedImage]);
 
-  // select old gorup 
   useEffect(() => {
     fetch(`http://${process.env.REACT_APP_ADMIN_HOST}:${process.env.REACT_APP_ADMIN_PORT}/api/getOldGroups`)
       .then((response) => {
@@ -226,7 +217,6 @@ const handleImageChange = (event) => {
     setValueOldGroup(selectedValue)
     setValueCurrentlyGroup('')
     setIdGroup2(selectedValue)
-    console.log("selected value ",selectedValue)
   }
   const handleChangeCurrentlyGroup = (event) =>
   {
@@ -234,34 +224,32 @@ const handleImageChange = (event) => {
     setValueCurrentlyGroup(selectedValue)
     setValueOldGroup('')
     setIdGroup2(selectedValue)
-    console.log("selected value ", selectedValue)
   }
-  function getStudents() {
+  const getStudents = useCallback(() => {
     fetch(`http://${process.env.REACT_APP_ADMIN_HOST}:${process.env.REACT_APP_ADMIN_PORT}/api/getStudentsGroupOnly/${idGroup2}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
         return response.json();
-        // return response.text(); // Parsing as plain text
       })
       .then((data) => {
         setAllStudentGroup(data);
       })
       .catch((error) => console.error(error));
-  }
-  const [prices, setPrices] = useState(Array(allStudentGroup.length).fill(''));
+  }, [idGroup2]); 
+  const [prices, setPrices] = useState([]);
+  
   useEffect(() => {
-    // console.log("idGroup 2 ",idGroup2)
     getStudents();
-  }, [idGroup2]);
+  }, [idGroup2, getStudents]);
   const [currentStyle, setCurrentStyle] = useState(0);
   const [scrollPosition, setScrollPosition] = useState(0);
   const [idStudent, setISdtudent] = useState(0);
   const [indexStudent, setIndexSdtudent] = useState(0);
   const updatePrice = (valid) => {
     
-    if (parseInt(prices[indexStudent]) > 0 && parseInt(prices[indexStudent]) < 1001 && valid == "yes") {
+    if (parseInt(prices[indexStudent]) > 0 && parseInt(prices[indexStudent]) < 1001 && valid === "yes") {
       fetch(`http://${process.env.REACT_APP_ADMIN_HOST}:${process.env.REACT_APP_ADMIN_PORT}/api/updatePayment/${idStudent}/${prices[indexStudent]}`, {
         method: 'PUT',
         headers: {

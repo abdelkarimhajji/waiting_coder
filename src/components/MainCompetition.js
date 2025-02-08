@@ -1,13 +1,8 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { UserContext } from "../utils/UserContext";
-import FormSignIn from "./FormSignIn";
-// import { UserContext } from '../utils/UserContext';
-import {PiProjectorScreenChartBold} from 'react-icons/pi';
+import React, { useState, useEffect,useCallback } from "react";
 import {AiFillCaretDown} from 'react-icons/ai';
 import style from "../sass/maincompetition.module.scss"
 import {FaTrophy} from 'react-icons/fa'
-import {GoFileBinary, GoFileZip} from 'react-icons/go'
+import { GoFileZip} from 'react-icons/go'
 
 function MainCompetition() {
     const userId = localStorage.getItem("userId");
@@ -23,7 +18,8 @@ function MainCompetition() {
     const smoothScrollToTop = () => {
         document.body.style.overflow = 'hidden'; // Hide overflow
       };
-      function get_competitions() {
+      
+      const get_competitions = useCallback(() => {
         fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/api/get_competitions/${userId}/${selectedOptionKey}`)
           .then((response) => {
             if (!response.ok) {
@@ -33,14 +29,13 @@ function MainCompetition() {
           })
           .then((data) => {
             setSelectedValuesCompetitions(data);
-            console.log("seee data   ",data);
           })
           .catch((error) => console.error(error));
-      }
-    useEffect(() => {
-        
-      get_competitions();
-      }, [userId, selectedOptionKey, refresh,selectedValuesCompetitions]);
+      }, [userId, selectedOptionKey]); // Only depend on userId and selectedOptionKey
+      
+      useEffect(() => {
+        get_competitions(); // Now it will be stable
+      }, [get_competitions, refresh]); 
 
       const register = (competitionId) => {
         const data = { 
@@ -155,32 +150,35 @@ function MainCompetition() {
             <AiFillCaretDown className={style.AiFillCaretDown} />
         </div>
         <div className={style.containCompetition}>
-          {selectedValuesCompetitions.length != 0 ? (
+          {selectedValuesCompetitions.length !== 0 ? (
             selectedValuesCompetitions.map((item, index) => (
               <div key={index} className={style.card}>
-              <div className={style.containerIcon}>
-                  <GoFileZip className={style.icon}/>
-              </div>
-              <div className={style.containerTitle}>
-                  <h1>{item.title_competition}</h1>
-              </div>
-              <div className={style.description}>
-                  <p>{item.description_competition}</p>
-              </div>
-              <div className={style.month}>
-                  <h2>{item.day_competition} : {item.month_competition}</h2>
-              </div>
-              <div className={style.time}>
-                  <p>{item.time_competition}</p>
-              </div>
-              <div className={style.containerButton}>
-              {item.is_registered === 0 ? (
-              
-                  <button onClick={() => confirmation(item.id)}>Register</button>
-                  ) : (
-                  <button onClick={() => deletConfirmation(item.id)}>UnRegister</button>
-                  )}
-              </div>
+                <div className={style.containerTop}>
+                  <div className={style.containerIcon}>
+                      <GoFileZip className={style.icon}/>
+                  </div>
+                  <div className={style.containerTitle}>
+                      <h1>{item.title_competition}</h1>
+                  </div>
+                </div>
+                
+                <div className={style.description}>
+                    <p>{item.description_competition}</p>
+                </div>
+                <div className={style.month}>
+                    <h2>{item.day_competition} : {item.month_competition}</h2>
+                </div>
+                <div className={style.time}>
+                    <p>{item.time_competition}</p>
+                </div>
+                <div className={style.containerButton}>
+                {item.is_registered === 0 ? (
+                
+                    <button onClick={() => confirmation(item.id)}>Register</button>
+                    ) : (
+                    <button onClick={() => deletConfirmation(item.id)}>UnRegister</button>
+                    )}
+                </div>
           </div>
 
             ))):(

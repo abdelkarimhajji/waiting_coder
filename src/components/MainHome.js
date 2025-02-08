@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useId, useRef} from "react";
-import { useLocation, Navigate , Link } from "react-router-dom";
+import React, { useState, useEffect} from "react";
+import { Link } from "react-router-dom";
 import style from "../sass/mainhome.module.scss"
-import { AiFillCaretDown, AiOutlineProject} from 'react-icons/ai';
-import { FaCode, FaUpload, FaStar,FaTrophy } from 'react-icons/fa'
+import { AiFillCaretDown} from 'react-icons/ai';
+import { FaCode, FaUpload,FaTrophy } from 'react-icons/fa'
 import {TiHtml5} from 'react-icons/ti'
 import { TbHandClick , TbToolsOff, TbBrandJavascript, TbBrandVscode} from 'react-icons/tb'
 import { DiCss3 } from 'react-icons/di'
@@ -14,14 +14,14 @@ import {GiStarShuriken} from 'react-icons/gi'
 import {BsFiletypePhp} from 'react-icons/bs'
 import {SiXampp} from 'react-icons/si'
 import {CgUnavailable} from 'react-icons/cg';
-import { PieChart, Pie, Legend, Tooltip, ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis , Radar } from 'recharts'; 
+import { Legend, ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis , Radar } from 'recharts'; 
 import { HashLink} from 'react-router-hash-link';
+import { TbSql } from "react-icons/tb";
 
 function MainHome({selectedValues, selectedValuesTools, selectedValuesProject}) {
-    const [selectedValuesEvents, setSelectedValuesEvents] = useState([])
-    const [selectedValuesCompetitions, setSelectedValuesCompetitions] = useState([])
-    const [test, setTest] = useState([])
-    const [skills, setSkills] = useState([])
+    const [selectedValuesEvents, setSelectedValuesEvents] = useState([]);
+    const [selectedValuesCompetitions, setSelectedValuesCompetitions] = useState([]);
+    const [skills, setSkills] = useState([]);
     const userId = localStorage.getItem("userId");
     const selectedOptionKey = localStorage.getItem("selectedOptionKey");
     
@@ -39,12 +39,11 @@ function MainHome({selectedValues, selectedValuesTools, selectedValuesProject}) 
         TbBrandVscode:TbBrandVscode,
         FiFigma:FiFigma,
         SiXampp:SiXampp,
+        TbSql:TbSql,
       };
       // 42
       
       const Default = TiHtml5;
-      // console.log("i juset test ok : ", selectedOptionKey)
-      console.log("i juset test ok : ", userId)
       useEffect(() => {
         fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/api/get_events/${userId}/${selectedOptionKey}`)
           .then((response) => {
@@ -85,7 +84,6 @@ function MainHome({selectedValues, selectedValuesTools, selectedValuesProject}) 
           })
           .then((data) => {
             setSkills(data);
-            console.log("tish ", data);
           })
           .catch((error) => console.error(error));
       }, [userId]);
@@ -270,12 +268,11 @@ function MainHome({selectedValues, selectedValuesTools, selectedValuesProject}) 
                             <AiFillCaretDown className={style.iconTitle}/>
                         </div>
                         <div className={style.UnderConatEvent}>
-                        <div className={style.UnderConatEvent}>
-                            {selectedValuesCompetitions.length != 0  ? (
+                            {selectedValuesCompetitions.length !== 0  ? (
                               selectedValuesCompetitions.map((item, index) => (
                                 <Link key={index} to={`/Competition#${item.title_competition}`} className={style.link}>
                                   <div key={index} className={style.conatEventItm}>
-                                    <GiStarShuriken className={style.TiHtml5} style={{fontSize: '30px', marginTop: '10px'}}/>
+                                    <GiStarShuriken className={style.TiHtml5} />
                                     <p className="par"> - {item.title_competition}</p>
                                     <TbHandClick className={style.TbHandClick} />
                                   </div>
@@ -288,36 +285,38 @@ function MainHome({selectedValues, selectedValuesTools, selectedValuesProject}) 
                               </div>
                             )}
                           </div>
-                        </div>
                 </div>
                     {/* finish  contInsideEvents*/}
             </div>
             {/* another item */}
             <div className={style.itemsEvents}>
-                      <div className={style.contInsidEvents}>
+                      <div className={style.contInsidEvents} >
                               <div className={style.titleEvents}>
                                   <FaTrophy className={style.iconTitle}/>
                                   <p className="par">Skills</p>
                                   <AiFillCaretDown className={style.iconTitle}/>
                               </div>
-                              <div className={style.skills}>
-                                <ResponsiveContainer width="100%" height={250}>
-                                <RadarChart outerRadius={chartOuterRadius}  data={data} >
-                                <PolarGrid />
-                                <PolarAngleAxis dataKey="subject" tick={{ fontSize: fontSize }}/>
-                                <PolarRadiusAxis angle={18} domain={[0, 15]} tick={{ fontSize: 12 }}/>
-                                <Radar  dataKey="A" stroke="#038688" fill="#038688" fillOpacity={0.6} />
-                                <Legend />
-                                </RadarChart>
-                                </ResponsiveContainer>
+                              <div style={{overflowY: 'scroll', height:'230px', scrollbarWidth:'none'}}>
+                                  <div className={style.skills}>
+                                    <ResponsiveContainer width="100%" height={250}>
+                                    <RadarChart outerRadius={chartOuterRadius}  data={data} >
+                                    <PolarGrid />
+                                    <PolarAngleAxis dataKey="subject" tick={{ fontSize: fontSize }}/>
+                                    <PolarRadiusAxis angle={18} domain={[0, 15]} tick={{ fontSize: 12 }}/>
+                                    <Radar  dataKey="A" stroke="#038688" fill="#038688" fillOpacity={0.6} />
+                                    <Legend />
+                                    </RadarChart>
+                                    </ResponsiveContainer>
+                                  </div>
+                                  <div className={style.readCharts}>
+                                    <p>Devlopement Web Front end : D-W-F</p>
+                                    <p>Devlopement Web Back end : D-W-B</p>
+                                    <p>Mobile Front-end : M-F</p>
+                                    <p>Mobile Back-end : M-B</p>
+                                    <p>Robitique : R</p>
+                                  </div>
                               </div>
-                              <div className={style.readCharts}>
-                                <p>Devlopement Web Front end : D-W-F</p>
-                                <p>Devlopement Web Back end : D-W-B</p>
-                                <p>Mobile Front-end : M-F</p>
-                                <p>Mobile Back-end : M-B</p>
-                                <p>Robitique : R</p>
-                              </div>
+                              
                       </div>
                           {/* finish  contInsideEvents*/}
                   </div>

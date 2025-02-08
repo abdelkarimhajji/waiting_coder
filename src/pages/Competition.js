@@ -1,11 +1,9 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Searsh from "../components/Searsh";
 import Footer from "../components/Footer";
 import style from "../sass/profile.module.scss";
 import MainCompetition from "../components/MainCompetition";
-import { UserContext } from "../utils/UserContext";
 
 
 function Competition() {

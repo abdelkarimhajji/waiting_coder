@@ -1,29 +1,19 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import style from '../sass/mainLanguage.module.scss';
-import { FaYoutube, FaCode } from 'react-icons/fa';
+import { FaCode } from 'react-icons/fa';
 import { TiHtml5 } from 'react-icons/ti';
 import { AiFillCaretDown } from 'react-icons/ai';
-import { BsArrowRight } from 'react-icons/bs';
-import { Link, useLocation } from 'react-router-dom';
-import { AiOutlineProject} from 'react-icons/ai';
-import { FaUpload, FaStar,FaTrophy } from 'react-icons/fa'
-import { TbHandClick , TbToolsOff, TbBrandJavascript, TbBrandVscode} from 'react-icons/tb'
+import {  TbBrandJavascript, TbBrandVscode} from 'react-icons/tb'
 import { DiCss3 } from 'react-icons/di'
 import {BiLogoGithub} from 'react-icons/bi'
 import { FiFigma} from 'react-icons/fi'
-import { PiProjectorScreenChartBold } from 'react-icons/pi'
-import {BsFillCalendar2EventFill } from 'react-icons/bs'
-import {GiStarShuriken} from 'react-icons/gi'
 import {BsFiletypePhp} from 'react-icons/bs'
 import {SiXampp} from 'react-icons/si'
 import {AiOutlineLink} from 'react-icons/ai'
-import { HashLink} from 'react-router-hash-link';
 
 function MainLanguage() {
-  const [valid, setValid] = useState(0);
   const [setSelectValuesLanguages, setSetSelectValuesLanguages] = useState([]);
   
-  const [scrollPosition, setScrollPosition] = useState(0);
   useEffect(() => {
     console.log("Current scroll position:", window.scrollY);
     const timer = setTimeout(() => {
@@ -34,17 +24,7 @@ function MainLanguage() {
     }, 100);  
     return () => clearTimeout(timer);
   }, []);
-  function displayWindow() {
-    if (valid === 0) {
-      document.body.style.transition = '1s all';
-      // document.body.style.overflow = 'hidden';
-      setValid(1);
-    } else {
-      //   document.body.style.overflow = 'auto';
-      document.body.style.transition = '1s all';
-      setValid(0);
-    }
-  }
+  
 
   const iconMapping = {
     TiHtml5: TiHtml5,
@@ -72,7 +52,6 @@ function MainLanguage() {
       .catch((error) => console.error(error));
   }, []);
 
-  const [test, setTest] = useState([])
   useEffect(() => {
     fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/api/getLanguagesAndLinks/${localStorage.getItem("selectedOptionKey")}`)
       .then((response) => {
@@ -82,18 +61,9 @@ function MainLanguage() {
         return response.json();
       })
       .then((data) => {
-        setTest(data);
-        console.log("tish ", data);
       })
       .catch((error) => console.error(error));
   }, []);
-
-
-  const [isFlipped, setIsFlipped] = useState(false);
-
-  const handleButtonClick = () => {
-    setIsFlipped(!isFlipped);
-  };
 
   return (
     <>
@@ -125,13 +95,13 @@ function MainLanguage() {
               </div>
               <div className={style.back}>
                 <div className={style.chooseLink}>
-                    <p>choose you link</p>
+                    <p>choose The link</p>
                 </div>
               <div className={style.allLinks}>
               {language.links.map((link) => (
                 <div key={link.linkId} className={style.link}>
                   <AiOutlineLink  className={style.AiOutlineLink}/>
-                  <p className={style.clickLink}><a href={link.link} target="_blank" rel="noopener noreferrer">{link.linkName}</a></p>
+                  <p ><a href={link.link} target="_blank" rel="noopener noreferrer">{link.linkName}</a></p>
                 </div>  
                 ))}
               </div>

@@ -1,35 +1,18 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useState, useEffect} from "react";
 import Navbar from "../components/Navbar";
 import Searsh from "../components/Searsh";
 import Level from "../components/Level";
 import MainHome from "../components/MainHome";
 import Footer from "../components/Footer";
 import style from "../sass/home.module.scss";
-import { UserContext } from "../utils/UserContext";
 
 function Home() {
-  const location = useLocation();
-  const { state } = location;
-  const number = state && state.number ? state.number : 0;
-  const { value, setValue, isLogin, setIsLogin } = useContext(UserContext);
-  const navigate = useNavigate();
-
-  const [updatedNumber, setUpdatedNumber] = useState(number);
-  const [valid, setValid] = useState(0);
   const [selectedValues, setSelectedValues] = useState([]);
   const [selectedValuesTools, setSelectedValuesTools] = useState([]);
   const [selectedValuesProject, setSelectedValuesProject] = useState([]); 
-  const [levelData, setLevelData] = useState([]);
-  const updateLevelData = (data) => {
-    setLevelData(data);
-  };
+  
   useEffect(() => {
     window.scrollTo(0, 0);
-    
-    // console.log("you cant read it ",selectedValuesProject[0].id)
-    // if(!localStorage.getItem("idProject"))
-    //     localStorage.setItem("idProject", selectedValuesProject[0].id);
   }, []);
   
   return (

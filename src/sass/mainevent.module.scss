@@ -165,6 +165,7 @@
         align-items: center;
         padding-left: 30px;
         padding-right: 30px;
+        border-radius: 10px;
         @media (max-width:700px)
         {
             width: 80%;
@@ -225,6 +226,7 @@
             border-top-left-radius: 20px;
             border-end-start-radius: 20px;
             flex-direction: column;
+            // background-color: red;
             @media (max-width: 1300px)
             {
                 width: 30%;
@@ -258,7 +260,7 @@
                 // margin-top: -50px;
                 color: $pColorR;
                 font-weight: bold;
-                border-end-start-radius: 20px;
+                border-end-start-radius: 17px;
                 width: 100%;
                 text-align: center;
                 background-color: #fef8bd;

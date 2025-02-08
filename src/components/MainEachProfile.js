@@ -1,12 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useLocation, useNavigate , Link} from "react-router-dom";
-import Navbar from "../components/Navbar";
-import Searsh from "../components/Searsh";
-import Footer from "../components/Footer";
+import React, { useState, useEffect } from "react";
+import {Link} from "react-router-dom";
 import style from "../sass/maineachprofile.module.scss";
-import { UserContext } from "../utils/UserContext";
-import EachLevel from "../components/EachLevel";
-import {TbToolsOff} from 'react-icons/tb'
 import {AiFillCaretDown} from 'react-icons/ai';
 import {PiProjectorScreenChartBold} from 'react-icons/pi'
 import {FaCode} from 'react-icons/fa';
@@ -14,17 +8,16 @@ import {TiHtml5} from 'react-icons/ti';
 import {FaUpload} from 'react-icons/fa';
 import {GiStarShuriken} from 'react-icons/gi';
 import {BsFillCalendar2EventFill} from 'react-icons/bs';
-import {FaStar,FaTrophy } from 'react-icons/fa'
+import {FaTrophy } from 'react-icons/fa'
 
-import { PieChart, Pie, Legend, Tooltip, ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis , Radar } from 'recharts'; 
+import { Legend, ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis , Radar } from 'recharts'; 
 
 function MainEachProfile({idCollectionValue, id}) {
 
-    const [selectLocalStor, setSelectLocalStor] = useState()
-    const [selectedValues, setSelectedValues] = useState([])
-    const [selectValuePoject, setselectValuePoject] = useState([])
-    const [selectedValuesTools, setSelectedValuesTools] =  useState([])
-    const [skills, setSkills] = useState([])
+  const [selectedValues, setSelectedValues] = useState([])
+  const [selectValuePoject, setselectValuePoject] = useState([])
+  const [selectedValuesTools, setSelectedValuesTools] =  useState([])
+  const [skills, setSkills] = useState([])
 useEffect(() => {
     window.scrollTo(0, 0);
     }, []);
@@ -54,7 +47,6 @@ useEffect(() => {
           .then((data) => {
             if (data.length > 0) {
               localStorage.setItem("idProject", data[0].id);
-              console.log("some peaple ok ", localStorage.getItem("idProject"))
             }
             setselectValuePoject(data);
           })
@@ -87,7 +79,6 @@ useEffect(() => {
           })
           .then((data) => {
             setSkills(data);
-            console.log("tish ", data);
           })
           .catch((error) => console.error(error));
       }, [id]);
@@ -118,7 +109,6 @@ useEffect(() => {
           "fullMark": 15
         }
       ]
-// console.log("id testtt ", localStorage.getItem('idEachProfile'));
       const [chartOuterRadius, setChartOuterRadius] = useState(90);
 
       const [fontSize, setFontSize] = useState(17);
@@ -221,23 +211,25 @@ useEffect(() => {
                       <p className="par">Skills</p>
                       <AiFillCaretDown className={style.iconTitle}/>
                   </div>
-                  <div className={style.skills}>
-                    <ResponsiveContainer width="100%" height={250}>
-                    <RadarChart outerRadius={chartOuterRadius}  data={data} >
-                    <PolarGrid />
-                    <PolarAngleAxis dataKey="subject" tick={{ fontSize: fontSize }}/>
-                    <PolarRadiusAxis angle={18} domain={[0, 15]} tick={{ fontSize: 12 }}/>
-                    <Radar  dataKey="A" stroke="#038688" fill="#038688" fillOpacity={0.6} />
-                    <Legend />
-                    </RadarChart>
-                    </ResponsiveContainer>
-                  </div>
-                  <div className={style.readCharts}>
-                    <p>Devlopement Web Front end : D-W-F</p>
-                    <p>Devlopement Web Back end : D-W-B</p>
-                    <p>Mobile Front-end : M-F</p>
-                    <p>Mobile Back-end : M-B</p>
-                    <p>Robitique : R</p>
+                  <div style={{overflowY: 'scroll', height:'230px', scrollbarWidth:'none'}}>
+                    <div className={style.skills}>
+                      <ResponsiveContainer width="100%" height={250}>
+                      <RadarChart outerRadius={chartOuterRadius}  data={data} >
+                      <PolarGrid />
+                      <PolarAngleAxis dataKey="subject" tick={{ fontSize: fontSize }}/>
+                      <PolarRadiusAxis angle={18} domain={[0, 15]} tick={{ fontSize: 12 }}/>
+                      <Radar  dataKey="A" stroke="#038688" fill="#038688" fillOpacity={0.6} />
+                      <Legend />
+                      </RadarChart>
+                      </ResponsiveContainer>
+                    </div>
+                    <div className={style.readCharts}>
+                      <p>Devlopement Web Front end : D-W-F</p>
+                      <p>Devlopement Web Back end : D-W-B</p>
+                      <p>Mobile Front-end : M-F</p>
+                      <p>Mobile Back-end : M-B</p>
+                      <p>Robitique : R</p>
+                    </div>
                   </div>
           </div>
               {/* finish  contInsideEvents*/}

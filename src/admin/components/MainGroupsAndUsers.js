@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import style from '../sass/maingroupsandusers.module.scss'
 import {BsCalendarDateFill} from 'react-icons/bs'
 import {MdCreateNewFolder} from 'react-icons/md'
@@ -35,7 +34,6 @@ function MainGroupsAndUsers() {
           })
           .then((data) => {
             setSelectInfoGroups(data);
-            console.log("groups ", data);
           })
           .catch((error) => console.error(error));
       }, []);
@@ -66,7 +64,7 @@ function MainGroupsAndUsers() {
             setSelectUserInfo(data);
           })
           .catch((error) => console.error(error));
-      }, [selectIdGroup, isCheckAllChecked,updatedIds, selectIdGroup]);
+      }, [selectIdGroup, isCheckAllChecked,updatedIds]);
 
       useEffect(() => {
         fetch(`http://${process.env.REACT_APP_ADMIN_HOST}:${process.env.REACT_APP_ADMIN_PORT}/api/getOldGroups`)
@@ -100,7 +98,6 @@ function MainGroupsAndUsers() {
         }, [valueGroupFinished, addSucces]);
         
         const [checkedItems, setCheckedItems] = useState({});
-        const [checkedIds, setCheckedIds] = useState({});
   
   const handleCheckboxChange = (event, index, id_user) => {
     // Update the checkedItems state
@@ -197,7 +194,7 @@ function MainGroupsAndUsers() {
     setCheckedItems(allChecked);
   };
   useEffect(() => {
-    console.log("SelectIdGroup ===> ", selectIdGroup)
+ 
   }, [selectIdGroup]);
   const handelValidateAll = () =>
   { 
@@ -348,7 +345,6 @@ function MainGroupsAndUsers() {
       .catch((error) => {
         console.error('Error pushing data:', error);
     });
-    console.log('setSelectedOption3 ===> ',selectedOption3)
     setInputValueName('')
     setSelectedOption3('');
     setSelectedOption4('');
@@ -534,7 +530,7 @@ const finisheGroup = () =>
                           ) : (
                             <button onClick={(event) => handelValidate(event, item.id_user)}>validate</button>
                           )}
-                          {console.log("valid week ===> ",item.validate_week)}
+                          
                         </td>
                     </tr>       
                     ))} 
@@ -568,7 +564,7 @@ const finisheGroup = () =>
                     <div className={style.containerInputCreate}>
                     {notNumber === 1 && <p>The Name should be Number!!!</p>}
                     {notChoose === 1 && <p>Must Choose Option!!!</p>}
-                    {nameAlreadExist == 1 && <p>This name already exist!!!</p>}
+                    {nameAlreadExist === 1 && <p>This name already exist!!!</p>}
                       <input type="button" value="Create" onClick={createGroup} />
                       {addSucces === 1 ? (
                         <HiOutlineBadgeCheck className={style.create}/>

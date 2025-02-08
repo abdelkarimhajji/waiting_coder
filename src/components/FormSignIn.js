@@ -9,8 +9,7 @@
     const [name, setname] = useState('');
     const [password, setPassword] = useState('');
     const [response, setResponse] = useState('');
-    const [userData, setUserData] = useState(null);
-    const {value, setValue, isLogin, setIsLogin} = useContext(UserContext);
+    const {value, setIsLogin} = useContext(UserContext);
     //navigate
     const navigate = useNavigate();
     //function to navigate
@@ -42,7 +41,7 @@
     const user = urlParams.get('user');
     if (user) {
       const userData = JSON.parse(user);
-      setUserData(JSON.parse(user));
+     
       fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/api/registerIntra`,{
         method: 'POST',
         headers:{
@@ -58,7 +57,6 @@
       })
       .then((data) => {
         localStorage.setItem('userId', data.idUser);
-        // console.log("loook at the a",data.idUser)
       })
       .catch((error) => console.error(error));
       localStorage.setItem('login', 1);
@@ -67,25 +65,19 @@
       
       // console.log(JSON.parse(user));
     }
-  }, []);
+  }, [navigate, setIsLogin]);
 
   
-    const handleButtonClick = () => {
-      localStorage.setItem('login', 1);
-      setIsLogin(1);
-      navigate("/Home");
-    };
+    
+    let login = localStorage.getItem("login");
     useEffect(() => {
       if (parseInt(localStorage.getItem("login")) === 1)
       {
           navigate("/Home");
       }
-    }, [localStorage.getItem("login")]);
+    }, [navigate, login]);
     
     
-    // Form submission handler
-    const storedData = localStorage.getItem('login');
-   
     const handleSubmit = async (e) => {
       e.preventDefault();
     
@@ -109,12 +101,19 @@
     };
 
     useEffect(() => {
+      const handleButtonClick = () => {
+        localStorage.setItem('login', 1);
+        setIsLogin(1);
+        navigate("/Home");
+      };
+    
       if (response.status === 1) {
-          handleButtonClick();
-          localStorage.setItem('userId', response.userId);
-          localStorage.setItem("idEachProfile", response.userId);
+        handleButtonClick();
+        localStorage.setItem('userId', response.userId);
+        localStorage.setItem("idEachProfile", response.userId);
       }
-    }, [response]);
+    }, [response, setIsLogin, navigate]); 
+    
     
     useEffect(() => {
       if (response.status !== 1) {
@@ -123,7 +122,7 @@
       }
     }, [response]);
      
-    if (value == 1)
+    if (value === 1)
     {
       return <Navigate to="/Home" replace />;
     }

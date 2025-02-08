@@ -34,6 +34,7 @@
         padding-right: 40px;
         position: relative;
         margin-top: 100px;
+        border-radius: 10px;
         @media (max-width: 768px)
         {
             width: 80%;
@@ -73,13 +74,17 @@
         
     .containCompetition
     {
-        width: 100%;
+        width: 96%;
         display: flex;
         flex-wrap: wrap;
         gap: 30px;
         align-items: center;
         justify-content: space-around;
         margin-bottom: 70px;
+        @media (max-width:1300px)
+        {
+            width: 100%;
+        }
         @media (max-width:597px)
         {
             width: 90%;
@@ -90,12 +95,13 @@
             width: 27%;
             min-height: 660px;
             border-radius: 20px;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
             // background: linear-gradient(to bottom, #e0e0e0, $pColor1);
-            background: linear-gradient(to bottom, #e0e0e0 0%, $pColorR 0%, $pColor1 100%);
-
+            // background: linear-gradient(to bottom, #e0e0e0 0%, $pColorR 0%, $pColor1 100%);
+            color: $pColor1;
             @media (max-width:1300px)
             {
-                width: 30%;
+                width: 45%;
             }
             @media (max-width: 1130px)
             {
@@ -112,9 +118,16 @@
                 justify-content: center;
                 display: 0 auto;
             }
+            .containerTop
+            {
+                background-color: $pColor1;
+                border-top-left-radius: 20px;
+                border-top-right-radius: 20px;
+                margin-bottom: 20px;
+            }
             .containerIcon
             {
-                height: 250px;
+                height: 200px;
                 padding-top: 50px;
                 // background-color: red;
                 display: flex;
@@ -132,20 +145,24 @@
                 justify-content: center;
                 align-items: center;
                 text-align: center;
-                // color: white;
+                color: white;
+                padding-bottom: 20px;
             }
             .description
             {
                 text-align: justify;
-                padding-left: 10px;
-                padding-right: 10px;
+                padding-left: 20px;
+                padding-right: 20px;
+                box-sizing: border-box;
                 overflow-y: scroll;
-                color: white;
+                color: $pColor1;
                 // background-color: red;
-                height: 100px;
+                height: 120px;
                 &::-webkit-scrollbar {
                     width: 5px;
                     transition: 0.5s all;
+                    color: $pColor1;
+                    background-color: $pColor1;
                     /* Customize the scrollbar track color */
                     &-track {
                       background-color: #f1f1f1;
@@ -153,7 +170,8 @@
                   
                     /* Customize the scrollbar thumb color */
                     &-thumb {
-                      background-color: $pColorR;
+                        color: $pColor1;
+                        background-color: $pColor1;
                     }
                   }
                 //  overflow-y: hidden
@@ -161,12 +179,12 @@
             .month
             {
                 text-align: center;
-                color: white;
+                color: $pColor1;
             }
             .time
             {
                 text-align: center;
-                color: white;
+                color: $pColor1;color: $pColor1;
             }
             .containerButton
             {
@@ -176,12 +194,14 @@
                 margin-bottom: 20px;
                 button {
                     width: 200px;
-                    height: 40px;
+                    height: 45px;
                     cursor: pointer;
-                    background-color: #e0e0e0; /* Initial background color */
+                    background-color: $pColor1; /* Initial background color */
                     border: none;
                     transition: background-color 0.5s ease;
                     border: 1px solid #e0e0e0;
+                    border-radius: 10px;
+                    color: white;
                     // background: l    inear-gradient(to bottom, #e0e0e0 0%, $pColorR 0%, $pColor1 100%);
                   
                     &:hover {

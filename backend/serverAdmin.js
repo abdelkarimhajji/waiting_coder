@@ -525,7 +525,6 @@ app.get('/api/getMonthsUesrs/:chooseYear', (req, res) => {
             console.log(insertErr);
             return res.json("Error");
           }
-          console.log("hiii\n")
           return res.json(insertResult);
         });
       }

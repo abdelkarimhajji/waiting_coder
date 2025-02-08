@@ -1,26 +1,18 @@
-import React, { useState, useEffect, useContext, useRef } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import Navbar from "../components/Navbar";
-import Searsh from "../components/Searsh";
-import Level from "../components/Level";
-import Footer from "../components/Footer";
+import React, { useState, useEffect, useRef } from "react";
+
 import style from "../sass/mainpushproject.module.scss";
-import { UserContext } from "../utils/UserContext";
 import {TbSend} from 'react-icons/tb'
-import {MdLibraryAddCheck} from 'react-icons/md'
 import {MdNumbers} from 'react-icons/md';
 
 function MainPushProject() {
     const [selectedValuesProject, setSelectedValuesProject] = useState([]);
     const [selectedValuesProjectPush, setSelectedValuesProjectPush] = useState([]);
-    const [keepValueTeacher, setKeepValueTeacher] = useState();
     const [seletedIdTeacher, setSeletedIdTeacher] = useState();
     const [inputValue, setInputValue] = useState('');
     const [idProject, SetidProject] = useState(localStorage.getItem('idProject'));
     const userId = localStorage.getItem("userId");
     const selectedOptionKey = localStorage.getItem("selectedOptionKey");
     const divRef = useRef();
-    const [currentTime, setCurrentTime] = useState(new Date());
 
 
     const goDown = () =>

@@ -1,21 +1,13 @@
-import React, { useState, useEffect, useContext, useRef } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import style from "../sass/mainLanguage.module.scss";
-import { UserContext } from "../utils/UserContext";
-import { FaYoutube, FaCode } from 'react-icons/fa';
+import {  FaCode } from 'react-icons/fa';
 import { TiHtml5 } from 'react-icons/ti';
 import { AiFillCaretDown } from 'react-icons/ai';
-import { BsArrowRight } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
-import { AiOutlineProject} from 'react-icons/ai';
-import { FaUpload, FaStar,FaTrophy } from 'react-icons/fa'
-import { TbHandClick , TbToolsOff, TbBrandJavascript, TbBrandVscode} from 'react-icons/tb'
+import {  TbBrandJavascript, TbBrandVscode} from 'react-icons/tb'
 import { DiCss3 } from 'react-icons/di'
 import {BiLogoGithub} from 'react-icons/bi'
 import { FiFigma} from 'react-icons/fi'
-import { PiProjectorScreenChartBold } from 'react-icons/pi'
-import {BsFillCalendar2EventFill } from 'react-icons/bs'
-import {GiStarShuriken} from 'react-icons/gi'
 import {BsFiletypePhp} from 'react-icons/bs'
 import {SiXampp} from 'react-icons/si'
 import {AiOutlineLink} from 'react-icons/ai'
@@ -41,6 +33,7 @@ function MainTools() {
       SiXampp:SiXampp,
     };
     const Default = TiHtml5;
+    let selectedOptionKey = localStorage.getItem("selectedOptionKey");
     useEffect(() => {
       fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/api/getToolsAndLinks/${localStorage.getItem("selectedOptionKey")}`)
         .then((response) => {
@@ -50,11 +43,10 @@ function MainTools() {
           return response.json();
         })
         .then((data) => {
-          console.log("hello i am karim ok", data)
           setSetSelectValuesTools(data);
         })
         .catch((error) => console.error(error));
-    }, [localStorage.getItem("selectedOptionKey")]);
+    }, [selectedOptionKey]);
 
     useEffect(() => {
       console.log("Current scroll position:", window.scrollY);
@@ -95,7 +87,7 @@ function MainTools() {
                 </div>
                 <div className={style.back}>
                   <div className={style.chooseLink}>
-                      <p>choose you link</p>
+                      <p>choose The link</p>
                   </div>
                 <div className={style.allLinks}>
                 {tools.links.map((link) => (

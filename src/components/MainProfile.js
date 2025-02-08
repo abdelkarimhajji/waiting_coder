@@ -1,16 +1,12 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useLocation, useNavigate, Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import {AiFillCaretDown} from 'react-icons/ai';
 import style from "../sass/mainprofile.module.scss";
-import { UserContext } from "../utils/UserContext";
 import {GiTopPaw} from 'react-icons/gi';
 import {FiUsers} from 'react-icons/fi';
-import karim from '../imgs/karim.png';
 
 function MainProfile() {
-    const userId = localStorage.getItem("userId");
     const [selectedValuesUser, setSelectedValuesUser] = useState([]);
-    const [selectedCountUsers, setSelectedCountUsers] = useState([]);
     const [next, setNext] = useState(0);
     const [numbers, setnumbers] = useState(4);
     const [totalPages, setTotalPages] = useState(0);
@@ -23,10 +19,10 @@ function MainProfile() {
       localStorage.setItem("idEachProfile", id);
     }
     function callNextUsers(count, i) {
-      if (count == 1)
+      if (count === 1)
       {
         setNext(0);
-        if(i != valid)
+        if(i !== valid)
         {
           window.scrollTo({
             top: 0,
@@ -37,7 +33,7 @@ function MainProfile() {
       else
       {
         setNext(7 * (count));
-        if(i != valid)
+        if(i !== valid)
         {
           window.scrollTo({
             top: 0,
@@ -104,7 +100,6 @@ function MainProfile() {
             return response.json();
           })
           .then((data) => {
-            setSelectedCountUsers(data);
             setTotalPages(parseInt((data.count / 7)));
           })
           .catch((error) => console.error(error));

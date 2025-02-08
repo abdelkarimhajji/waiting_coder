@@ -1,8 +1,5 @@
-import React, { useState, useEffect, useContext, useRef } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
 import style from '../sass/mainvalidate.module.scss'
-import {HiFolderRemove} from 'react-icons/hi'
-import karim from '../../imgs/karim.png'
 import {BsFillSendFill} from 'react-icons/bs'
 import {TbViewfinder} from 'react-icons/tb'
 function MainValidate() {

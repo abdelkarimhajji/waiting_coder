@@ -1,15 +1,6 @@
-// import React, { useState , useContext, Link} from 'react';
-// import ReactDOM from 'react-dom';
-import { Link, useNavigate } from 'react-router-dom';
-import { navigate } from 'react-router';
-// import Home from './pages/Home';
-// import SignIn from './pages/SignIn';
-import {BiError} from 'react-icons/bi'
+import { Link } from 'react-router-dom';
 import {TbError404} from 'react-icons/tb';
-import '../sass/index.scss';
-// import { UserContext } from './utils/UserContext';
-// import Language from './pages/Language';
-import Home from './Home';
+import '../sass/index.scss';;
 
 function NotFound() {
 

@@ -1,30 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, Navigate , Link} from "react-router-dom";
+import { Link} from "react-router-dom";
 import style from "../../sass/search.module.scss"
 import {AiOutlineSearch} from 'react-icons/ai';
 
 
 function SearchAdmin() {
-  
-  const [data, setData] = useState([]);
+
   const [valid, setValid] = useState(0);
   const [resultSearch, setResultSearch] = useState([]);
-  const adminId = localStorage.getItem('adminId');
   const [value, setValue] = useState('');
-  useEffect(() => {
-    // Fetch data from the '/data' endpoint
-    fetch(`http://${process.env.REACT_APP_ADMIN_HOST}:${process.env.REACT_APP_ADMIN_PORT}/api/get_admin/${adminId}`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-        setData(data);
-      })
-      .catch(error => console.error(error));
-  }, []);
   
   useEffect(() => {
     console.log(value)
@@ -44,7 +28,6 @@ function SearchAdmin() {
       })
       .then(data => {
         setResultSearch(data);
-        console.log("get info admin ",data); // Log the data in the frontend console
       })
       .catch(error => console.error(error));
   }, [value]);

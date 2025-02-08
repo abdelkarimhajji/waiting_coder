@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useLocation, useNavigate, Navigate } from "react-router-dom";
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import React, { useState, useEffect } from "react";
+
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 function BarCharte({choosetYear}) {
 
@@ -16,8 +16,7 @@ function BarCharte({choosetYear}) {
       })
       .then((data) => {
         setGetYearnEarning(data);
-        console.log("okkk ticgh ", choosetYear);
-        console.log("okkk ticgh ", data);
+
       })
       .catch((error) => console.error(error));
   }, [choosetYear]);
@@ -84,7 +83,7 @@ function BarCharte({choosetYear}) {
       // amt: 2100,
     },
   ];
-  console.log("just test ok",getYearnEarning.find(item => item.month === 8)?.earnings  || 0,)
+
   return (
     <ResponsiveContainer width="100%" height="70%">
   <BarChart

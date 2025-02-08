@@ -1,16 +1,13 @@
-import React, { useContext, useEffect , useState} from 'react';
-import { useLocation, Navigate , Link } from "react-router-dom";
+import React, {useEffect , useState} from 'react';
+import { Link } from "react-router-dom";
 import style from "../sass/mainproject.module.scss";
-import { FaYoutube } from 'react-icons/fa';
-import { AiOutlineUserAdd } from 'react-icons/ai';
-import FormSignIn from "./FormSignIn";
-import { UserContext } from '../utils/UserContext';
+
 import {PiProjectorScreenChartBold} from 'react-icons/pi';
 import {AiFillCaretDown} from 'react-icons/ai';
-import biographie from '../imgs/biographie.png';
 
 function MainProject() {
   const [setSelectValuesProjects, setSetSelectValuesProjects] = useState([]);
+  let  selectedOptionKey = localStorage.getItem("selectedOptionKey");
   useEffect(() => {
     fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/api/get_porject/${localStorage.getItem("selectedOptionKey")}`)
       .then((response) => {
@@ -23,12 +20,10 @@ function MainProject() {
         setSetSelectValuesProjects(data); 
       })
       .catch((error) => console.error(error));
-  }, [localStorage.getItem("selectedOptionKey")]);
+  }, [selectedOptionKey]);
   
   const getIdProject = (id) => {
     localStorage.setItem('idProject', id);
-    console.log('Button clicked!', id);
-    // You can perform any actions you want here
   };
   return (
     <div className={style.container}>

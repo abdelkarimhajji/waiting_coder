@@ -401,6 +401,7 @@
         padding-right: 40px;
         position: relative;
         margin-top: 100px;
+        border-radius: 10px;
         @media (max-width: 768px)
         {
             width: 80%;
@@ -443,7 +444,8 @@
         min-height: 80%;
         min-height: 300px;
         border-radius: 20px;
-        background: linear-gradient(to left, #e0e0e0 -20%, $pColor1 );
+        // background: linear-gradient(to left, #aaa7a7 -20%, #f1f1f1 );
+        background-color: white;
         box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
         // background-color: white;
         // box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
@@ -495,12 +497,13 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                background-color: #2a2d3865;
+                background-color: $pColor1;
                 padding-right: 10px;
                 color: white;
                 font-family: $myfont;
                 font-size: 15px ;
                 margin-bottom: 20px;
+                border-radius: 10px;
             }
             .allLinks
             {
@@ -509,16 +512,23 @@
                 // background-color: red;
                 overflow-y: scroll;
                 overflow-x: hidden;
+                scrollbar-width: none;
+                ::-webkit-scrollbar{
+                    width: 0;
+                }
             }
         }
         .titleLanguage
         {
-            width: 25%;
-            // background-color: red;
+            width: 22%;
+            
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+            background-color: $pColor1;
             @media (max-width: 950px)
             {
                 width: 100%;
@@ -529,10 +539,12 @@
 
             color: white;
             font-size: 100px;
+            
             @media (max-width: 950px)
             {
                 padding-top: 50px;
             }
+            
         }
        .containerTitle
        {
@@ -543,7 +555,7 @@
        }
         .contentTitleLanguage
         {
-            width: 50%;
+            width: 54%;
             padding-left: 10px;
             padding-right: 20px;
             display: flex;
@@ -555,7 +567,8 @@
             line-height: 30px;
             padding-top: 15px;
             padding-bottom: 15px;
-            // background-color: red;
+            box-sizing: border-box;
+            padding-left: 30px;
             @media (max-width: 950px)
             {
                 align-items: center;
@@ -583,10 +596,13 @@
             width: 98%;
             display: flex;
             // justify-content: center;
+            border-radius: 10px;
             align-items: center;
             cursor: pointer;
             transition: 0.2s all;
             padding-left: 10px;
+            box-sizing: border-box;
+           
             // background-color: rgb(136, 118, 155);
             &:hover
             {
@@ -595,13 +611,14 @@
             p{
                 // padding-left: 20px;
                 padding-right: 30px;
+                margin-left: 10px;
             }
             a
             {
                 font-family: $myfont;
                 font-size: 16px;
                 font-weight: bold;
-                color: white;
+                color: $pColor1;
                 text-decoration: none;
             }
             .AiOutlineLink

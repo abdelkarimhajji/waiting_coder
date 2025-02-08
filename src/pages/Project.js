@@ -1,9 +1,5 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import style from "../sass/project.module.scss";
-import { FaYoutube } from 'react-icons/fa';
-import { AiOutlineUserAdd } from 'react-icons/ai';
-import FormSignIn from "../components/FormSignIn";
-import { UserContext } from '../utils/UserContext';
 import Navbar from '../components/Navbar';
 import Searsh from '../components/Searsh'
 import Footer from '../components/Footer'

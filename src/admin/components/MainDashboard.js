@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, Navigate , Link} from "react-router-dom";
 import style from "../sass/maindashboard.module.scss"
-import {AiOutlineSearch, AiOutlineBarChart} from 'react-icons/ai';
+import { AiOutlineBarChart} from 'react-icons/ai';
 import {GiClick} from 'react-icons/gi'
 import {BiPieChartAlt2} from 'react-icons/bi'
 import BarCharte from './BarCharte'
 import PieCharte from "./PieCharte";
 import BarCharte2 from "./BarCharte2";
 import PieChart2 from './PieChart2'
-import { PieChart, Pie, Legend, Tooltip, ResponsiveContainer } from 'recharts';
 // ... other imports ...
 
 function MainDashboard() {

@@ -25,6 +25,7 @@
         margin-bottom: 100px;
         align-items: center;
         color: $pColorR;
+        border-radius: 10px;
         @media (max-width: 800px)
         {
             width: 75%;
@@ -264,6 +265,7 @@
             transition: 0.5s all;
             border: 1px solid white;
             text-decoration: none;
+            border-radius: 10px;
             &:hover
             {
                 background-color: white;

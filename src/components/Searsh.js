@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, Navigate , Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 import style from "../sass/search.module.scss"
 import {AiOutlineSearch} from 'react-icons/ai';
 
@@ -22,14 +22,12 @@ function Searsh() {
         })
         .then(data => {
           setData(data);
-          console.log("why not work kkkkkkkkk : ",data); // Log the data in the frontend console
         })
         .catch(error => console.error(error));
 
   }, [userId]);
   
   useEffect(() => {
-    console.log(value)
     if (value === '') {
       setValid(0)
       setResultSearch([]);
@@ -59,8 +57,7 @@ function Searsh() {
     setValid(1);
   };
   useEffect(() => {
-    // Fetch data from the '/data' endpoint
-    console.log(valid)
+
   }, [valid]);
 
   
@@ -78,11 +75,8 @@ function Searsh() {
 
       {
         setValid(0);
-        console.log("i am here");
       }
       
-      // console.log("Clas s:   " + className );
-      // setClickedElement(className);
     };
 
     window.addEventListener('click', handleWindowClick);
@@ -109,9 +103,9 @@ function Searsh() {
         <div className={style.photo}>
           
           {data[0].phone === "null" ? (
-            <img src={data[0].image} alt={data[0].firstName} className="imgUser" />
+            <img src={data[0].image} alt={data[0].firstName} className="imgUser" style={{objectFit: 'cover'}}/>
           ) : (
-            <img src={require(`../imgs/${data[0].image}`)} alt="" className="imgUser" />
+            <img src={require(`../imgs/${data[0].image}`)} alt="" className="imgUser" style={{objectFit: 'cover'}}/>
           )}
         </div>
       </div>
@@ -133,9 +127,9 @@ function Searsh() {
             <div  className={style.containerEachRsult} onClick={() => get_id(item.id)}>
               <div className={style.containerImgResult}>
               {item.phone === "null" ? (
-                  <img src={item.image} alt={item.image} className="imgUser" />
+                  <img src={item.image} alt={item.image} className="imgUser" style={{objectFit: 'cover'}}/>
                 ) : (
-                  <img src={require(`../imgs/${item.image}`)} alt={item.firstName}/>
+                  <img src={require(`../imgs/${item.image}`)} alt={item.firstName} style={{objectFit: 'cover'}}/>
                 )}
                   
               </div>

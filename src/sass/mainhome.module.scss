@@ -36,8 +36,10 @@
         .itemsProgram
         {
             @include item-styles;
-            overflow-y: scroll;
+            border-radius: 10px !important;
+            
             .contInsidProgram{
+                // overflow-y: scroll;
                 margin: 30px;
                 .titleProgram
                 {
@@ -63,6 +65,12 @@
                     margin-top: 30px;
                     padding-left: 20px;
                     // background-color: red;
+                    overflow-y: scroll;
+                    scrollbar-width: none;
+                    height: 175px;
+                    ::-webkit-scrollbar{
+                        width: 0;
+                    }
                     .conatProItm
                     {
                         display: flex;
@@ -113,7 +121,7 @@
         .itemsEvents
         {
             @include item-styles;
-            overflow-y: scroll;
+            border-radius: 10px;
             .contInsidEvents
             {
                 // overflow-y: scroll;
@@ -140,6 +148,13 @@
                 .UnderConatEvent
                 {
                     margin-top: 30px;
+                    overflow-y: scroll;
+                    height: 180px;
+                    scrollbar-width: none;
+                    ::-webkit-scrollbar{
+                        width: 0;
+                    }
+
                     .conatEventItm
                     {
                         display: flex;

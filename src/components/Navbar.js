@@ -2,46 +2,36 @@ import style from "../sass/navbar.module.scss";
 import { Link } from 'react-router-dom';
 import { AiOutlineMenuUnfold, AiOutlineMenuFold, AiOutlineHome } from 'react-icons/ai';
 import { FiUsers } from 'react-icons/fi';
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useCallback} from "react";
 import karim from '../imgs/karim.png';
-import { UserContext } from '../utils/UserContext';
-import { FaCode, FaUpload, FaStar } from 'react-icons/fa'
+import { BiCodeAlt } from "react-icons/bi";
 import {TbToolsOff} from 'react-icons/tb'
 import {PiProjectorScreenChartBold} from 'react-icons/pi'
-import {BsFillCalendar2EventFill} from 'react-icons/bs'
+import { FaRegCalendar } from "react-icons/fa";
 import {PiSignOutBold} from 'react-icons/pi'
-import {FaTrophy} from 'react-icons/fa'
+import { LuSwords } from "react-icons/lu";
 
 function Navbar(props) {
   const [hovered, setHovered] = useState(true);
-  const [clickedElement, setClickedElement] = useState(null);
-  const {value, setValue, isLogin, setIsLogin} = useContext(UserContext);
 
-
-  const handleClick = () => {
-    if (hovered === true)
-      setHovered(false);
-    else
-      setHovered(true);    
-  };
+  const handleClick = useCallback(() => {
+    setHovered((prev) => !prev); 
+  }, []);
   useEffect(() => {
     const handleWindowClick = (event) => {
       const className = event?.target?.className;
-      if(className === "navbar_underNavBarTrue__F5nPx")
+      if (className === "navbar_underNavBarTrue__F5nPx") {
         handleClick();
-      
-      // console.log("Clas s:   " + className );
-      // setClickedElement(className);
+      }
     };
-
-    window.addEventListener('click', handleWindowClick);
-
+  
+    window.addEventListener("click", handleWindowClick);
     return () => {
-      window.removeEventListener('click', handleWindowClick);
+      window.removeEventListener("click", handleWindowClick);
     };
-  }, [hovered]);
+  }, [handleClick]);
+
   const logout = () => {
-    console.log("i am rest to 0");
     localStorage.removeItem("selectedOptionKey");
     localStorage.removeItem("userId");
     localStorage.removeItem('idProject');
@@ -109,7 +99,7 @@ function Navbar(props) {
         <Link to="/Language" className={style.Link} onClick={close}>
           <div className={style.containItemNav}>
             <p className={style.oneItem}>Languages</p>
-            <p className={style.twoItem}><FaCode className={style.AiOutlineMenuFold} /></p>
+            <p className={style.twoItem}><BiCodeAlt className={style.AiOutlineMenuFold} /></p>
           </div>
           </Link>
           <Link to="/Tools" className={style.Link} onClick={close}>
@@ -133,13 +123,13 @@ function Navbar(props) {
           <Link to="/Event" className={style.Link} onClick={close}>
           <div className={style.containItemNav}>
             <p className={style.oneItem}>Events</p>
-            <p className={style.twoItem}><BsFillCalendar2EventFill className={style.AiOutlineMenuFold} /></p>
+            <p className={style.twoItem}><FaRegCalendar className={style.AiOutlineMenuFold} /></p>
           </div>
           </Link>
           <Link to="/Competition" className={style.Link} onClick={close}>
           <div className={style.containItemNav}>
             <p className={style.oneItem}>Competition</p>
-            <p className={style.twoItem}><FaTrophy className={style.AiOutlineMenuFold} /></p>
+            <p className={style.twoItem}><LuSwords className={style.AiOutlineMenuFold} /></p>
           </div>
           </Link>
           <Link to="/" className={style.Link}  onClick={logout}>
