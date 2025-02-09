@@ -10,9 +10,10 @@ function MainProfile() {
     const [next, setNext] = useState(0);
     const [numbers, setnumbers] = useState(4);
     const [totalPages, setTotalPages] = useState(0);
+    const [totalPagesDisplay, setTotalPagesDisplay] = useState(0);
     const [count, setCount] = useState(1);
     const [valid, setValid] = useState(0);
-
+    const [items, setItems] = useState([]);
       
     const get_id = (id) =>
     {
@@ -76,6 +77,32 @@ function MainProfile() {
     //   setNext(7 * totalPages);
     //   setValid(-2);
     // }
+
+    function storeItems(totalPagesDisplayValue)
+    {
+        let i = 1;
+        const array = []
+        while(i <= totalPagesDisplayValue)
+        {
+          const newItem = i;
+          array.push(newItem);
+          i++;
+        }
+        setItems([...array]);
+    }
+
+    function calculateNumberPagesDisplay(pages) {
+      const numberPagesTostring = pages.toString();
+      let totalPagesDisplayValue = parseInt(pages) >= 4 ? 4 : parseInt(pages);
+      
+      if (numberPagesTostring.includes('.')) {
+          totalPagesDisplayValue += 1;
+      }
+  
+      setTotalPagesDisplay(totalPagesDisplayValue);
+      storeItems(totalPagesDisplayValue)
+      console.log("totalPagesDisplay", totalPagesDisplayValue);
+  }
     useEffect(() => {
         fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/api/get_user_levle/${next}`)
           .then((response) => {
@@ -100,11 +127,17 @@ function MainProfile() {
             return response.json();
           })
           .then((data) => {
-            setTotalPages(parseInt((data.count / 7)));
+            const pages = data.count / 7;
+            setTotalPages(pages); 
+            console.log("Data received: ", data.count, pages);
+            calculateNumberPagesDisplay(pages)
           })
           .catch((error) => console.error(error));
       }, [next]);
      
+      useEffect(() => {
+        console.log("kdkdkdkd itwms", items);
+      }, [items]);
   return (
     <>
     <div className={style.container}>
@@ -171,6 +204,12 @@ function MainProfile() {
         <p>{count + i}</p>
     </div>
   ))} */}
+
+  {items.map((item, index) => (
+    <div key={index} className={style.button} >
+        <p>{item}</p>
+    </div>
+  ))}
 
   {/* start button go right */}
   <div className={style.nextButton} /*onClick={nextNumbers}*/>

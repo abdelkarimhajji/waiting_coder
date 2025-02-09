@@ -93,12 +93,13 @@
         {
             // background-color: red;
             width: 27%;
-            min-height: 660px;
+            height: 640px;
             border-radius: 20px;
             box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
             // background: linear-gradient(to bottom, #e0e0e0, $pColor1);
             // background: linear-gradient(to bottom, #e0e0e0 0%, $pColorR 0%, $pColor1 100%);
             color: $pColor1;
+            
             @media (max-width:1300px)
             {
                 width: 45%;
@@ -107,6 +108,10 @@
             {
                 width: 45%;
                 // min-height: 300px;
+            }
+            @media (max-width:1000px)
+            {
+                height: 620px;
             }
             @media (max-width:904px)
             {
@@ -124,10 +129,11 @@
                 border-top-left-radius: 20px;
                 border-top-right-radius: 20px;
                 margin-bottom: 20px;
+                height: 310px;
             }
             .containerIcon
             {
-                height: 200px;
+                height: 150px;
                 padding-top: 50px;
                 // background-color: red;
                 display: flex;
@@ -137,6 +143,10 @@
                 {
                     font-size: 150px;
                     color: white;
+                    @media (max-width:1000px)
+                    {
+                        font-size: 120px;
+                    }
                 }
             }
             .containerTitle
@@ -147,6 +157,10 @@
                 text-align: center;
                 color: white;
                 padding-bottom: 20px;
+                @media (max-width:1000px)
+                {
+                    font-size: 15px;
+                }
             }
             .description
             {
@@ -174,12 +188,19 @@
                         background-color: $pColor1;
                     }
                   }
-                //  overflow-y: hidden
+                  @media (max-width:1000px)
+                  {
+                    font-size: 13px;
+                  }
             }
             .month
             {
                 text-align: center;
                 color: $pColor1;
+                @media (max-width:1000px)
+                {
+                    font-size: 13px;
+                }
             }
             .time
             {

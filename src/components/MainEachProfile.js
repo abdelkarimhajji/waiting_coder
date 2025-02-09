@@ -153,7 +153,7 @@ useEffect(() => {
                     <div className={style.UnderConatProgram}>
                         {selectedValues.map((item, index) => (
                         // <Link key={index} to="/Language#html" className={style.link}>
-                            <div className={style.conatProItm}>
+                            <div key={index} className={style.conatProItm}>
                                 <FaUpload className={style.TiHtml5}/>
                                 <p className="par"> - {item.languageName}</p>
                             </div>
@@ -173,7 +173,7 @@ useEffect(() => {
                     <div className={style.UnderConatProgram}>
                     {selectValuePoject.map((item, index) => (
                     // <Link key={index} to="/Language#html" className={style.link}>
-                        <div className={style.conatProItm}>
+                        <div key={index} className={style.conatProItm}>
                             <TiHtml5  className={style.TiHtml5}/>
                             <p className="par"> - {item.name_project}</p>
                         </div>
