@@ -33,7 +33,11 @@
         position: relative;
         margin-top: 100px;
         border-radius: 10px;
-        @media (max-width: 768px)
+        @media (max-width:1000px)
+        {
+            width: 100%;
+        }
+        @media (max-width:597px)
         {
             width: 80%;
         }
@@ -78,13 +82,17 @@
         align-items: center;
         justify-content: space-around;
         margin-bottom: 70px;
+        @media (max-width:904px)
+        {
+            width: 100%;
+        }
         @media (max-width:597px)
         {
-            width: 90%;
+            width: 100%;
         }
         .Link {
             width: 27%;
-            min-height: 530px;
+            height: 560px;
             border-radius: 20px;
             background-color: #ffffff;
             // margin-left: 1%;
@@ -120,12 +128,11 @@
             {
                 padding-left: 15px;
                 padding-right: 15px;
-                
-                // height: 230px;
-                // height: auto;
+                margin-bottom: 20px;
+                height: 220px;
                 word-wrap: break-word;
                 text-align: justify;
-                // background-color: red;
+                overflow: hidden;
                 
             }
             .titleProject
@@ -160,28 +167,24 @@
                     width: 150px;
                 }
             }
-            .description
+            .containerSingleDiscription
             {
                 font-size: 15px;
-                margin-bottom: 30px;
-                height: 130px;
+                // margin-bottom: 30px;
+                height: 110px;
                 overflow-y: scroll;
                 margin-bottom: 20px;
+                padding-bottom: 20px;
                 &::-webkit-scrollbar {
-                width: 5px;
-                height: 5px;
-                transition: 0.5s all;
-                /* Customize the scrollbar track color */
-                }
-                @media (max-width:1130px)
-                {
-                    min-height: 200px;
-                }
-                @media (max-width:1130px)
-                {
-                    min-height: 140px;
+                    width: 5px;
+                    height: 5px;
+                    transition: 0.5s all;
                 }
             }
+            // .description
+            // {
+               
+            // }
         }
         .containImg
         {

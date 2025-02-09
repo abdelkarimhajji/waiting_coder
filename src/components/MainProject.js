@@ -44,7 +44,9 @@ function MainProject() {
           </div>
           <div className={style.containerDiscreption}>
             <p className={style.titleProject}>{item.name_project}</p>
-            <p className={style.description}>{item.description}</p>
+            <div className={style.containerSingleDiscription}>
+              <p className={style.description}>{item.description}</p>
+            </div>
           </div>
           <button className={style.moreDetails}>More Details</button>
         </div>

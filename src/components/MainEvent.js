@@ -170,7 +170,9 @@ const No = () => {
       </div>
       <div className={style.description}>
         <p className={style.title}>{item.title_event}</p>
-        <p>{item.description_event}</p>
+        <div  className={style.containerDescription}>
+          <p>{item.description_event}</p>
+        </div>
         <div className={style.parentTimeButton}>
           <div className={style.containerTime}>
             <MdWatchLater className={style.icon} />

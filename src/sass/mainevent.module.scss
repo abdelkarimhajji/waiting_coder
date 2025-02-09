@@ -205,15 +205,19 @@
         @media (max-width:650px)
         {
             flex-direction: column;
-            height: 500px;
+            height: 520px;
         } 
         @media(max-width:500px)
         {
-            min-height: 550px;
+            height: 590px;
         }
         @media (max-width:400px)
         {
             width: 95%;
+        }
+        @media(max-width:252px)
+        {
+            height: 600px;
         }
         .date
         {
@@ -246,13 +250,7 @@
                 text-align: center;
                 // background-color: red;
                 border-top-left-radius: 20px;
-                // @media (max-width:650px)
-                // {
-                //     // height: 50%;
-                //     width: 100%;
-                //     text-align: center;
-                //     padding-top: 50px;
-                // }
+                
             }
             .month
             {
@@ -293,6 +291,23 @@
             {
                text-align: left;
                padding-right: 5px;
+               padding-left: 20px;
+            }
+            .containerDescription
+            {
+                @media (max-width:650px)
+                {
+                    height: 125px;
+                    overflow-y: scroll;
+                    text-align: justify;
+                    box-sizing: border-box;
+                    padding-right: 15px;
+                    margin-bottom: 20px;
+                    &::-webkit-scrollbar {
+                        width: 0px;
+                        transition: 0.5s all;
+                    }
+                } 
             }
             .parentTimeButton
             {
@@ -311,7 +326,6 @@
                 }
                 .containerButton
                 {
-                    // background-color: #fef8bd;
                     width: 160px;
                     height: 50px;
                     margin-bottom: 30px;
@@ -320,10 +334,15 @@
                     align-items: center;
                     border-radius: 20px;
                     margin-left: 20px;
-                    @media(max-width:500px)
+                    @media (max-width:500px)
                     {
-                        width: 80%;
-                        margin-left: 0px;
+                        margin-left: 0;
+                        width: 60%;
+                        margin-bottom: 15px;
+                    }
+                    @media (max-width:400px)
+                    {
+                    width: 80%;
                     }
                     button{
                         width: 100%;
@@ -352,6 +371,7 @@
                 font-size: 25px;
                 font-weight: bolder;
                 color: $pColorR;
+                height: 50px;
             }
             .containerTime
             {
@@ -373,7 +393,12 @@
                 }
                 @media (max-width:550px)
                 {
-                   width: 60%;
+                    width: 60%;
+                }
+                @media (max-width:500px)
+                {
+                    margin-bottom: 10px;
+                    width: 60%;
                 }
                 @media (max-width:400px)
                 {
