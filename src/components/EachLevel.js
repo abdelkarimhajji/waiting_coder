@@ -18,7 +18,7 @@ function EachLevel({setIdCollectionValue, setId}) {
       setIdCollectionValue(selectedOption.id)
       setIdCollection(selectedOption.id)
     };
-    console.log()
+
     
     useEffect(() => {
       fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/get_each_user_levle/${localStorage.getItem('idEachProfile')}`)

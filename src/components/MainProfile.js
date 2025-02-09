@@ -18,64 +18,64 @@ function MainProfile() {
     {
       localStorage.setItem("idEachProfile", id);
     }
-    function callNextUsers(count, i) {
-      if (count === 1)
-      {
-        setNext(0);
-        if(i !== valid)
-        {
-          window.scrollTo({
-            top: 0,
-            behavior: "smooth"  // for smooth scrolling
-          });
-        }
-      }
-      else
-      {
-        setNext(7 * (count));
-        if(i !== valid)
-        {
-          window.scrollTo({
-            top: 0,
-            behavior: "smooth"  // for smooth scrolling
-          });
-        }
-      }
-      setValid(i);
-    }
-    function nextNumbers() 
-    {
-        if (numbers + 4 > totalPages) {
-          let i = 0;
-          let j = numbers;
-          while(j < totalPages)
-          {
-            i++;
-            j++;
-          }
-          setnumbers(i);
-          setCount(count + i + 1);
-          setValid(-1);
-        }
-    }
-    function beforeNumbers()
-    {
-        if (numbers < 4)
-        {
-          setnumbers(4);
-          setValid(-1);
-        }
-        if(count > 4)
-        {
-          setCount(count - 4);
-          setValid(-1);
-        }
-    }
-    function getLastUsers() 
-    {
-      setNext(7 * totalPages);
-      setValid(-2);
-    }
+    // function callNextUsers(count, i) {
+    //   if (count === 1)
+    //   {
+    //     setNext(0);
+    //     if(i !== valid)
+    //     {
+    //       window.scrollTo({
+    //         top: 0,
+    //         behavior: "smooth"  // for smooth scrolling
+    //       });
+    //     }
+    //   }
+    //   else
+    //   {
+    //     setNext(7 * (count));
+    //     if(i !== valid)
+    //     {
+    //       window.scrollTo({
+    //         top: 0,
+    //         behavior: "smooth"  // for smooth scrolling
+    //       });
+    //     }
+    //   }
+    //   setValid(i);
+    // }
+    // function nextNumbers() 
+    // {
+    //     if (numbers + 4 > totalPages) {
+    //       let i = 0;
+    //       let j = numbers;
+    //       while(j < totalPages)
+    //       {
+    //         i++;
+    //         j++;
+    //       }
+    //       setnumbers(i);
+    //       setCount(count + i + 1);
+    //       setValid(-1);
+    //     }
+    // }
+    // function beforeNumbers()
+    // {
+    //     if (numbers < 4)
+    //     {
+    //       setnumbers(4);
+    //       setValid(-1);
+    //     }
+    //     if(count > 4)
+    //     {
+    //       setCount(count - 4);
+    //       setValid(-1);
+    //     }
+    // }
+    // function getLastUsers() 
+    // {
+    //   setNext(7 * totalPages);
+    //   setValid(-2);
+    // }
     useEffect(() => {
         fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/api/get_user_levle/${next}`)
           .then((response) => {
@@ -163,20 +163,23 @@ function MainProfile() {
 )}
 {/* finish card */} 
 <div  className={style.chooseNumber}>
-  <div className={style.beforeButton} onClick={beforeNumbers}>
+  <div className={style.beforeButton} /*onClick={beforeNumbers}*/>
       <p>&lt;&lt;</p>
   </div>
-{Array.from({ length: numbers }, (_, i) => (
+{/* {Array.from({ length: numbers }, (_, i) => (
     <div key={i} className={valid === i ? style.buttonActive : style.button} onClick={() => callNextUsers(count+i, i)}>
         <p>{count + i}</p>
     </div>
-  ))}
-  <div className={style.nextButton} onClick={nextNumbers}>
+  ))} */}
+
+  {/* start button go right */}
+  <div className={style.nextButton} /*onClick={nextNumbers}*/>
         <p>&gt;&gt;</p>
   </div>
-    <div className={valid === -2 ? style.buttonActive : style.lastButton} onClick={getLastUsers}>
+  {/* finish button go right */}
+    {/* <div className={valid === -2 ? style.buttonActive : style.lastButton} onClick={getLastUsers}>
         <p>{totalPages}</p>
-    </div>
+    </div> */}
   </div>
 </div>
 

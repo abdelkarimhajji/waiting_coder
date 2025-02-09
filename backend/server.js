@@ -608,6 +608,7 @@ app.post('/api/update_level/:id', (req, res) => {
 
 app.get('/api/validation_specific/:id/:idCollection', (req, res) => {
   const id = req.params.id;
+  const idCollection = req.params.idCollection;
   const selectSql = `SELECT validation FROM specifics WHERE id_nameSpecifics = ? and id_user = ?`;
 
   db.query(selectSql, [idCollection, id], (selectErr, selectResult) => {

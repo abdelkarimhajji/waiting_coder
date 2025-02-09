@@ -129,10 +129,11 @@
             }
             img
             {
-                width: 280;
+                width: 280px;
                 height: 280px;
                 border-radius: 50%;
                 box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+                object-fit: cover;
                 @media(max-width:938px)
                 {
                     height: 250px;
