@@ -157,9 +157,8 @@
     left: 150px;
     z-index: 11;
     padding-top: 15px;
-    
     position: fixed;
-    // padding-left: 20px;
+    border-radius: 15px;
     transition: 0.2s ease-in-out;
     @media (max-width:1000px)
     {
@@ -190,7 +189,7 @@
         width: 97%;
         min-height: 40px;
         background-color: #2a2d38;
-        // background-color: red;
+        border-radius: 15px;
         cursor: pointer;
         margin: 0 auto;
         margin-bottom: 15px;
