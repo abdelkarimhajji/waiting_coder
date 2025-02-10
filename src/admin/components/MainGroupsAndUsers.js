@@ -407,197 +407,199 @@ const finisheGroup = () =>
   }
 }
   return (
-    <div className={style.container}>
-      <div className={style.containerDivsInfo}>
-          {/* start one div */}
-          {selectInfoGroups.map((item, index) => (
-            <div key={index} className={style.oneDiv}>
-              <div className={style.insidedOneDivContent}>
-                  <div className={style.total}>
-                      <p>{item.specific_name}</p>
-                  </div>
-                  <div className={style.description}>
-                      <p>Total of Groups : {item.group_count} </p>
-                      <p>Group(s) working now are(is) : {item.unfinished_group_count} </p>
-                  </div>
-              </div>
-              <div className={style.insdeOneDivUnder}></div>
-            </div>
-          ))}
-          {/* finish one div */}
-          {/* start one div */}
-            <div className={style.oneDiv}>
-              <div className={style.insidedOneDivContent}>
-                  <div className={style.total}>
-                      <p>Groups Working</p>
-                  </div>
-                  <div className={style.description}>
-                        {selectCountGroupsWorking && selectCountGroupsWorking.length > 0 ? (
-                            <p>Total groups working: {selectCountGroupsWorking[0].unfinished_group_count}</p>
-                        ) : (
-                            <p>Loading or no data available</p>
-                        )}
+    <div className={style.containerResponcive}>
+      <div className={style.container}>
+        <div className={style.containerDivsInfo}>
+            {/* start one div */}
+            {selectInfoGroups.map((item, index) => (
+              <div key={index} className={style.oneDiv}>
+                <div className={style.insidedOneDivContent}>
+                    <div className={style.total}>
+                        <p>{item.specific_name}</p>
                     </div>
+                    <div className={style.description}>
+                        <p>Total of Groups : {item.group_count} </p>
+                        <p>Group(s) working now are(is) : {item.unfinished_group_count} </p>
+                    </div>
+                </div>
+                <div className={style.insdeOneDivUnder}></div>
               </div>
-              <div className={style.insdeOneDivUnder}></div>
-            </div>
-          {/* finish one div */}
-        </div>
-        {/* container about groups start */}
-        <div className={style.containerListUsers}>
-            <div className={style.containerSelect}>
-            <select value={selectedOption1} onChange={handleSelect1Change}>
-              <option value="Choose another Year">Choose Old Group</option>
-              {selectOldGroups.map((item, index) => (
-              <option key={index} value={`${item.IdGroup}*${item.date_created}&${item.date_finished}`}>Group {item.name_group} {item.name}</option>
+            ))}
+            {/* finish one div */}
+            {/* start one div */}
+              <div className={style.oneDiv}>
+                <div className={style.insidedOneDivContent}>
+                    <div className={style.total}>
+                        <p>Groups Working</p>
+                    </div>
+                    <div className={style.description}>
+                          {selectCountGroupsWorking && selectCountGroupsWorking.length > 0 ? (
+                              <p>Total groups working: {selectCountGroupsWorking[0].unfinished_group_count}</p>
+                          ) : (
+                              <p>Loading or no data available</p>
+                          )}
+                      </div>
+                </div>
+                <div className={style.insdeOneDivUnder}></div>
+              </div>
+            {/* finish one div */}
+          </div>
+          {/* container about groups start */}
+          <div className={style.containerListUsers}>
+              <div className={style.containerSelect}>
+              <select value={selectedOption1} onChange={handleSelect1Change}>
+                <option value="Choose another Year">Choose Old Group</option>
+                {selectOldGroups.map((item, index) => (
+                <option key={index} value={`${item.IdGroup}*${item.date_created}&${item.date_finished}`}>Group {item.name_group} {item.name}</option>
+                ))}
+              </select>
+            <select value={selectedOption2} onChange={handleSelect2Change}>
+              <option value="Choose another Year">Choose Current Group</option>
+              {selectCurrentGroups.map((item, index) => (
+              <option key={index} value={`${item.IdGroup}*${item.date_created}`}>Group {item.name_group} {item.name}</option>
               ))}
             </select>
-          <select value={selectedOption2} onChange={handleSelect2Change}>
-            <option value="Choose another Year">Choose Current Group</option>
-            {selectCurrentGroups.map((item, index) => (
-            <option key={index} value={`${item.IdGroup}*${item.date_created}`}>Group {item.name_group} {item.name}</option>
-            ))}
-          </select>
-            </div>
-            <div className={style.selectAll}>
-              <div className={style.containerAll}>
-                <div className={style.containerChecked}>
-                  <label >Checked All</label>
-                  <input
-                    type="checkbox"
-                    style={{ marginLeft: '20px' }}
-                    onChange={handleCheckAll}
-                    checked={isCheckAllChecked}
-                  />
+              </div>
+              <div className={style.selectAll}>
+                <div className={style.containerAll}>
+                  <div className={style.containerChecked}>
+                    <label >Checked All</label>
+                    <input
+                      type="checkbox"
+                      style={{ marginLeft: '20px' }}
+                      onChange={handleCheckAll}
+                      checked={isCheckAllChecked}
+                    />
+                    </div>
+                </div>
+                <div className={style.containerValidate} >
+                    <button onClick={handelValidateAll}>validate Week</button>
+                    {/* <button onClick={handleCheckAll}>Check All</button> */}
+                </div>
+              
+              </div>
+              <div className={style.cantainerTable}>
+                <div className={style.containerTitles}>
+                  <div className={style.containerDateCreate}>
+                  <BsCalendarDateFill  className={style.iconDate}/>
+                  <p> Created At : {dateCreated}</p>
                   </div>
-              </div>
-              <div className={style.containerValidate} >
-                  <button onClick={handelValidateAll}>validate Week</button>
-                  {/* <button onClick={handleCheckAll}>Check All</button> */}
-              </div>
-             
-            </div>
-            <div className={style.cantainerTable}>
-              <div className={style.containerTitles}>
-                <div className={style.containerDateCreate}>
-                <BsCalendarDateFill  className={style.iconDate}/>
-                <p> Created At : {dateCreated}</p>
+                  {dateFinished !== 0 && 
+                  <div className={style.containerDateCreate}>
+                  <BsFillCalendarXFill  className={style.iconDate}/>
+                  <p> Finished At : {dateFinished}</p>
+                  </div>
+                  }
                 </div>
-                {dateFinished !== 0 && 
-                <div className={style.containerDateCreate}>
-                <BsFillCalendarXFill  className={style.iconDate}/>
-                <p> Finished At : {dateFinished}</p>
+              
+                  <table>
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Student(s)</th>
+                            <th>payemnt</th>
+                            <th className={style.displayNone}>update</th>
+                            <th >select</th>
+                            <th className={style.displayNone}>validate FWeek</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {selectUserInfo.map((item, index) => (
+                      <tr key={index} className={style.trHover}>
+                          <td>
+                            {item.phone === "null" ? (
+                                <img src={item.image} alt={item.firstName} className={style.img} />
+                              ):(
+                                
+                                <img src={require(`../../imgs/${item.image}`)} alt={item.firstName} className={style.img} />
+                            )}
+                          </td>
+                          <td>{item.firstName} {item.lastName}</td>
+                          <td>{item.payment} DH</td>
+                          <td className={style.displayNone}><button>edit</button></td>
+                          <th >
+                          <input
+                              type="checkbox"
+                              className={style.checkBox}
+                              checked={checkedItems[index] || false}
+                              onChange={(event) => handleCheckboxChange(event, index, item.id_user)}
+                            />
+                          </th>
+                          <td className={style.displayNone}>
+                          {item.validation_week === 1 ? (
+                              <button>is Valid</button>
+                            ) : (
+                              <button onClick={(event) => handelValidate(event, item.id_user)}>validate</button>
+                            )}
+                            
+                          </td>
+                      </tr>       
+                      ))} 
+                      </tbody>
+                  </table>
+              </div>
+              {/* finish container table */}
+          </div>
+          {/* create groups */}
+          <div className={style.containerGroups}>
+                <div className={style.containerTitle}>
+                  <MdCreateNewFolder  className={style.iconFolder}/>
+                  <p>Create New Group</p>
                 </div>
-                }
-              </div>
-            
-                <table>
-                  <thead>
-                      <tr>
-                          <th>Image</th>
-                          <th>Student(s)</th>
-                          <th>payemnt</th>
-                          <th className={style.displayNone}>update</th>
-                          <th >select</th>
-                          <th className={style.displayNone}>validate FWeek</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    {selectUserInfo.map((item, index) => (
-                    <tr key={index} className={style.trHover}>
-                        <td>
-                          {item.phone === "null" ? (
-                              <img src={item.image} alt={item.firstName} className={style.img} />
-                            ):(
-                              
-                              <img src={require(`../../imgs/${item.image}`)} alt={item.firstName} className={style.img} />
-                          )}
-                        </td>
-                        <td>{item.firstName} {item.lastName}</td>
-                        <td>{item.payment} DH</td>
-                        <td className={style.displayNone}><button>edit</button></td>
-                        <th >
-                        <input
-                            type="checkbox"
-                            className={style.checkBox}
-                            checked={checkedItems[index] || false}
-                            onChange={(event) => handleCheckboxChange(event, index, item.id_user)}
-                          />
-                        </th>
-                        <td className={style.displayNone}>
-                        {item.validation_week === 1 ? (
-                            <button>is Valid</button>
-                          ) : (
-                            <button onClick={(event) => handelValidate(event, item.id_user)}>validate</button>
-                          )}
-                          
-                        </td>
-                    </tr>       
-                    ))} 
-                    </tbody>
-                </table>
-            </div>
-            {/* finish container table */}
-        </div>
-        {/* create groups */}
-        <div className={style.containerGroups}>
-              <div className={style.containerTitle}>
-                <MdCreateNewFolder  className={style.iconFolder}/>
-                <p>Create New Group</p>
-              </div>
-              <div className={style.containerCreateGroups}>
-                    <div className={style.containerInputs}>
-                      <input type="text" placeholder="Enter Number Of gorup" value={inputValueName} onChange={handleGetValueInput}/>
-                      <select value={selectedOption3} onChange={handleSelectChooseSpicific}>
-                        <option value="Choose Specifics">Choose Specifics</option>
-                        {getALLSpecific.map((item, index) => (
-                        <option key={index} value={item.id} >Group {item.name}</option>
-                      ))}
-                      </select>
-                    <select value={selectedOption4} onChange={handleSelectChooseTeacher}>
-                      <option value="Choose Teacher">Choose Teacher</option>
-                      {getALLTeachers.map((item, index) => (
-                      <option key={index} value={item.id}>Teacher : {item.first_name} {item.last_name}</option>
-                      ))}
-                    </select>
-                    </div>
-                    <div className={style.containerInputCreate}>
-                    {notNumber === 1 && <p>The Name should be Number!!!</p>}
-                    {notChoose === 1 && <p>Must Choose Option!!!</p>}
-                    {nameAlreadExist === 1 && <p>This name already exist!!!</p>}
-                      <input type="button" value="Create" onClick={createGroup} />
-                      {addSucces === 1 ? (
-                        <HiOutlineBadgeCheck className={style.create}/>
-                        ) : addSucces === 0 ? (
-                        <MdOutlineGppBad  className={style.nCreate}/>
-                      ) : null}
-                    </div>
-              </div>
-        </div>
-        {/* finish create groups */}
-
-        {/* start group finish */}
-        <div className={style.containerFinishGroup}>
-              <div className={style.containerTitle}>
-                <HiFolderRemove  className={style.iconFolder}/>
-                <p>Finish Group</p>
-              </div>
-              <div className={style.conatinerInputs}>
-                    <div className={style.containerSelect}>
-                    <select value={valueGroupFinished} onChange={handleSelectGroupsFinish}>
-                        <option value="Choose Group to Finishe">Choose Group to Finishe</option>
-                        {selectCurrentGroups.map((item, index) => (
-                        <option key={index} value={item.IdGroup}>Group {item.name_group} {item.name}</option>
+                <div className={style.containerCreateGroups}>
+                      <div className={style.containerInputs}>
+                        <input type="text" placeholder="Enter Number Of gorup" value={inputValueName} onChange={handleGetValueInput}/>
+                        <select value={selectedOption3} onChange={handleSelectChooseSpicific}>
+                          <option value="Choose Specifics">Choose Specifics</option>
+                          {getALLSpecific.map((item, index) => (
+                          <option key={index} value={item.id} >Group {item.name}</option>
                         ))}
-                    </select>
-                    </div>
-                    <div className={style.containerValid}>
-                          <button onClick={finisheGroup}>Submit</button>
-                          {finishGroup === 1 ? <HiOutlineBadgeCheck className={style.create2}/>: null}
-                    </div>
-              </div>
-        </div>
-        {/* finish group finish */}
+                        </select>
+                      <select value={selectedOption4} onChange={handleSelectChooseTeacher}>
+                        <option value="Choose Teacher">Choose Teacher</option>
+                        {getALLTeachers.map((item, index) => (
+                        <option key={index} value={item.id}>Teacher : {item.first_name} {item.last_name}</option>
+                        ))}
+                      </select>
+                      </div>
+                      <div className={style.containerInputCreate}>
+                      {notNumber === 1 && <p>The Name should be Number!!!</p>}
+                      {notChoose === 1 && <p>Must Choose Option!!!</p>}
+                      {nameAlreadExist === 1 && <p>This name already exist!!!</p>}
+                        <input type="button" value="Create" onClick={createGroup} />
+                        {addSucces === 1 ? (
+                          <HiOutlineBadgeCheck className={style.create}/>
+                          ) : addSucces === 0 ? (
+                          <MdOutlineGppBad  className={style.nCreate}/>
+                        ) : null}
+                      </div>
+                </div>
+          </div>
+          {/* finish create groups */}
+
+          {/* start group finish */}
+          <div className={style.containerFinishGroup}>
+                <div className={style.containerTitle}>
+                  <HiFolderRemove  className={style.iconFolder}/>
+                  <p>Finish Group</p>
+                </div>
+                <div className={style.conatinerInputs}>
+                      <div className={style.containerSelect}>
+                      <select value={valueGroupFinished} onChange={handleSelectGroupsFinish}>
+                          <option value="Choose Group to Finishe">Choose Group to Finishe</option>
+                          {selectCurrentGroups.map((item, index) => (
+                          <option key={index} value={item.IdGroup}>Group {item.name_group} {item.name}</option>
+                          ))}
+                      </select>
+                      </div>
+                      <div className={style.containerValid}>
+                            <button onClick={finisheGroup}>Submit</button>
+                            {finishGroup === 1 ? <HiOutlineBadgeCheck className={style.create2}/>: null}
+                      </div>
+                </div>
+          </div>
+          {/* finish group finish */}
+      </div>
     </div>
   );
 

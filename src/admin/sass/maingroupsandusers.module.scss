@@ -2,9 +2,18 @@
 @import 'mathsass';
 
 
+.containerResponcive
+{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    background-color:#f7f7f7;
+}
 .container
 {
-    background-color:#f7f7f7;
+    max-width: 2500px;
+    width: 100%;
     // background-color: red;
     min-height: 100vh; 
     display: flex;
@@ -126,8 +135,8 @@
     .containerListUsers
     {
         min-height: 200px;
-        // background-color:    red;
-        width: 100%;
+      
+        width: 96%;
         border-radius: 20px;
         // box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
         margin-bottom: 50px;
@@ -463,7 +472,7 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        width: 100%;
+        width: 96%;
         padding-top: 50px;
         margin-bottom: 100px;
         box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
@@ -613,7 +622,7 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        width: 100%;
+        width: 96%;
         padding-top: 50px;
         margin-bottom: 100px;
         box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;

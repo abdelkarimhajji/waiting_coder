@@ -497,220 +497,223 @@ function MainValidate() {
   }
  
   return (
-    <div className={style.container}>
-        <div className={style.containerValidateProject}>
-            <div className={style.containerTitle}>
-                <TbViewfinder  className={style.iconFolder}/>
-                <p>Choose Group Validate</p>
-            </div>
-            {/* start container inputs */}
-            <div className={style.containerInputs}>
-                <select value={valueSelect1} onChange={handelChangeOldGroup}>
-                    <option value="Choose Old group" >Choose Old group</option>
-                    {selectOldGroups.map((item, index) => (
-                    <option key={index} value={`${item.IdNameSpecific}/${item.IdGroup}`}>Group : {item.name_group} {item.name}</option>
-                    ))}
-                </select>
-                <select value={valueSelect2} onChange={handelChangeCurruntlyGroup}>
-                    <option value="Choose Curruntly group">Choose Curruntly group</option>
-                    {selectCurrentGroups.map((item,index) => (
-                    <option key={index} value={`${item.IdNameSpecific}/${item.IdGroup}`}>Group : {item.name_group} {item.name}</option>
-                    ))}
-                </select>
-                <select value={valueSelect3} onChange={handelChangeProject}>
-                    <option value="Choose Project">Choose Project</option>
-                    {nameSpecific.map((item, index) => (
-                    <option key={index} value={item.id}>{item.name_project}</option>
-                    ))}
-                </select>
-            </div>
-            {/* finish container inputs */}
-        </div>
-        {/* sellect all and valid */}
-        <div className={style.containerSellectAll}>
-                <div className={style.select}>
-                      <p>Select ALL </p>
-                      <input type="checkbox" checked={selectAllChecked} onChange={handleSelectAll}/>
-                </div>
-                <div className={style.valid}>
-                      <button onClick={handelValidAll}>Valid Project</button>
-                      <button onClick={handelValidSpecificAll}>Valid specific</button>
-                </div>
-        </div>
-          {/* finishe sellect all and vlaid */}
-        {/* start container of table */}
-        <div className={style.containerTable}>
-        <table>
-                  <thead>
-                      <tr>
-                          <th>Image</th>
-                          <th>Student(s)</th>
-                          <th>payemnt</th>
-                          <th>select</th>
-                          <th className={style.displayNone}>validate Project</th>
-                          <th className={style.displayNone}>validate specific</th>
-                      </tr> 
-                    </thead>
-                    <tbody>
-                        {allStudentGroup.length > 0 ? (
-                          allStudentGroup.map((item, index) => (
-                    <tr key={index} className={style.trHover}>
-                       <td>
-                        {item.phone === "null" ? (
-                          <img
-                          src={item.image}
-                          alt={item.firstName}
-                          className={style.img}
-                          />
-                        ) : (
-                          <img
-                          src={item.image ? require(`../../imgs/${item.image}`) : 'fallback-image-url.jpg'}
-                          alt={item.firstName}
-                          className={style.img}   
-                          />
-                        )}
-                        </td>
-                        <td>{item.firstName}</td>
-                        <td>{item.payment} DH</td> 
+    <div className={style.containerResponcive}>
+      <div className={style.container}>
+          <div className={style.containerValidateProject}>
+              <div className={style.containerTitle}>
+                  <TbViewfinder  className={style.iconFolder}/>
+                  <p>Choose Group Validate</p>
+              </div>
+              {/* start container inputs */}
+              <div className={style.containerInputs}>
+                  <select value={valueSelect1} onChange={handelChangeOldGroup}>
+                      <option value="Choose Old group" >Choose Old group</option>
+                      {selectOldGroups.map((item, index) => (
+                      <option key={index} value={`${item.IdNameSpecific}/${item.IdGroup}`}>Group : {item.name_group} {item.name}</option>
+                      ))}
+                  </select>
+                  <select value={valueSelect2} onChange={handelChangeCurruntlyGroup}>
+                      <option value="Choose Curruntly group">Choose Curruntly group</option>
+                      {selectCurrentGroups.map((item,index) => (
+                      <option key={index} value={`${item.IdNameSpecific}/${item.IdGroup}`}>Group : {item.name_group} {item.name}</option>
+                      ))}
+                  </select>
+                  <select value={valueSelect3} onChange={handelChangeProject}>
+                      <option value="Choose Project">Choose Project</option>
+                      {nameSpecific.map((item, index) => (
+                      <option key={index} value={item.id}>{item.name_project}</option>
+                      ))}
+                  </select>
+              </div>
+              {/* finish container inputs */}
+          </div>
+          {/* sellect all and valid */}
+          <div className={style.containerSellectAll}>
+                  <div className={style.select}>
+                        <p>Select ALL </p>
+                        <input type="checkbox" checked={selectAllChecked} onChange={handleSelectAll}/>
+                  </div>
+                  <div className={style.valid}>
+                        <button onClick={handelValidAll}>Valid Project</button>
+                        <button onClick={handelValidSpecificAll}>Valid specific</button>
+                  </div>
+          </div>
+            {/* finishe sellect all and vlaid */}
+          {/* start container of table */}
+          <div className={style.containerTable}>
+          <table>
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Student(s)</th>
+                            <th>payemnt</th>
+                            <th>select</th>
+                            <th className={style.displayNone}>validate Project</th>
+                            <th className={style.displayNone}>validate specific</th>
+                        </tr> 
+                      </thead>
+                      <tbody>
+                          {allStudentGroup.length > 0 ? (
+                            allStudentGroup.map((item, index) => (
+                      <tr key={index} className={style.trHover}>
                         <td>
-                        <input
-                            type="checkbox"
-                            className={style.checkBox}
-                            checked={checkboxes[item.idOfUser] || false}
-                            onChange={() => toggleCheckbox(item.idOfUser)}
-                          />
-                        </td>
-                        <td className={style.displayNone}>
-                        {item.valid_project === 1 ? <button>is Valid</button> : <button  onClick={() => handlCklickEachValid(item.idOfUser)}>valid</button> }
-                        </td>
-                        <td className={style.displayNone}>{item.validation === 1 ? <button>is valid</button> : <button onClick={() => handelVlidEachStudentSpecific(item.idOfUser)}>valid</button>}</td>
-                    </tr>    
-                    ))): (
-                      <>
-                      <tr style={{backgroundColor: '#00bbbe'}}>
-                        <td>empty</td>
-                        <td>empty</td>
-                        <td>empty</td>
-                        <td>empty</td>
-                        <td>empty</td>
-                        <td>empty</td>
-                      </tr>
-                    </>
-                    )}   
-                    </tbody>
-                </table>
-        </div>
-        {/* finish container of table */}
-        <div className={style.containerLinkProjectValid}>
-            {/* start container choose group and project */}
-            <div className={style.containerChooseGroupProject}>
-                <div className={style.containerTitle}>
-                    <TbViewfinder  className={style.iconFolder}/>
-                    <p>Choose User Validate</p>
-                </div>
-            {/* finish title */}
-            {/* start selects */}
-            <div className={style.containerInputs}>
-                <select value={valueSelect4} onChange={handelChangeOldGroup2}>
-                    <option value="Choose Old group" >Choose Old group</option>
-                    {selectOldGroups.map((item, index) => (
-                    <option key={index} value={`${item.IdNameSpecific}/${item.IdGroup}`}>Group : {item.name_group} {item.name}</option>
-                    ))}
-                </select>
-                <select value={valueSelect5} onChange={handelChangeCurruntlyGroup2}>
-                    <option value="Choose Curruntly group">Choose Curruntly group</option>
-                    {selectCurrentGroups.map((item,index) => (
-                    <option key={index} value={`${item.IdNameSpecific}/${item.IdGroup}`}>Group : {item.name_group} {item.name}</option>
-                    ))}
-                </select>
-                <select value={valueSelect6} onChange={handelChangeProject2}>
-                    <option value="Choose Project">Choose Project</option>
-                    {nameSpecific2.map((item, index) => (
-                    <option key={index} value={item.id}>{item.name_project}</option>
-                    ))}
-                </select>
-            </div>
-            {/* finishe selects */}
-            </div>
-            {/* finish conainer choose goroup and project */}
-            {/* start container links */}
-            <div className={style.containerLinks}>
-                <div className={style.partStudents}>
-                    <div className={style.containerTitles}>Choose Student</div>
-                    <div className={style.allStudent}>
-                      {allStudentGroup2.length > 0 ?(
-                      allStudentGroup2.map((item, index) => (
-                        <div key={index} className={index % 2 === 0 ? style.parentValidConversation : style.parentValidConversation2}>
-                          <div className={index % 2 === 0 ? style.eachStudent : style.eachStudentWhite} onClick={() => handelClickUser(item.idOfUser)}>
-                              <div className={style.containerImg}>
-                              {item.phone === "null" ? (
-                              <img
-                              src={item.image}
-                              alt={item.firstName}
-                             
-                              />
-                            ) : (
-                              <img
-                              src={item.image ? require(`../../imgs/${item.image}`) : 'fallback-image-url.jpg'}
-                              alt={item.firstName}
-                            
-                              />
-                            )}
-                                </div>
-                              <div className={style.containerName}><p>{item.firstName} {item.lastName}</p></div>
+                          {item.phone === "null" ? (
+                            <img
+                            src={item.image}
+                            alt={item.firstName}
+                            className={style.img}
+                            />
+                          ) : (
+                            <img
+                            src={item.image ? require(`../../imgs/${item.image}`) : 'fallback-image-url.jpg'}
+                            alt={item.firstName}
+                            className={style.img}   
+                            />
+                          )}
+                          </td>
+                          <td>{item.firstName}</td>
+                          <td>{item.payment} DH</td> 
+                          <td>
+                          <input
+                              type="checkbox"
+                              className={style.checkBox}
+                              checked={checkboxes[item.idOfUser] || false}
+                              onChange={() => toggleCheckbox(item.idOfUser)}
+                            />
+                          </td>
+                          <td className={style.displayNone}>
+                          {item.valid_project === 1 ? <button>is Valid</button> : <button  onClick={() => handlCklickEachValid(item.idOfUser)}>valid</button> }
+                          </td>
+                          <td className={style.displayNone}>{item.validation === 1 ? <button>is valid</button> : <button onClick={() => handelVlidEachStudentSpecific(item.idOfUser)}>valid</button>}</td>
+                      </tr>    
+                      ))): (
+                        <>
+                        <tr style={{backgroundColor: '#00bbbe'}}>
+                          <td>empty</td>
+                          <td>empty</td>
+                          <td>empty</td>
+                          <td>empty</td>
+                          <td>empty</td>
+                          <td>empty</td>
+                        </tr>
+                      </>
+                      )}   
+                      </tbody>
+                  </table>
+          </div>
+          {/* finish container of table */}
+          <div className={style.containerLinkProjectValid}>
+              {/* start container choose group and project */}
+              <div className={style.containerChooseGroupProject}>
+                  <div className={style.containerTitle}>
+                      <TbViewfinder  className={style.iconFolder}/>
+                      <p>Choose User Validate</p>
+                  </div>
+              {/* finish title */}
+              {/* start selects */}
+              <div className={style.containerInputs}>
+                  <select value={valueSelect4} onChange={handelChangeOldGroup2}>
+                      <option value="Choose Old group" >Choose Old group</option>
+                      {selectOldGroups.map((item, index) => (
+                      <option key={index} value={`${item.IdNameSpecific}/${item.IdGroup}`}>Group : {item.name_group} {item.name}</option>
+                      ))}
+                  </select>
+                  <select value={valueSelect5} onChange={handelChangeCurruntlyGroup2}>
+                      <option value="Choose Curruntly group">Choose Curruntly group</option>
+                      {selectCurrentGroups.map((item,index) => (
+                      <option key={index} value={`${item.IdNameSpecific}/${item.IdGroup}`}>Group : {item.name_group} {item.name}</option>
+                      ))}
+                  </select>
+                  <select value={valueSelect6} onChange={handelChangeProject2}>
+                      <option value="Choose Project">Choose Project</option>
+                      {nameSpecific2.map((item, index) => (
+                      <option key={index} value={item.id}>{item.name_project}</option>
+                      ))}
+                  </select>
+              </div>
+              {/* finishe selects */}
+              </div>
+              {/* finish conainer choose goroup and project */}
+              {/* start container links */}
+              <div className={style.containerLinks}>
+                  <div className={style.partStudents}>
+                      <div className={style.containerTitles}>Choose Student</div>
+                      <div className={style.allStudent}>
+                        {allStudentGroup2.length > 0 ?(
+                        allStudentGroup2.map((item, index) => (
+                          <div key={index} className={index % 2 === 0 ? style.parentValidConversation : style.parentValidConversation2}>
+                            <div className={index % 2 === 0 ? style.eachStudent : style.eachStudentWhite} onClick={() => handelClickUser(item.idOfUser)}>
+                                <div className={style.containerImg}>
+                                {item.phone === "null" ? (
+                                <img
+                                src={item.image}
+                                alt={item.firstName}
+                              
+                                />
+                              ) : (
+                                <img
+                                src={item.image ? require(`../../imgs/${item.image}`) : 'fallback-image-url.jpg'}
+                                alt={item.firstName}
+                              
+                                />
+                              )}
+                                  </div>
+                                <div className={style.containerName}><p>{item.firstName} {item.lastName}</p></div>
+                            </div>
+                            <div className={style.containerVlidate}>{item.valid_project === 1 ? <button>is Valid</button> : <button onClick={() => handlCklickEachValid2(item.idOfUser)}>Validate</button>}</div>
                           </div>
-                          <div className={style.containerVlidate}>{item.valid_project === 1 ? <button>is Valid</button> : <button onClick={() => handlCklickEachValid2(item.idOfUser)}>Validate</button>}</div>
+                          ))):(
+                            <div  className={style.eachStudent} style={{justifyContent: "center", alignItems:"center"}}>
+                              <p>empty</p>
+                          </div>
+                          )}
+                      </div>
+                  </div>
+                  <div className={style.partLinks}>
+                      <div className={style.containerTitles}>Links</div>
+                      <div className={style.allLinks} ref={divRef}>
+                        {allConversationStudent.length > 0 ? (
+                        allConversationStudent.map((item, index) => (
+                        <div key={index} >
+                          {item.message_student !== null && (
+                        <div className={style.ContainerMessageStudent}>
+                          <p className={style.time}>{item.firstName}: {item.time_send_student}</p>
+                          <div className={style.message}>
+                              <p>{item.message_student}</p>
+                          </div>
+                        </div>
+                        
+                        )}
+                        {item.message_teacher !== null && (
+                        <div className={style.ContainerMessageTeacher}>
+                          <p className={style.time2}>{item.first_name}: {item.time_send_teacher}</p>
+                          <div className={style.message}>
+                              <p>{item.message_teacher}</p>
+                          </div>
+                        </div>
+                        )}
                         </div>
                         ))):(
-                          <div  className={style.eachStudent} style={{justifyContent: "center", alignItems:"center"}}>
-                            <p>empty</p>
+                          <div className={style.ContainerMessageStudent}>
+                          <div className={style.message}>
+                              <p>No message</p>
+                          </div>
                         </div>
                         )}
-                    </div>
-                </div>
-                <div className={style.partLinks}>
-                    <div className={style.containerTitles}>Links</div>
-                    <div className={style.allLinks} ref={divRef}>
-                      {allConversationStudent.length > 0 ? (
-                      allConversationStudent.map((item, index) => (
-                      <div key={index} >
-                        {item.message_student !== null && (
-                       <div className={style.ContainerMessageStudent}>
-                        <p className={style.time}>{item.firstName}: {item.time_send_student}</p>
-                        <div className={style.message}>
-                            <p>{item.message_student}</p>
-                        </div>
-                       </div>
-                      )}
-                       {item.message_teacher !== null && (
-                       <div className={style.ContainerMessageTeacher}>
-                        <p className={style.time2}>{item.first_name}: {item.time_send_teacher}</p>
-                        <div className={style.message}>
-                            <p>{item.message_teacher}</p>
-                        </div>
-                       </div>
-                       )}
-                       </div>
-                       ))):(
-                        <div className={style.ContainerMessageStudent}>
-                        <div className={style.message}>
-                            <p>No message</p>
-                        </div>
-                       </div>
-                       )}
-                    </div>
-                </div>
-            </div>
-            {/* finish container links */}
-            {/* start container response */}
-            <div className={style.containerResponse}>
-              <div className={style.coloumnForm}>
-                <div className={style.containerInput}><input value={inputValue} type="text" onChange={(event) => setInputValue(event.target.value)} placeholder="Enter Your Message ..."/></div>
-                <div className={style.containerIcone}><div className={style.cercleOutSideIcone} onClick={handelCklickSendMessage}><BsFillSendFill className={style.icone}/></div></div>
+                      </div>
+                  </div>
               </div>
-            </div>
-            {/* finsih container response */} 
-        </div>
+              {/* finish container links */}
+              {/* start container response */}
+              <div className={style.containerResponse}>
+                <div className={style.coloumnForm}>
+                  <div className={style.containerInput}><input value={inputValue} type="text" onChange={(event) => setInputValue(event.target.value)} placeholder="Enter Your Message ..."/></div>
+                  <div className={style.containerIcone}><div className={style.cercleOutSideIcone} onClick={handelCklickSendMessage}><BsFillSendFill className={style.icone}/></div></div>
+                </div>
+              </div>
+              {/* finsih container response */} 
+          </div>
+      </div>
     </div>
   );
 

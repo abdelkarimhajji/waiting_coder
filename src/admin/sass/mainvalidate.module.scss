@@ -34,6 +34,7 @@
         }
     }
 }
+
 @mixin selects-style
 {
     .containerInputs
@@ -68,10 +69,20 @@
         }
 }
 
+.containerResponcive
+{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    background-color:#f7f7f7;
+    
+}
 .container
 {
-    background-color:#f7f7f7;
-    // background-color: red;   
+    max-width: 2500px;
+    // background-color: red; 
+    width: 95%;  
     min-height: 100vh; 
     display: flex;
     flex-direction: column;
@@ -87,10 +98,18 @@
         padding-left:10px;
         padding-right:10px;
     }
+    @media(max-width:1200px)
+    {
+        width: 90%;
+    }
     @media(max-width:950px)
     {
         padding-left:10px;
         padding-right:10px;
+    }
+    @media(max-width:650px)
+    {
+        width: 94%;
     }
     @media (max-width:580px)
     {
@@ -332,6 +351,10 @@
                 {
                     width: 100%;
                 }
+                // @media(max-width:600px)
+                // {
+                //     width: 100%;
+                // }
                 .containerTitles
                 {
                     width: 100%;
@@ -475,24 +498,36 @@
                    overflow-x: hidden;
                    padding-top: 50px;
                    color : white;
+                   font-family: Arial, Helvetica, sans-serif;
                    
                    .ContainerMessageStudent
                    {
                         width: 100%;
                         margin-bottom: 50px;
-                        overflow: hidden;
+                        
                         padding-left: 20px;
-                        .message
-                        {
-                            width: 80%;
-                            height: 50px;
+                        .message {
+                            width: 50%;
+                            min-height: 0px;
                             background-color: $pColorR;
                             border-radius: 20px;
                             color: white;
-                            // margin-left: 20px;
-                            display: flex;
-                            align-items: center;
-                            padding-left: 20px;
+                            display: block;
+                            padding-left:10px;
+                            padding-right: 7px;
+                            padding-top:3px;
+                            padding-bottom: 3px;
+                            @media(max-width:470px)
+                            {
+                                width: 200px;
+                                // overflow-x: scroll;
+                            }
+                        }
+                       
+                        p{
+                            word-wrap: break-word;
+                            overflow-wrap: break-word;
+                            white-space: normal;
                         }
                         .time
                         {
@@ -506,23 +541,35 @@
                         display: flex;
                         align-items:end;
                         flex-direction: column;
-                        overflow: hidden;
+                       
                         .time2
                         {
                             margin-right: 25px;
                             font-weight: bold;
                         }
-                        .message
-                        {
-                            width: 80%;
-                            height: 50px;
+                        .message {
+                            width: 50%;
+                            min-height: 0px;
                             background-color: $pColorR;
                             border-radius: 20px;
                             color: white;
+                            display: block;
+                            padding-left:10px;
+                            padding-right: 7px;
+                            padding-top: 3px;
+                            padding-bottom: 3px;
                             margin-right: 20px;
-                            display: flex;
-                            align-items: center;
-                            padding-left: 20px;
+                            @media(max-width:470px)
+                            {
+                                width: 200px;
+                                // overflow-x: scroll;
+                            }
+                           
+                        }
+                        p{
+                            word-wrap: break-word;
+                            overflow-wrap: break-word;
+                            white-space: normal;
                         }
                    }
                 }

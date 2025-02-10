@@ -35,11 +35,19 @@
         }
     }
 }
-
+.containerResponcive
+{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    background-color:#f7f7f7;
+}
 .container
 {
-    background-color:#f7f7f7;
-    min-height: 100vh; 
+    max-width: 2500px;
+    width: 100%;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -212,6 +220,10 @@
         flex-direction: column;
         align-items: center;
         padding-top: 50px;
+        @media(min-width:1500px)
+        {
+            width: 90%;
+        }
         @include title-style();
         .containerSelect
         {
@@ -246,6 +258,10 @@
         margin-bottom: 120px;
         display: flex;
         flex-direction: column;
+        @media(min-width:1500px)
+        {
+            width:90%;
+        }
         &::-webkit-scrollbar {
             width: 3px;
             height: 3px;

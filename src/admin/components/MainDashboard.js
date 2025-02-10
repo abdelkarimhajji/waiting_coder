@@ -67,104 +67,106 @@ function MainDashboard() {
     }
   };
   return (
-    <div className={style.container}>
-        <div className={style.containerDivsInfo}>
-          {/* start one div */}
-          {Object.keys(getAggregatedData).map((title, index) => (
-            <div key={index} className={style.oneDiv}>
-              <div className={style.insidedOneDivContent}>
-                  <div className={style.total}>
-                      <p>+{getAggregatedData[title]?.data?.count || 0} {title}</p>
-                  </div>
-                  <div className={style.description}>
-                      <p>{getAggregatedData[title].description}</p>
-                  </div>
+    <div className={style.containerResponsive}>
+      <div className={style.container}>
+          <div className={style.containerDivsInfo}>
+            {/* start one div */}
+            {Object.keys(getAggregatedData).map((title, index) => (
+              <div key={index} className={style.oneDiv}>
+                <div className={style.insidedOneDivContent}>
+                    <div className={style.total}>
+                        <p>+{getAggregatedData[title]?.data?.count || 0} {title}</p>
+                    </div>
+                    <div className={style.description}>
+                        <p>{getAggregatedData[title].description}</p>
+                    </div>
+                </div>
+                <div className={style.insdeOneDivUnder}>
+                  {/* You can add additional content here */}
+                </div>
               </div>
-              <div className={style.insdeOneDivUnder}>
-                {/* You can add additional content here */}
-              </div>
-            </div>
-          ))}
-          {/* finish one div */}
-        </div>
-        {/* container about money start */}
-        <div className={style.containeConrainer}>
-          {/* start choose */}
-          <div className={style.choose}>
-            {/* <h2>More deatils about money</h2> */}
-            <div className={style.containerTitle}>
-                <GiClick  className={style.iconFolder}/>
-                <p>More deatils about money</p>
-              </div>
-          <select value={valueSelect} onChange={handleSelectChange}>
-            <option value="Choose another Year">Choose another Year</option>
-            {selectYears.map((item, index) => (
-            <option key={index} value={item.year}>Year {item.year}</option>
             ))}
-          </select>
+            {/* finish one div */}
           </div>
-          {/* finish choose */}
-          <div className={style.ContainerBarCharte}>
-            <div className={style.some}>
-              {/* <p className={style.title}>Chart of earn all year</p> */}
+          {/* container about money start */}
+          <div className={style.containeConrainer}>
+            {/* start choose */}
+            <div className={style.choose}>
+              {/* <h2>More deatils about money</h2> */}
               <div className={style.containerTitle}>
-                <BiPieChartAlt2 className={style.iconFolder}/>
-                <p>Earn all years</p>
-              </div>
-              <PieCharte />
-              <p>add here your title</p>
-              <p>*******</p>
+                  <GiClick  className={style.iconFolder}/>
+                  <p>More deatils about money</p>
+                </div>
+            <select value={valueSelect} onChange={handleSelectChange}>
+              <option value="Choose another Year">Choose another Year</option>
+              {selectYears.map((item, index) => (
+              <option key={index} value={item.year}>Year {item.year}</option>
+              ))}
+            </select>
             </div>
-            <div className={style.barCharte}>
-              {/* <p className={style.title}>Chart of earn all year</p> */}
-              <div className={style.containerTitle}>
-                <AiOutlineBarChart  className={style.iconFolder}/>
-                <p>Earn all years</p>
+            {/* finish choose */}
+            <div className={style.ContainerBarCharte}>
+              <div className={style.some}>
+                {/* <p className={style.title}>Chart of earn all year</p> */}
+                <div className={style.containerTitle}>
+                  <BiPieChartAlt2 className={style.iconFolder}/>
+                  <p>Earn all years</p>
+                </div>
+                <PieCharte />
+                <p>add here your title</p>
+                <p>*******</p>
               </div>
-              <BarCharte choosetYear={choosetYear}/>
-            </div>
-          </div>
-        </div>
-        {/* container about money finish */}
-        {/* container about money start */}
-        <div className={style.containeConrainer}>
-          {/* start choose */}
-          <div className={style.choose}>
-            {/* <h2>More deatils about Student</h2> */}
-            <div className={style.containerTitle}>
-                <GiClick  className={style.iconFolder}/>
-                <p>More deatils about money</p>
+              <div className={style.barCharte}>
+                {/* <p className={style.title}>Chart of earn all year</p> */}
+                <div className={style.containerTitle}>
+                  <AiOutlineBarChart  className={style.iconFolder}/>
+                  <p>Earn all years</p>
+                </div>
+                <BarCharte choosetYear={choosetYear}/>
               </div>
-          <select value={valueSelect2} onChange={handleSelectChange2}>
-            <option value="Choose another Year">Choose another Year</option>
-            {selectYears.map((item, index) => (
-            <option key={index} value={item.year}>Year {item.year}</option>
-            ))}
-          </select>
-          </div>
-          {/* finish choose */}
-          <div className={style.ContainerBarCharte}>
-            <div className={style.barCharte}>
-              {/* <p className={style.title}>Chart : Number of stuent each month</p> */}
-              <div className={style.containerTitle}>
-                <AiOutlineBarChart  className={style.iconFolder}/>
-                <p>Number Stuent Month</p>
-              </div>
-              <BarCharte2 choosetYear={choosetYear2}/>
-            </div>
-            <div className={style.some}>
-              {/* <p className={style.title}>Chart : Number User in each year</p> */}
-              <div className={style.containerTitle}>
-                <BiPieChartAlt2  className={style.iconFolder}/>
-                <p>Number User in each year</p>
-              </div>
-              <PieChart2 />
-              <p>add here your title</p>
-              <p>*******</p>
             </div>
           </div>
-        </div>
-        {/* container about money finish */}
+          {/* container about money finish */}
+          {/* container about money start */}
+          <div className={style.containeConrainer}>
+            {/* start choose */}
+            <div className={style.choose}>
+              {/* <h2>More deatils about Student</h2> */}
+              <div className={style.containerTitle}>
+                  <GiClick  className={style.iconFolder}/>
+                  <p>More deatils about money</p>
+                </div>
+            <select value={valueSelect2} onChange={handleSelectChange2}>
+              <option value="Choose another Year">Choose another Year</option>
+              {selectYears.map((item, index) => (
+              <option key={index} value={item.year}>Year {item.year}</option>
+              ))}
+            </select>
+            </div>
+            {/* finish choose */}
+            <div className={style.ContainerBarCharte}>
+              <div className={style.barCharte}>
+                {/* <p className={style.title}>Chart : Number of stuent each month</p> */}
+                <div className={style.containerTitle}>
+                  <AiOutlineBarChart  className={style.iconFolder}/>
+                  <p>Number Stuent Month</p>
+                </div>
+                <BarCharte2 choosetYear={choosetYear2}/>
+              </div>
+              <div className={style.some}>
+                {/* <p className={style.title}>Chart : Number User in each year</p> */}
+                <div className={style.containerTitle}>
+                  <BiPieChartAlt2  className={style.iconFolder}/>
+                  <p>Number User in each year</p>
+                </div>
+                <PieChart2 />
+                <p>add here your title</p>
+                <p>*******</p>
+              </div>
+            </div>
+          </div>
+          {/* container about money finish */}
+      </div>
     </div>
   );
 }

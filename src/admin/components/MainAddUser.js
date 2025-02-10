@@ -303,6 +303,7 @@ const handleImageChange = (event) => {
     
   return (
     <>
+    <div className={style.containerResponcive}>
     <div className={styleAlert} style={{top: scrollPosition }}>
       
         <div className={style.confirmation}>
@@ -471,6 +472,7 @@ const handleImageChange = (event) => {
               </table>
         </div>
         {/* finish container payment */}
+    </div>
     </div>
     </>
   );

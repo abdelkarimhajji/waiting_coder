@@ -3,41 +3,50 @@
 
 @mixin title-style
 {
-    .containerTitle
-        {
-            width: 80%;
-            // background-color: yellow;
-            height: 50px;
-            border-radius: 10px;
-            box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 50px;
-            text-align: center;
-            @media(max-width:768px)
-            {
-                width: 90%;
-            }
-            @media(max-width:328px)
-            {
-                width: 90%;
-            }
-            .iconFolder
-            {
-                font-size: 30px;
-                color: $pColorR;
-            }
-            p
-            {
-                margin-left: 10px;
-                font-weight: bold;
-            }
-        }
+.containerTitle
+{
+    width: 80%;
+    // background-color: yellow;
+    height: 50px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+    text-align: center;
+    @media(max-width:768px)
+    {
+        width: 90%;
+    }
+    @media(max-width:328px)
+    {
+        width: 90%;
+    }
+    .iconFolder
+    {
+        font-size: 30px;
+        color: $pColorR;
+    }
+    p
+    {
+        margin-left: 10px;
+        font-weight: bold;
+    }
+}
+}
+.containerResponsive
+{
+    width: 100%;
+    min-height: 100vh;
+    background-color:#f7f7f7;
+    display: flex;
+    justify-content: center;
 }
 .container
 {
-    background-color:#f7f7f7;
+    max-width: 2500px;
+    width: 100%;
     min-height: 100vh; 
     display: flex;
     flex-direction: column;
@@ -154,7 +163,7 @@
     }
     .containeConrainer
     {
-        width: 100%;
+        width: 96%;
         display: flex;
         flex-direction: column;
         align-items: end;

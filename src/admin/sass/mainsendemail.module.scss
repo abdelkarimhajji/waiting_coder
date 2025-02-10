@@ -1,13 +1,24 @@
 @import "../../sass/global.module.scss";
 
+
+
+.containerResponcive
+{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    background-color:rgba(221, 221, 221, 0.194);
+}
 .container
 {
+    max-width: 2500px;
     width: 100%;
     min-height: 100vh;
     margin-top: 65px;
     font-family: $myfont;
     overflow:hidden;
-    background-color:rgba(221, 221, 221, 0.194);
+    // background-color:rgba(221, 221, 221, 0.194);
     .containerFilter
     {
         width: 100%;

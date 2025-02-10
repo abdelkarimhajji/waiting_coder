@@ -1,8 +1,19 @@
 @import "../../sass/global.module.scss";
 @import 'mathsass';
 
-
+.containerResponsive
+{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+}
 .container {
+    width: 100%;
+    max-width: 3000px;
+    max-height: 1600px;
     height: 100vh;
     display: flex;
     font-family: $myfont;
@@ -11,7 +22,7 @@
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
-      height: 100vh;
+    //   height: 100vh;
       width: 60%;
       color: white;
       position: relative;
@@ -81,11 +92,13 @@
   
     .loginSide {
       background-color: $pColor1;
-      height: 100vh;
+    //   height: 100vh;
       width: 40%;
       display: flex;
       justify-content: center;
       align-items: center;
+      position: relative;
+      z-index: 0;
       @media(max-width: 1450px)
       {
         width: 50%;
@@ -97,16 +110,42 @@
       @media(max-width: 800px)
       {
         width: 100%;
+        background-image: url(../../imgs/background_admin.webp);
+        background-position: center;
+        background-size: cover;
+        &::after
+        {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.578);
+            z-index: 1;
+        }
       }
       .containerLogin
       {
-        // box-shadow: rgba(255, 255, 255, 0.274) 0px 18px 50px -10px;
-        
-        background: linear-gradient(to bottom, #e0e0e0 -180%, $pColor1 );
+        background-image: url('../../imgs/binary_level.jpg');
         border-radius: 20px;
-        // background-color: red;
         width: 500px;
         height: 500px;
+        position: relative;
+        z-index: 3;
+        &::after
+        {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2px;
+            background-color: rgba(0, 0, 0, 0.525);
+            // background-color: red;
+            border-radius: 20px;
+        }
         @media(max-width: 1100px)
         {
             width: 400px;
@@ -122,12 +161,16 @@
             width: 270px;
             height: 300px;
         }
+        // background-color: red;
             .containerIcon
             {
                 height: 250px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                position: relative;
+                z-index: 3;
+                
                 @media(max-width: 1100px)
                 {
                     height: 170px;
@@ -148,11 +191,15 @@
                     {   
                         font-size: 70px;
                     }
+                    position: relative;
+                    z-index: 3;
                 }
             }
             .containerInputs
             {
                 // background-color: red;
+                position: relative;
+                z-index: 3;
                 .input
                 {
                     font-family: $myfont;
@@ -162,6 +209,9 @@
                     width: 250px;
                     margin-bottom: 20px;
                     text-align: center;
+                    border-radius: 10px;
+                    border: 1px solid black;
+                    
                     &:focus
                     {
                         outline: none;
@@ -176,6 +226,8 @@
             }
             .containerSubmit
             {
+                position: relative;
+                z-index: 1;
                 .submit
                 {
                     display: block;
@@ -190,11 +242,12 @@
                     cursor: pointer;
                     transition: 0.5s all;
                     border: 0.5px solid rgba(255, 255, 255, 0.374);
+                    border-radius: 10px;
                     &:hover
                     {
-                        background-color:#262a3d9f;
-                        width: 280px;
-                        height: 50px;
+                        background-color:#262a3df0;
+                        width: 270px;
+                        height: 46px;
                         font-size: 16px;
                     }
                     @media(max-width: 300px)
@@ -208,6 +261,10 @@
             {
                 text-align: center;
                 color: red;
+                position: relative;
+                z-index: 1;
+                font-weight: bold;
+                font-size: 13px;
             }
       }
     }

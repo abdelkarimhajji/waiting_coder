@@ -57,62 +57,53 @@ const singIn = async() =>
       }
 }
 
-
-// useEffect(() => {
-//   if (response.status === 1) {
-//       handleButtonClick();
-//       // localStorage.setItem('userId', response.userId);
-//       // localStorage.setItem("idEachProfile", response.userId);
-//       // localStorage.setItem('adminLogin', 1);
-//       localStorage.setItem('adminId', response.adminId)
-//   }
-// }, [response]);
-
   return (
-    <div className={style.container}>
-       <div className={style.leftSide}>
-            <div className={style.overlay}>
-                <div className={style.contianerTitle}>
-                    <div className={style.containerContent}>
-                        <SiCodersrank  className={style.icon}/>
-                        <p className={style.title}>Waiting Coders</p>
-                        <div className={style.description}>
-                            {/* <p>{displayText}</p> */}
-                            <Typewriter
-                            options={{
-                              strings: ['`Unlock the world of possibilities through the lines of code`'],
-                              autoStart: true,
-                              loop: true,
-                            }}
-                          />
-                        </div>
-                    </div>
-                </div>
-                <div className={style.containerCopieRight}>
-                <p>&copy; 2023 Waiting Coder. All rights reserved.</p>
-                </div>
-            </div>
-       </div>
-       <div className={style.loginSide}>
-            <div className={style.containerLogin} >
-                <div className={style.containerIcon}>
-                    <FaUserShield className={style.icon}/>
-                </div>
-                <div className={style.containerInputs}>
-                    <input type="text" placeholder="Enter your username" className={style.input} value={username} onChange={(e) => setUsername(e.target.value)}/>
-                    <input type="password" placeholder="Enter your password" className={style.input}value={password} onChange={(e) => setPassword(e.target.value)}/>
-                </div>
-                <div className={style.containerSubmit}>
-                    <input type="submit" value="submit" className={style.submit} onClick={singIn}/>
-                </div>
-                {valid ?
-                <p className={style.error}>Your Password or email does not exist</p>
-                :
-                <p className={style.error}></p>
-                }
-            </div>
-       </div>
-       
+    <div className={style.containerResponsive}>
+      <div className={style.container}>
+        <div className={style.leftSide}>
+              <div className={style.overlay}>
+                  <div className={style.contianerTitle}>
+                      <div className={style.containerContent}>
+                          <SiCodersrank  className={style.icon}/>
+                          <p className={style.title}>Waiting Coders</p>
+                          <div className={style.description}>
+                              {/* <p>{displayText}</p> */}
+                              <Typewriter
+                              options={{
+                                strings: ['`Unlock the world of possibilities through the lines of code`'],
+                                autoStart: true,
+                                loop: true,
+                              }}
+                            />
+                          </div>
+                      </div>
+                  </div>
+                  <div className={style.containerCopieRight}>
+                  <p>&copy; 2023 Waiting Coder. All rights reserved.</p>
+                  </div>
+              </div>
+        </div>
+        <div className={style.loginSide}>
+              <div className={style.containerLogin} >
+                  <div className={style.containerIcon}>
+                      <FaUserShield className={style.icon}/>
+                  </div>
+                  <div className={style.containerInputs}>
+                      <input type="text" placeholder="Enter your username" className={style.input} value={username} onChange={(e) => setUsername(e.target.value)}/>
+                      <input type="password" placeholder="Enter your password" className={style.input}value={password} onChange={(e) => setPassword(e.target.value)}/>
+                  </div>
+                  <div className={style.containerSubmit}>
+                      <input type="submit" value="submit" className={style.submit} onClick={singIn}/>
+                  </div>
+                  {valid ?
+                  <p className={style.error}>Your Password or email does not exist</p>
+                  :
+                  <p className={style.error}></p>
+                  }
+              </div>
+        </div>
+        
+      </div>
     </div>
   );
 }
