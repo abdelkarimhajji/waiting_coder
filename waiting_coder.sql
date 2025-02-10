@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : jeu. 13 juin 2024 à 00:39
+-- Généré le : lun. 10 fév. 2025 à 23:44
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.0.25
 
@@ -167,7 +167,8 @@ INSERT INTO `languages` (`id`, `name_langauge`, `name_icon`, `description`, `id_
 (3, 'HTML5', 'TiHtml5', 'HTML5 is the latest version of the Hypertext Markup Language used for structuring web content. It introduces semantic elements, multimedia support, canvas for graphics, form enhancements, offline capabilities, and improved accessibility, empowering developers to create modern, interactive, and responsive websites.', 3),
 (4, 'CSS3', 'DiCss3', 'CSS3 is the latest version of the CSS language used for styling web pages. It introduces new features like transitions, animations, flexbox, grid layouts, media queries, and more, enabling better design and responsiveness.', 3),
 (5, 'JAVASCRIPT', 'TbBrandJavascript', 'JavaScript is a scripting language used for web development to make websites interactive and dynamic. It runs on the client-side in web browsers and can also be used on the server-side with Node.js. JavaScript enables developers to create engaging and responsive user experiences on the web.', 3),
-(6, 'PHP', 'BsFiletypePhp', 'PHP is a popular server-side scripting language used for web development. It is embedded in HTML and used to create dynamic web pages, interact with databases, and handle various server-side tasks. PHP is known for its ease of use, wide community support, and ability to build dynamic and interactive websites.', 4);
+(6, 'PHP', 'BsFiletypePhp', 'PHP is a popular server-side scripting language used for web development. It is embedded in HTML and used to create dynamic web pages, interact with databases, and handle various server-side tasks. PHP is known for its ease of use, wide community support, and ability to build dynamic and interactive websites.', 4),
+(7, 'SQL', 'TbSql', 'SQL (Structured Query Language) is a domain-specific language used for managing and manipulating relational databases. It is essential for defining the structure of databases, enforcing data integrity, and performing operations on data. SQL allows users to create and manage databases, tables, and indexes, as well as apply rules and constraints to ensure that data remains consistent.', 4);
 
 -- --------------------------------------------------------
 
@@ -201,7 +202,8 @@ INSERT INTO `level` (`id`, `id_user`, `level`, `background`) VALUES
 (37, 88, 0, 0),
 (38, 89, 0, 0),
 (39, 90, 3.4, 40),
-(40, 91, 0, 0);
+(40, 91, 0, 0),
+(41, 92, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -221,14 +223,17 @@ CREATE TABLE `links_languages` (
 --
 
 INSERT INTO `links_languages` (`id`, `id_language`, `name_link`, `link`) VALUES
-(1, 3, 'first link', 'http/:this is the link ok'),
-(2, 3, 'secend link', 'http/:this is the link ok'),
-(3, 3, 'thired link', 'http/:this is the link ok'),
-(4, 4, 'first link', 'http/:this is the link ok'),
-(5, 5, 'first link', 'http/:this is the link ok'),
-(6, 6, 'first link', 'http/:this is the link ok'),
-(7, 3, 'Foor Link', 'this foor link'),
-(8, 3, 'five Link', 'this foor link');
+(1, 3, 'Quiz HTML5', 'https://www.w3schools.com/quiztest/quiztest.asp?qtest=HTML'),
+(2, 3, 'HTML5 Resources', 'https://www.w3schools.com/html/default.asp'),
+(4, 4, 'Quiz CSS', 'https://www.w3schools.com/quiztest/quiztest.asp?qtest=css'),
+(5, 5, 'Quiz JS', 'https://www.w3schools.com/quiztest/quiztest.asp?qtest=js'),
+(6, 6, 'Quiz PHP', 'https://www.w3schools.com/quiztest/quiztest.asp?qtest=PHP'),
+(9, 7, 'Quiz SQL', 'https://www.w3schools.com/quiztest/quiztest.asp?qtest=SQL'),
+(10, 6, 'Download php', 'https://www.php.net/downloads.php'),
+(11, 6, 'PHP Resources', 'https://www.w3schools.com/php/'),
+(13, 7, 'SQL Resources', 'https://www.w3schools.com/sql/default.asp'),
+(14, 4, 'CSS Resources', 'https://www.w3schools.com/css/default.asp'),
+(15, 5, 'JS Resources', 'https://www.w3schools.com/js/default.asp');
 
 -- --------------------------------------------------------
 
@@ -248,12 +253,16 @@ CREATE TABLE `links_tools` (
 --
 
 INSERT INTO `links_tools` (`id`, `id_tools`, `name_link`, `link`) VALUES
-(1, 1, 'first link', 'this is the link'),
-(2, 1, 'secend link', 'this is the link'),
-(3, 2, 'first link', 'this is the link'),
-(4, 2, 'seceend link', 'this is the link'),
-(5, 3, 'first link', 'this is the link'),
-(6, 4, 'first link', 'this is the link');
+(1, 1, 'Github Link', 'https://github.com/'),
+(2, 1, 'Special Repo', 'https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/managing-your-profile-readmehttps://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/managing-your-profile-readme'),
+(3, 2, 'Download VS-code', 'https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/managing-your-profile-readme'),
+(4, 2, 'Popular extensions ', 'https://www.syncfusion.com/blogs/post/top-vs-code-extensions'),
+(5, 3, 'Figma link', 'https://www.figma.com/fr-fr/'),
+(6, 4, 'Download VS-code', 'https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/managing-your-profile-readme'),
+(7, 5, 'Github Link', 'https://github.com/'),
+(8, 5, 'Special Repo', 'https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/managing-your-profile-readmehttps://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/managing-your-profile-readme'),
+(9, 4, 'Popular extensions ', 'https://www.syncfusion.com/blogs/post/top-vs-code-extensions'),
+(10, 6, 'Download XAMPP', 'https://www.apachefriends.org/fr/index.html');
 
 -- --------------------------------------------------------
 
@@ -275,9 +284,9 @@ CREATE TABLE `more_info_projects` (
 --
 
 INSERT INTO `more_info_projects` (`id`, `id_project`, `context`, `deliverables`, `languages_used`, `finished_project`) VALUES
-(1, 1, 'Votre page doit obligatoirement contenir les éléments suivants :  Un titre principal sur le nom de votre personnage  Un sous-titre qui le décrit  Une image  Une description de l’image  Une bio portant les dates clés et les meilleures réalisations  Un lien vers la page Wikipédia de votre personnage Vous trouverez dans les pièces jointes un modèle pour s’inspirer ; Pour la mise en style, vous avez le libre choix de disposer et styliser les éléments de votre page. Laisser votre créativité s’exprimer ;\r\n\r\n​\r\n\r\nDans un fichier word,vous décrivez les différentes balises HTML ainsi que les propriétés CSS que vous avez utilisé et notez leur utilité;', 'Dépôt dans le Drive (Un dossier portant votre nom et prénom, contenant la page HTML et CSS et le fichier WORD)', 'HTML5, CSS3', 'So you need to click on button to go on the next page and put your link of your project in the input and click finished'),
-(2, 2, 'Votre page doit obligatoirement contenir les éléments suivants :  Un titre principal sur le nom de votre personnage  Un sous-titre qui le décrit  Une image  Une description de l’image  Une bio portant les dates clés et les meilleures réalisations  Un lien vers la page Wikipédia de votre personnage Vous trouverez dans les pièces jointes un modèle pour s’inspirer ; Pour la mise en style, vous avez le libre choix de disposer et styliser les éléments de votre page. Laisser votre créativité s’exprimer ;\r\n\r\n​\r\n\r\nDans un fichier word,vous décrivez les différentes balises HTML ainsi que les propriétés CSS que vous avez utilisé et notez leur utilité;', 'Dépôt dans le Drive (Un dossier portant votre nom et prénom, contenant la page HTML et CSS et le fichier WORD)', 'HTML5, CSS3, JS', 'So you need to click on button to go on the next page and put your link of your project in the input and click finished'),
-(3, 3, 'Votre page doit obligatoirement contenir les éléments suivants :  Un titre principal sur le nom de votre personnage  Un sous-titre qui le décrit  Une image  Une description de l’image  Une bio portant les dates clés et les meilleures réalisations  Un lien vers la page Wikipédia de votre personnage Vous trouverez dans les pièces jointes un modèle pour s’inspirer ; Pour la mise en style, vous avez le libre choix de disposer et styliser les éléments de votre page. Laisser votre créativité s’exprimer ;\r\n\r\n​\r\n\r\nDans un fichier word,vous décrivez les différentes balises HTML ainsi que les propriétés CSS que vous avez utilisé et notez leur utilité;', 'Dépôt dans le Drive (Un dossier portant votre nom et prénom, contenant la page HTML et CSS et le fichier WORD)', 'HTML5, CSS3, JS', 'So you need to click on button to go on the next page and put your link of your project in the input and click finished');
+(1, 1, 'In today\'s digital world, web pages play a crucial role in sharing information in an engaging way. This project aims to create a biography webpage for an inspiring character using HTML5 and CSS3. The objective is to design a visually appealing and well-structured page that presents key information about the chosen character, such as their background, achievements, and impact on society. Through this project, we will explore essential web development concepts, including semantic HTML, responsive design, and styling with CSS, while improving our ability to organize and present content effectively.', 'A folder with your full name containing the HTML and CSS files of the biography page and a Word document explaining the project, uploaded to Google Drive.', 'HTML5, CSS3', 'So you need to click on button to go on the next page and put your link of your project in the input and click finished'),
+(2, 2, 'This project aims to develop a structured and visually appealing web page using HTML and CSS. It involves transforming a given design mockup into a fully functional contact page while ensuring responsiveness and adherence to provided specifications.This project aims to develop a structured and visually appealing web page using HTML and CSS. It involves transforming a given design mockup into a fully functional contact page while ensuring responsiveness and adherence to provided specifications.', 'A folder with your full name containing the HTML and CSS files of the biography page and a Word document explaining the project, uploaded to Google Drive.', 'HTML5, CSS3, JS', 'So you need to click on button to go on the next page and put your link of your project in the input and click finished'),
+(3, 3, ' This project focuses on designing and developing a responsive landing page by adapting an existing model. The goal is to create two versions (Desktop and Mobile) that maintain a consistent user experience across different devices. Once the designs are finalized, they will be implemented using HTML and CSS while following the given instructions.', 'A folder with your full name containing the HTML and CSS files of the biography page and a Word document explaining the project, uploaded to Google Drive.', 'HTML5, CSS3, JS', 'So you need to click on button to go on the next page and put your link of your project in the input and click finished');
 
 -- --------------------------------------------------------
 
@@ -335,7 +344,8 @@ INSERT INTO `payment` (`id`, `payment`, `valid`, `date_payment`, `id_user`) VALU
 (30, 0, 0, '2024-01-14', 88),
 (31, 0, 0, '2024-01-14', 89),
 (32, 0, 0, '2024-01-23', 90),
-(33, 0, 0, '2024-01-25', 91);
+(33, 0, 0, '2024-01-25', 91),
+(34, 300, 1, '2025-02-08', 92);
 
 -- --------------------------------------------------------
 
@@ -358,8 +368,8 @@ CREATE TABLE `projects` (
 
 INSERT INTO `projects` (`id`, `name_project`, `count_exp`, `id_collection`, `image_project`, `description`) VALUES
 (1, 'Create a biography of a character who inspires you', 100, 3, 'biographie.png', 'This involves creating a web page which presents the biography of a character of your choice (sportsman, scientist, artist, etc.) using HTML5 and CSS3;'),
-(2, 'Reproduce a mockup and convert it to HTML and CSS.', 170, 3, 'biographie.png', 'You will reproduce a mock-up of a contact page which you will then have to translate into HTML and CSS based on the specifications provided.'),
-(3, 'Design and create a responsive landing page', 70, 3, 'biographie.png', 'The objective of this brief is to adapt a model of your choice, in order to create 2 new models (Desktop/Mobile) for a responsive Landing page. Then you must translate your models into HTML and CSS code according to the instructions provided.'),
+(2, 'Reproduce a mockup and convert it to HTML and CSS.', 170, 3, 'mockup.jpg', 'You will reproduce a mock-up of a contact page which you will then have to translate into HTML and CSS based on the specifications provided.'),
+(3, 'Design and create a responsive landing page', 70, 3, 'landingPage.png', 'The objective of this brief is to adapt a model of your choice, in order to create 2 new models (Desktop/Mobile) for a responsive Landing page. Then you must translate your models into HTML and CSS code according to the instructions provided.'),
 (4, 'Créer une interface utilisateur de gestion de produits qui interroge un fichier JSON', 90, 4, 'biographie.png', 'Créer un fichier JSON contenant les informations des produits de votre choix, exploiter ce fichier pour créer une page responsive qui permet d\'afficher ces données, les trier et les filtrer.');
 
 -- --------------------------------------------------------
@@ -436,7 +446,9 @@ INSERT INTO `push_porojects` (`id`, `id_user`, `id_teacher`, `id_project`, `mess
 (53, 89, 1, 2, 'dlm', '14/1/2024', NULL, NULL),
 (54, 90, 1, 1, 'heyyo', '23/1/2024', NULL, NULL),
 (55, 2, 1, 1, 'waeil', '29/2/2024', NULL, NULL),
-(56, 2, 1, 1, 'd', '15/5/2024', NULL, NULL);
+(56, 2, 1, 1, 'd', '15/5/2024', NULL, NULL),
+(57, 2, 1, 1, 'https://github.com/abdelkarimhajji/waiting_coder', '10/2/2025', NULL, NULL),
+(58, 2, 1, 1, 'that is my link github project', '10/2/2025', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -459,7 +471,7 @@ INSERT INTO `registrement_competition` (`id`, `id_user`, `id_competition`, `vali
 (3, 13, 2, 0),
 (34, 90, 2, 0),
 (35, 90, 3, 0),
-(52, 2, 2, 0);
+(53, 2, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -483,8 +495,7 @@ INSERT INTO `registrement_events` (`id`, `id_user`, `id_event`, `valid`) VALUES
 (85, 86, 2, 0),
 (86, 79, 1, 0),
 (87, 79, 2, 0),
-(89, 90, 1, 0),
-(91, 2, 1, 0);
+(89, 90, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -543,7 +554,6 @@ INSERT INTO `specifics` (`id`, `id_user`, `id_nameSpecifics`, `study_now`, `vali
 (3, 2, 3, 1, 1, 1, 1, '2024-03-03', '2023-09-14'),
 (4, 2, 4, 0, 0, 1, 2, '2020-02-03', NULL),
 (8, 13, 3, 1, 1, 1, 1, '2020-02-03', '2023-09-14'),
-(11, 32, 6, 1, 0, 0, 4, '2023-09-20', NULL),
 (24, 2, 5, 0, 1, 0, 17, '2025-03-03', '2025-06-04'),
 (53, 79, 3, 1, 1, 1, 20, '2024-01-08', '2024-01-12'),
 (54, 80, 3, 1, 0, 0, 20, '2024-01-08', NULL),
@@ -557,7 +567,8 @@ INSERT INTO `specifics` (`id`, `id_user`, `id_nameSpecifics`, `study_now`, `vali
 (62, 88, 3, 1, 0, 0, 20, '2024-01-14', NULL),
 (63, 89, 3, 1, 0, 0, 20, '2024-01-14', NULL),
 (64, 90, 3, 1, 1, 0, 20, '2024-01-23', '2024-01-23'),
-(65, 91, 3, 1, 0, 0, 20, '2024-01-25', NULL);
+(65, 91, 3, 1, 0, 0, 20, '2024-01-25', NULL),
+(66, 92, 3, 1, 0, 0, 1, '2025-02-08', NULL);
 
 -- --------------------------------------------------------
 
@@ -657,7 +668,6 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `firstName`, `password`, `lastName`, `email`, `phone`, `image`, `date_registered`) VALUES
 (2, 'Abdelkarim', 'karim', 'hajji', 'hajji@gmail.com', '0617591321', 'karim.png', '2024-03-20'),
 (13, 'nassim', 'achab', 'achab', 'achab@gamil.com', '0617591321', 'oussama.png', '2023-02-10'),
-(32, 'hicham', '@hajjicode', 'hajji', 'hicham@gmail.com', '0617591321', 'ahajji.jpg', '2023-09-20'),
 (79, 'Abdelkarim', '@ahajji', 'Hajji', 'ahajji@student.1337.ma', 'null', 'https://cdn.intra.42.fr/users/d12cd5a31ca3cecff426bbbf5e5e4aec/medium_ahajji.jpg', '2024-01-08'),
 (80, 'Nassim', '@nachab', 'Achab', 'nachab@student.1337.ma', 'null', 'https://cdn.intra.42.fr/users/0f112b961272e37b01b805b7ec9279ad/medium_nachab.jpg', '2024-01-08'),
 (81, 'Amine', '@asalmi', 'Salmi', 'asalmi@student.1337.ma', 'null', 'https://cdn.intra.42.fr/users/198b5cb321a2b0d3642ff2aba96c7714/medium_asalmi.jpg', '2024-01-11'),
@@ -670,7 +680,8 @@ INSERT INTO `user` (`id`, `firstName`, `password`, `lastName`, `email`, `phone`,
 (88, 'Rachid', '@rennatiq', 'Ennatiqi', 'rennatiq@student.1337.ma', 'null', 'https://cdn.intra.42.fr/users/9978f3e0a77ae6dea12abe4ebd0604b6/medium_rennatiq.jpg', '2024-01-14'),
 (89, 'Ahmed', '@asekkak', 'Sekak', 'asekkak@student.1337.ma', 'null', 'https://cdn.intra.42.fr/users/07627870cd855c4b13d6242e114f3f44/medium_asekkak.jpg', '2024-01-14'),
 (90, 'Amine', '@ael-mhar', 'El Mharzi', 'ael-mhar@student.1337.ma', 'null', 'https://cdn.intra.42.fr/users/9992c6d85f1a8cc118297d718d6db71e/medium_ael-mhar.jpg', '2024-01-23'),
-(91, 'Youssef', '@youel-id', 'El Idrissi', 'youel-id@student.1337.ma', 'null', 'https://cdn.intra.42.fr/users/94c9b98a52e9626e9c5244c484053b51/medium_youel-id.jpg', '2024-01-25');
+(91, 'Youssef', '@youel-id', 'El Idrissi', 'youel-id@student.1337.ma', 'null', 'https://cdn.intra.42.fr/users/94c9b98a52e9626e9c5244c484053b51/medium_youel-id.jpg', '2024-01-25'),
+(92, 'abderahman', '@hajjicode', 'hajji', 'abdorahmanhajji@gamil.com', '0617591321', 'abderrahmane.jpg', '2025-02-08');
 
 -- --------------------------------------------------------
 
@@ -925,25 +936,25 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT pour la table `languages`
 --
 ALTER TABLE `languages`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT pour la table `level`
 --
 ALTER TABLE `level`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT pour la table `links_languages`
 --
 ALTER TABLE `links_languages`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT pour la table `links_tools`
 --
 ALTER TABLE `links_tools`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT pour la table `more_info_projects`
@@ -961,7 +972,7 @@ ALTER TABLE `name_specifics`
 -- AUTO_INCREMENT pour la table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT pour la table `projects`
@@ -973,19 +984,19 @@ ALTER TABLE `projects`
 -- AUTO_INCREMENT pour la table `push_porojects`
 --
 ALTER TABLE `push_porojects`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT pour la table `registrement_competition`
 --
 ALTER TABLE `registrement_competition`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT pour la table `registrement_events`
 --
 ALTER TABLE `registrement_events`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 
 --
 -- AUTO_INCREMENT pour la table `ressources_projects`
@@ -997,7 +1008,7 @@ ALTER TABLE `ressources_projects`
 -- AUTO_INCREMENT pour la table `specifics`
 --
 ALTER TABLE `specifics`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT pour la table `teachers`
@@ -1021,7 +1032,7 @@ ALTER TABLE `tools`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 
 --
 -- AUTO_INCREMENT pour la table `validation_projects`

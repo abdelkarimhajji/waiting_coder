@@ -77,7 +77,36 @@ function MainProfile() {
     //   setNext(7 * totalPages);
     //   setValid(-2);
     // }
-
+    function nextPages()
+    {
+      let array = [];
+      let i  = 0;
+      if(totalPagesDisplay - 2 >= 2)
+      {
+        i = parseInt(items[0]) + 1;
+        while(i <= (parseInt(items[0]) + 1) +2)
+        {
+          array.push(i);
+          i++;
+        }
+      }
+      else if(totalPagesDisplay - 2 == 2)
+      {
+        setItems([...items])
+      }
+      else
+      {
+        i = parseInt(items[(items.length - 1) - totalPagesDisplay - 2]);
+        alert(i)
+        while(i <= (totalPagesDisplay - 2) + parseInt(items[items.length - totalPagesDisplay - 2]))
+        {
+          array.push(i);
+          i++;
+        }
+      }
+      console.log("nextPages okn=====> ", array);
+      setItems([...array]);
+    }
     function storeItems(totalPagesDisplayValue)
     {
         let i = 1;
@@ -93,7 +122,7 @@ function MainProfile() {
 
     function calculateNumberPagesDisplay(pages) {
       const numberPagesTostring = pages.toString();
-      let totalPagesDisplayValue = parseInt(pages) >= 4 ? 4 : parseInt(pages);
+      let totalPagesDisplayValue = parseInt(pages) >= 1 ? 1 : parseInt(pages);
       
       if (numberPagesTostring.includes('.')) {
           totalPagesDisplayValue += 1;
@@ -212,7 +241,7 @@ function MainProfile() {
   ))}
 
   {/* start button go right */}
-  <div className={style.nextButton} /*onClick={nextNumbers}*/>
+  <div className={style.nextButton} onClick={nextPages}>
         <p>&gt;&gt;</p>
   </div>
   {/* finish button go right */}
