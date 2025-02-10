@@ -14,20 +14,25 @@
 .container
 {
     width: 100%;
-    height: auto;
+    min-height: 100vh;
     background-color: rgba(225, 225, 225, 0.11);
     padding-top: 30px;
     display: flex;
     justify-content: space-evenly;
     -webkit-tap-highlight-color: transparent;
+    
+    @media(min-width:2000px)
+    {
+        justify-content: center;
+    }
     @media (max-width: 768px)
     {
         flex-direction: column;
         align-items: center;
-        // margin-left: 2   px;
     }
     .program
     {
+        max-width: 1000px;
         width: 47%;
         @media (max-width: 768px)
         {
@@ -113,6 +118,11 @@
     
     .events
     {
+        max-width: 1000px;
+        @media(min-width:2000px)
+        {
+            margin-left: 50px;
+        }
         width: 47%;
         @media (max-width: 768px)
         {

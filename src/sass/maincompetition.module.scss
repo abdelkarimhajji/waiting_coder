@@ -22,6 +22,7 @@
     
     .containTitle
     {
+        max-width: 2000px;
         width: 90%;
         height: 60px;
         box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
@@ -57,9 +58,9 @@
         }
         .AiFillCaretDown
         {
-            position: absolute;
-            left: 95%;
             font-size: 23px;
+            position: absolute;
+            right: 30px;
             @media (max-width: 768px)
             {
                 left: 90%;
@@ -74,6 +75,7 @@
         
     .containCompetition
     {
+        max-width: 2000px;
         width: 96%;
         display: flex;
         flex-wrap: wrap;

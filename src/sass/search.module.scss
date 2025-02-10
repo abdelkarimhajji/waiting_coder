@@ -28,6 +28,7 @@
     background-color: white;
     position: fixed;
     z-index: 2  ;
+    // background-color: red;
     // border: 1px solid black;
     .search
     {
@@ -63,8 +64,9 @@
     .user
     {
         @include flexCenter-styles;
-        // background-color: red;
-        width: 30%;
+        justify-content: end;
+        // width: 25.5%;
+        // flex-grow:1;
         @media (max-width: 935px)
         {
             width: 40%;
@@ -84,19 +86,14 @@
         {
             width: 80%;
         }
-        // height: 100px;
         .name
         {
-            width: 30%;
             font-family: $myfont;
             display: flex;
             justify-content: end;
             padding-right: 50px;
-            // background-color: white;
-            // text-align: center;
-            // background-color: blueviolet;
-            // word-break: break-all;
-            // @include flexCenter-styles;
+            position: absolute;
+            right: 120px;
             @media (max-width: 1250px)
             {
                 width: 20%;
@@ -106,6 +103,8 @@
             {
                 width: 100%;
                 justify-content: center;
+                position: static;
+                right: auto;
             }
             @media (max-width: 650px)
             {
@@ -128,11 +127,11 @@
         }
         .photo
         {
-            // width: 20%;
             @include flexCenter-styles;
-            // background-color: yellow;
+            position: absolute;
+            right: 80px;
+            z-index: 10px;
             justify-content: end;
-            // justify-content: flex-start;
             img{
                 width: 50px;
                 height: 50px;

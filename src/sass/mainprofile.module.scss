@@ -23,6 +23,7 @@
     }
     .containerTitlePage
     {
+        max-width: 2000px;
         width: 85%;
         height: 60px;
         margin-bottom: 70px;
@@ -34,6 +35,7 @@
         padding-left: 30px;
         padding-right: 30px;
         border-radius: 10px;
+        position: relative;
         @media (max-width:700px)
         {
             width: 80%;
@@ -55,6 +57,8 @@
         .iconDown
         {
             font-size: 25px;
+            position: absolute;
+            right: 30px;
         }
     }
     @media(max-width:660px)
@@ -69,6 +73,7 @@
     }
     .link
     {
+        max-width: 1800px;
         width: 70%;
         min-height: 300px;
         // background-color: red;

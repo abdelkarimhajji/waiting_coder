@@ -1,64 +1,64 @@
 @import "mainhome.module.scss";
 
 .contInsidEvents
+{
+    // overflow-y: scroll;
+    margin: 30px;
+    .titleEvents
+    {
+        display: flex;
+        p{
+            font-weight: bold;
+            font-size: 18px;
+            width: 90%;
+            margin-left: 10px;
+        }
+        .iconTitle
+        {
+            width: 10%;
+            display: block;
+            font-size: 25px;
+            color: $pColorR;
+            font-weight: 100;
+            margin-top: 15px;
+        }
+    }
+    .UnderConatEvent
+    {
+        margin-top: 30px;
+        .conatEventItm
+        {
+            display: flex;
+            transition: 0.5s all;
+            cursor: pointer;
+            &:hover
             {
-                // overflow-y: scroll;
-                margin: 30px;
-                .titleEvents
-                {
-                    display: flex;
-                    p{
-                        font-weight: bold;
-                        font-size: 18px;
-                        width: 90%;
-                        margin-left: 10px;
-                    }
-                    .iconTitle
-                    {
-                        width: 10%;
-                        display: block;
-                        font-size: 25px;
-                        color: $pColorR;
-                        font-weight: 100;
-                        margin-top: 15px;
-                    }
-                }
-                .UnderConatEvent
-                {
-                    margin-top: 30px;
-                    .conatEventItm
-                    {
-                        display: flex;
-                        transition: 0.5s all;
-                        cursor: pointer;
-                        &:hover
-                        {
-                            background-color: rgba(208, 206, 206, 0.549);
-                        }
-                        p{
-                            // background-color: aqua;
-                            width: 86%;
-                            padding-right: 10px;
-                            padding-left: 20px;
-                            // line-height: ;
-                        }
-                        .TiHtml5
-                        {
-                            display: block;
-                            // width: 7%;
-                            font-size: 30px;
-                            margin-top: 9px;
-                            color: $pColorR;
-                            padding-left: 20px;
-                        }
-                        .TbHandClick
-                        {
-                            display: block;
-                            font-size: 25px;
-                            color: $pColorR;
-                            margin-top: 13px;
-                            padding-right: 20px;
-                        }
-                    }
-                }
+                background-color: rgba(208, 206, 206, 0.549);
             }
+            p{
+                // background-color: aqua;
+                width: 86%;
+                padding-right: 10px;
+                padding-left: 20px;
+                // line-height: ;
+            }
+            .TiHtml5
+            {
+                display: block;
+                // width: 7%;
+                font-size: 30px;
+                margin-top: 9px;
+                color: $pColorR;
+                padding-left: 20px;
+            }
+            .TbHandClick
+            {
+                display: block;
+                font-size: 25px;
+                color: $pColorR;
+                margin-top: 13px;
+                padding-right: 20px;
+            }
+        }
+    }
+}

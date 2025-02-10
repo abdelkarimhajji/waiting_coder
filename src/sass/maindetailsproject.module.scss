@@ -16,6 +16,7 @@
     -webkit-tap-highlight-color: transparent;
     .containerMoreDetails
     {
+        max-width: 2000px;
         width: 85%;
         height: 65px;
         background-color: $pColor3;
@@ -56,6 +57,7 @@
     }
     .join
     {
+        max-width: 2000px;
         height: auto;
         width: 55%;
         @media (max-width: 1200px)
@@ -66,7 +68,6 @@
         {
             width: 90%;
         }
-        // background-color: red;
     }
     .partOneExplaine
     {
