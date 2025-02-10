@@ -159,6 +159,10 @@
                 text-align: center;
                 color: white;
                 padding-bottom: 20px;
+                @media (max-width:1460px)
+                {
+                    font-size: 13px;
+                }
                 @media (max-width:1000px)
                 {
                     font-size: 15px;
