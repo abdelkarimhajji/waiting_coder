@@ -2,6 +2,10 @@
 @import 'mathsass';
 
 
+::-webkit-scrollbar{
+    height: 0;
+}
+
 
 .container
 {
@@ -16,6 +20,7 @@
     font-family: $myfont;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
+    position: relative;
     @media(max-width : 1300px)
     {
         padding-left: 0px;
@@ -300,14 +305,20 @@
 {
     width: 100%;
     height: 100px;
-    // background-color: red;
-    
+    position: absolute;
+    bottom: 0;
     display: flex;
     justify-content: center;
+    align-items: center;
+    border: 1px solid white;
+    border-color: white;
+    color: white;
     // align-items: center;
     .button
     {
        @include style-button;
+       border-radius: 8px;
+       background-color: $pColorR;
     }
     .button:hover
     {
@@ -332,6 +343,10 @@
     {
        @include style-button;
        margin-left: 7px;
+       border-radius: 8px;
+       background-color: $hoverR;
+       color: white;
+       border-color: white;
     }
     .nextButton:hover
     {
@@ -341,5 +356,9 @@
     {
        @include style-button;
        margin-right: 5px;
+       border-radius: 8px;
+       background-color: $hoverR;
+       border-color: white;
+       color: white;
     }
 }

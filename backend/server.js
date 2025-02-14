@@ -714,6 +714,8 @@ app.get('/api/get_user_count', (req, res) => {
   });
 });
 
+
+
 app.get('/api/get_user_levle/:next', (req, res) => {
   const now = parseInt(req.params.now); 
   const next = parseInt(req.params.next); 
@@ -721,7 +723,7 @@ app.get('/api/get_user_levle/:next', (req, res) => {
   AS valid_event_count, (SELECT COUNT(DISTINCT id) FROM registrement_competition WHERE id_user = user.id AND valid = 1)
   AS valid_competition_count, COUNT(DISTINCT CASE WHEN validation_projects.valid_project = 1 THEN validation_projects.id ELSE NULL END)
   AS valid_project_count FROM user LEFT JOIN validation_projects ON user.id = validation_projects.id_user
-  LEFT JOIN level ON user.id = level.id_user GROUP BY user.id LIMIT 7 OFFSET ?`;
+  LEFT JOIN level ON user.id = level.id_user GROUP BY user.id LIMIT 5 OFFSET ?`;
   db.query(selectSql,[next], (selectErr, selectResult) => {
     if (selectErr) {
       console.log(selectErr);

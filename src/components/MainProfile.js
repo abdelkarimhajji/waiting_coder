@@ -8,144 +8,68 @@ import {FiUsers} from 'react-icons/fi';
 function MainProfile() {
     const [selectedValuesUser, setSelectedValuesUser] = useState([]);
     const [next, setNext] = useState(0);
-    const [numbers, setnumbers] = useState(4);
+    const [nextPage, setNextPage] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
-    const [totalPagesDisplay, setTotalPagesDisplay] = useState(0);
-    const [count, setCount] = useState(1);
-    const [valid, setValid] = useState(0);
     const [items, setItems] = useState([]);
-      
+    const [clickPage, setClickPage] = useState(1);
     const get_id = (id) =>
     {
       localStorage.setItem("idEachProfile", id);
     }
-    // function callNextUsers(count, i) {
-    //   if (count === 1)
-    //   {
-    //     setNext(0);
-    //     if(i !== valid)
-    //     {
-    //       window.scrollTo({
-    //         top: 0,
-    //         behavior: "smooth"  // for smooth scrolling
-    //       });
-    //     }
-    //   }
-    //   else
-    //   {
-    //     setNext(7 * (count));
-    //     if(i !== valid)
-    //     {
-    //       window.scrollTo({
-    //         top: 0,
-    //         behavior: "smooth"  // for smooth scrolling
-    //       });
-    //     }
-    //   }
-    //   setValid(i);
-    // }
-    // function nextNumbers() 
-    // {
-    //     if (numbers + 4 > totalPages) {
-    //       let i = 0;
-    //       let j = numbers;
-    //       while(j < totalPages)
-    //       {
-    //         i++;
-    //         j++;
-    //       }
-    //       setnumbers(i);
-    //       setCount(count + i + 1);
-    //       setValid(-1);
-    //     }
-    // }
-    // function beforeNumbers()
-    // {
-    //     if (numbers < 4)
-    //     {
-    //       setnumbers(4);
-    //       setValid(-1);
-    //     }
-    //     if(count > 4)
-    //     {
-    //       setCount(count - 4);
-    //       setValid(-1);
-    //     }
-    // }
-    // function getLastUsers() 
-    // {
-    //   setNext(7 * totalPages);
-    //   setValid(-2);
-    // }
+    
+
     function nextPages()
     {
-      let array = [];
-      let i  = 0;
-      if(totalPagesDisplay - 2 >= 2)
-      {
-        i = parseInt(items[0]) + 1;
-        while(i <= (parseInt(items[0]) + 1) +2)
-        {
-          array.push(i);
-          i++;
-        }
-      }
-      else if(totalPagesDisplay - 2 == 2)
-      {
-        setItems([...items])
-      }
-      else
-      {
-        i = parseInt(items[(items.length - 1) - totalPagesDisplay - 2]);
-        alert(i)
-        while(i <= (totalPagesDisplay - 2) + parseInt(items[items.length - totalPagesDisplay - 2]))
-        {
-          array.push(i);
-          i++;
-        }
-      }
-      console.log("nextPages okn=====> ", array);
-      setItems([...array]);
+      if(nextPage <= totalPages - 3)
+        setNextPage(nextPage + 3);
     }
-    function storeItems(totalPagesDisplayValue)
+    function pervPage()
     {
-        let i = 1;
+      if(nextPage > 0)
+        setNextPage(nextPage - 3);
+    }
+
+    function calculateNumberPagesDisplay(pages)
+    {
+      
         const array = []
-        while(i <= totalPagesDisplayValue)
+        if(pages % 3 != 0)
         {
-          const newItem = i;
-          array.push(newItem);
+          pages++;
+          if(pages % 3 != 0)
+            pages++;
+          if(pages % 3 != 0)
+            pages++;
+        }
+        let i = 1;
+        while(i <= pages)
+        {
+          array.push(i);
           i++;
         }
         setItems([...array]);
-    }
-
-    function calculateNumberPagesDisplay(pages) {
-      const numberPagesTostring = pages.toString();
-      let totalPagesDisplayValue = parseInt(pages) >= 1 ? 1 : parseInt(pages);
-      
-      if (numberPagesTostring.includes('.')) {
-          totalPagesDisplayValue += 1;
-      }
-  
-      setTotalPagesDisplay(totalPagesDisplayValue);
-      storeItems(totalPagesDisplayValue)
-      console.log("totalPagesDisplay", totalPagesDisplayValue);
   }
-    useEffect(() => {
-        fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/api/get_user_levle/${next}`)
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error("Network response was not ok");
-            }
-            return response.json();
-          })
-          .then((data) => {
-            setSelectedValuesUser(data);
-            
-          })
-          .catch((error) => console.error(error));
-      }, [next]);
+  function updatePage(numberPage)
+  {
+    setClickPage(numberPage);
+    if(numberPage != clickPage)
+      setNext((numberPage - 1) * 5);
+  }
+  useEffect(() => {
+      fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/api/get_user_levle/${next}`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          setSelectedValuesUser(data);
+          
+        })
+        .catch((error) => console.error(error));
+        // alert(next);
+    }, [next]);
 
       useEffect(() => {
         fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/api/get_user_count`)
@@ -156,10 +80,15 @@ function MainProfile() {
             return response.json();
           })
           .then((data) => {
-            const pages = data.count / 7;
-            setTotalPages(pages); 
+            const pages = data.count / 5;
+            if(pages.toString().includes('.'))
+            {
+              setTotalPages(parseInt(pages + 1));
+              calculateNumberPagesDisplay(parseInt(pages + 1));
+            }
+            else
+              calculateNumberPagesDisplay(parseInt(pages));
             console.log("Data received: ", data.count, pages);
-            calculateNumberPagesDisplay(pages)
           })
           .catch((error) => console.error(error));
       }, [next]);
@@ -225,29 +154,18 @@ function MainProfile() {
 )}
 {/* finish card */} 
 <div  className={style.chooseNumber}>
-  <div className={style.beforeButton} /*onClick={beforeNumbers}*/>
+  <div className={style.beforeButton} onClick={pervPage}style={nextPage <= 0? {backgroundColor: "#d9d9d9"}:{} } >
       <p>&lt;&lt;</p>
   </div>
-{/* {Array.from({ length: numbers }, (_, i) => (
-    <div key={i} className={valid === i ? style.buttonActive : style.button} onClick={() => callNextUsers(count+i, i)}>
-        <p>{count + i}</p>
-    </div>
-  ))} */}
-
-  {items.map((item, index) => (
-    <div key={index} className={style.button} >
-        <p>{item}</p>
-    </div>
-  ))}
-
+      {Array.from({ length: 3 }, (_, index) => (
+       <div key={index} className={style.button} style={clickPage === items[index + nextPage] ? {backgroundColor: "#d9d9d9"}:{}} onClick={() => updatePage(items[index + nextPage])}>
+          <p>{items[index + nextPage] ? items[index + nextPage] : items[index + nextPage]} </p>
+      </div>
+      ))}
   {/* start button go right */}
-  <div className={style.nextButton} onClick={nextPages}>
+  <div className={style.nextButton} onClick={nextPages} style={nextPage > totalPages - 3 ? {backgroundColor: "#d9d9d9"}:{} }>
         <p>&gt;&gt;</p>
   </div>
-  {/* finish button go right */}
-    {/* <div className={valid === -2 ? style.buttonActive : style.lastButton} onClick={getLastUsers}>
-        <p>{totalPages}</p>
-    </div> */}
   </div>
 </div>
 
