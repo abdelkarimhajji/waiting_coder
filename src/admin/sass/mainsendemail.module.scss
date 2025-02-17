@@ -18,7 +18,9 @@
     margin-top: 65px;
     font-family: $myfont;
     overflow:hidden;
-    // background-color:rgba(221, 221, 221, 0.194);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     .containerFilter
     {
         width: 100%;
@@ -29,7 +31,7 @@
         justify-content: space-around;
         // background-color:rgba(221, 221, 221, 0.194);
         // padding-left: 50px;
-        @media(max-width: 700px)
+        @media(max-width: 900px)
         {
             flex-direction:column;
             justify-content: center;
@@ -44,9 +46,11 @@
             color: rgb(95, 93, 93);
             cursor: pointer;
             font-family: $myfont;
-            @media(max-width: 700px)
+            padding-left: 10px;
+            padding-right: 10px;
+            @media(max-width: 900px)
             {
-                width: 80%;
+                width: 82%;
                 margin-bottom: 30px;
             }
             option
@@ -65,9 +69,9 @@
             justify-content: center;
             align-items: center;
             background-color: white;
-            @media(max-width: 700px)
+            @media(max-width: 900px)
             {
-                width: 80%;
+                width: 82%;
             }
             label
             {
@@ -81,11 +85,11 @@
     }
     .containerBox
     {
-        width: 100%;
+        width: 96%;
         min-height: 100vh;
         display: flex;
         margin-left: 3px;
-        margin-bottom: 20px; 
+        margin-bottom: 20px;
         @media(max-width:900px)
         {
             flex-direction: column;
@@ -238,7 +242,8 @@
                         height: 70px;
                         overflow: hidden;
                         word-break:break-all;
-                        text-align: justify;
+                        text-align: left;
+                        width: 100%;
                         &::-webkit-scrollbar {
                             width: 0px; /* Set the width of the scrollbar */
                         }

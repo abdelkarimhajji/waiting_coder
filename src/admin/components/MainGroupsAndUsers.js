@@ -52,7 +52,9 @@ function MainGroupsAndUsers() {
           .catch((error) => console.error(error));
       }, []);
 
-      useEffect(() => {
+
+      function getUsersSpecificPayemnt()
+      {
         fetch(`http://${process.env.REACT_APP_ADMIN_HOST}:${process.env.REACT_APP_ADMIN_PORT}/api/getUserSpecificPayment/${selectIdGroup}`)
           .then((response) => {
             if (!response.ok) {
@@ -64,6 +66,10 @@ function MainGroupsAndUsers() {
             setSelectUserInfo(data);
           })
           .catch((error) => console.error(error));
+      }
+
+      useEffect(() => {
+        getUsersSpecificPayemnt()
       }, [selectIdGroup, isCheckAllChecked,updatedIds]);
 
       useEffect(() => {
@@ -89,6 +95,7 @@ function MainGroupsAndUsers() {
             return response.json();
           })
           .then((data) => {
+            console.log("thiiiiiiiiis is is the data ok container group", data);
             setSelectCurrentGroups(data);
             setSelectIdGroup(data[0].IdGroup)
             setDateCreated(data[0].date_created.split("T")[0])
@@ -179,7 +186,7 @@ function MainGroupsAndUsers() {
   const handleSelect2Change = (event) => {
     const selectedValue = event.target.value;
     setSelectedOption2(selectedValue);
-    setSelectedOption1(selectedValue); // Synchronize both selects
+    setSelectedOption1(selectedValue);
     setSelectIdGroup(parseInt(selectedValue.split('*')[0]))
     setIsCheckAllChecked(false)
     const allChecked = Object.fromEntries(
@@ -213,6 +220,7 @@ function MainGroupsAndUsers() {
     })
       .then((response) => response.json())
       .then((responseData) => {
+        getUsersSpecificPayemnt()
       })
       .catch((error) => {
         console.error('Error pushing data:', error);
@@ -232,7 +240,7 @@ function MainGroupsAndUsers() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ id_user }), // Sending the user ID in the request body
+      body: JSON.stringify({ id_user }),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -500,7 +508,7 @@ const finisheGroup = () =>
                             <th>payemnt</th>
                             <th className={style.displayNone}>update</th>
                             <th >select</th>
-                            <th className={style.displayNone}>validate FWeek</th>
+                            <th className={style.displayNone}>validate Week</th>
                         </tr>
                       </thead>
                       <tbody>

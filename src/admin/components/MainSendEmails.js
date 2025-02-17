@@ -4,14 +4,20 @@ import {BiMailSend } from 'react-icons/bi'
 import { TbPasswordUser } from "react-icons/tb";
 import { IoIosHappy } from "react-icons/io";
 
+
 function MainSendEmails() {
     
     const divsToRender = [1, 2, 3, 4, 5, 6, 7];
     const [valueTitle, setValueTitle] = useState();
     const [valudeDesc, setValueDesc] = useState();
-
-    const tileWelcom = "Welcome ";
-    const descWelcom = `This page is still in development ... `
+    const [currentGroup, setCurrentGroup] = useState();
+    const [oldGroup, setOldGroup] = useState();
+    const [idGroup, setIdGroup] = useState(null);
+    const [selectedDefaultValue, setSelectedDefaultValue] = useState();
+    const [selectedDefaultValueOld, setSelectedDefaultValueOld] = useState();
+    const [users, setUsers] = useState();
+    const tileWelcom = "Welcome";
+    const descWelcom = `This page is still in development ... `;
 
     function callWelcome(){
         setValueDesc(descWelcom)
@@ -32,17 +38,122 @@ function MainSendEmails() {
         setValueTitle(tileWelcom)
         
     }, []);
-  return (
+
+
+    // useEffect(() => {
+    //     fetch(`http://${process.env.REACT_APP_ADMIN_HOST}:${process.env.REACT_APP_ADMIN_PORT}/api/getCurrentGroups`)
+    //         .then((response) => {
+    //         if (!response.ok) {
+    //             throw new Error("Network response was not ok");
+    //         }
+    //         return response.json();
+    //         })
+    //         .then((data) => {
+    //         setSelectCurrentGroups(data);
+    //         setSelectIdGroup(data[0].IdGroup)
+    //         setDateCreated(data[0].date_created.split("T")[0])
+    //         setSelectedOption2(`${data[0].IdGroup}*${data[0].date_created}`)
+    //         })
+    //         .catch((error) => console.error(error));
+    //     }, [valueGroupFinished, addSucces]);
+
+
+    useEffect(() => {
+        fetch(`http://${process.env.REACT_APP_ADMIN_HOST}:${process.env.REACT_APP_ADMIN_PORT}/api/getCurrentGroups`)
+        .then((response) => 
+        {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return response.json();
+        })
+        .then((data)=>{
+            setCurrentGroup(data);
+            setSelectedDefaultValue(`${data[0].IdGroup}*${data[0].date_created}`)
+            setIdGroup(data[0].IdGroup);
+            // ale
+            // ${item.IdGroup}*${item.date_created}
+        })
+        .catch((error) => console.error(error))
+    }, [])
+
+
+    useEffect(() => {
+        fetch(`http://${process.env.REACT_APP_ADMIN_HOST}:${process.env.REACT_APP_ADMIN_PORT}/api/getOldGroups`)
+        .then((response) => {
+            if(!response.ok){
+                throw new Error("Network response was not ok");
+            }
+            return response.json();
+        })
+        .then((data) => {
+            setOldGroup(data);
+        })
+        .catch((error) => console.error(error))
+    }, [])
+
+    useEffect(() =>
+    {
+        if (idGroup !== null) {
+        fetch(`http://${process.env.REACT_APP_ADMIN_HOST}:${process.env.REACT_APP_ADMIN_PORT}/api/usersAndSpecifics/${idGroup}`)
+        .then((response) =>{
+            if(!response.ok)
+                throw new Error("Network response was not ok");
+            return response.json();
+        })
+        .then((data) =>{
+            console.log("data of users ok ",data);
+            setUsers(data);
+        })
+        .catch((error) => console.error(error))
+    }
+    }, [idGroup])
+
+function handelValueCurrentGroup(event)
+{
+    console.log("event.target.value", event.target.value)
+    const target = event.target.value;
+    const idGroup_ = target.split("*")[0];
+    setSelectedDefaultValue(target)
+    setIdGroup(idGroup_);
+    setSelectedDefaultValueOld("")
+}
+
+function handelValueOldGroup(event)
+{
+    console.log("event.targert.value", event.target.value);
+    const target = event.target.value;
+    const idGroup_ = target.split("*")[0];
+    setIdGroup(idGroup_);
+    setSelectedDefaultValueOld(target)
+    setSelectedDefaultValue("")
+}
+
+return (
     <div className={style.containerResponcive}>
         <div className={style.container}>
             <div className={style.containerFilter}>
-                <select >
-                    <option value="Choose Project">Choose Classes</option>
-                    <option >test</option>
+            <select value={selectedDefaultValue} onChange={handelValueCurrentGroup}>
+                    <option value="Choose Project" >Choose Current Group</option>
+                    {(currentGroup && currentGroup.length > 0)?
+                        currentGroup.map((item, index) => (
+                            <option key={index} value={`${item.IdGroup}*${item.date_created}`}>Group {item.name_group} {item.name}</option>
+                        )):( <option disabled>No groups available</option>)
+                    }
                 </select>
-                <select >
-                    <option value="Choose Project">Choose year</option>
-                    <option >test</option>
+                <select value={selectedDefaultValueOld} onChange={handelValueOldGroup}>
+                    <option value="Choose Project">Choose Old Group</option>
+                    {
+                    oldGroup && oldGroup.length > 0 ? 
+                        oldGroup.map((item, index) => {
+                        return (
+                            <option key={index} value={`${item.IdGroup}*${item.date_created}&${item.date_finished}`}>
+                            Group {item.name_group} {item.name}
+                            </option>
+                        );
+                        }) : 
+                        (<option disabled>No groups available</option>)
+                    }
                 </select>
                 <div className={style.containerSelectALl}>
                     <input type="checkbox"  />
@@ -54,7 +165,9 @@ function MainSendEmails() {
                 {/* start left box */}
                 <div className={style.containerLeftBox}>
                     {/* start make one box */}
-                {divsToRender.map((item, index) => (
+                {
+                users && users.length > 0 ?
+                users.map((item, index) => (
                     <div key={index} className={style.boxUser}>
                         {/* start make top part of boxUser profile */}
                         <div className={style.topPartProfile}>
@@ -65,8 +178,8 @@ function MainSendEmails() {
                             {/* finish make  part left of img */}
                             {/* start make part to have name user */}
                                 <div className={style.containerName}>
-                                    <span className={style.name}>Abdelkarim hajji</span>
-                                    <span className={style.specific}>Devlopement front-end</span>
+                                    <span className={style.name}>{item.firstName} {item.lastName}</span>
+                                    <span className={style.specific}>{item.name}</span>
                                 </div>  
                             {/* finish make part to have name user */}
                         </div>
@@ -81,15 +194,18 @@ function MainSendEmails() {
                             {/* finish make  part left of icon */}
                             {/* start make part to have desc user */}
                                 <div className={style.containerDesctiption}>
-                                    <span className={style.desc}>Abdelkarim hajji Abdelkarim hajji
-                                        Desplay here the last message send&nbsp;to  this user
+                                    <span className={style.desc}>
+                                        {item.email}
                                     </span>
                                 </div>
                             {/* finish make part to have desc user */}
                         </div>
                         {/* finish make bottom part of boxUser profile */}
                     </div>
-                    ))}
+                    
+                    )):(<p>NO USERS</p>)
+                }
+                    
                     {/* finish make one box */}
                 </div>
                 {/* finish left box */}

@@ -191,6 +191,7 @@
                 padding-left: 30px;
                 font-family: $myfont;
                 border: 1px solid #dddddd;
+                border-radius: 10px;
                 @media (max-width: 650px)
                 {
                     width: 90%;
@@ -301,6 +302,7 @@
                 width: 50px;
                 height: 50px;
                 border-radius: 50%;
+                object-fit: cover;
               }
               .containerTitles
               {
@@ -544,6 +546,7 @@
                     padding-left: 10px;
                     font-family: $myfont;
                     border: 1px solid #dddddd;
+                    border-radius: 10px;
                     &::placeholder
                     {
                         color: rgba(0, 0, 0, 0.802);
@@ -565,6 +568,7 @@
                     padding-left: 10px;
                     font-family: $myfont;
                     border: 1px solid #dddddd;
+                    border-radius: 10px;
                     &:focus
                     {
                         outline: none;
@@ -694,6 +698,7 @@
                     padding-left: 10px;
                     font-family: $myfont;
                     border: 1px solid #dddddd;
+                    border-radius: 10px;
                     &:focus
                     {
                         outline: none;
