@@ -768,7 +768,7 @@ app.get('/api/getGroupsConditonSpecific/:idSpecific', (req, res) => {
 app.get('/api/usersAndSpecifics/:idGroup', (req, res) => {
   const idGroup = req.params.idGroup;
   console.log("idgroup", idGroup);
-  const query = `SELECT user.id, user.firstName, user.lastName, 
+  const query = `SELECT user.id, user.firstName, user.lastName, user.phone, 
   user.image, user.email, name_specifics.name FROM user INNER JOIN specifics
   On user.id = specifics.id_user INNER JOIN name_specifics 
   On name_specifics.id = specifics.id_nameSpecifics WHERE specifics.id_group = ?;`;

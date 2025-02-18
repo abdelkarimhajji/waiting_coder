@@ -3,7 +3,7 @@ import style from "../sass/mainsendemail.module.scss"
 import {BiMailSend } from 'react-icons/bi'
 import { TbPasswordUser } from "react-icons/tb";
 import { IoIosHappy } from "react-icons/io";
-
+import { FaPeopleGroup } from "react-icons/fa6";
 
 function MainSendEmails() {
     
@@ -16,6 +16,18 @@ function MainSendEmails() {
     const [selectedDefaultValue, setSelectedDefaultValue] = useState();
     const [selectedDefaultValueOld, setSelectedDefaultValueOld] = useState();
     const [users, setUsers] = useState();
+    const [checked, setChecked] = useState(false);
+    const [userCheckedAlone, setUserCheckedAlone] = useState(false);
+    const [userCheckedAloneName, setUserCheckedAloneName] = useState('');
+    const [userCheckedAloneImage, setUserCheckedAloneImage] = useState('');
+    const [userCheckedAloneSpecific, setUserCheckedAloneSpecific] = useState('');
+    const [userCheckedAlonePhone, setUserCheckedAlonePhone] = useState('')
+    const [userCheckedAlone2, setUserCheckedAlone2] = useState(0);
+    const [userCheckedAloneName2, setUserCheckedAloneName2] = useState('');
+    const [userCheckedAloneImage2, setUserCheckedAloneImage2] = useState('');
+    const [userCheckedAloneSpecific2, setUserCheckedAloneSpecific2] = useState('');
+    const [userCheckedAlonePhone2, setUserCheckedAlonePhone2] = useState('')
+    const [usersChecked, setUsersChecked] = useState([]);
     const tileWelcom = "Welcome";
     const descWelcom = `This page is still in development ... `;
 
@@ -71,6 +83,7 @@ function MainSendEmails() {
             setCurrentGroup(data);
             setSelectedDefaultValue(`${data[0].IdGroup}*${data[0].date_created}`)
             setIdGroup(data[0].IdGroup);
+            
             // ale
             // ${item.IdGroup}*${item.date_created}
         })
@@ -102,8 +115,21 @@ function MainSendEmails() {
             return response.json();
         })
         .then((data) =>{
-            console.log("data of users ok ",data);
             setUsers(data);
+            if(data.length > 0)
+            {
+                setUserCheckedAlone(data[0].id)
+                setUserCheckedAloneImage(data[0].image)
+                setUserCheckedAloneName(`${data[0].firstName} ${data[0].lastName}`)
+                setUserCheckedAloneSpecific(data[0].name)
+                setUserCheckedAlonePhone(data[0].phone)
+
+                setUserCheckedAlone2(data[0].id)
+                setUserCheckedAloneImage2(data[0].image)
+                setUserCheckedAloneName2(`${data[0].firstName} ${data[0].lastName}`)
+                setUserCheckedAloneSpecific2(data[0].name)
+                setUserCheckedAlonePhone2(data[0].phone)
+            }
         })
         .catch((error) => console.error(error))
     }
@@ -111,7 +137,6 @@ function MainSendEmails() {
 
 function handelValueCurrentGroup(event)
 {
-    console.log("event.target.value", event.target.value)
     const target = event.target.value;
     const idGroup_ = target.split("*")[0];
     setSelectedDefaultValue(target)
@@ -121,7 +146,6 @@ function handelValueCurrentGroup(event)
 
 function handelValueOldGroup(event)
 {
-    console.log("event.targert.value", event.target.value);
     const target = event.target.value;
     const idGroup_ = target.split("*")[0];
     setIdGroup(idGroup_);
@@ -129,6 +153,80 @@ function handelValueOldGroup(event)
     setSelectedDefaultValue("")
 }
 
+function selectAll()
+{
+    if(!checked)
+    {
+        let array = [];
+        let i = 0;
+        while(i < users.length){
+            array.push(users[i].id)
+            i++;
+        }
+        setUsersChecked([...array])
+        // alert(array)
+    }
+    
+    setChecked(!checked);
+    if(checked)
+    {
+        setUsersChecked([]);
+        setUserCheckedAlone(userCheckedAlone2);
+        setUserCheckedAloneImage(userCheckedAloneImage2);
+        setUserCheckedAloneName(userCheckedAloneName2);
+        setUserCheckedAloneSpecific(userCheckedAloneSpecific2);
+        setUserCheckedAlonePhone(userCheckedAlonePhone2);
+    }
+    
+    
+}
+
+function clickOnCard(idUser, firstName, lastName, image ,nameSpecific, phone)
+{
+    if(usersChecked.length !== 0 && checked && !usersChecked.includes(idUser))
+    {
+        // alert(1)
+        const newArray = usersChecked;
+        newArray.push(idUser);
+        // alert(newArray);
+        setUsersChecked([...newArray]);
+        setUserCheckedAlone(0)
+    }
+    else if(usersChecked.length !== 0 && checked && usersChecked.includes(idUser))
+    {
+        const newArray = usersChecked.filter(item => item != idUser);
+        setUsersChecked([...newArray]);
+        if(newArray.length === 0 && checked)
+            setChecked(!checked)
+        setUserCheckedAlone(0)
+        if(newArray.length === 0)
+            setUserCheckedAlone(userCheckedAlone2);
+    }
+    
+    if(usersChecked.length === 0 && checked === false )
+    {
+        if(idUser !== userCheckedAlone)
+        {
+            setUserCheckedAlone(idUser);
+            setUserCheckedAloneImage(image)
+            setUserCheckedAloneName(`${firstName} ${lastName}`)
+            setUserCheckedAloneSpecific(nameSpecific)
+            setUserCheckedAlonePhone(phone)
+        }
+    }
+}
+
+
+function sendMessage()
+{
+    console.log("usersChecked ===> ",usersChecked);
+    console.log(" ===> setUserCheckedAlone",userCheckedAlone);
+    console.log(" ===> setUserCheckedAlone2",userCheckedAlone2);
+}
+
+
+
+// setUsersChecked(prev => [...prev, newUser]); 
 return (
     <div className={style.containerResponcive}>
         <div className={style.container}>
@@ -144,7 +242,7 @@ return (
                 <select value={selectedDefaultValueOld} onChange={handelValueOldGroup}>
                     <option value="Choose Project">Choose Old Group</option>
                     {
-                    oldGroup && oldGroup.length > 0 ? 
+                        oldGroup && oldGroup.length > 0 ? 
                         oldGroup.map((item, index) => {
                         return (
                             <option key={index} value={`${item.IdGroup}*${item.date_created}&${item.date_finished}`}>
@@ -156,7 +254,7 @@ return (
                     }
                 </select>
                 <div className={style.containerSelectALl}>
-                    <input type="checkbox"  />
+                    <input checked={checked} type="checkbox" onChange={selectAll}/>
                     <label >Sellect All</label>
                 </div>
             </div>
@@ -168,18 +266,23 @@ return (
                 {
                 users && users.length > 0 ?
                 users.map((item, index) => (
-                    <div key={index} className={style.boxUser}>
+                    <div key={index} className={style.boxUser}  style={(usersChecked.includes(item.id) && checked && usersChecked.length !== 0) || (userCheckedAlone === item.id && usersChecked.length === 0)? { backgroundColor: '#2a2d38', color: 'white' }: {}} onClick={() => clickOnCard(item.id, item.firstName, item.lastName, item.image ,item.name, item.phone)}>
                         {/* start make top part of boxUser profile */}
                         <div className={style.topPartProfile}>
                             {/* start make  part left of img */}
                                 <div className={style.containerImg}>
-                                    <img src={require(`../../imgs/ahajji.jpg`)} alt="" className={style.img} />
+                                {item.phone === "null" ? (
+                                    <img src={item.image} alt={item.firstName} className={style.img} />
+                                ):(
+                                  
+                                  <img src={require(`../../imgs/${item.image}`)} alt={item.firstName} className={style.img} />
+                              )}
                                 </div>
                             {/* finish make  part left of img */}
                             {/* start make part to have name user */}
-                                <div className={style.containerName}>
-                                    <span className={style.name}>{item.firstName} {item.lastName}</span>
-                                    <span className={style.specific}>{item.name}</span>
+                                <div className={style.containerName} >
+                                    <span className={style.name} style={(usersChecked.includes(item.id) && checked && usersChecked.length !== 0) || (userCheckedAlone === item.id && usersChecked.length === 0)? { color: 'white' }: {}} >{item.firstName} {item.lastName}</span>
+                                    <span className={style.specific} style={(usersChecked.includes(item.id) && checked && usersChecked.length !== 0) || (userCheckedAlone === item.id && usersChecked.length === 0)? { color: 'white' }: {}} >{item.name}</span>
                                 </div>  
                             {/* finish make part to have name user */}
                         </div>
@@ -188,13 +291,13 @@ return (
                         {/* start make bottom part of boxUser profile */}
                         <div className={style.bottomPartProfile}>
                             {/* start make  part left of icon */}
-                                <div className={style.containerImg}>
-                                <BiMailSend className={style.icon}/>
+                                <div className={style.containerImg} >
+                                <BiMailSend className={style.icon} style={(usersChecked.includes(item.id) && checked && usersChecked.length !== 0) || (userCheckedAlone === item.id && usersChecked.length === 0)? { color: 'white' }: {}} />
                                 </div>
                             {/* finish make  part left of icon */}
                             {/* start make part to have desc user */}
                                 <div className={style.containerDesctiption}>
-                                    <span className={style.desc}>
+                                    <span className={style.desc} style={(usersChecked.includes(item.id) && checked && usersChecked.length !== 0) || (userCheckedAlone === item.id && usersChecked.length === 0) ? { color: 'white' }: {}} >
                                         {item.email}
                                     </span>
                                 </div>
@@ -217,12 +320,29 @@ return (
                         {/* start titel */}
                         <div className={style.containerTitel}>
                             <div className={style.containerImg}>
-                                <img src={require(`../../imgs/ahajji.jpg`)} alt="" className={style.img} />
+                                {
+                                    userCheckedAlonePhone ? (
+                                    !checked ? (  
+                                        userCheckedAlonePhone === "null" ? (
+                                            <img src={userCheckedAloneImage} alt={userCheckedAloneName} className={style.img} />
+                                        ) : (
+                                            <img src={require(`../../imgs/${userCheckedAloneImage}`)} alt={userCheckedAloneName} className={style.img} />
+                                        )
+                                    ):(<FaPeopleGroup style={{fontSize: '30px'}}/>)
+                                    ):(
+                                        <p style={{fontSize:'12px'}}>No image</p>
+                                    )
+                                }
                             </div>
 
                             <div className={style.containerName}>
-                                <span className={style.name}>Abdelkarim Hajji</span>
-                                <span className={style.specific}>Devlopement web Front-end</span>
+                                <span className={style.name}>{
+                                !checked ? (
+                                        userCheckedAloneName 
+                                        ? userCheckedAloneName : 'No user'
+                                    ):(<p>Group</p>)
+                                }</span>
+                                <span className={style.specific}>{userCheckedAloneSpecific ? userCheckedAloneSpecific : 'No specific'}</span>
                             </div>
                         </div>
                         {/* finish titel */}
@@ -277,7 +397,7 @@ return (
                                 <textarea  maxLength="1050" defaultValue={valudeDesc} type='text'/>
                             </div>
                             <div className={style.sendEmail}>
-                                <button>Send Message</button>
+                                <button onClick={sendMessage}>Send Message</button>
                             </div>
                         </div>
                         {/* finish container message */}

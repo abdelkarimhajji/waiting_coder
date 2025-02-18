@@ -124,35 +124,12 @@
             background-color: white;
             border: 0.5px solid rgb(173, 173, 173);
             margin-bottom: 20px;
+            color: white !important;
             cursor: pointer;
             transition: 0.5s all;
             &:hover{
-                background-color: $pColor3;
-                .topPartProfile
-                {
-                    .containerName
-                    {
-                        span{
-                            color: white;
-                        }
-                    }
-                }
-                .bottomPartProfile
-                {
-                    .containerImg
-                    {
-                        .icon
-                        {
-                            color: white;
-                        }
-                    }
-                    .containerDesctiption
-                    {
-                        span{
-                            color:white;
-                        }
-                    }
-                }
+                width: 87%;
+                // height: 150px;
             }
             .topPartProfile
             {
@@ -170,6 +147,7 @@
                         width: 50px;
                         height: 50px;
                         border-radius: 50%;
+                        object-fit: cover;
                         @media(max-width: 900px)
                         {
                             width: 60px;
@@ -298,6 +276,7 @@
                             width: 50px;
                             height: 50px;
                             border-radius: 50%;
+                            object-fit: cover;
                         }
                     }
                     .containerName
