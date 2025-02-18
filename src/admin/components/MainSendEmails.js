@@ -217,11 +217,29 @@ function clickOnCard(idUser, firstName, lastName, image ,nameSpecific, phone)
 }
 
 
-function sendMessage()
+async function sendMessage()
 {
-    console.log("usersChecked ===> ",usersChecked);
-    console.log(" ===> setUserCheckedAlone",userCheckedAlone);
-    console.log(" ===> setUserCheckedAlone2",userCheckedAlone2);
+    // console.log("usersChecked ===> ",usersChecked);
+    // console.log(" ===> setUserCheckedAlone",userCheckedAlone);
+    // console.log(" ===> setUserCheckedAlone2",userCheckedAlone2);
+    let emails;
+    if(usersChecked.length === 0)
+        emails = userCheckedAlone2;
+    else
+        emails = usersChecked;
+    try{
+        const response = await fetch(`http://${process.env.REACT_APP_ADMIN_HOST}:${process.env.REACT_APP_ADMIN_PORT}/api/usersAndSpecifics/${idGroup}`, {
+            method: "POST",
+            headers:{
+                "Content-Type": "application/json"
+            },
+            body:JSON.stringify({emails})
+        })
+        const data = await response.json();
+        console.log("Emails sent:", data);
+    }catch(error){
+        console.log("error sending emails:", error);
+    }
 }
 
 

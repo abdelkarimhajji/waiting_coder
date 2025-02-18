@@ -1,17 +1,12 @@
 require('dotenv').config();
 const express = require("express");
-const mysql = require('mysql');
+const db = require("./db");
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const app = express();
 app.use(cors());
 
-const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "waiting_coder"
-});
+
   
 app.use(express.json()); 
 
