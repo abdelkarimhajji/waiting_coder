@@ -783,6 +783,8 @@ app.get('/api/usersAndSpecifics/:idGroup', (req, res) => {
 })
 
 
+
+
 app.post('/api/sendEmails/', (req, res) =>{
   const emails = req.body.emails;
   const message = req.body.valueMessage;
@@ -797,7 +799,7 @@ app.post('/api/sendEmails/', (req, res) =>{
     const userEmails = results.map(row => row.email);
     console.log("this subject", subject);
     console.log("this is message", message);
-    sendEmail(userEmails ,message ,subject)
+    sendEmail(userEmails ,message ,subject, emails)
     .then(response => {
         console.log('Email sent:', response);
     })
@@ -807,6 +809,8 @@ app.post('/api/sendEmails/', (req, res) =>{
   //   // console.log(userEmails);
   })
 })
+
+
 
 app.put('/api/updatePayment/:idUser/:newPayment', (req, res) => {
   const newPayment = req.params.newPayment;

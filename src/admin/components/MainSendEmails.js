@@ -28,8 +28,15 @@ function MainSendEmails() {
     const [userCheckedAloneSpecific2, setUserCheckedAloneSpecific2] = useState('');
     const [userCheckedAlonePhone2, setUserCheckedAlonePhone2] = useState('')
     const [usersChecked, setUsersChecked] = useState([]);
-    const tileWelcom = "Welcome";
-    const descWelcom = `This page is still in development ... `;
+    const [valueSubject, setValueSubject] = useState('');
+    const [valueMessage, setValueMessage] = useState('');
+    const tileWelcom = "Welcome to the Waiting Coder!";
+    const descWelcom = `Hello everyone,
+    I just wanted to introduce myself. I’m Abdelkarim hajji, and I’ll be working with you during your programming journey. If you have any questions or need help, feel free to reach out to me anytime.
+    Looking forward to working with you all!
+    Best regards,
+    Abdelkarim hajji
+`;
 
     function callWelcome(){
         setValueDesc(descWelcom)
@@ -37,13 +44,27 @@ function MainSendEmails() {
     }
     function callPassword()
     {
-        setValueDesc("Send Password")
-        setValueTitle("Send Password")
+        setValueTitle("Password for the app")
+        setValueDesc(`Hello [Student's Name],
+
+I hope you're doing well! I'm happy to share your account details with you.
+
+If you ever have any questions or need help, feel free to reach out. Wishing you all the best in your learning journey!
+
+Now, here are your login details:
+\n\n
+
+`)
     }
     function callGoodBy()
     {
-        setValueDesc("GoodBy")
-        setValueTitle("GoodBy")
+        setValueTitle("Farewell and Best Wishes")
+        setValueDesc(`Hello,
+                        It’s time for me to say goodbye. I just wanted to take a moment to thank you personally for all the great moments we’ve shared during our time working together. It’s truly been a pleasure seeing you grow and develop your skills.
+                        I hope you continue to push forward in your programming journey, and I have no doubt that you’ll do amazing things in the future.
+                        Remember, stay curious, keep learning, and don’t hesitate to reach out if you ever need anything. I’m always here if you have any questions or need support.
+                        Goodbye, and take care!
+                        Best wishes,\nAbdelkarim hajji`)
     }
     useEffect(() => {
         setValueDesc(descWelcom)
@@ -88,6 +109,9 @@ function MainSendEmails() {
             // ${item.IdGroup}*${item.date_created}
         })
         .catch((error) => console.error(error))
+
+        setValueMessage("Welcome");
+        setValueSubject("This page is still in development ...");
     }, [])
 
 
@@ -219,21 +243,19 @@ function clickOnCard(idUser, firstName, lastName, image ,nameSpecific, phone)
 
 async function sendMessage()
 {
-    // console.log("usersChecked ===> ",usersChecked);
-    // console.log(" ===> setUserCheckedAlone",userCheckedAlone);
-    // console.log(" ===> setUserCheckedAlone2",userCheckedAlone2);
+    alert(valueMessage)
     let emails;
     if(usersChecked.length === 0)
         emails = userCheckedAlone2;
     else
         emails = usersChecked;
     try{
-        const response = await fetch(`http://${process.env.REACT_APP_ADMIN_HOST}:${process.env.REACT_APP_ADMIN_PORT}/api/usersAndSpecifics/${idGroup}`, {
+        const response = await fetch(`http://${process.env.REACT_APP_ADMIN_HOST}:${process.env.REACT_APP_ADMIN_PORT}/api/sendEmails/`, {
             method: "POST",
             headers:{
                 "Content-Type": "application/json"
             },
-            body:JSON.stringify({emails})
+            body:JSON.stringify({emails, valueSubject, valueMessage}),
         })
         const data = await response.json();
         console.log("Emails sent:", data);
@@ -409,10 +431,10 @@ return (
                         {/* start container message */}
                         <div className={style.messageForm}>
                             <div className={style.title}>
-                                <textarea defaultValue={valueTitle} type='text' maxLength="20"/>
+                                <textarea defaultValue={valueTitle} type='text' maxLength="20" onChange={(e) => setValueSubject(e.target.value)}/>
                             </div>
                             <div className={style.discreption}>
-                                <textarea  maxLength="1050" defaultValue={valudeDesc} type='text'/>
+                                <textarea  maxLength="1050" defaultValue={valudeDesc} type='text' onChange={(e) => setValueMessage(e.target.value)}/>
                             </div>
                             <div className={style.sendEmail}>
                                 <button onClick={sendMessage}>Send Message</button>

@@ -432,14 +432,18 @@
                         textarea
                         {
                             font-size: 25px;
+                            
                             font-weight: bold;
                             height: 55px;
                             outline: none;
                             border: 0.5px solid rgb(170, 170, 170);
                             resize: none;
-                            padding-top: 25px;
+                            padding-top: 15px;
+                            padding-bottom: 15px;
+                            width: 91%;
                             border-radius: 10px;
                             padding-left: 10px;
+                            
                             @media(max-width:400px)
                             {
                                 font-size: 20px;
