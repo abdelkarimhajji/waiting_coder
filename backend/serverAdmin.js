@@ -4,6 +4,7 @@ const cors = require('cors');
 const multer = require("multer");
 const path = require("path");
 const { keyframes } = require("@emotion/react");
+const sendEmail = require('./send');
 
 const app = express();
 app.use(cors());
@@ -778,6 +779,32 @@ app.get('/api/usersAndSpecifics/:idGroup', (req, res) => {
       res.json(results);
       console.log(results)
     }
+  })
+})
+
+
+app.post('/api/sendEmails/', (req, res) =>{
+  const emails = req.body.emails;
+  const message = req.body.valueMessage;
+  const subject = req.body.valueSubject;
+  const query = 'SELECT email FROM user WHERE id IN (?)';
+  console.log(subject, message)
+  db.query(query, [emails], (error, results) => {
+    if (error) {
+      console.error("Error fetching emails from database:", error);
+      return res.status(500).json({ message: "Error fetching emails", error });
+    }
+    const userEmails = results.map(row => row.email);
+    console.log("this subject", subject);
+    console.log("this is message", message);
+    sendEmail(userEmails ,message ,subject)
+    .then(response => {
+        console.log('Email sent:', response);
+    })
+    .catch(error => {
+        console.error('Error sending email:', error);
+    });
+  //   // console.log(userEmails);
   })
 })
 
