@@ -35,8 +35,25 @@ function MainSendEmails() {
     I just wanted to introduce myself. I’m Abdelkarim hajji, and I’ll be working with you during your programming journey. If you have any questions or need help, feel free to reach out to me anytime.
     Looking forward to working with you all!
     Best regards,
-    Abdelkarim hajji
-`;
+    Abdelkarim hajji\n`;
+
+    const passwordTitle = `Password for the app`;
+    const passwordDesc = `Hello [Student's Name],
+
+            I hope you're doing well! I'm happy to share your account details with you.
+
+            If you ever have any questions or need help, feel free to reach out. Wishing you all the best in your learning journey!
+
+            Now, here are your login details:
+            \n\n`
+
+    const goodByTitle = `Farewell and Best Wishes`;
+    const goodByDesc = `Hello,
+                        It’s time for me to say goodbye. I just wanted to take a moment to thank you personally for all the great moments we’ve shared during our time working together. It’s truly been a pleasure seeing you grow and develop your skills.
+                        I hope you continue to push forward in your programming journey, and I have no doubt that you’ll do amazing things in the future.
+                        Remember, stay curious, keep learning, and don’t hesitate to reach out if you ever need anything. I’m always here if you have any questions or need support.
+                        Goodbye, and take care!
+                        Best wishes,\nAbdelkarim hajji`
 
     function callWelcome(){
         setValueDesc(descWelcom)
@@ -44,51 +61,27 @@ function MainSendEmails() {
     }
     function callPassword()
     {
-        setValueTitle("Password for the app")
-        setValueDesc(`Hello [Student's Name],
-
-I hope you're doing well! I'm happy to share your account details with you.
-
-If you ever have any questions or need help, feel free to reach out. Wishing you all the best in your learning journey!
-
-Now, here are your login details:
-\n\n
-
-`)
+        setValueTitle(passwordTitle)
+        setValueDesc(passwordDesc)
+        setValueSubject(passwordTitle)
+        setValueMessage(passwordDesc)
     }
     function callGoodBy()
     {
-        setValueTitle("Farewell and Best Wishes")
-        setValueDesc(`Hello,
-                        It’s time for me to say goodbye. I just wanted to take a moment to thank you personally for all the great moments we’ve shared during our time working together. It’s truly been a pleasure seeing you grow and develop your skills.
-                        I hope you continue to push forward in your programming journey, and I have no doubt that you’ll do amazing things in the future.
-                        Remember, stay curious, keep learning, and don’t hesitate to reach out if you ever need anything. I’m always here if you have any questions or need support.
-                        Goodbye, and take care!
-                        Best wishes,\nAbdelkarim hajji`)
+        setValueTitle(goodByTitle)
+        setValueDesc(goodByDesc)
+        setValueSubject(goodByTitle)
+        setValueMessage(goodByDesc)
     }
     useEffect(() => {
         setValueDesc(descWelcom)
         setValueTitle(tileWelcom)
-        
+        setValueSubject(descWelcom)
+        setValueMessage(tileWelcom)
     }, []);
 
 
-    // useEffect(() => {
-    //     fetch(`http://${process.env.REACT_APP_ADMIN_HOST}:${process.env.REACT_APP_ADMIN_PORT}/api/getCurrentGroups`)
-    //         .then((response) => {
-    //         if (!response.ok) {
-    //             throw new Error("Network response was not ok");
-    //         }
-    //         return response.json();
-    //         })
-    //         .then((data) => {
-    //         setSelectCurrentGroups(data);
-    //         setSelectIdGroup(data[0].IdGroup)
-    //         setDateCreated(data[0].date_created.split("T")[0])
-    //         setSelectedOption2(`${data[0].IdGroup}*${data[0].date_created}`)
-    //         })
-    //         .catch((error) => console.error(error));
-    //     }, [valueGroupFinished, addSucces]);
+   
 
 
     useEffect(() => {
@@ -110,8 +103,8 @@ Now, here are your login details:
         })
         .catch((error) => console.error(error))
 
-        setValueMessage("Welcome");
-        setValueSubject("This page is still in development ...");
+        // setValueMessage("Welcome");
+        // setValueSubject("This page is still in development ...");
     }, [])
 
 
@@ -243,7 +236,7 @@ function clickOnCard(idUser, firstName, lastName, image ,nameSpecific, phone)
 
 async function sendMessage()
 {
-    alert(valueMessage)
+    alert("Confirme")
     let emails;
     if(usersChecked.length === 0)
         emails = userCheckedAlone2;

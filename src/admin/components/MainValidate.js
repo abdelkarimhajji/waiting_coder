@@ -421,9 +421,11 @@ function MainValidate() {
   };
   const handelCklickSendMessage = () =>
   {
+   
     if(inputValue !== '' && idUser !== null) 
     {
-      fetch('http://${process.env.REACT_APP_ADMIN_HOST}:${process.env.REACT_APP_ADMIN_PORT}/api/send_messageFromTeacher', {
+      alert(1)
+      fetch(`http://${process.env.REACT_APP_ADMIN_HOST}:${process.env.REACT_APP_ADMIN_PORT}/api/send_messageFromTeacher`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -435,7 +437,6 @@ function MainValidate() {
           setInputValue('');
           getConversation();
           setTimeout(() => {
-              // Scroll to the bottom of the div after adding the new message
               divRef.current.scrollTop = divRef.current.scrollHeight;
             }, 100);
         })

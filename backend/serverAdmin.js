@@ -617,6 +617,7 @@ app.get('/api/get_pushProject/:idProject/:idUser', (req, res) => {
 app.post("/api/send_messageFromTeacher", (req, res) => {
   const { id_user, id_teacher, message, id_project, time_send } = req.body;
   const sql = "INSERT INTO push_porojects (id_user, id_teacher, id_project, message_teacher, time_send_teacher) VALUES (?, ?, ?, ?, ?)";
+  console.log('req.body')
   db.query(sql, [id_user, id_teacher, id_project, message, time_send], (error, result) => {
     if (error) {
       console.error(error);
@@ -787,10 +788,9 @@ app.get('/api/usersAndSpecifics/:idGroup', (req, res) => {
 
 app.post('/api/sendEmails/', (req, res) =>{
   const emails = req.body.emails;
-  const message = req.body.valueMessage;
-  const subject = req.body.valueSubject;
+  const message = req.body.valueSubject;
+  const subject = req.body.valueMessage;
   const query = 'SELECT email FROM user WHERE id IN (?)';
-  console.log(subject, message)
   db.query(query, [emails], (error, results) => {
     if (error) {
       console.error("Error fetching emails from database:", error);
@@ -799,7 +799,7 @@ app.post('/api/sendEmails/', (req, res) =>{
     const userEmails = results.map(row => row.email);
     console.log("this subject", subject);
     console.log("this is message", message);
-    sendEmail(userEmails ,message ,subject, emails)
+    sendEmail(userEmails ,subject ,message, emails)
     .then(response => {
         console.log('Email sent:', response);
     })
